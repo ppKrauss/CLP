@@ -1,27 +1,42 @@
 # CLP
 Proposta de **C**ódigo **L**ocalizador de **P**ortão para o meio rural
 
-Com apoio das Secretarias do Estado (da Agricultura e do Meio Ambiente) do Estado de São Paulo, e você, cidadão,
-estamos construimdo um novo protocolo de localização geográfica e de endereçamento, a ser utilizado inicialmente por viaturas oficiais da prefeitura, do Estado, para ocorrências policiais, ambulâncias e bombeiros. Consiste em usar métodos simples e já bem conhecidos, tudo é uma questão de se adotar o padrão:
+Com apoio da Secretaria da Agricultura do Estado de São Paulo, e você, cidadão,
+estamos construimdo um novo protocolo de localização geográfica e de endereçamento, a ser utilizado inicialmente por viaturas oficiais da prefeitura, do Estado, para ocorrências policiais, ambulâncias e bombeiros. Consiste em usar métodos simples e já bem conhecidos, tudo é uma questão de se adotar padrões:
 
 * Usar métodos conhecidos de localização;
-* Conhecer a malha viária (com o Openstreetmap) e identificá-la (com IDs eternos a Wikidata);
-* Comunicar os maiores interessados &mdash; os produtores rurais;
-* Divulgar e revisar os mapas básicos;
-* Fazer ajustes finos nas informações oficiais e bancos de dados públicos.
+* Conhecer a malha viária (com o Openstreetmap) e identificá-la;
+* Comunicar os maiores interessados &mdash; os produtores rurais e demais habitantes da região;
+* Divulgar e revisar os mapas básicos, batizando vias com códigos oficiais quando preciso;
+* Fazer ajustes finos nas informações oficiais, e tornando-as bancos de dados públicos.
 
 ![](assets/CLP-resumo1b.png)<br/>Ver detalhes em [neste PDF](assets/CLP-gov2018-05-02.pdf).
 
+Exemplos de Código de Localização de Portão no meio rural:
+
+* Uma estrada municipal com identificador oficial já destacado pelo OpenStreetMap: [PIR-033/260](https://www.openstreetmap.org/way/485934035#map=14/-22.8511/-47.9207). A numeração CLP será provavelmente a mesma porém sem separadores, **`PIR-033260`**.
+
+* Uma fazenda com porteira próxima à estrada: [ponto no Openstreetmap](https://www.openstreetmap.org/node/5679199345#map=15/-22.8603/-47.9208).  Não precisa ser exato, vale a projeção do ponto sobre a linha da estrada. Se a porteira da fazenda estisse a 12,3 km do marco-zero da estrada, o  endereço oficial seria  **`PIR-033260-12300`**.
+
 ## Motivações
+
 Mesmo no rico Estado de São Paulo, em pleno 2018, chegar até uma propriedade rural nunca foi simples: as vias não tem nome ou não se sabe, sinalização inexiste; distâncias são imprecisas, referências são perdidas, temporárias. Mesmo com celular, o sinal nem sempre pega.
 
-Esse abandono, essa dor é forte para o poder público e pior para o cidadão.  
+A dor por esse abandono  é forte para o poder público e para o cidadão... É preciso unir esforços para "dar nome aos bois", identificar com precisão digital, e encontrar a agulha no palheiro.
 
-É preciso "dar nome aos bois", identificar com precisão digital, e encontrar a agulha no palheiro.
+### Soluções preliminares
+
+O cidadão do meio rural não ficou de braços cruzados, algumas iniciativas se concretizaram e demonstraram que há uma imensa demanda:
+
+*  [GPS Caipira](https://www.revide.com.br/noticias/tecnologia/gps-caipira-surge-como-solucao-para-localizacao-e-seguranca-na-zona-rural/), em uso por prefeituras, polícia, SUS e hospitais de pequenas cidades de SP. Confira nos vídeos: [MP4 - vídeo](https://t.me/OSMBrasil_Comunidade/34694), [MP4 - vídeo](https://t.me/OSMBrasil_Comunidade/34695).  A ampliação da iniciativa esbarra nos protocolos de comunicação adotados, que não são totalmente abertos.
+
+* [CEP Rural](https://www.orolo.com.br/botucatu-sp/cep-rural-chega-a-1-200-propriedades-rurais-de-botucatu/): algumas cidades como Botucatu, implementaram o "Programa Acessibilidade Rural".
+
+A principal crítica a essas iniciativas é a [demanda por uma autoridade central](https://doi.org/10.5281/zenodo.159004) e o envolvimento de entidades privadas no controle do sistema. Estas soluções não seriam perdidas e teriam na transição para o CLP a garantia de uniformização com o restante do Estado de SP.
 
 ## Implementação
 
-Implementar um "conversor de CLP em ponto no mapa" é relativamente simples com as tecnologias disponiveis em domínio público. Um sistema completo,  todavia, que garanta a utilização em todas as cidades, por longo prazo, e operando com todos os tipos de localidade rural, requer diversos cuidados. Preservação digital, abertura de dados, consistência das normas, consistência e viabilidade de tradução das normas para algoritmos (software) eficientes, e outros. 
+Implementar um "conversor de CLP em ponto no mapa" é relativamente simples com as tecnologias disponiveis em domínio público. Um sistema completo,  todavia, que garanta a utilização em todas as cidades, por longo prazo, e operando com todos os tipos de localidade rural, requer diversos cuidados. Preservação digital, abertura de dados, consistência das normas, consistência e viabilidade de tradução das normas para algoritmos (software) eficientes, e outros.
 
 ### Elementos metodológicos e jurídicos
 
@@ -43,7 +58,7 @@ Mas não é tão simples quanto a tabela de abreviações:
 
 * Referência em mapas oficiais quando possível (por exemplo mapas de municípios fornecidos pelo IBGE), convencinando como segunda opção, quando da indisponibilidade de mapas oficiais adequados, uma versão estável homologada do Openstreetmap. Regras objetivas e transparentes permitiram que a referência métrica não seja colocada em risco quando da ausência de um  mapa oficial.
 
- 	 	
+
 ### Subsídios técnicos
 
 Dados abertos, estáveis e confiáveis são o lastro do CLP. Esses dados são obtidos de projetos mais especializados:
@@ -58,5 +73,16 @@ Em seguida a implementação deve contar com dois recursos fundamentais de refer
 
 2. Algoritmos [PostGIS](https://postgis.net/docs/manual-2.0/) para a inferência métrica.
 
+<!--
+## Exemplos e provas de conceito
 
+SP https://www.wikidata.org/wiki/Q175
 
+Piracicaba https://www.wikidata.org/wiki/Q330175
+-->
+
+## Referências
+
+* mapa [ipplap2017](http://www.ipplap.com.br/docs/MAPA%20DE%20ESTRADAS%20RURAIS%20ATUALIZACAO%20SET%202017%20%20-%20VERSO.pdf)
+
+[ ![](assets/legendaMapasVias.png) ](assets/legendaMapasVias.png)
