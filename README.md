@@ -1,8 +1,7 @@
 # CLP
 Proposta de **C**ódigo **L**ocalizador de **P**ortão para o meio rural
 
-Com apoio da Secretaria da Agricultura do Estado de São Paulo, e você, cidadão,
-estamos construindo um novo protocolo de localização geográfica e de endereçamento, a ser utilizado inicialmente por viaturas oficiais da prefeitura, do Estado, para ocorrências policiais, ambulâncias e bombeiros. Consiste em usar métodos simples e já bem conhecidos, tudo é uma questão de se adotar padrões:
+O intuito deste projeto é apresentar recursos tecnológicos, provas de conceito e metodologias para o governo do Estado de São Paulo. Há anos que o governo de SP vem tentando oferecer um endereço para o ciadão do meio rural. Com apoio conjunto da  comunidade de cada município e do governo, acreditamos  ser possível construir um novo protocolo de localização geográfica e de endereçamento. O padrão seria adotado inicialmente por viaturas oficiais da prefeitura, do Estado, para ocorrências policiais, ambulâncias e bombeiros. Consiste em usar métodos simples e já bem conhecidos, tudo é uma questão de se adotar padrões:
 
 * Usar métodos conhecidos de localização;
 * Conhecer a malha viária (com o Openstreetmap) e identificá-la;
@@ -70,7 +69,7 @@ Em seguida a implementação deve contar com dois recursos fundamentais de refer
 
 2. Algoritmos [PostGIS](https://postgis.net/docs/manual-2.0/) para a inferência métrica  e controle de qualidade baseado.
 
-3. Algoritmos SparQL e SQL para consolidação dos dados junto à Wikidata.
+3. Algoritmos SparQL e SQL para consolidação dos dados junto à Wikidata. Por exemplo o conceito de "Estado de São Paulo" na Wikidata é  [Q175](http://wikidata.org/entity/Q175), o conceito de Piracicaba é  [Q330175](http://wikidata.org/entity/Q330175), de "Rodovia BR-116" é [Q2739838](http://wikidata.org/entity/Q2739838)... Todos com respectivos dados de localização no Openstreetmap ([P402](http://wikidata.org/entity/P402)).
 
 <!--
 ## Exemplos e provas de conceito
