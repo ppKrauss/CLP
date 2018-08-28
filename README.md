@@ -10,11 +10,9 @@ estamos construimdo um novo protocolo de localização geográfica e de endereç
 * Divulgar e revisar os mapas básicos, batizando vias com códigos oficiais quando preciso;
 * Fazer ajustes finos nas informações oficiais, e tornando-as bancos de dados públicos.
 
-![](assets/CLP-resumo1b.png)<br/>Ver detalhes em [neste PDF](assets/CLP-gov2018-05-02.pdf).
-
 Exemplos de Código de Localização de Portão no meio rural:
 
-* Uma estrada municipal com identificador oficial já destacado pelo OpenStreetMap: [PIR-033/260](https://www.openstreetmap.org/way/485934035#map=14/-22.8511/-47.9207). A numeração CLP será provavelmente a mesma porém sem separadores, **`PIR-033260`**.
+* Uma estrada municipal com identificador oficial já destacado pelo OpenStreetMap: [PIR-033/260](https://www.openstreetmap.org/way/485934035#map=14/-22.8511/-47.9207). A numeração CLP será provavelmente a mesma porém sem separadores, **`PIR-033260`**. Ver [ipplap2017].
 
 * Uma fazenda com porteira próxima à estrada: [ponto no Openstreetmap](https://www.openstreetmap.org/node/5679199345#map=15/-22.8603/-47.9208).  Não precisa ser exato, vale a projeção do ponto sobre a linha da estrada. Se a porteira da fazenda estisse a 12,3 km do marco-zero da estrada, o  endereço oficial seria  **`PIR-033260-12300`**.
 
@@ -58,7 +56,6 @@ Mas não é tão simples quanto a tabela de abreviações:
 
 * Referência em mapas oficiais quando possível (por exemplo mapas de municípios fornecidos pelo IBGE), convencinando como segunda opção, quando da indisponibilidade de mapas oficiais adequados, uma versão estável homologada do Openstreetmap. Regras objetivas e transparentes permitiram que a referência métrica não seja colocada em risco quando da ausência de um  mapa oficial.
 
-
 ### Subsídios técnicos
 
 Dados abertos, estáveis e confiáveis são o lastro do CLP. Esses dados são obtidos de projetos mais especializados:
@@ -71,7 +68,9 @@ Em seguida a implementação deve contar com dois recursos fundamentais de refer
 
 1. Preservação digital unificada de identificadores e metadados de apoio à identificação: **Wikidata**. Todas as entidades geográficas envolvidas na representação CLP são passíveis de identificação persistente e georeferenciamento a partir da [`key:wikidata`](https://wiki.openstreetmap.org/wiki/Key:wikidata) no Openstreetmap e sua identificação recíproca através da [propriedade `P402`](https://www.wikidata.org/wiki/Property:P402) Wikidata.
 
-2. Algoritmos [PostGIS](https://postgis.net/docs/manual-2.0/) para a inferência métrica.
+2. Algoritmos [PostGIS](https://postgis.net/docs/manual-2.0/) para a inferência métrica  e controle de qualidade baseado.
+
+3. Algoritmos SparQL e SQL para consolidação dos dados junto à Wikidata.
 
 <!--
 ## Exemplos e provas de conceito
@@ -80,6 +79,13 @@ SP https://www.wikidata.org/wiki/Q175
 
 Piracicaba https://www.wikidata.org/wiki/Q330175
 -->
+
+### Subsídios sociais
+O primeiro passo para se ter e discutir a qualidade das informações é a liberação em domínio público, com a publicação sob licança aberta, por parte do governo local (SP, DER ou município), das planilhas e mapas digitais. Conforme o dado ele será então consolidado e tornado mais acessível através das plataformas Wikidata e Openstreetmap. A comunidade dessas plataformas é a maior do mundo, com milhões de usuários, e tem centenas de cidadãos brasileiros participando.
+
+Já existem inclusive prefeituras, tais como Monteiro Lobato e Jaraguá do Sul, que fazendo uso integral do Openstreetmap, como base de dados oficial do munício. A utilização conjunta por parte da sociaedade e do governo é viável e tem sido adotada como principal meta: enquanto dados da escala federal e estadual são mantidos por agentes do governo tais como IBGE (federal) e Secretarias (estadual), os municípios através das suas secretarias locais e os condomínios, associações, cooperativas complementam e auditam os dados mais locais.
+
+No Openstreetmap já existe um grande percentual da malha viária do estado de SP, mas muitas vias ainda carecem de um identificador oficial. O maior trabalho, tanto em termos de auditoria como de cadastro e consolidalção de dados, será em torno da complementação dos identificadores, seguindo o modelo já de sucesso para a auditoria e preservação digitais com os repositórios  [datasets.ok.org.br/state-codes](http://datasets.ok.org.br/state-codes) e [datasets.ok.org.br/city-codes](http://datasets.ok.org.br/city-codes).
 
 ## Referências
 
