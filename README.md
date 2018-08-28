@@ -1,5 +1,6 @@
 # CLP
-Proposta de **C**ódigo **L**ocalizador de **P**ortão para o meio rural
+
+Proposta de **C**ódigo **L**ocalizador de **P**ortão para o meio rural.
 
 O intuito deste projeto é apresentar recursos tecnológicos, provas de conceito e metodologias para o governo do Estado de São Paulo. Há anos que o governo de SP vem tentando oferecer um endereço para o ciadão do meio rural. Com apoio conjunto da  comunidade de cada município e do governo, acreditamos  ser possível construir um novo protocolo de localização geográfica e de endereçamento. O padrão seria adotado inicialmente por viaturas oficiais da prefeitura, do Estado, para ocorrências policiais, ambulâncias e bombeiros. Consiste em usar métodos simples e já bem conhecidos, tudo é uma questão de se adotar padrões:
 
@@ -9,11 +10,15 @@ O intuito deste projeto é apresentar recursos tecnológicos, provas de conceito
 * Divulgar e revisar os mapas básicos, batizando vias com códigos oficiais quando preciso;
 * Fazer ajustes finos nas informações oficiais, e tornando-as bancos de dados públicos.
 
-![](assets/CLP-resumo1b.png)<br/><small>Fonte: adaptado de slides gov. SP.</small><br/>Exemplos de Código de Localização de Portão no meio rural:
+![](assets/CLP-resumo1b.png)<br/><small>Fonte: adaptado de slides gov. SP.</small>
+
+Exemplos de Código de Localização de Portão no meio rural:
 
 * Uma estrada municipal com identificador oficial já destacado pelo OpenStreetMap: [PIR-033/260](https://www.openstreetmap.org/way/485934035#map=14/-22.8511/-47.9207). A numeração CLP será provavelmente a mesma porém sem separadores, **`PIR-033260`**. Ver [ipplap2017].
 
 * Uma fazenda com porteira próxima à estrada: [ponto no Openstreetmap](https://www.openstreetmap.org/node/5679199345#map=15/-22.8603/-47.9208).  Não precisa ser exato, vale a projeção do ponto sobre a linha da estrada. Se a porteira da fazenda estivesse a 12,3 km do marco-zero da estrada, o  endereço oficial seria  **`PIR-033260-12300`**.
+
+NOTA:  o nome "CLP" ainda não é oficial, é um apelido prelinar para servir de referência nas dicussões OSM.
 
 ## Motivações
 
