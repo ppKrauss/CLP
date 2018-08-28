@@ -85,4 +85,4 @@ Piracicaba https://www.wikidata.org/wiki/Q330175
 
 * mapa [ipplap2017](http://www.ipplap.com.br/docs/MAPA%20DE%20ESTRADAS%20RURAIS%20ATUALIZACAO%20SET%202017%20%20-%20VERSO.pdf)
 
-[ ![](assets/legendaMapasVias.png) ](assets/legendaMapasVias.png)
+[ ![](assets/legendaMapasVias.png) ](https://raw.githubusercontent.com/OSMBrasil/CLP/master/assets/legendaMapasVias.png)
