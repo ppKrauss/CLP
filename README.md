@@ -10,7 +10,7 @@ estamos construindo um novo protocolo de localização geográfica e de endereç
 * Divulgar e revisar os mapas básicos, batizando vias com códigos oficiais quando preciso;
 * Fazer ajustes finos nas informações oficiais, e tornando-as bancos de dados públicos.
 
-Exemplos de Código de Localização de Portão no meio rural:
+![](assets/CLP-resumo1b.png)<br/>Exemplos de Código de Localização de Portão no meio rural:
 
 * Uma estrada municipal com identificador oficial já destacado pelo OpenStreetMap: [PIR-033/260](https://www.openstreetmap.org/way/485934035#map=14/-22.8511/-47.9207). A numeração CLP será provavelmente a mesma porém sem separadores, **`PIR-033260`**. Ver [ipplap2017].
 
