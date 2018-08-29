@@ -14,11 +14,11 @@ O intuito deste projeto é apresentar recursos tecnológicos, provas de conceito
 
 Exemplos de Código de Localização de Portão no meio rural:
 
-* Uma estrada municipal com identificador oficial já destacado pelo OpenStreetMap: [PIR-033/260](https://www.openstreetmap.org/way/485934035#map=14/-22.8511/-47.9207). A numeração CLP será provavelmente a mesma porém sem separadores, **`PIR-033260`**. Ver [ipplap2017].
+* Uma estrada municipal com identificador oficial já destacado pelo OpenStreetMap: [PIR-033/260](https://www.openstreetmap.org/way/485934035#map=14/-22.8511/-47.9207). A numeração CLP será provavelmente a mesma porém sem separadores, **`PIR-033260`**. Ver ilustração [ipplap2017] abaixo nas Referências.
 
-* Uma fazenda com porteira próxima à estrada: [ponto no Openstreetmap](https://www.openstreetmap.org/node/5679199345#map=15/-22.8603/-47.9208).  Não precisa ser exato, vale a projeção do ponto sobre a linha da estrada. Se a porteira da fazenda estivesse a 12,3 km do marco-zero da estrada, o  endereço oficial seria  **`PIR-033260-12300`**.
+* Uma fazenda com porteira próxima à estrada: [ponto no Openstreetmap](https://www.openstreetmap.org/node/5679199345#map=15/-22.8603/-47.9208).  Não precisa ser exato, vale a projeção do ponto sobre a linha da estrada. Se a porteira da fazenda estivesse a 12,3 km do marco-zero da estrada, o endereço CLP oficial seria  **`PIR-033260-12300`**.
 
-NOTA:  o nome "CLP" ainda não é oficial, é um apelido prelinar para servir de referência nas dicussões OSM.
+NOTA:  o nome "CLP" é um apelido genérico, para discutir o assunto na comunidade OSM e em outros Estados, iniciativa do governo de SP provavelmente adotará outro nome.
 
 ## Motivações
 
@@ -38,25 +38,27 @@ A principal crítica a essas iniciativas é a [demanda por uma autoridade centra
 
 ## Implementação
 
-Implementar um "conversor de CLP em ponto no mapa" é relativamente simples com as tecnologias disponíveis em domínio público. Um sistema completo,  todavia, que garanta a utilização em todas as cidades, por longo prazo, e operando com todos os tipos de localidade rural, requer diversos cuidados. Preservação digital, abertura de dados, consistência das normas, consistência e viabilidade de tradução das normas para algoritmos (software) eficientes, e outros.
+Implementar um "conversor de CLP em ponto no mapa" é relativamente simples com as tecnologias disponíveis em domínio público. Um protótipo de redirecionamento de códigos rodando com NGINX e PostgreSQL foi utilizado como prova de conceito.
+
+Um sistema completo,  todavia, que garanta a utilização em todas as cidades, por longo prazo, e operando com todos os tipos de localidade rural, requer diversos cuidados. Preservação digital, abertura de dados, consistência das normas, consistência e viabilidade de tradução das normas para algoritmos (software) eficientes, e outros.
 
 ### Elementos metodológicos e jurídicos
 
 O nome ou número oficial identificador do município, normatizados pelo IBGE, se apresentam como padrão oficial estável e amplamente utilizado.  Já a   abreviação de nome de cidade por código de 3 letras, ainda pouco conhecida mesmo entre as autoridades governamentais, será tão estável quanto o grau de obrigatoriedade do seu uso: uma vez publicada como tabela de-para oficial em lei ou decreto estadual &mdash; tabela anexa "de abreviação para identificador IBGE" &mdash;, não correrá mais risco de instabilidade.
 
-Analogamente o  número oficial identificador da via, o seu marco zero e a referência oficial de mapeamento e metragem da via: sem estabilidade nestas referências oficiais não haverá incentivo ou motivação racional para o uso do CLP. Por exemplo o proprietário não vai investir em uma placa na sua porteira, a prefeitura não vai investir na divulgação de endereços, o corpo de bombeiros e hospitais não irão investir nos aplicativos de georeferenciamento dos endereços, etc.
+Analogamente o  número oficial identificador da via, o seu marco zero e a referência oficial de mapeamento e metragem da via: sem clareza e estabilidade nas convenções oficiais não haverá incentivo ou motivação racional para o uso do CLP. Por exemplo o proprietário não vai investir em uma placa na sua porteira, a prefeitura não vai investir na divulgação de endereços, o corpo de bombeiros e hospitais não irão investir nos aplicativos de georeferenciamento dos endereços, etc.
 
-Mas não é tão simples quanto a tabela de abreviações:
+Não é tão simples, diversos detalhes precisam ser adequados às necessidades de abertura, transparência e operacionalidade:
 
-* O processo de "batismo oficial" das vias com respectivos identificadores precisa ser norteado por regras, ser transparente e descentralizado. Hoje apenas autoridades federais e estaduais possuem essa clareza de regras e acesso a meios técnicos. A descentralização inclui liberdade de usar ferramentas como o OpenStreetMap para que os municípios tenham autonomia. O mesmo vale para  
+* O processo de "batismo oficial" das vias com respectivos identificadores precisa ser norteado por regras, ser transparente e descentralizado. Hoje apenas autoridades federais e estaduais possuem essa clareza de regras e acesso a meios técnicos. A descentralização inclui liberdade de usar ferramentas como o OpenStreetMap para que os municípios tenham autonomia. <br/>Mesmo  sendo normatizados num momento posterior, as normas de rotulação devem prever desde o início a existência dessas vias, garantindo "reserva de numeração" para elas.
 
-* Vias dentro de grandes propriedades (e no meio rural isso pode incluir condomínios e loteamentos) possuem como "autoridade de batismo" o proprietário ou associações de proprietários. Esse tipo de identificador deve também ser contemplado pelo processo de normatização, para garantir ampla aderência à malha viária real,  onde nasce a demanda por endereçamento. Mesmo  sendo normatizados num momento posterior, as normas de rotulação devem prever desde o início a existência dessas vias, garantindo "reserva de numeração" para elas.
+* Vias dentro de grandes propriedades (ex. condomínios e fazendas) possuem como "autoridade de batismo" o proprietário ou coletivos formais de proprietários, ou ainda cooperativas. Esse tipo de identificador deve também ser contemplado pelo processo de normatização, para garantir ampla aderência à malha viária real,  onde nasce a demanda por endereçamento.
 
 * O processo de "mapeamento digital oficial" precisa prever a existência de [metodologias](https://wiki.openstreetmap.org/wiki/WikiProject_Brazil/Modelos_de_Contrato) baseadas no uso de ferramentas abertas ([licenças OpenDefinitoin](https://opendefinition.org/od/2.0/pt-br/)), tais como as ferramentas de mapeamento digital do OpenStreetMap e cadastramento de dados estruturados na Wikidata.
 
 * As licenças de dados, tanto dados cadastrais como mapas digitais, precisa ser idealmente [CC0](http://creativecommons.org/publicdomain/zero/1.0/legalcode), ou seja, o dado precisa estar dedicado ao domínio público, sem qualquer tipo de retrição &mdash; tal como um mapa anexado à Lei Orgânica do  município. Quando isso não for possível o máximo de restrição que se pode admitir é a Licença de Banco de Dados Aberto Open Data Commons, [ODbL](http://opendatacommons.org/licenses/odbl/1.0). <br/>Eventualmente estratégias de [liceamento dual](https://en.wikipedia.org/wiki/Multi-licensing) para dados esopecíficos podem também ajudar o município a contornar problemas jurídicos.
 
-* Batismo informal compatível com o batismo oficial: quando da indisponibilidade de código oficial de uma via, as "regras de batismo" devem ser suficientemente claras e independentes da autoridade central para que possa ser fixada pela prefeitura ou comunidade de interesse no Openstreetmap sem maiores riscos de mudança no momento futuro da oficialização. As "normas de batismo de via" devem prever esse tipo de situação.  
+* Batismo informal compatível com o batismo oficial: quando da indisponibilidade de código oficial de uma via, as "regras de batismo" devem ser suficientemente claras e independentes da autoridade central para que a via possa receber seu identificador pela prefeitura ou comunidade de interesse no Openstreetmap sem maiores riscos de mudança no momento futuro da oficialização. A exemplo do  "normas de batismo de via" não podem ser reféns de uma autoridade central.
 
 * Referência em mapas oficiais quando possível (por exemplo mapas de municípios fornecidos pelo IBGE), convencionando como segunda opção, quando da indisponibilidade de mapas oficiais adequados, uma versão estável homologada do Openstreetmap. Regras objetivas e transparentes permitiram que a referência métrica não seja colocada em risco quando da ausência de um  mapa oficial.
 
@@ -70,9 +72,9 @@ Dados abertos, estáveis e confiáveis são o lastro do CLP. Esses dados são ob
 
 Em seguida a implementação deve contar com dois recursos fundamentais de referência de dados e padronização nos protocolos e algoritmos:
 
-1. Preservação digital unificada de identificadores e metadados de apoio à identificação: **Wikidata**. Todas as entidades geográficas envolvidas na representação CLP são passíveis de identificação persistente e georreferenciamento a partir da [`key:wikidata`](https://wiki.openstreetmap.org/wiki/Key:wikidata) no Openstreetmap e sua identificação recíproca através da [propriedade `P402`](https://www.wikidata.org/wiki/Property:P402) Wikidata.
+1. Identificadores e metadados de apoio: **Wikidata**. Todas as entidades geográficas envolvidas na representação CLP são passíveis de identificação persistente e georreferenciamento a partir da [`key:wikidata`](https://wiki.openstreetmap.org/wiki/Key:wikidata) no Openstreetmap, e sua identificação recíproca através da [propriedade `P402`](https://www.wikidata.org/wiki/Property:P402) Wikidata.
 
-2. Algoritmos [PostGIS](https://postgis.net/docs/manual-2.0/) para a inferência métrica  e controle de qualidade baseado.
+2. Algoritmos [PostGIS](https://postgis.net/docs/manual-2.0/) para a inferência métrica  e controle de qualidade baseado. Funções tais como *ST_ClosestPoint*, *ST_LineLocatePoint* e *ST_Line_Interpolate_Point*. Em caso de numeração oficial fornecida em pontos específicos, pode-se optar por parametrização baseada em regressão linear, para ajuste fino relativo às medidas de campo.   
 
 3. Algoritmos SparQL e SQL para consolidação dos dados junto à Wikidata. Por exemplo o conceito de "Estado de São Paulo" na Wikidata é  [Q175](http://wikidata.org/entity/Q175), o conceito de Piracicaba é  [Q330175](http://wikidata.org/entity/Q330175), de "Rodovia BR-116" é [Q2739838](http://wikidata.org/entity/Q2739838)... Todos com respectivos dados de localização no Openstreetmap ([P402](http://wikidata.org/entity/P402)).
 
@@ -91,7 +93,17 @@ Já existem inclusive prefeituras, tais como Monteiro Lobato e Jaraguá do Sul, 
 
 No Openstreetmap já existe um grande percentual da malha viária do estado de SP, mas muitas vias ainda carecem de um identificador oficial. O maior trabalho, tanto em termos de auditoria como de cadastro e consolidalção de dados, será em torno da complementação dos identificadores, seguindo o modelo já de sucesso para a auditoria e preservação digitais com os repositórios  [datasets.ok.org.br/state-codes](http://datasets.ok.org.br/state-codes) e [datasets.ok.org.br/city-codes](http://datasets.ok.org.br/city-codes).
 
+## Outras soluções discutidas
+
+Além do "GPS caipira" e do "CEP rural", outras opções ao CLP foram discutidas, servindo de referência para avaliação do próprio CLP (o quanto ele seria mais simples ou estável que outras soluções).  Dentre as diversas sugestões alternativas,  as que se destacaram foram:
+
+* Uso do **Geohash descartando o prefixo da BBOX do município** (visto que seria o mesmo para todos os pontos da região), e substituindo pela sigla de 3 letras do município. Isso dispensa o conhecimento de nomes oficiais de vias terciárias, e evita sucateamento quando vias são modificadas (resultando em nova metragem ou novo identificador).
+
+* Adatação do CLP para identificar em **prefixo do código da via** a  "autoridade de batismo da via" (federal, estadual, municipal, particular e via-natural), permitindo que o "namespace", o tamanho do código e as normas de batismo dos identificadores sejam controladas cada qual pela sua respectiva autoriade, e acrescentando um código de reserva para vias urbanas (ex. uso do menor valor de CEP associado à via quando o município apresentar CEP por logradouro).
+
 ## Referências
+
+* Geohash https://www.movable-type.co.uk/scripts/geohash.html
 
 * mapa [ipplap2017](http://www.ipplap.com.br/docs/MAPA%20DE%20ESTRADAS%20RURAIS%20ATUALIZACAO%20SET%202017%20%20-%20VERSO.pdf)
 
