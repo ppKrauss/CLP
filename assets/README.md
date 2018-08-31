@@ -15,3 +15,8 @@ File    | License | Reuse (type/resp/year) | original URL
 [`ilustra-escalas01.jpg`](ilustra-escalas01.jpg) | CC0 | adapted /ppkrauss /2018 | -
 [`CLP-resumo1b.png`](CLP-resumo1b.png)| CC-BY | adapted /ppkrauss /2018 | contém pedaço obtido por captura de trecho de slide apresentado por representantes do Governo do Estado de São Paulo.
 [CC0-logo](CC0-logo-200px.png) | CC0 | adapted /ppkrauss /2018 | https://en.wikipedia.org/wiki/File:CC0_button.svg
+
+
+------
+
+[&#160;&#160;Conteúdo e dados deste projeto são dedicados ao domínio público<br/>&#160;&#160;![](assets/CC0-logo-200px.png) ](LICENSE.md)

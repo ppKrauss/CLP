@@ -83,3 +83,8 @@ No Openstreetmap já existe um grande percentual da malha viária do estado de S
 * mapa [ipplap2017](http://www.ipplap.com.br/docs/MAPA%20DE%20ESTRADAS%20RURAIS%20ATUALIZACAO%20SET%202017%20%20-%20VERSO.pdf)
 
 [ ![](assets/legendaMapasVias.png) ](https://raw.githubusercontent.com/OSMBrasil/CLP/master/assets/legendaMapasVias.png)
+
+
+------
+
+[&#160;&#160;Conteúdo e dados deste projeto são dedicados ao domínio público<br/>&#160;&#160;![](assets/CC0-logo-200px.png) ](LICENSE.md)

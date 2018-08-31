@@ -7,3 +7,8 @@ Comparativamente ao [CLP-via](spec-CLP-via.md) Isso dispensa o conhecimento de n
 
 ...
 ![](assets/CLP-anatomia-coord.png)[<div style="text-align:right;font-size:8ptwidth:98%;height:10pt">(fonte)</div>](assets/README.md#Imagens)
+
+
+------
+
+[&#160;&#160;Conteúdo e dados deste projeto são dedicados ao domínio público<br/>&#160;&#160;![](assets/CC0-logo-200px.png) ](LICENSE.md)
