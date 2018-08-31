@@ -54,7 +54,17 @@ mas oferece uma lógica espacial para análise de vizinhança muito mais sofisti
 Conforme apresentado acima, o entrelaçamemto é a principal estratégia para a codificação desejada.  
 Se a inferência das células vizinhas do Geohash não for um recurso importante, o Geohash pode ser
 substituído por uma convenção mais eficiente. Acredita-se que pode ser reduzido em 1 ou dois caracteres
-com a adoção de uma convenção alternativa. 
+com a adoção de uma convenção alternativa.
+
+## Outras convenções avaliadas
+
+Convenção  | Prós | Contras
+-----------|------|---------
+[PlusCode](https://plus.codes/) ([Wikipedia](https://en.wikipedia.org/wiki/Open_Location_Code)) | Aberto e apoiado por uma grande empresa (Google)  | Muito longo (*base20*) e não demonstra vantagem com relação ao Geohash (algoritmos similares de vizinhança)
+[what3words](http://what3words.com) ([Wikipedia](https://en.wikipedia.org/wiki/What3words)) | Fácil de lembrar, baixa taxa de erro na comunicação oral | Solução privada (não é aberta), e solução similar pode ser acoplada às demais como "charminho", não precisa ser centrada nas palavras &mdash; na OSM podemos lançar uma convenção para o português um código de "cidade + duas palavras" com Geohash correspondente.
+
+
+<!-- Geohexa | Referência para fork | é só um brinquedo -->
 
 ------
 
