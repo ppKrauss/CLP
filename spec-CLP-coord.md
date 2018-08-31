@@ -15,7 +15,7 @@ A seguir uma breve discussão sobre as convenções e hipóteses de trabalho ado
 Para apresentar  de forma mais didática o problema do prefixo comum em endereços vizinhos, imaginemos um sistema de coordenadas simples com apenas quatro dígitos, dois para a coordenada _x_ e dois para a coordenada _y_. <br/>Suponhamos *x=72* e *y=19*,  e que o código desejado é formado pelo "entrelaçamemto de dígitos" desses códigos, ou seja, como os primeiros dígitos de *x* e *y*  são respectivamente 7 e 1, os segundos dígitos 2 e 9, o entrelaçamento resulta em "71" seguido de "29", o número 7129.
 
 representação |*x* | *y* | entrelaçado direto | entrelaçado binário
---------------|----|-----|------------- |
+--------------|----|-----|--------------------|-----------
 ponto A -  **decimal** (72;19) | 72  | 19 | 71 29 = **71**29| **858**1
 ponto B -  **decimal** (72;39) | 72  | 39 | 73 29 = **7**329| 9365
 ponto C -  **decimal** (73;19) | 73  | 19 | 71 39 = **71**39| **858**3
