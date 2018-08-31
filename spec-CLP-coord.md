@@ -39,7 +39,7 @@ Um número inteiro de 64-bits pode ser representado com diferentes bases: *base1
 
 ## Adoção do padrão GeoHash
 
-O padrão Geohash é um tipo de entrelaçamemto de coordenadas lat-long que permite a representação de uma coordenada de 64-bits com 9 dígitos *base32*. O  Geohash está presente em diversas plataformas de SIG e bancos de dados espaciais, notadamente no PostGIS (funções [*ST_GeoHash*](https://postgis.net/docs/ST_GeoHash.html), *ST_PointFromGeoHash*, *ST_Box2dFromGeoHash* e outras).
+O padrão Geohash é um tipo de entrelaçamemto binário de coordenadas lat-long que permite a representação de uma coordenada de 64-bits com 9 dígitos *base32*. O  Geohash está presente em diversas plataformas de SIG e bancos de dados espaciais, notadamente no PostGIS (funções [*ST_GeoHash*](https://postgis.net/docs/ST_GeoHash.html), *ST_PointFromGeoHash*, *ST_Box2dFromGeoHash* e outras).
 
 Convencionou-se fazer uso do código **Geohash** da localização do portão, **descartando o prefixo da [BBOX](https://en.wikipedia.org/wiki/Minimum_bounding_box) do município** &mdash; visto que seria o mesmo para todos os pontos da região. A identificação do município se dá por  [sigla mnemônica de 3 letras](sigla3letras-municipio.md).
 
@@ -51,7 +51,10 @@ mas oferece uma lógica espacial para análise de vizinhança muito mais sofisti
 
 ## Adoção de padrões similares
 
-Conforme apresentado acima, o entrelaçamemto é
+Conforme apresentado acima, o entrelaçamemto é a principal estratégia para a codificação desejada.  
+Se a inferência das células vizinhas do Geohash não for um recurso importante, o Geohash pode ser
+substituído por uma convenção mais eficiente. Acredita-se que pode ser reduzido em 1 ou dois caracteres
+com a adoção de uma convenção alternativa. 
 
 ------
 
