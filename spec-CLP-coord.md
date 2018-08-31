@@ -6,3 +6,4 @@ Faz uso do código **Geohash** da localização do portão, **descartando o pref
 Comparativamente ao [CLP-via](spec-CLP-via.md) Isso dispensa o conhecimento de nomes oficiais de vias terciárias, e evita sucateamento quando vias são modificadas (resultando em nova metragem ou novo identificador).
 
 ...
+![](assets/CLP-anatomia-coord.png)[<div style="text-align:right;font-size:8ptwidth:98%;height:10pt">(fonte)</div>](assets/README.md#Imagens)

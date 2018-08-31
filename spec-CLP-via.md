@@ -8,7 +8,7 @@ Código Localizador de Portão baseado no *identificador da via* e na "localiza�
 * Divulgar e revisar os mapas básicos, batizando vias com códigos oficiais quando preciso;
 * Fazer ajustes finos nas informações oficiais, e tornando-as bancos de dados públicos.
 
-![](assets/CLP-resumo1b.png)<br/><small>Fonte: adaptado de slides gov. SP.</small>
+![](assets/CLP-resumo1b.png)[<div style="text-align:right;font-size:8ptwidth:98%;height:10pt">(fonte)</div>](assets/README.md#Imagens)
 
 Exemplos de Código de Localização de Portão no meio rural:
 

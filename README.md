@@ -2,35 +2,37 @@
 
 Proposta de **C**ódigo **L**ocalizador de **P**ortão:  estudo de viabilidade.
 
-O intuito deste projeto é apresentar recursos tecnológicos, provas de conceito e metodologias para a Comunidade OpenStreetMap e o cidadão brasileiro em geral. O foco é o "endereço de portão", ou seja, endereço para entregas entre empresas ou empreendimentos em Logística, endereço de um equipamento social de utilidade pública, endereço para um amigo chegar até a sua casa para uma visita, [endereço para correspondência](https://schema.org/PostalAddress), etc. A referência genérica, independente da aplicação é o "portão".
+O intuito deste projeto é apresentar recursos tecnológicos, provas de conceito e metodologias para a Comunidade OpenStreetMap e o cidadão brasileiro em geral. O foco é o "endereço de portão", ou seja, endereço para um amigo chegar até a sua casa para uma visita, [endereço para correspondência](https://schema.org/PostalAddress), endereço para entregas entre empresas ou empreendimentos em Logística, endereço de um equipamento social, etc. A referência, independente da aplicação, é esse conceito generalizado de "portão".
 
 Existe por de trás disso o [Direito de Ir e Vir](http://www.conteudojuridico.com.br/artigo,direito-de-ir-e-vir-na-sociedade-brasileira,53479.html) (até o portão); o [Direito de Habitar](https://pt.wikipedia.org/wiki/Direito_%C3%A0_moradia), de ser dono de um portão (com pleno usufruto do mesmo); o [Direito de ser Informado](https://pt.wikipedia.org/wiki/Direito_da_informa%C3%A7%C3%A3o#Direito_%C3%A0_informa%C3%A7%C3%A3o) da localização precisa de um serviço público ou de uma sede institucional; além das questões de **custo**: buscamos exercer nossos direitos de forma o menos onerosa possível, idealmente a custo zero.
 
 A grosso modo o **endereço de portão é um ponto geográfico**, com as suas coordenadas de latitude e longitude, e com uma certa resolução: um quadrado de **3m×3m em espaço urbano**, posicionando uma porta de casa sem confundir com o vizinho ou com o outro lado da rua; e um quadrado **15m×15m em espaço rural** (assim como também em parques e grandes propriedades), posicionando uma porteira de estratada, uma casa sem fachada, um pórtico, uma portaria, ou algo similar.
 
-![](assets/ilustra-escalas01.jpg)<br/>([<small>fonte</small>](assets/README.md#Imagens))
+![](assets/ilustra-escalas01.jpg)[<div style="text-align:right;font-size:8ptwidth:98%;height:10pt">(fonte)</div>](assets/README.md#Imagens)
 
 > A função do **CLP** é portanto localizar geograficamente, através de um códigio curto, um "portão genérico", de utilidade pública ou de interesse do cidadão.
 
 ## Soluções levantadas
 
-Existem dois grupos principais de "soluções de endereçamento de portão":
+Existem dois grupos principais de "soluções para endereçamento de portão":
 * Soluções baseadas na **proximidade do portão com uma via de acesso** a ele.
 * Soluções baseadas na **coordenada geográfica do portão**.
 
 Tecnicamente uma pode ser convertida na outra através de [procedimentos de geocodificação](https://en.wikipedia.org/wiki/Geocoding#Geocoding_process).
 
-Entre as soluções conhecidas, o presente projeto tem como foco e entendimento, que necessitam ser "soluções codificáveis", ou seja, que possam ser traduzidas em um *número identificador do endereço*. Esse número pode ter uma representação alternativa, não precisa ser decimal, mas precisa resultar em um código **código curto** &mdash;  sugere-se códigios de no máximo ~6 caracteres não-mnemônicos, totalizando máximo de ~12 em caso de reunir mnemônicos.
+Entre as soluções conhecidas, no presente entende-se que necessitam ser "soluções codificáveis", ou seja, que possam ser traduzidas em um *número identificador do endereço*. Esse número pode ter uma representação alternativa, não precisa ser estritamente decimal (pode usar letras como no heaxadecimal), mas precisa resultar em um código **código curto** &mdash;  sugere-se códigios de no máximo ~6 caracteres não-mnemônicos, totalizando máximo de ~12 caso  apresente também blocos mnemônicos.
 
-Por exemplo o ponto do marco-zero de São Paulo é a coordenada `-23,5503270/-46,6339431`, que consome 23 caracteres... Para uma resolução de ~4 metros, bastam 16 caracteres, mas ainda assim   é considerada uma cadeia longa para se memorizar. Se a mesma coordenada for codificada em [Geohash](https://en.wikipedia.org/wiki/Geohash) como `6GYF4BF1Y`, fica reduzida a 9 caracteres. Como o prefixo `6G` de Geohash aparece em todos os pontos do município, pode-se reduzir para um mnemônico do tipo _"**Sampa-YF4.BF1Y**"_, que depende da memorização de um código de 7 caracteres, mais palatável para a memória e comunicação entre humanos.
+Por exemplo o ponto do marco-zero de São Paulo é a coordenada `-23,5503270/-46,6339431`, que consome 23 caracteres... Para uma resolução de ~4 metros, reduziriam-se a 21 caracteres, uma cadeia ainda muito longa para se memorizar. Se a mesma coordenada for codificada em [Geohash](https://en.wikipedia.org/wiki/Geohash) como `6GYF4BF1Y`, fica reduzida a 9 caracteres. Como o prefixo `6G` de Geohash aparece em todos os pontos do município, pode-se reduzir para um mnemônico do tipo _"**Sampa-YF4.BF1Y**"_, com prefixo fácil de memorizar, e código de 7 caracteres,  palatável para a memória e comunicação entre humanos.
 
 ![](assets/marcoZeroSP.png)
 
-Quanto aos critérios de seleção, a baixa eficiência de um *sistema de  localização baseada no código* pode ser traduzida em "alto custo" para quem quer chegar no endereço. Não existem estatísticas no Brasil, mas é um custo mensurável e objetivo. Outro critério é o "risco futuro de custo", que se traduz em licenças abertas e identificadores transparentes:
+Quanto aos critérios de seleção, os principais são o custo e o risco de alto custo no futuro.
 
-* algo que não faça uso de licenças abertas ([licenças _OpenDefinitoin_](https://opendefinition.org/od/2.0/pt-br/)), mesmo que não tenha custo hoje, corre sério risco de ser explorado pelo seu proprietário amanhã.  
+Se um  *sistema de localização baseada no código* não é eficiente, a sua  baixa eficiência pode ser traduzida em "alto custo para quem quer chegar no endereço". Não existem estatísticas no Brasil, mas é um custo mensurável e objetivo. Já o  critério de "risco de alto custo no futuro", se traduz na seleção de licenças abertas e identificadores transparentes:
 
-* um [identificador que dependa de autoridade central](https://doi.org/10.5281/zenodo.159004) não é considerado "transparente", e o *grau de transparência* pode ser expresso pelo grau de comprometimento com uma autoridade central. <br/>Como existem "hierarquias de identificação" (como que caixinhas uma dentro da outra), é suposto que quando mais geral (escalas de país ou Estado são mais gerais que município ou condomínio), maior a necessidade de certa centralização. Hoje identificadores tais como [ISO 3166-2:BR](https://en.wikipedia.org/wiki/ISO_3166-2:BR), dos códigos de duas letras para país (ex. AR, BO, BR) e estado (ex. AM, MG, SP), apesar de serem centralizados pela autoridade ISO, são considerados padrões abertos.
+* Algo que não faça uso de licenças abertas ([licenças _OpenDefinitoin_](https://opendefinition.org/od/2.0/pt-br/)), mesmo que não tenha custo hoje, corre sério risco de ser explorado pelo seu licenciador (proprietário) amanhã.
+
+* Um [identificador que dependa de autoridade central](https://doi.org/10.5281/zenodo.159004) não é considerado "transparente", e o *grau de transparência* pode ser expresso pelo grau de comprometimento com uma autoridade central. <br/>Como existem "hierarquias de identificação" (como que caixinhas uma dentro da outra), é suposto que quando mais geral (escalas de país ou Estado são mais gerais que município ou condomínio), maior a necessidade de certa centralização. Hoje identificadores tais como [ISO 3166-2:BR](https://en.wikipedia.org/wiki/ISO_3166-2:BR), dos códigos de duas letras para país (ex. AR, BO, BR) e estado (ex. AM, MG, SP), apesar de serem centralizados pela autoridade ISO, são considerados padrões abertos.
 
 A "autoridade" do identificador, quando realmente necessária, é uma entidade sem fins lucrativos, com governança aberta e democrática... O cidadão não quer se refém de uma empresa que busca maximizar seu lucro, nem refém de troca de favores a "políticos" (risco de corrupção)  numa instituição pública fraca ou desorganizada.
 
@@ -43,8 +45,6 @@ Historicamente instituições como os Correios vem se beneficiando do [fato de s
 Do ponto de vista social também são bem conhecidos os problemas, que se somam ao longo da História da Vida Privada do brasilerio, a falta de vontade politica em oferecer um endereço a quem mora em "espaços informais" (ex. favelas) e quem mora no espaço rural.
 
 ### Problemas no espaço rural
-6GVVVW3J
-6GVVVW3HV
 
 Mesmo no rico Estado de São Paulo, em pleno 2018, chegar até uma propriedade rural nunca foi simples: as vias não tem nome ou não se sabe, sinalização inexiste; distâncias são imprecisas, referências são perdidas, temporárias. Mesmo com celular, o sinal nem sempre pega.
 
