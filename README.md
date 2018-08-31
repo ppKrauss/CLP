@@ -52,7 +52,7 @@ A dor por esse abandono  é forte para o poder público e para o cidadão... É 
 
 Há anos que o governo de SP vem tentando oferecer um endereço para o ciadão do meio rural. Acreditamos que o presente estudo possa ajudar as autoridades governamentais a apreciar soluções simples, baratas e viáveis, com  comprovação de conceito realizada com o OpenStreetMap.
 
-## Padrões analisadas
+## Padrões considerados
 
 O intuito deste projeto é apresentar recursos tecnológicos, provas de conceito e metodologias. Com apoio conjunto da  comunidade de cada município e do governo, acreditamos  ser possível construir um novo protocolo de localização geográfica e de endereçamento. O padrão seria adotado inicialmente por viaturas oficiais da prefeitura, do Estado, para ocorrências policiais, ambulâncias e bombeiros. Consiste em usar métodos simples e tecnologicamente já bem conhecidos... O desafio  se resume a avaliar e adotar padrões.
 
@@ -65,11 +65,17 @@ Conforme comentado acima, os principais padrões envolvidos na escrita de uma co
 
 ### Padrões baseados no endereçamento postal tradicional
 
-O principal padrão para se expressar endereços em conformidade com as tradições nacional e internacional, é  [endereço postal](https://schema.org/PostalAddress). Seus principais componentes são o nome identificador do logradouro, que é a via de acesso ao portão, e a [numeração predial](https://en.wikipedia.org/wiki/House_numbering), que é a "metragem" da posição do portão na via. Esses dois componentes, para que possam ser codificados de forma compacta, persistente e confiável precisam satisfazer padrões:
+O principal padrão para se expressar endereços em conformidade com as tradições nacional e internacional, é  [endereço postal](https://schema.org/PostalAddress). Seus componentes básicos são o nome identificador do logradouro, que é a via de acesso ao portão, e a [numeração predial](https://en.wikipedia.org/wiki/House_numbering), que é a "metragem" da posição do portão na via. Esses dois componentes, para que possam ser codificados de forma compacta, persistente e confiável precisam satisfazer padrões abertos:
 
 * A  via é "batizada" pelo **identificador oficial da via**. Por exemplo [`BR-116`](https://pt.wikipedia.org/wiki/BR-116) é o código de uma via federal primária,  `PIR-033/260` é o código de uma  via municipal terciária. Conforme a escala ou área em que se insere a via, fica estabelecida uma autoridade para a sua manutenção e seu batismo. "Autoridades de batismo" podem ser grosseiramente classificadas por: pública (federal, estadual, municipal), privada (interior de condomínios,  fazendas, etc.) e "natural" (riachos e trilhas naturais de menor uso).
 
-* A numeração predial depende de estarem oficialmente fixados o **"marco zero" da via**, de onde se começa a contar a "metragem" da via; e depende também de como foi digitalizado o seu percurso (se mais retilínio a numeração diminui se mais rugoso a numeração aumenta), portanto do registro em meio digital do **"traçado oficial" da via**. Alternativamente traçados satisfatórios (aceitos como "próximos do oficial") podem ter sua métrica ajustada por algumas **amostras de "numeração predia oficial"** ao longo da via.
+* A numeração predial depende do **"marco zero" da via**, onde inicia a sua "metragem", e de como foi digitalizado o  percurso da via &mdash; se mais retilínio a numeração diminui se mais rugoso a numeração aumenta, portanto do registro em meio digital do **"traçado oficial" da via**. Alternativamente traçados satisfatórios (aceitos como "próximos do oficial") podem ter sua métrica ajustada por algumas **amostras de "numeração predial oficial"** ao longo da via.
+
+### Convenções sobre acurácia na localização do portão
+
+Pode-se supor que, para fins de calibração de mapas ou localização oficial de um endereço, sejam usadas tecnologias mais precisas que aquelas usualmente embarcadas num aparelho de telefonia celular de custo médio. A prinpal tecnologia é a [RTK](https://en.wikipedia.org/wiki/Real-time_kinematic) (*Real-time kinematic*), acessível em todo o território nacional.  Aferições de "marco-zero da via", "metragem da via" e coordenada do portão podem ser obtidos com precisão de metro em aferições oficiais (apresentam custo).
+
+Quanto à convenção da resolução de 3m×3m "sem custo", é uma estimativa para se caracterizar dois portões distintos em espaço urbano, aproximadamente compativel com o limite atual dos sistemas de Multi-GNSS (GPS/GLONASS/Galileo). Largura de automóvel, rua, calçada, e outros parâmetros médios também são compativeis com esse limite. A rigor não existe um padrão &mdash; como referência pode-se citar o sistema [what3words](http://what3words.com), aparentemente o único que se compromete com a resolução nominal de 3m×3m. A estimativa de precisão do código Geohash de 9 caracteres também é da mesma ordem de grandeza, ~4 mertros.
 
 ## Soluções analisadas e revisadas
 
