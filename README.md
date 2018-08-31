@@ -8,7 +8,7 @@ Existe por de trás disso o [Direito de Ir e Vir](http://www.conteudojuridico.co
 
 A grosso modo o **endereço de portão é um ponto geográfico**, com as suas coordenadas de latitude e longitude, e com uma certa resolução: um quadrado de **3m×3m em espaço urbano**, posicionando uma porta de casa sem confundir com o vizinho ou com o outro lado da rua; e um quadrado **15m×15m em espaço rural** (assim como também em parques e grandes propriedades), posicionando uma porteira de estratada, uma casa sem fachada, um pórtico, uma portaria, ou algo similar.
 
-![](assets/ilustra-escalas01.jpg)[<div style="text-align:right;font-size:8ptwidth:98%;height:10pt">(fonte)</div>](assets/README.md#Imagens)
+![](assets/ilustra-escalas01.jpg)
 
 > A função do **CLP** é portanto localizar geograficamente, através de um códigio curto, um "portão genérico", de utilidade pública ou de interesse do cidadão.
 
@@ -85,8 +85,8 @@ Resumindo a **solução baseada em coordenada**: o principal recurso padronizado
 
 Resumindo a **solução baseada em endereço**: um CLP-rural baseado em endereço, por código identificador de via, requer padronização e estabilidade dos códigos de via por parte das "autoridades de batismo", entre elas o governo do estado e os municípios. Já o CLP-urbano baseado em endereços pode fazer uso do "menor CEP da via" como código oficial da via, aproveitando o fato de que a tradução de fragmentos de CEP através do [CRP](https://github.com/OSMBrasil/CRP) não oferece barreiras de direitos autoriais. Todavia bem todo município tem CEP-por-lograsouro, de modo que tais municípios, no seu espaço urbano demandariam mesma solução (e portanto enfrentariam mesmos problemas de identificação de via) que a no espaço rural.
 
-![](assets/CLP-resumo2-vias.png)<br/>([<small>fonte</small>](assets/README.md#Imagens))
+![](assets/CLP-resumo2-vias.png)
 
 ------
 
-[&#160;&#160;Conteúdo e dados deste projeto são dedicados ao domínio público<br/>&#160;&#160;![](assets/CC0-logo-200px.png) ](LICENSE.md)
+&#160;&#160;Conteúdos e dados deste projeto são dedicados ao domínio público. Ver também [Créditos das imagens](assets/README.md#Imagens).   <br/>&#160;&#160;[![](assets/CC0-logo-200px.png) ](LICENSE.md)

@@ -8,7 +8,7 @@ Código Localizador de Portão baseado no *identificador da via* e na "localiza�
 * Divulgar e revisar os mapas básicos, batizando vias com códigos oficiais quando preciso;
 * Fazer ajustes finos nas informações oficiais, e tornando-as bancos de dados públicos.
 
-![](assets/CLP-resumo1b.png)[<div style="text-align:right;font-size:8ptwidth:98%;height:10pt">(fonte)</div>](assets/README.md#Imagens)
+![](assets/CLP-resumo1b.png)
 
 Exemplos de Código de Localização de Portão no meio rural:
 
@@ -87,4 +87,5 @@ No Openstreetmap já existe um grande percentual da malha viária do estado de S
 
 ------
 
-[&#160;&#160;Conteúdo e dados deste projeto são dedicados ao domínio público<br/>&#160;&#160;![](assets/CC0-logo-200px.png) ](LICENSE.md)
+
+&#160;&#160;Conteúdos e dados deste projeto são dedicados ao domínio público. Ver também [Créditos das imagens](assets/README.md#Imagens).   <br/>&#160;&#160;[![](assets/CC0-logo-200px.png) ](LICENSE.md)
