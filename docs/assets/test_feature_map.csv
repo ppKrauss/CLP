@@ -1,0 +1,8 @@
+group,wikidata_id,iso_latlon,name,utm,scale,length,s2_level,tmp_polygon
+A1,Q178114,38.889475 -77.035244,Washington Monument pointer (DC),18S 323483 4306480,cm²,0.10,25,https://www.openstreetmap.org/relation/3374540
+A2,Q17300119,40.754 -73.9841,Josephine Shaw Lowell Fountain (NY),18T 585756 4511946,~70m²,8.00,20,
+A3,Q1060845,40.7801 -73.968767,Delacorte Theater,18T 587017 4514858,~1km²,30.00,18,https://www.openstreetmap.org/way/278363024
+A3,Q160409,40.7825 -73.966111,Central Park (NY),18T 587238 4515127,3.4 km²,1800.00,12,https://www.openstreetmap.org/way/427818536
+A3,Q19473784,40.781028 -73.964556,Alexander Hamilton's statue,18T 587371 4514965,~1m²,1.00,23,
+B,Q208760,1.287022 103.854689,Merlion fountaine,48N 372579 142283,~30m²,5.00,22,https://www.openstreetmap.org/way/182819157
+B,Q6819812,1.28683 103.855,Merlion Park (Singapore),48N 372614 142262,2.5 km²,1500.00,11,https://www.openstreetmap.org/way/164881352

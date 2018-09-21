@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Comparações - CLP</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">CLP</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">Apresentação</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Especificações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../spec01-hub/">Geral</a>
+</li>
+                            
+<li >
+    <a href="../spec02-coord/">CLP-coord</a>
+</li>
+                            
+<li >
+    <a href="../spec03-via/">CLP-via</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apêndices <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../spec04ap01-siglas/">Siglas</a>
+</li>
+                            
+<li class="active">
+    <a href="./">Comparações</a>
+</li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="../assets/README/">Créditos</a>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../spec04ap01-siglas/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../assets/README/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#comparacao">Comparação</a></li>
+        <li class="main "><a href="#codigos-do-marco-zero-de-sp">Códigos do Marco-Zero de SP</a></li>
+            <li><a href="#geohash">Geohash</a></li>
+            <li><a href="#pluscode">PlusCode</a></li>
+            <li><a href="#mapcode">MapCode</a></li>
+            <li><a href="#s2">S2</a></li>
+            <li><a href="#whats3words">Whats3words</a></li>
+        <li class="main "><a href="#outros-pontos-de-controle">Outros pontos de controle</a></li>
+        <li class="main "><a href="#exemplos-de-geohash-de-prefixo-do-municipio">Exemplos de Geohash de prefixo do município</a></li>
+        <li class="main "><a href="#exemplos-de-otimizacao-com-o-prefixo-da-cidade">Exemplos de otimização com o prefixo da cidade</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h2 id="comparacao">Comparação</h2>
+<p>Comparação entre padrões mais populares: Geohash, PlusCode, MapCode. Foi acescentado ainda o padrão S2, que apesar de não ser ainda muito divulgado, é um dos recomendados.</p>
+<p>A comparação se deu em torno de um ponto de controle bem conhecido, na capital de SP.</p>
+<h2 id="codigos-do-marco-zero-de-sp">Códigos do Marco-Zero de SP</h2>
+<p><a href="https://pt.wikipedia.org/wiki/Marco_zero_da_cidade_de_S%C3%A3o_Paulo">Marco Zero</a> (<em>latitude -23.550385, longitude -46.633956</em>) com ~5m de precisão nos padrões mais populares de 2018 e com infraestrutura em operação:</p>
+<ul>
+<li>Geohash (base32): <code>6gyf4bf1n</code></li>
+<li>PlusCode normal (base20): <code>588MC9X8+RC</code></li>
+<li>PlusCode hibrido (cidade+base20): <code>C9X8+RC São Paulo</code></li>
+<li>MapCode (híbrido): <code>SP-RR.56</code></li>
+<li>S2 (hexadecimal): <code>94ce59aaf89</code></li>
+</ul>
+<p>Destes, Geohash e S2 ainda não oferecem infraestrutura para sua versão híbrida, e o PlusCode ainda não oferece resolução de abreviações. Resultariam nos seguintes códigos:</p>
+<ul>
+<li>Geohash Hibrido: <code>SPA-YF4B.F1N</code></li>
+<li>PlusCode com sigla da cidade: <code>SPA-C9X8+RC</code></li>
+<li>S2 em base36: <code>3MHP9.IW09</code></li>
+<li>S2 em base 36 com prefixo SPA: <code>SPA-XIW.09</code></li>
+</ul>
+<p>A seguir cada um dos exemplos ilustrado pelo mapa fornecido na respectiva infraestrutura pública.</p>
+<h3 id="geohash"><a href="http://geohash.org/6gyf4bf1n"><strong>Geohash</strong></a></h3>
+<p>O link acima envia aponta para <code>geohash.org</code> que não dá zoom compativel com a resolução do Geohash. Para a ilustração abaixo foi utilizada a interface manual de <a href="https://movable-type.co.uk/scripts/geohash.html">movable-type.co.uk/scripts/geohash</a>.</p>
+<p><img alt="" src="../assets/CLP-coord-geohash-ilustra01.png" /></p>
+<p>Os dois primeiros dígitos podem ser cortados quando sabemos que o contexto é a cidade de São Paulo (prefixo <code>6g</code>).</p>
+<p>Porta principal (~10m), escadaria da igreja da Sé
+<em> Geohash (base32), 9 dígitos: <code>6gyf4bdn9</code> precisão ~5x5m
+</em> Geohash (base32), 8 dígitos: <code>6gyf4bdn</code> precisão ~35x20m</p>
+<p><img alt="" src="../assets/CLP-coord-geohash-ilustra03.png" /></p>
+<h3 id="pluscode"><a href="https://plus.codes/588MC9X8+RC"><strong>PlusCode</strong></a></h3>
+<p><img alt="" src="../assets/CLP-coord-plusCode-ilustra01.png" /></p>
+<h3 id="mapcode"><a href="http://www.mapcode.com/getcoords.html?iso3=331&amp;mapcode=RR.56&amp;xx=-46.633956&amp;yy=-23.550385"><strong>MapCode</strong></a></h3>
+<p><img alt="" src="../assets/CLP-coord-mapCode-ilustra01b.png" /></p>
+<h3 id="s2"><a href="https://s2.sidewalklabs.com/regioncoverer/?cells=94ce59aaf89f&amp;center=-23.550385%2C-46.633956&amp;zoom=20"><strong>S2</strong></a></h3>
+<p><img alt="" src="../assets/CLP-coord-s2-ilustra01c.png" /></p>
+<h3 id="whats3words"><a href="https://map.what3words.com/funil.leites.chaves"><strong>Whats3words</strong></a></h3>
+<p>Por ser patenteado está sendo utilizado apenas como exemplo ilustrativo.</p>
+<p><img alt="" src="../assets/CLP-coord-whats3words-ilustra01.png" /></p>
+<h2 id="outros-pontos-de-controle">Outros pontos de controle</h2>
+<p>Exemplificando apenas com Geohash: ...</p>
+<h2 id="exemplos-de-geohash-de-prefixo-do-municipio">Exemplos de Geohash de prefixo do município</h2>
+<p>Conforme o padrão que vier a ser eleito (entre as opções Geohash, PlusCode, S2, etc.), a geometria e tamanho da menor célula a conter o muncípio será diferente. A tabela abaixo exemplifica casos de diversos municípios, mostrando junto o Geohash do seu centroide e em modo absoluto e modo relativa ao prefixo.</p>
+<table>
+<thead>
+<tr>
+<th>Município (UF-abbrev3)</th>
+<th>Código CLP<br/>(~4m)</th>
+<th>Geohash<br/>municipal</th>
+<th>ponto<br/>(~0.5m)</th>
+<th>Área munic.<br/>(km2)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Amaraji (PE-ARJ)</td>
+<td><strong>ARJ-WB3.J236</strong></td>
+<td>7N</td>
+<td>7NWB3J23621T</td>
+<td>~200</td>
+</tr>
+<tr>
+<td>Barbacena (MG-BCA)</td>
+<td><strong>BCA-0Z4.GXCV</strong></td>
+<td>7H</td>
+<td>7H0Z4GXCV8BK</td>
+<td>~800</td>
+</tr>
+<tr>
+<td>Barra do Chapéu (SP-BCH)</td>
+<td><strong>BCH-THG.NK1N</strong></td>
+<td>6G</td>
+<td>6GTHGNK1NY93</td>
+<td>~400</td>
+</tr>
+<tr>
+<td>Bom Jesus da Penha (MG-BSN)</td>
+<td><strong>BSN-KZB.37</strong></td>
+<td>6UQB</td>
+<td>6UQBKZB377KE</td>
+<td>~200</td>
+</tr>
+<tr>
+<td>Campinas (SP-CAM)</td>
+<td><strong>CAM-TDX.YF6</strong></td>
+<td>6GY</td>
+<td>6GYTDXYF6FSH</td>
+<td>~800</td>
+</tr>
+<tr>
+<td>Descalvado (SP-DCV)</td>
+<td><strong>DCV-5E8.X5H</strong></td>
+<td>6UN</td>
+<td>6UN5E8X5H0B2</td>
+<td>~800</td>
+</tr>
+<tr>
+<td>Dois Córregos (SP-DCR)</td>
+<td><strong>DCR-UJ8.S4J0E</strong></td>
+<td>6</td>
+<td>6UJ8S4J0ENBY</td>
+<td>~600</td>
+</tr>
+<tr>
+<td>Holambra (SP-HOL)</td>
+<td><strong>HOL-X30.JHZ</strong></td>
+<td>6GY</td>
+<td>6GYX30JHZ7C3</td>
+<td>~100</td>
+</tr>
+<tr>
+<td>Jaci (SP-JCI)</td>
+<td><strong>JCI-8ZE.FZD</strong></td>
+<td>6UK</td>
+<td>6UK8ZEFZDM0C</td>
+<td>~100</td>
+</tr>
+<tr>
+<td>Jardim Alegre (PR-JDG)</td>
+<td><strong>JDG-NM9.1C5</strong></td>
+<td>6GE</td>
+<td>6GENM91C5P7W</td>
+<td>~400</td>
+</tr>
+<tr>
+<td>Lagoa Real (BA-LRL)</td>
+<td><strong>LRL-9BP.JC74</strong></td>
+<td>7J</td>
+<td>7J9BPJC74SEC</td>
+<td>~900</td>
+</tr>
+<tr>
+<td>Lutécia (SP-LTC)</td>
+<td><strong>LTC-1J2.4UJ</strong></td>
+<td>6UH</td>
+<td>6UH1J24UJJYQ</td>
+<td>~500</td>
+</tr>
+<tr>
+<td>Oliveira (MG-OLV)</td>
+<td><strong>OLV-1YV.9JR</strong></td>
+<td>7H2</td>
+<td>7H21YV9JREW6</td>
+<td>~900</td>
+</tr>
+<tr>
+<td>Santa Mariana (PR-SNM)</td>
+<td><strong>SNM-UHF.4YSN</strong></td>
+<td>6G</td>
+<td>6GUHF4YSNY2X</td>
+<td>~400</td>
+</tr>
+<tr>
+<td>São Borja (RS-SJA)</td>
+<td><strong>SJA-FBK.9M4ME</strong></td>
+<td>6</td>
+<td>6FBK9M4MEGPF</td>
+<td>~3600</td>
+</tr>
+<tr>
+<td>São Paulo (SP-SPA)</td>
+<td><strong>SPA-YC2.BYHD</strong></td>
+<td>6G</td>
+<td>6GYC2BYHDXTF</td>
+<td>~1500</td>
+</tr>
+<tr>
+<td>São Paulo de Olivença (AM-SDO)</td>
+<td><strong>SDO-RNT.1BMP0</strong></td>
+<td>6</td>
+<td>6RNT1BMP0GX0</td>
+<td>~19700</td>
+</tr>
+<tr>
+<td>Schroeder (SC-SCH)</td>
+<td><strong>SCH-453.MSP</strong></td>
+<td>6GM</td>
+<td>6GM453MSPZR7</td>
+<td>~200</td>
+</tr>
+<tr>
+<td>Três Barras (SC-TSB)</td>
+<td><strong>TSB-70E.VP9</strong></td>
+<td>6GK</td>
+<td>6GK70EVP9S0P</td>
+<td>~400</td>
+</tr>
+<tr>
+<td>Ubaitaba (BA-UIA)</td>
+<td><strong>UIA-7YY.ETNV</strong></td>
+<td>7J</td>
+<td>7J7YYETNVBMH</td>
+<td>~200</td>
+</tr>
+</tbody>
+</table>
+<p>Reparamos que municípios de área maior (ex. São Borja e São Paulo de Olivença) e municípios que "dão azar" de ficar entre células do Geohash, como Dois Córregos, tendem a ficar contidos em uma célula muito grande do Geohash, ou seja, ficam com o prefixo de um só dígito.</p>
+<p>Além destes casos extremos, percebemos que daria para otimizar, economizando pelo menos um dígito. A seguir examinaremos as estratégias de otimização, que consistem em "escolher a dedo" um conjunto de células que cubra mais precisamente o território do município. No caso de São Paulo, percebe-se que o Geohash <code>6G</code> tem uma cobertura muito ampla, acaba sendo usado por diversos outros municípios:</p>
+<p><img alt="" src="../assets/geohash-6G.png" /></p>
+<p>Se para São Paulo o seguinte, <code>6GY</code>, fica de fora a pequena fração em vermelho.
+<img alt="" src="../assets/geohash-6GY.png" /></p>
+<!--
+SELECT nome, '**'||abbrev3||'-'||code_format(code_cut_prefix(pref,pt,9)) ||'**' as x
+      , pref, pt, area
+FROM (
+   SELECT
+     abbrev3,name||' ('||state||'-'||abbrev3||')' as nome,
+     '~'||(round(km2/100)*100) area, UPPER(geohash_envelop) pref,
+      upper(geohash_center) pt
+    FROM test_city where abbrev3>'' and random() < 0.006
+) t;
+-->
+
+<h2 id="exemplos-de-otimizacao-com-o-prefixo-da-cidade">Exemplos de otimização com o prefixo da cidade</h2>
+<p>Mesmo o PlusCode que já nasceu especializado em usar nomes de cidade amigáveis no lugar estranhos prefixos,  não foi otimizado para cada cidade do mundo, é apenas um "quebra galho", ao contrário do que foi feito no MapCode (infelizmente patenteado), que consegue uma compactação muito maior por ter sido otimizado. <strong>Cabe ao brasileiro</strong> (governo do Brasil e/ou comunidades brasileiras organizadas, como a Comunidade OSM Brasil) <strong>propor um esquema consistente de otimização</strong>.</p>
+<p>Suponhamos que a decisão final seja por códigos <a href="https://en.wikipedia.org/wiki/Base32">base32</a>, ou seja, com dígitos "0,1,2...,9,A,B,C...T". <br/>Suponhamos também que o  <strong>código completo</strong> no padrão eleito respeite a seguinte sintaxe de concatenação,<br/>&nbsp; &nbsp; <code>&lt;estado&gt; "-" &lt;município&gt; "-" &lt;codigo_celula&gt; &lt;codigo_sufixo&gt;</code><br/>onde cada elemento entre <code>&lt;</code> e <code>&gt;</code> tem o seguinte conteúdo:</p>
+<ul>
+<li>
+<p><code>&lt;estado&gt;</code> é uma sigla oficial de 2 letras (AC para Acre, AM para Amazonas, etc.)</p>
+</li>
+<li>
+<p><code>&lt;município&gt;</code> é uma sigla oficial de 3 letras, que junto com o código do estado fornece o identificador único da cidade. Por exemplo <code>SP-PIR</code> é Piracicaba, <code>SP-CAM</code> é Campinas. <br/>No caso de capital do estado, pode-se omitir (ao invés de <code>SP-SPA</code> fica só <code>SP</code>).   </p>
+</li>
+<li>
+<p><code>&lt;índice_celula&gt;</code> é um índice de 0 a 32, identificando uma das 32 células que cobrem o município. Eventualmente poderão ser usadas 1024 células no lugar de apenas 32... E em raríssimas exceções seria uma célula só para todo o município, dispensando o índice.</p>
+</li>
+<li>
+<p><code>&lt;codigo_sufixo&gt;</code> é o que sobra do código original depois que removemos dele o código da célula-mão determinada pelo índice (indice_celula).</p>
+</li>
+</ul>
+<p>O primeiro desafio é criar um esquema padronizado para se recobrir o município por uma malha de células maiores, que poderão ser designadas por  <code>&lt;índice_celula&gt;</code>. Imaginemos o recobrimento ilustrado abaixo, através de um algoritmo simples e parametrizável, conhecido como <em>region cover</em>:</p>
+<p><img alt="" src="../assets/otimizacao1.png" /></p>
+<p>Resumidamente a métodologia de otimização do prefixo do município consiste do seguinte:</p>
+<ol>
+<li>
+<p>Se o município apresentar uma distribuição não-uniforme de uso urbano e rural, digamos 30% urbano e 70% rural, localizar as áreas da mancha ou manchas urbanas, onde deverá haver maior densidade de células. Ideal que sejam  "mancha urbana futura estimada" (digamos estimativa de expanção para próximos 10 anos).</p>
+</li>
+<li>
+<p>Escolher um conjunto células (32 no exemplo) o mais acoplado possível à geometria do município, cubrindo com o mínimo de sobras o seu território. Cada uma dessas células será associada a um valor de <code>&lt;índice_celula&gt;</code>. <br/>Se for um "município de <a href="spec-dadosCompl.md">área grande</a>", ou se for não-uniforme, pode ser necessário usar dois dígitos de indexação (1024 células o exemplo).<br/>Havendo grades de maior resolução sobre a mancha urbana, o seu polígono é dado pela  subtração dentro do conjunto de resolução mais grosseira.  </p>
+</li>
+<li>
+<p>Voltar ao item-1 com uma melhor parametrização...</p>
+</li>
+</ol></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script>
+        <script src="../assets/leaflet-bing-layer.min.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

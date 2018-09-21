@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Leaflet Web Map</title>
+
+<!-- reference to Leaflet CSS -->
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+<!-- reference to Leaflet JavaScript -->
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+<!-- set width and height styles for map -->
+<style>
+#map {
+    width: 960px;
+    height:500px;
+}
+</style>
+
+</head>
+
+
+<body>
+This is a page...
+
+    <!-- place holder for map -->
+    <div id="map"></div>
+
+<script>
+    // from http://bl.ocks.org/uafrazier/bec76b7e288fd26bd297
+    //  https://gis.stackexchange.com/a/78851/7505
+    // create map object, tell it to live in 'map' div and give initial latitude, longitude, zoom values
+    // pass option to turn scroll wheel zoom off
+    var map = L.map('map',{scrollWheelZoom:false}).setView([1.2862100, 103.8541900], 18);
+
+//pode trocar pelo BING https://github.com/digidem/leaflet-bing-layer
+
+    // add base map tiles from OpenStreetMap and attribution info to 'map' div
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    	//attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+	maxZoom: 20,
+	maxNativeZoom: 18
+    }).addTo(map);
+
+
+    // define rectangle geographical bounds
+    // [ [maxlat,maxlon], [minlat,minlon]] = example [[43.64701, -79.39425], [43.64533, -79.38235]]
+    // minlat="1.2862100" minlon="103.8541900"  /  maxlat="1.2872800" maxlon="103.8557300"
+    var bounds = [[1.2872800, 103.8557300], [1.2862100, 103.8541900]];
+
+    // add rectangle passing bounds and some basic styles
+    L.rectangle(bounds, {color: "#D00", weight: 3}).addTo(map)
+    .bindPopup('A Geohash<br><code>w21z762</code>')  // 5m = w21z76281
+    .openPopup();
+
+    L.control.scale({"imperial":false}).addTo(map);  // rev to only meters
+
+</script>
+
+</body>
+
+</html>

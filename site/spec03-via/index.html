@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>CLP-via - CLP</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">CLP</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">Apresentação</a>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Especificações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../spec01-hub/">Geral</a>
+</li>
+                            
+<li >
+    <a href="../spec02-coord/">CLP-coord</a>
+</li>
+                            
+<li class="active">
+    <a href="./">CLP-via</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apêndices <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../spec04ap01-siglas/">Siglas</a>
+</li>
+                            
+<li >
+    <a href="../comparacao/">Comparações</a>
+</li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="../assets/README/">Créditos</a>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../spec02-coord/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../spec04ap01-siglas/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#clt-baseado-na-via">CLT baseado na via</a></li>
+        <li class="main "><a href="#solucoes-preliminares">Soluções preliminares</a></li>
+        <li class="main "><a href="#implementacao">Implementação</a></li>
+            <li><a href="#elementos-metodologicos-e-juridicos">Elementos metodológicos e jurídicos</a></li>
+            <li><a href="#subsidios-tecnicos">Subsídios técnicos</a></li>
+            <li><a href="#subsidios-sociais">Subsídios sociais</a></li>
+        <li class="main "><a href="#referencias">Referências</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>((em construção))</p>
+<h2 id="clt-baseado-na-via">CLT baseado na via</h2>
+<p>Código Localizador de Portão baseado no <em>identificador da via</em> e na "localização sobre a via" (do ponto de acesso ao portão). Faz uso dos seguintes critérios e padromozações:
+<em> Usar métodos conhecidos de localização;
+</em> Conhecer a malha viária (com o Openstreetmap) e identificá-la;
+<em> Comunicar os maiores interessados &mdash; os produtores rurais e demais habitantes da região;
+</em> Divulgar e revisar os mapas básicos, batizando vias com códigos oficiais quando preciso;
+* Fazer ajustes finos nas informações oficiais, e tornando-as bancos de dados públicos.</p>
+<p><img alt="" src="../assets/CLP-resumo1b.png" /></p>
+<p>Exemplos de Código de Localização de Portão no meio rural:</p>
+<ul>
+<li>
+<p>Uma estrada municipal com identificador oficial já destacado pelo OpenStreetMap: <a href="https://www.openstreetmap.org/way/485934035#map=14/-22.8511/-47.9207">PIR-033/260</a>. A numeração CLP será provavelmente a mesma porém sem separadores, <strong><code>PIR-033260</code></strong>. Ver ilustração [ipplap2017] abaixo nas Referências.</p>
+</li>
+<li>
+<p>Uma fazenda com porteira próxima à estrada: <a href="https://www.openstreetmap.org/node/5679199345#map=15/-22.8603/-47.9208">ponto no Openstreetmap</a>.  Não precisa ser exato, vale a projeção do ponto sobre a linha da estrada. Se a porteira da fazenda estivesse a 12,3 km do marco-zero da estrada, o endereço CLP oficial seria  <strong><code>PIR-033260-12300</code></strong>.</p>
+</li>
+</ul>
+<p>NOTA:  o nome "CLP" é um apelido genérico, para discutir o assunto na comunidade OSM e em outros Estados, iniciativa do governo de SP provavelmente adotará outro nome.</p>
+<h2 id="solucoes-preliminares">Soluções preliminares</h2>
+<p>O cidadão do meio rural não ficou de braços cruzados, algumas iniciativas se concretizaram e demonstraram que há uma imensa demanda:</p>
+<ul>
+<li>
+<p><a href="https://www.revide.com.br/noticias/tecnologia/gps-caipira-surge-como-solucao-para-localizacao-e-seguranca-na-zona-rural/">GPS Caipira</a>, em uso por prefeituras, polícia, SUS e hospitais de pequenas cidades de SP. Confira nos vídeos: <a href="https://t.me/OSMBrasil_Comunidade/34694">MP4 - vídeo</a>, <a href="https://t.me/OSMBrasil_Comunidade/34695">MP4 - vídeo</a>.  A ampliação da iniciativa esbarra nos protocolos de comunicação adotados, que não são totalmente abertos.</p>
+</li>
+<li>
+<p><a href="https://www.orolo.com.br/botucatu-sp/cep-rural-chega-a-1-200-propriedades-rurais-de-botucatu/">CEP Rural</a>: algumas cidades como Botucatu, implementaram o "Programa Acessibilidade Rural".</p>
+</li>
+</ul>
+<p>A principal crítica a essas iniciativas é a <a href="https://doi.org/10.5281/zenodo.159004">demanda por uma autoridade central</a> e o envolvimento de entidades privadas no controle do sistema. Estas soluções não seriam perdidas e teriam na transição para o CLP a garantia de uniformização com o restante do Estado de SP.</p>
+<h2 id="implementacao">Implementação</h2>
+<p>Implementar um "conversor de CLP em ponto no mapa" é relativamente simples com as tecnologias disponíveis em domínio público. Um protótipo de redirecionamento de códigos rodando com NGINX e PostgreSQL foi utilizado como prova de conceito.</p>
+<p>Um sistema completo,  todavia, que garanta a utilização em todas as cidades, por longo prazo, e operando com todos os tipos de localidade rural, requer diversos cuidados. Preservação digital, abertura de dados, consistência das normas, consistência e viabilidade de tradução das normas para algoritmos (software) eficientes, e outros.</p>
+<h3 id="elementos-metodologicos-e-juridicos">Elementos metodológicos e jurídicos</h3>
+<p>O nome ou número oficial identificador do município, normatizados pelo IBGE, se apresentam como padrão oficial estável e amplamente utilizado.  Já a   abreviação de nome de cidade por código de 3 letras, ainda pouco conhecida mesmo entre as autoridades governamentais, será tão estável quanto o grau de obrigatoriedade do seu uso: uma vez publicada como tabela de-para oficial em lei ou decreto estadual &mdash; tabela anexa "de abreviação para identificador IBGE" &mdash;, não correrá mais risco de instabilidade.</p>
+<p>Analogamente o  número oficial identificador da via, o seu marco zero e a referência oficial de mapeamento e metragem da via: sem clareza e estabilidade nas convenções oficiais não haverá incentivo ou motivação racional para o uso do CLP. Por exemplo o proprietário não vai investir em uma placa na sua porteira, a prefeitura não vai investir na divulgação de endereços, o corpo de bombeiros e hospitais não irão investir nos aplicativos de georeferenciamento dos endereços, etc.</p>
+<p>Não é tão simples, diversos detalhes precisam ser adequados às necessidades de abertura, transparência e operacionalidade:</p>
+<ul>
+<li>
+<p>O processo de "batismo oficial" das vias com respectivos identificadores precisa ser norteado por regras, ser transparente e descentralizado. Hoje apenas autoridades federais e estaduais possuem essa clareza de regras e acesso a meios técnicos. A descentralização inclui liberdade de usar ferramentas como o OpenStreetMap para que os municípios tenham autonomia. <br/>Mesmo  sendo normatizados num momento posterior, as normas de rotulação devem prever desde o início a existência dessas vias, garantindo "reserva de numeração" para elas.</p>
+</li>
+<li>
+<p>Vias dentro de grandes propriedades (ex. condomínios e fazendas) possuem como "autoridade de batismo" o proprietário ou coletivos formais de proprietários, ou ainda cooperativas. Esse tipo de identificador deve também ser contemplado pelo processo de normatização, para garantir ampla aderência à malha viária real,  onde nasce a demanda por endereçamento.</p>
+</li>
+<li>
+<p>O processo de "mapeamento digital oficial" precisa prever a existência de <a href="https://wiki.openstreetmap.org/wiki/WikiProject_Brazil/Modelos_de_Contrato">metodologias</a> baseadas no uso de ferramentas abertas (<a href="https://opendefinition.org/od/2.0/pt-br/">licenças OpenDefinitoin</a>), tais como as ferramentas de mapeamento digital do OpenStreetMap e cadastramento de dados estruturados na Wikidata.</p>
+</li>
+<li>
+<p>As licenças de dados, tanto dados cadastrais como mapas digitais, precisa ser idealmente <a href="http://creativecommons.org/publicdomain/zero/1.0/legalcode">CC0</a>, ou seja, o dado precisa estar dedicado ao domínio público, sem qualquer tipo de retrição &mdash; tal como um mapa anexado à Lei Orgânica do  município. Quando isso não for possível o máximo de restrição que se pode admitir é a Licença de Banco de Dados Aberto Open Data Commons, <a href="http://opendatacommons.org/licenses/odbl/1.0">ODbL</a>. <br/>Eventualmente estratégias de <a href="https://en.wikipedia.org/wiki/Multi-licensing">liceamento dual</a> para dados esopecíficos podem também ajudar o município a contornar problemas jurídicos.</p>
+</li>
+<li>
+<p>Batismo informal compatível com o batismo oficial: quando da indisponibilidade de código oficial de uma via, as "regras de batismo" devem ser suficientemente claras e independentes da autoridade central para que a via possa receber seu identificador pela prefeitura ou comunidade de interesse no Openstreetmap sem maiores riscos de mudança no momento futuro da oficialização. A exemplo do  "normas de batismo de via" não podem ser reféns de uma autoridade central.</p>
+</li>
+<li>
+<p>Referência em mapas oficiais quando possível (por exemplo mapas de municípios fornecidos pelo IBGE), convencionando como segunda opção, quando da indisponibilidade de mapas oficiais adequados, uma versão estável homologada do Openstreetmap. Regras objetivas e transparentes permitiram que a referência métrica não seja colocada em risco quando da ausência de um  mapa oficial.</p>
+</li>
+</ul>
+<h3 id="subsidios-tecnicos">Subsídios técnicos</h3>
+<p>Dados abertos, estáveis e confiáveis são o lastro do CLP. Esses dados são obtidos de projetos mais especializados:</p>
+<ul>
+<li>
+<p><a href="https://wiki.openstreetmap.org/wiki/Permanent_ID">Identificadores persistentes</a> no Openstreetmap, baseados na <a href="https://wiki.openstreetmap.org/wiki/Key:wikidata">tag Wikidata</a>, atribuida a estados, cidades e vias. <br/> O projeto de preservação digital,  <a href="https://github.com/OSMBrasil/semantic-bridge">semantic-bridge</a> ajuda a garantir a "eternidade" dos identificadores e da sua resolução no Openstreetmap. Nada será perdido, e poderemos dar garantia de décadas!</p>
+</li>
+<li>
+<p>Abreviações de nome de estado (2 letras) e <strong>nome de cidade (3 letras)</strong>, com respectivos <strong>mapas digitais estáveis</strong>, também garantidos por projetos de preservação: <a href="https://github.com/OSMBrasil/semantic-bridge">semantic-bridge</a>, <a href="https://Datasets.OK.org.BR/state-codes">datasets-br/state-codes</a> e <a href="https://Datasets.OK.org.BR/city-codes">datasets-br/city-codes</a>.</p>
+</li>
+</ul>
+<p>Em seguida a implementação deve contar com dois recursos fundamentais de referência de dados e padronização nos protocolos e algoritmos:</p>
+<ol>
+<li>
+<p>Identificadores e metadados de apoio: <strong>Wikidata</strong>. Todas as entidades geográficas envolvidas na representação CLP são passíveis de identificação persistente e georreferenciamento a partir da <a href="https://wiki.openstreetmap.org/wiki/Key:wikidata"><code>key:wikidata</code></a> no Openstreetmap, e sua identificação recíproca através da <a href="https://www.wikidata.org/wiki/Property:P402">propriedade <code>P402</code></a> Wikidata.</p>
+</li>
+<li>
+<p>Algoritmos <a href="https://postgis.net/docs/manual-2.0/">PostGIS</a> para a inferência métrica  e controle de qualidade baseado. Funções tais como <em>ST_ClosestPoint</em>, <em>ST_LineLocatePoint</em> e <em>ST_Line_Interpolate_Point</em>. Em caso de numeração oficial fornecida em pontos específicos, pode-se optar por parametrização baseada em regressão linear, para ajuste fino relativo às medidas de campo.   </p>
+</li>
+<li>
+<p>Algoritmos SparQL e SQL para consolidação dos dados junto à Wikidata. Por exemplo o conceito de "Estado de São Paulo" na Wikidata é  <a href="http://wikidata.org/entity/Q175">Q175</a>, o conceito de Piracicaba é  <a href="http://wikidata.org/entity/Q330175">Q330175</a>, de "Rodovia BR-116" é <a href="http://wikidata.org/entity/Q2739838">Q2739838</a>... Todos com respectivos dados de localização no Openstreetmap (<a href="http://wikidata.org/entity/P402">P402</a>).</p>
+</li>
+</ol>
+<h3 id="subsidios-sociais">Subsídios sociais</h3>
+<p>O primeiro passo para se ter e discutir a qualidade das informações é a liberação em domínio público, com a publicação sob licença aberta, por parte do governo local (SP, DER ou município), das planilhas e mapas digitais. Conforme o dado ele será então consolidado e tornado mais acessível através das plataformas Wikidata e Openstreetmap. A comunidade dessas plataformas é a maior do mundo, com milhões de usuários, e tem centenas de cidadãos brasileiros participando.</p>
+<p>Já existem inclusive prefeituras, tais como Monteiro Lobato e Jaraguá do Sul, que fazendo uso integral do Openstreetmap, como base de dados oficial do município. A utilização conjunta por parte da sociedade e do governo é viável e tem sido adotada como principal meta: enquanto dados da escala federal e estadual são mantidos por agentes do governo tais como IBGE (federal) e Secretarias (estadual), os municípios através das suas secretarias locais e os condomínios, associações, cooperativas complementam e auditam os dados mais locais.</p>
+<p>No Openstreetmap já existe um grande percentual da malha viária do estado de SP, mas muitas vias ainda carecem de um identificador oficial. O maior trabalho, tanto em termos de auditoria como de cadastro e consolidalção de dados, será em torno da complementação dos identificadores, seguindo o modelo já de sucesso para a auditoria e preservação digitais com os repositórios  <a href="http://datasets.ok.org.br/state-codes">datasets.ok.org.br/state-codes</a> e <a href="http://datasets.ok.org.br/city-codes">datasets.ok.org.br/city-codes</a>.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>mapa <a href="http://www.ipplap.com.br/docs/MAPA%20DE%20ESTRADAS%20RURAIS%20ATUALIZACAO%20SET%202017%20%20-%20VERSO.pdf">ipplap2017</a></li>
+</ul>
+<p><a href="https://raw.githubusercontent.com/OSMBrasil/CLP/master/assets/legendaMapasVias.png"> <img alt="" src="../assets/legendaMapasVias.png" /> </a></p>
+<hr />
+<p>&#160;&#160;Conteúdos e dados deste projeto são dedicados ao domínio público. Ver também <a href="../assets/README/#Imagens">Créditos das imagens</a>.   <br/>&#160;&#160;<a href="LICENSE.md"><img alt="" src="../assets/CC0-logo-200px.png" /> </a></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script>
+        <script src="../assets/leaflet-bing-layer.min.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

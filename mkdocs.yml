@@ -1,0 +1,23 @@
+site_name: CLP
+docs_dir: ./docs
+pages:
+
+    - Apresentação: index.md
+
+    - Especificações: 
+       - Geral: spec01-hub.md
+       - CLP-coord: spec02-coord.md
+       - CLP-via: spec03-via.md
+
+    - Apêndices:
+       - Siglas: spec04ap01-siglas.md
+       - Comparações: comparacao.md
+#       - Dados complementares: spec04ap06-dadosCompl.md
+#       - Detalhes técnicos: spec04ap08-auxTec.md
+
+    - Créditos: assets/README.md
+
+extra_javascript:
+    - assets/leaflet-bing-layer.min.js
+
+

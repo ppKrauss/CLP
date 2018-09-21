@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Geral - CLP</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">CLP</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">Apresentação</a>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Especificações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li class="active">
+    <a href="./">Geral</a>
+</li>
+                            
+<li >
+    <a href="../spec02-coord/">CLP-coord</a>
+</li>
+                            
+<li >
+    <a href="../spec03-via/">CLP-via</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apêndices <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../spec04ap01-siglas/">Siglas</a>
+</li>
+                            
+<li >
+    <a href="../comparacao/">Comparações</a>
+</li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="../assets/README/">Créditos</a>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="..">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../spec02-coord/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#clp-especificacoes">CLP - Especificações</a></li>
+            <li><a href="#prefixo">Prefixo</a></li>
+            <li><a href="#sufixos-no-clp-coordenada">Sufixos no CLP-coordenada</a></li>
+            <li><a href="#sufixos-no-clp-via">Sufixos no CLP-via</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="clp-especificacoes">CLP - Especificações</h1>
+<p>Especificações Técnicas do <strong>Código Localizador de Portão</strong> (CLP), conforme testes, levantamentos e consulta pública realizada em <a href="https://github.com/OSMBrasil/CLP">projeto de iniciativa da Comunidade OSM Brasil</a>.</p>
+<p>A CLP é um tipo de código identificador, que toma a forma de <a href="https://pt.wikipedia.org/wiki/Cadeia_de_caracteres">cadeia de caracteres</a> dividida em duas partes, um prefixo e um sufixo, separadas por um hífen:<br/>&nbsp; <strong><code>&lt;CLP&gt; = &lt;prefixo&gt;&lt;sufixo&gt;</code></strong></p>
+<p>Onde o prefixo é uma sigla <a href="https://pt.wikipedia.org/wiki/ISO_3166-2:BR">ISO_3166-2:BR</a> composta de código do país (Brasil=BR), <code>&lt;country&gt;</code>, código da unidade da federação (por ex. estado de São Paulo é SP), <code>&lt;uf&gt;</code>, e uma sigla de 3 letras do nome do município, <code>&lt;abbrev3&gt;</code>,<br/>&nbsp; <strong><code>&lt;prefixo&gt; = &lt;country&gt;-&lt;uf&gt;-&lt;abbrev3&gt;</code></strong>.</p>
+<p>O CLP não existe sozinho como se fosse um nome, ele dependente também da sua "infraestrutura de <em>resolução do CLP</em>", que é o mecanismo que garante a tradução do código em coordenadas geográficas de latitude e longitude.</p>
+<p>Nesta especificação são definidos dois tipos de CLP, o "CLP default", também apelidado de CLP-coordenada, recomendado para a resolução em mapas e para substituir o CEP,  e o CLP-via, utilizado como versão compacta do  endereçamento postal tradicional, baseado em logradouro e numeração predial.</p>
+<p>No caso do CLP-coordenada foi desenvolvida uma especificação de requisitos gerais, e diversas especifcações complementares, conforme o padrão de referência adotado (Geohash, PlusCode e S2cellId).  </p>
+<p>A seguir um breve cada um dos módulos da especificação é apresentado com um breve resumo.</p>
+<h2 id="prefixo">Prefixo</h2>
+<p>.... questão das abreviações</p>
+<h3 id="sensibilidade-ao-contexto">Sensibilidade ao contexto</h3>
+<p>... Prefixo de <code>&lt;country&gt;</code> e <code>&lt;uf&gt;</code> são dispensáveis conforme o contexto de localização....</p>
+<h3 id="regras-de-determinacao-exata-do-contexto">Regras de determinação exata do contexto</h3>
+<ol>
+<li>Se o valor de <code>&lt;country&gt;</code> é conhecido (certeza quanto ser BR), e uma coordenada latLong é fornecida com precisão da ordem de ...</li>
+<li>Se a coordenada geográfica é conhecida com precisão de ..</li>
+<li>Se o valor de <code>&lt;uf&gt;</code> é conhecido... a UF pode designar a capital na sintaxe <code>&lt;uf&gt;-&lt;sufixo&gt;</code>, dispensando o uso de   <code>&lt;abbrev3&gt;</code>...</li>
+<li>...</li>
+</ol>
+<h2 id="sufixos-no-clp-coordenada">Sufixos no CLP-coordenada</h2>
+<p>...</p>
+<h3 id="finalidades-principais">Finalidades principais</h3>
+<p>A padronização requer expressar em linguagem técnica e precisa o que se adota como padrão. Quando fazemos isso descobrimos como diversos padrões podem se relacionar, garantindo que "conversem" entre eles, ou seja, garantindo a interoperabilidade.  </p>
+<p>A rigor o "portão genérico" adotado pelo CLP é um "ponto de acesso ao lote", de maneira que <strong>há um vínculo entre o CLP e o <a href="https://en.wikipedia.org/wiki/Land_lot">lote</a></strong>, e entre a precisão do CLP (erro nas coordenadas do ponto que ele representa) e o tamanho da área ocupada pelo lote.<!-- See justifica pois toda localidade de habitação, trabalho ou utilidade pública é  merecedora de um endereço público. --> Além dessa indepência do tipo de portão, o CLP se prestaria a múltiplos usos, destando-se:</p>
+<ol>
+<li>
+<p>Servir de endereço oficial ou componente do endereço oficial:</p>
+<p>1.1. Servir (potencialmente) de <a href="https://schema.org/postalCode"><strong>código postal</strong></a>, em <a href="https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md">substituição ao CEP</a>.</p>
+<p>1.2. Servir de <strong>endereço oficial do portão</strong>, em bases de dados padrões de interoperabilidade,
+  no sentido de ser identificador único de uma via de acesso, ou de um ponto ou região esratégica do lote.</p>
+<p>1.3. Servir de <strong>endereço principal do lote</strong>, quando no papel de identificador do <em>"portão principal"</em>. É portanto um componente  ao "esquema de identificação unívoca do lote" ao qual pertence o portão. <br/>Componente de redundância no caso de esquemas de identificação de lotes como do <a href="http://www.planalto.gov.br/ccivil_03/_ato2015-2018/2016/decreto/D8764.htm">SINTER</a>,<!-- ver tb. http://idg.receita.fazenda.gov.br/noticias/ascom/2016/maio/unificacao-de-dados-traz-simplificacao-e-mais-seguranca-na-titularidade-de-imoveis --> mas num papel de maior relevância do que o CEP. Recomenda-se inclusive que o SINTER e o CLP façam uso de infraestrutura comum  &mdash; na prática façam uso de mesmo prefixo nos respectivos identificadores.<!--
+  <br/>O CLP seria aceito por exemplo  registrar o CLP da residência no cartório, caracterizar pelo seu CLP a  habitação no censo demográfico, ou registrar a sede da empresa na prefeitura pelo CLP da portaria principal. <br/>Neste contexto é proposto que o CLP seja interoperável com o código identificador de lote previsto pelo <a href="http://idg.receita.fazenda.gov.br/noticias/ascom/2016/maio/unificacao-de-dados-traz-simplificacao-e-mais-seguranca-na-titularidade-de-imoveis">SINTER</a> (a proposta aliás é discutir junto o futuro padrão de identificação). <br/>Apesar da caixa de correio não ser um portão, deve-se acrescentar o <a href="https://schema.org/PostalAddress">endereço para correspondência</a> como mais uma forma de uso do CLP, que neste caso viria a substituir o <a href="https://pt.stackoverflow.com/a/63936/4186">problemático CEP</a>. [{conferir versão nova do MANUAL DO SINTER onde esboçam o identificador de lote.  http://idg.receita.fazenda.gov.br/sinter/manuais-operacionais/arquivos-e-imagens/manual-operacional-sinter-modelo-de-dados-registrais-e-notariais-v1_0.pdf).}]
+  --></p>
+</li>
+<li>
+<p>Instruir aplicativos sobre as <strong>coordenadas geográficas do portão</strong>. Essa coordenada  teria precisão da ordem de <strong>3 metros no meio urbano</strong> e da ordem de <strong>15 metros no meio rural</strong>.<br/>Neste contexto o principal requisito  de interoperabilidade é que o código seja compatível  com as normas Web (ISO, W3C e RFC) para expressão de parâmetros em <a href="https://tools.ietf.org/html/rfc3986">URIs</a>. <br/>Exemplos: visualizar um CLP em destaque no OpenStreetMap, postar o CLP no Whatsapp para avisar os amigos do local da festa, digitar o CLP no Uber,  falar o CLP no telefone para garantir o local exato da entrega da pizza.</p>
+</li>
+</ol>
+<h3 id="snap-de-enderecos-conhecidos">Snap de endereços conhecidos</h3>
+<p>... <em>snap rounding</em> na grade local do CLP... <!-- ref https://doi.org/10.1016/j.comgeo.2012.02.011 e outras para o termo .. CRAR na Wikidata!  --></p>
+<h3 id="clp-baseado-em-geohash">CLP baseado em Geohash</h3>
+<p>...</p>
+<h3 id="clp-baseado-em-pluscode">CLP baseado em PlusCode</h3>
+<p>...</p>
+<h3 id="clp-baseado-em-s2">CLP baseado em S2</h3>
+<p>....</p>
+<h2 id="sufixos-no-clp-via">Sufixos no CLP-via</h2>
+<p>....</p>
+<hr />
+<p>&#160;&#160;Conteúdos e dados deste projeto são dedicados ao domínio público. Ver também <a href="../assets/README/#Imagens">Créditos das imagens</a>.   <br/>&#160;&#160;<a href="../assets/README/"><img alt="" src="../assets/CC0-logo-200px.png" /> </a></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script>
+        <script src="../assets/leaflet-bing-layer.min.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
