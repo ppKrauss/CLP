@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Levantamentos - CLP</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">CLP</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">Apresentação</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Especificações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../spec01-hub/">Geral</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">CLP-coord</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../spec02-coord/">Geral</a>
+</li>
+            
+<li >
+    <a href="../spec02a-coord-Geohash/">Geohash</a>
+</li>
+            
+<li >
+    <a href="../spec02b-coord-S2/">S2</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../spec03-via/">CLP-via</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apêndices <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li class="active">
+    <a href="./">Levantamentos</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap01-siglas/">Siglas</a>
+</li>
+                            
+<li >
+    <a href="../comparacao/">Comparações</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap05-ingenuos/">Algoritmos ingênuos</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap06-dadosCompl/">Dados complementares</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap08-auxTec/">Detalhes técnicos</a>
+</li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="../assets/README/">Créditos</a>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../spec03-via/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../spec04ap01-siglas/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#levantamentos-oficiais">Levantamentos oficiais</a></li>
+        <li class="main "><a href="#levantamentos-e-comparacoes-academicas">Levantamentos e comparações acadêmicas</a></li>
+        <li class="main "><a href="#demais-levantamentos">Demais levantamentos</a></li>
+        <li class="main "><a href="#levantamento-de-patentes-e-copyrights">Levantamento de patentes e copyrights</a></li>
+        <li class="main "><a href="#decisoes-adotadas-no-presente-projeto">Decisões adotadas no presente projeto</a></li>
+            <li><a href="#estrategias-contra-patentes">Estratégias contra patentes</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p><strong><center><big>Bibliografia e levantamentos já realizados</big></center></strong></p>
+<p>Diversos estudos similares, buscando a melhor opção de <em>"location code"</em> para um país já foram realizados, tanto por parte das empresas e iniciativas que lançaram novas tecnologias, como por parte do governo e coletivos de potenciais usuários.</p>
+<h2 id="levantamentos-oficiais">Levantamentos oficiais</h2>
+<p>A substituição oficial dos tradicionais códigos postais por códigos que representam coordenadas geográficas teve inicio em alguns países, enquanto outros preparam o debate sobre o assunto para decidir qual padrão adotar.</p>
+<ul>
+<li>Japão. Denso-MapCode ..</li>
+<li>Irlanda. Em 2010 a legislação definiu código postal como <em>"um código que consiste em números, e/ou outros caracteres, que identifica a localização de um endereço e, quando apropriado, a localização geográfica de um endereço"</em><a href="https://www.oireachtas.ie/en/debates/debate/seanad/2010-12-08/8/">ref</a></li>
+</ul>
+<p>Para chegar ao seu atual padrão, o Ericode, lançou uma concorrência e publicou estudos  comparativos de <a href="https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland#Alternative_location_codes">diversas soluções alternativas</a>.
+* ... Conferi</p>
+<h2 id="levantamentos-e-comparacoes-academicas">Levantamentos e comparações acadêmicas</h2>
+<p>Deve-se destacar dois tipos de estudo, relativos a "Discrete Global Grids" (DGGs) e relativos a "location codes", que não necessariamente precisam ser vinculados a tecnologias de DGG.</p>
+<p>.. ver a comparação PlusCode com Geohash</p>
+<h2 id="demais-levantamentos">Demais levantamentos</h2>
+<ul>
+<li>https://en.wikipedia.org/wiki/Category:Location_codes</li>
+<li>https://github.com/google/open-location-code/wiki/Evaluation-of-Location-Encoding-Systems</li>
+</ul>
+<h2 id="levantamento-de-patentes-e-copyrights">Levantamento de patentes e copyrights</h2>
+<p>O CEP brasileiro é um dos raros casos em que prevalece a insconstitucionalidade e o usdo</p>
+<h2 id="decisoes-adotadas-no-presente-projeto">Decisões adotadas no presente projeto</h2>
+<p>... fazer uso apenas de soluções com</p>
+<ul>
+<li>
+<p>algoritmos de resolução do código com as seguintes características</p>
+</li>
+<li>
+<p>algoritmos baseados em grades do tipo DGG, Discrete Global Grid, tendo em vista que o Brasil é um pais continental;</p>
+</li>
+<li>uso consolidado (evitaremos apreciar soluções experimentais, exceto por inovação em variantes menores);</li>
+<li>
+<p>licenças livres (sem patentes ou licenças restritivas).</p>
+</li>
+<li>
+<p>dados abertos: a solução com demanda por dados pode fazer uso apenas de dados abertos &mdash;  não pode depender de bases de dados com a do CEP que tem direitos autoriais.</p>
+</li>
+</ul>
+<h3 id="estrategias-contra-patentes">Estratégias contra patentes</h3></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script>
+        <script src="../assets/leaflet-bing-layer.min.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

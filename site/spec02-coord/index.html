@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>CLP-coord - CLP</title>
+        <title>Geral - CLP</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -56,9 +56,23 @@
     <a href="../spec01-hub/">Geral</a>
 </li>
                             
+  <li class="dropdown-submenu">
+    <a href="#">CLP-coord</a>
+    <ul class="dropdown-menu">
+            
 <li class="active">
-    <a href="./">CLP-coord</a>
+    <a href="./">Geral</a>
 </li>
+            
+<li >
+    <a href="../spec02a-coord-Geohash/">Geohash</a>
+</li>
+            
+<li >
+    <a href="../spec02b-coord-S2/">S2</a>
+</li>
+    </ul>
+  </li>
                             
 <li >
     <a href="../spec03-via/">CLP-via</a>
@@ -70,11 +84,27 @@
                         <ul class="dropdown-menu">
                             
 <li >
+    <a href="../locationCodes/">Levantamentos</a>
+</li>
+                            
+<li >
     <a href="../spec04ap01-siglas/">Siglas</a>
 </li>
                             
 <li >
     <a href="../comparacao/">Comparações</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap05-ingenuos/">Algoritmos ingênuos</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap06-dadosCompl/">Dados complementares</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap08-auxTec/">Detalhes técnicos</a>
 </li>
                         </ul>
                     </li>
@@ -95,7 +125,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../spec03-via/">
+                        <a rel="prev" href="../spec02a-coord-Geohash/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -107,18 +137,152 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#clp-baseado-na-coordenada">CLP baseado na coordenada</a></li>
+        <li class="main active"><a href="#caracteristicas-prefixadas">Características prefixadas</a></li>
+        <li class="main "><a href="#conversao-para-prefixo">Conversão para prefixo</a></li>
+        <li class="main "><a href="#conversao-para-clp">Conversão para CLP</a></li>
+        <li class="main "><a href="#algoritmo-de-traducao-do-clp">Algoritmo de tradução do CLP</a></li>
+        <li class="main "><a href="#jargao-e-definicoes-preliminares">Jargão e Definições preliminares</a></li>
+        <li class="main "><a href="#pefil-do-sufixo-de-clp-coordenada">Pefil do sufixo de CLP-Coordenada</a></li>
+        <li class="main "><a href="#requisitos-do-sufixo-de-clp-coordenada">Requisitos do sufixo de CLP-coordenada</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
 <p>((em construção))</p>
-<h2 id="clp-baseado-na-coordenada">CLP baseado na coordenada</h2>
+<p><strong><center><big>CLP baseado na coordenada</big></center></strong></p>
 <p>As coordenadas geográficas e a sua representação em padrões abertos não dependem de qualquer infraestrutura e, portanto, não dependem de nenhuma organização ou empresa para sua existência ou uso continuado.</p>
 <p>Como <a href="..">apresentado na introdução</a> as coordenadas geográficas, expressas no seu formato usual de latitude e longitude decimais, formam um código muito longo. Além disso, como o CLP substituirá o CEP, é importante que seja um número só, hierárquico &mdash; seu primeiro dígito representa uma macro-região e o prefixo com mais dígitos representa uma micro-região.</p>
 <p>Uma das estratégias de compactação do CLP-coordenada, já demonstrada em anexo desta especificação,</p>
 <p>O Geohash não é o único candidato a CLP-coordenada, apenas ilustra abaixo como seria a sua anatomia no uso prático. Neste relatório serão analisados também o MapCode, o PlusCode e o S2geometry.</p>
-<p><img alt="" src="../assets/CLP-anatomia-coord.png" /></p></div>
+<p><img alt="" src="../assets/CLP-anatomia-coord.png" /></p>
+<h2 id="caracteristicas-prefixadas">Características prefixadas</h2>
+<p>Apesar dos algorimos e suas variantes proporcionarem certa liberdade de escolha, as seguintes características de um  CLP-coordenada foram previamente fixadas:</p>
+<ul>
+<li>prefixo hierárquico do código CLP, até <code>abbrev3</code>: definido conforme a <a href="../spec01-hub.md/#prefixo">especificação</a>.</li>
+<li>grade e cobertua dos polígonos de <code>macrocells</code>: serão recomendados algoritmos e metodologias gerais, para todos os municípios.</li>
+</ul>
+<h2 id="conversao-para-prefixo">Conversão para prefixo</h2>
+<p>O algoritmo de conversão que transforma dados da Geo URI em <strong>prefixo de código CLP-coordenada</strong> é definido <em>a priori</em>, deve ser entendido como um passo intermediário, antes da conversão final, que gera o sufixo através de um <a href="#algoritmo-de-conversao-para-clp">algoritmo de conversão para CLP</a>.</p>
+<p>...</p>
+<ul>
+<li>ENTRADA: Geo URI e contexto.</li>
+<li>SAÍDA: Geo URI, prefixo e metadados da macrocélula.</li>
+</ul>
+<p>Cabe em última análise à autoridade local (ex. prefeitura) e à autoridade normativa (ex. IBGE ou SINTER) negociarem qual será a grade macrocélulas. Um algoritmo complementar apenas sugere uma possível partição do território municipal em zero, 32 ou 1024 macrocélulas.</p>
+<h2 id="conversao-para-clp">Conversão para CLP</h2>
+<p>Um algoritmo de conversão transforma dados da Geo URI em código CLP-coordenada.</p>
+<ul>
+<li>ENTRADA: Geo URI, contexto normalizado e macrocélula. (proveniente da <a href="#">conversão de prefixo</a>)</li>
+<li>SAÍDA: código CLP definido pelo próprio algoritmo, e satisfazendo os critérios abaixo.</li>
+</ul>
+<p><strong>Critérios eliminatórios</strong> para a seleção de algoritmos de referência:</p>
+<ol>
+<li>
+<p>Ser consistente com a classificação de <a href="https://en.wikipedia.org/wiki/Discrete_Global_Grid#Hierarchical_grids">Grade Discreta Global</a> (do inglês <strong>Hierarchical DGG</strong>), de modo que o lugar  identificado pelo CLP-coordenada seria uma célula da DGG proposta pelo algoritmo.</p>
+</li>
+<li>
+<p>Estar publicado há mais de 1 ano e ter sido testado por uma comunidade ampla de usuários.</p>
+</li>
+<li>
+<p>Não pode ter perda injustificada de funcionalidade, ou performance inferior aos <a href="../spec04ap05-ingenuos/">algoritmos ingênuos</a>.</p>
+</li>
+<li>
+<p>Apresentar licença livre (senso <a href="https://opendefinition.org/od/2.0/pt-br/">OpenDefinition</a>) e não depender de bases de dados não-livres (com copyright como o CEP) ou mecanismos adicionais patenteados (ex. restrições para o uso em QR Code).</p>
+</li>
+</ol>
+<p><strong>Critérios classificatórios</strong> para que os <strong>códigos de sufixo gerados</strong> por dois algoritmos possam ser comparados.</p>
+<ol>
+<li>
+<p>Ser curto o suficiente para que possa ser memorizado pelo usuário humano.</p>
+</li>
+<li>
+<p>Ser auto-suficiente, não exigindo informações adicionais além daquelas já fornecidas pelo prefixo do código (identificador do município).</p>
+</li>
+<li>
+<p>Evitar caracteres visualmente confusos (por ex. "0" e "O" ou "1" e "l").</p>
+</li>
+<li>
+<p>Ser expresso com pontuação facultativa, para que o usuário humano memorize mais facilmente em grupos de 2 a 4 caracteres.</p>
+</li>
+<li>
+<p>Evitar a formação de fonemas (portanto evitar o uso de vogais mais frequentes) para que não sejam confundidos com palavras curtas (2 a 4 letras) do vocabulário da lingua portuguesa do Brasil (VOLP ou similar sem nomes próprios).</p>
+</li>
+<li>
+<p>O código de um local deve ser gerado de forma determinística, não exigindo nenhuma configuração ou aplicação</p>
+</li>
+<li>
+<p>O software que gera o código a partir da latitude/longitude deve ser leve o suficiente para estar numa página Web ou num aplicativo de smarthfone, e deve funcionar offline.  ... Os códigos devem poder ser gerados e decodificados offline. Redes de dados móveis podem não ser onipresentes ou baratas</p>
+</li>
+<li>
+<p>Os códigos não devem depender de nenhum fornecedor, de modo que não haja risco de que eles parem de funcionar se uma empresa ou site sair do ar.</p>
+</li>
+</ol>
+<h2 id="algoritmo-de-traducao-do-clp">Algoritmo de tradução do CLP</h2>
+<p>Um algoritmo de tradução transforma o CLP-coordenada em uma Geo URI. <strong>Critérios eliminatórios</strong> para a seleção de algoritmos de referência:</p>
+<ol>
+<li>
+<p>Apresentar um algoritmo de função inversa, <a href="#algoritmo-de-conversao-para-clp">de conversão</a>, aceito sem restrições.</p>
+</li>
+<li>
+<p>Estar também publicado há mais de 1 ano e ter sido testado por uma comunidade ampla de usuários.</p>
+</li>
+<li>
+<p>Não pode ter perda injustificada de precisão, ou restrições para fornecer resultados no padrão Geo URI.</p>
+</li>
+<li>
+<p>Apresentar licença livre (senso <a href="https://opendefinition.org/od/2.0/pt-br/">OpenDefinition</a>) e não depender de bases de dados não-livres ou mecanismos adicionais patenteados.</p>
+</li>
+</ol>
+<hr />
+<h2 id="jargao-e-definicoes-preliminares">Jargão e Definições preliminares</h2>
+<ul>
+<li>O lugar identificado pelo CLP é uma célula de <a href="https://en.wikipedia.org/wiki/Discrete_Global_Grid">grade discreta global</a> (do inglês <strong>DGG</strong>), portanto é uma localidade horizontal e existe um código único por localidade.</li>
+</ul>
+<h2 id="pefil-do-sufixo-de-clp-coordenada">Pefil do sufixo de CLP-Coordenada</h2>
+<p>As características do CLP eleito devem ser expressas, quando necessário, com relação sua estrutura e parâmetros de implantação. São elas:</p>
+<ul>
+<li>Referencial tecnológico de DGG na qual está baseado. Exemplos: Geohash, S2, PlusCode, etc.</li>
+<li>Expressão pública: texto   </li>
+<li>Base numérica de referência para a expressão pública. Exemplos: base32, base36, base16.</li>
+<li>Número mínimo de bits por grupo em caso de indexar células-grade. Exemplo: bit-a-bit, 5-a-5, etc.</li>
+</ul>
+<p>Os códigos devem representar uma área, não um ponto, onde o tamanho da área é variável</p>
+<h2 id="requisitos-do-sufixo-de-clp-coordenada">Requisitos do sufixo de CLP-coordenada</h2>
+<p>Atributos desejados e <a href="https://en.wikipedia.org/wiki/Requirements_analysis">requisitos técnicos</a> de um código de localização  capaz de ser traduzido diretamente em coordenadas geográficas. A listagem a seguir não segue uma ordem particular, foi baseada nas <a href="spec05-referencias.md">referências</a> e discussões adicionais.</p>
+<p>Um <strong>código de sufixo de CLP-coordenada</strong> deve:</p>
+<ol>
+<li>Se baseado em uma grade global hierárquica (DGG hierarquica) de indexação do espaço, com tecnologia já consolidada de conversões para latitude/longitude. Essa hierarquia deverá estar presente na sequência de caracteres, de modo que um código com mais caracteres represente um zoom sobre a localidade identificada por aquele de menos caractres.</li>
+</ol>
+<p>Encurtar um código deve representar uma área maior que contém o local original. Um efeito colateral disso é que os códigos próximos terão um prefixo comum;</p>
+<ol>
+<li>
+<p>Ser curto o suficiente para que possa ser memorizado pelo usuário humano.</p>
+</li>
+<li>
+<p>Ser auto-suficiente, não exigindo informações adicionais além daquelas já fornecidas pelo prefixo do código (identificador do município).</p>
+</li>
+<li>
+<p>Evitar caracteres visualmente confusos (por ex. "0" e "O" ou "1" e "l").</p>
+</li>
+<li>
+<p>Ser expresso com pontuação facultativa, para que o usuário humano memorize mais facilmente em grupos de 2 a 4 caracteres.</p>
+</li>
+<li>
+<p>Evitar a formação de fonemas (portanto evitar o uso de vogais mais frequentes) para que não sejam confundidos com palavras curtas (2 a 4 letras) do vocabulário da lingua portuguesa do Brasil (VOLP ou similar sem nomes próprios).</p>
+</li>
+<li>
+<p>O código de um local deve ser gerado de forma determinística, não exigindo nenhuma configuração ou aplicação</p>
+</li>
+<li>
+<p>O software que gera o código a partir da latitude/longitude deve ser leve o suficiente para estar numa página Web ou num aplicativo de smarthfone, e deve funcionar offline.  ... Os códigos devem poder ser gerados e decodificados offline. Redes de dados móveis podem não ser onipresentes ou baratas</p>
+</li>
+<li>
+<p>Os códigos não devem depender de nenhum fornecedor, de modo que não haja risco de que eles parem de funcionar se uma empresa ou site sair do ar.</p>
+</li>
+<li>
+<p>O algoritmo deve ser publicado publicamente e ser livre para usar.</p>
+</li>
+</ol></div>
         </div>
 
         <footer class="col-md-12">

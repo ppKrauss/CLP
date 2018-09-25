@@ -1,8 +1,8 @@
 ## Créditos
 
-Agradecemos a todos os comentários e discussões da Comunidade OpenStreetMap do Brasil, nos canais Telegram-Comunidade e Telegram-Avançado, bem como aqueles que direta ou indireamente auxiliaram na revisão de texto, etc.
+Agradecemos a todos os comentários e discussões da Comunidade OpenStreetMap do Brasil, nos canais Telegram-Comunidade e Telegram-Avançado, bem como aqueles que direta ou indireamente auxiliaram na revisão dos textos deste projeto.
 
-Agradecemos ao governo do Eestado de São Paulo e suas Secretarias,  por terem "aberto os portões" à participação da comunidade no debate do problema do endereçamento rural.
+Agradecemos ao governo do Estado de São Paulo e suas Secretarias,  por terem "aberto os portões" à participação da comunidade no debate do problema do endereçamento rural.
 
 ### Imagens
 
@@ -16,6 +16,8 @@ File    | License | Reuse (type/resp/year) | original URL
 [`porteira01.jpg`](porteira01.jpg) | CC0| original /pixabay /2018 | `pixabay.com/pt/porteira-fazenda-viagem-1222916` [proof](https://web.archive.org/web/20180830122527/https://pixabay.com/pt/porteira-fazenda-viagem-1222916/)
 [`portico01.jpg`](portico01.jpg) | CC0 | original /Wikimedia /2015 | [commons.wikimedia.org/wiki/File:Pórtico_de_Venha-Ver_(RN)](https://commons.wikimedia.org/wiki/File:P%C3%B3rtico_de_Venha-Ver_(RN).JPG)
 [`marcoZeroSP.png`](marcoZeroSP.png) | CC-BY | cut /ppkrauss /2018 | [movable-type.co.uk/scripts/geohash](https://www.movable-type.co.uk/scripts/geohash.html)
+
+tanzania_plus-nq8.png - http://shtosm.ru/  
 
 ------
 

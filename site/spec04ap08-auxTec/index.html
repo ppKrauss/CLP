@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Detalhes técnicos - CLP</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">CLP</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">Apresentação</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Especificações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../spec01-hub/">Geral</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">CLP-coord</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../spec02-coord/">Geral</a>
+</li>
+            
+<li >
+    <a href="../spec02a-coord-Geohash/">Geohash</a>
+</li>
+            
+<li >
+    <a href="../spec02b-coord-S2/">S2</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../spec03-via/">CLP-via</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apêndices <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../locationCodes/">Levantamentos</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap01-siglas/">Siglas</a>
+</li>
+                            
+<li >
+    <a href="../comparacao/">Comparações</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap05-ingenuos/">Algoritmos ingênuos</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap06-dadosCompl/">Dados complementares</a>
+</li>
+                            
+<li class="active">
+    <a href="./">Detalhes técnicos</a>
+</li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="../assets/README/">Créditos</a>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../spec04ap06-dadosCompl/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../assets/README/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#auxilio-tecnico">Auxílio técnico</a></li>
+        <li class="main "><a href="#apendice-representacoes-de-bbox">APÊNDICE - Representações de BBOX</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h2 id="auxilio-tecnico">Auxílio técnico</h2>
+<p>Descrição auxiliar para descrever ferramentas empregadas nos testes ou conceitos técnicos adotadas numa implementação.</p>
+<h2 id="apendice-representacoes-de-bbox">APÊNDICE - Representações de BBOX</h2>
+<p>Exemplificando o obtenção e cuidados com a BBOX (<a href="https://en.wikipedia.org/wiki/Minimum_bounding_box">caixa mínima</a>) de um município. <a href="https://www.openstreetmap.org/relation/298285">São Paulo</a> está contido em um retângulo de ~50km por ~70km,</p>
+<p><img alt="" src="../assets/bbox-sampa-ABCD.200px.png" /></p>
+<p>O retângulo <em>R</em>, que corresponde à BBOX,  é um conjunto de pontos, <em>R</em>={<em>A, B, C, D</em>}, e cada um desses pontos possui, grosseiramente, as seguintes coordenadas de latitude e longitude:<br/> &nbsp; <code>A = -23.357 -46.8264</code>; <code>B = -23.357 -46.3651</code>; <code>C= -24.007 -46.3651</code>, <code>D = -24.007 -46.8264</code>. <br/>A face superior <em>AB</em> do retângulo está mais ao norte, a face inferior <em>CD</em> mais ao sul, a face direita <em>BC</em> a leste, a face esquerda <em>AD</em> a oeste. Na representação em graus, as coordenadas do ponto <em>A</em>, por exemplo, seriam <code>23° 33′S, 46° 38′ W</code>.</p>
+<p>Quando no PostGIS solicitamos a BBOX  através da função ST_Envelope, <code>SELECT st_astext(st_envelope(geom))</code>, que retorna o formato "longitude latitude" e numa sequência diferente: <code>P1 = -46.8264 -24.007</code>; <code>P2 = -46.8264 -23.357</code>; <code>P3 = -46.3651 -23.357</code>; <code>P4 = -46.3651 -24.007</code>. A ordem ABCD ilustrada na figura corresponderia a <code>P2=A</code>; <code>P3=B</code>, <code>P4=C</code>; <code>P1=D</code>.</p>
+<p>Quando expressamos os "bounds" é como se listássemos valores sem repetir, visto que podemos deduzir o retângulo <em>R</em> a partir de apenas 4 valores. A informação pode ser extraída das diagonais, dois pontos <em>A</em> e <em>C</em> por exemplo &mdash; latitude máxima em <em>A</em> e mínima em&nbsp;<em>C</em>, e longitude máxima em <em>C</em> e mínima em&nbsp;<em>A</em>. Na função <a href="https://github.com/datasets-br/city-codes/blob/master/src/test_illustrating.sql"><code>bbox_bounds()</code></a> foi expresso em formato JSON:</p>
+<pre><code class="json">&quot;bounds&quot;: {
+  &quot;minlat&quot;: -24.007,
+  &quot;minlon&quot;: -46.8264,
+  &quot;maxlat&quot;: -23.357,
+  &quot;maxlon&quot;: -46.3651
+}
+</code></pre>
+
+<p>Esta notação também é utilizada no <a href="http://overpass-turbo.eu/">Overpass</a>, em saídas <code>[out:json]; ... out bb;</code>.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script>
+        <script src="../assets/leaflet-bing-layer.min.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

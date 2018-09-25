@@ -1,7 +1,9 @@
-# CLP - Especificações
+((em construção))
+**<center><big>CLP - Especificações</big></center>**
 
 Especificações Técnicas do **Código Localizador de Portão** (CLP), conforme testes, levantamentos e consulta pública realizada em [projeto de iniciativa da Comunidade OSM Brasil](https://github.com/OSMBrasil/CLP).
 
+## Sintaxe básica 
 A CLP é um tipo de código identificador, que toma a forma de [cadeia de caracteres](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres) dividida em duas partes, um prefixo e um sufixo, separadas por um hífen:<br/>&nbsp; **`<CLP> = <prefixo><sufixo>`**
 
 Onde o prefixo é uma sigla [ISO_3166-2:BR](https://pt.wikipedia.org/wiki/ISO_3166-2:BR) composta de código do país (Brasil=BR), `<country>`, código da unidade da federação (por ex. estado de São Paulo é SP), `<uf>`, e uma sigla de 3 letras do nome do município, `<abbrev3>`,<br/>&nbsp; **`<prefixo> = <country>-<uf>-<abbrev3>`**.
@@ -15,7 +17,19 @@ No caso do CLP-coordenada foi desenvolvida uma especificação de requisitos ger
 A seguir um breve cada um dos módulos da especificação é apresentado com um breve resumo.
 
 ## Prefixo
+Os componentes do prefixo do CLP são, na sequência:
+
+* `<country>`-`<uf>`: código [ISO_3166-2:BR](https://pt.wikipedia.org/wiki/ISO_3166-2:BR) vigente. <br/>A última alteração nestes códigos foram acréscimos em 1988 e 1977 e uma alteração em 1962 &mdash; surgiram MS e TO, e  Rio Branco (RB) foi rebatizado para Roraima (RR) &madh;, de modo que é considerado um prefixo estável desde então.<br/>Para os testes, a tradução das siglas em outros identificadores (ex. número IBGE ou nome) está sendo adotado o conjunto de dados http://datasets.ok.org.br/state-codes
+
+* `<abbrev3>`: código de abreviação de 3 letras. Ver [apêndice siglas](spec04ap01-siglas.md);
+
+* `<macrocells>`: (opcional conforme município) código de macrocélula.
+
+
 .... questão das abreviações
+As [*regular expressions*](https://pt.wikipedia.org/wiki/Express%C3%A3o_regular) (regex) são *case-insensitive*, mas é recomendado quando possível manter o código em maiúsculas, seguindo a tradição ISO 3166 do prefixo.
+
+* Reggex geral []
 
 ### Sensibilidade ao contexto
 ... Prefixo de `<country>` e `<uf>` são dispensáveis conforme o contexto de localização....
@@ -26,7 +40,7 @@ A seguir um breve cada um dos módulos da especificação é apresentado com um 
 3. Se o valor de `<uf>` é conhecido... a UF pode designar a capital na sintaxe `<uf>-<sufixo>`, dispensando o uso de   `<abbrev3>`...
 4. ...
 
-## Sufixos no CLP-coordenada
+## Sufixo no CLP-coordenada
 ...
 
 ### Finalidades principais
@@ -59,10 +73,10 @@ A rigor o "portão genérico" adotado pelo CLP é um "ponto de acesso ao lote", 
 ...
 
 ### CLP baseado em S2
-....
+...
 
-## Sufixos no CLP-via
-....
+## Sufixo no CLP-via
+...
 
 ------
 

@@ -56,9 +56,23 @@
     <a href="../spec01-hub/">Geral</a>
 </li>
                             
+  <li class="dropdown-submenu">
+    <a href="#">CLP-coord</a>
+    <ul class="dropdown-menu">
+            
 <li >
-    <a href="../spec02-coord/">CLP-coord</a>
+    <a href="../spec02-coord/">Geral</a>
 </li>
+            
+<li >
+    <a href="../spec02a-coord-Geohash/">Geohash</a>
+</li>
+            
+<li >
+    <a href="../spec02b-coord-S2/">S2</a>
+</li>
+    </ul>
+  </li>
                             
 <li >
     <a href="../spec03-via/">CLP-via</a>
@@ -70,11 +84,27 @@
                         <ul class="dropdown-menu">
                             
 <li >
+    <a href="../locationCodes/">Levantamentos</a>
+</li>
+                            
+<li >
     <a href="../spec04ap01-siglas/">Siglas</a>
 </li>
                             
 <li class="active">
     <a href="./">Comparações</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap05-ingenuos/">Algoritmos ingênuos</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap06-dadosCompl/">Dados complementares</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap08-auxTec/">Detalhes técnicos</a>
 </li>
                         </ul>
                     </li>
@@ -95,7 +125,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../assets/README/">
+                        <a rel="prev" href="../spec04ap05-ingenuos/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -107,8 +137,7 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#comparacao">Comparação</a></li>
-        <li class="main "><a href="#codigos-do-marco-zero-de-sp">Códigos do Marco-Zero de SP</a></li>
+        <li class="main active"><a href="#codigos-do-marco-zero-de-sp">Códigos do Marco-Zero de SP</a></li>
             <li><a href="#geohash">Geohash</a></li>
             <li><a href="#pluscode">PlusCode</a></li>
             <li><a href="#mapcode">MapCode</a></li>
@@ -121,7 +150,8 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h2 id="comparacao">Comparação</h2>
+<p>((em construção))
+<strong><center><big>COMPARAÇÃO</big></center></strong></p>
 <p>Comparação entre padrões mais populares: Geohash, PlusCode, MapCode. Foi acescentado ainda o padrão S2, que apesar de não ser ainda muito divulgado, é um dos recomendados.</p>
 <p>A comparação se deu em torno de um ponto de controle bem conhecido, na capital de SP.</p>
 <h2 id="codigos-do-marco-zero-de-sp">Códigos do Marco-Zero de SP</h2>
@@ -130,7 +160,7 @@
 <li>Geohash (base32): <code>6gyf4bf1n</code></li>
 <li>PlusCode normal (base20): <code>588MC9X8+RC</code></li>
 <li>PlusCode hibrido (cidade+base20): <code>C9X8+RC São Paulo</code></li>
-<li>MapCode (híbrido): <code>SP-RR.56</code></li>
+<li>MapCode (cidade+): <code>SP-RR.56</code></li>
 <li>S2 (hexadecimal): <code>94ce59aaf89</code></li>
 </ul>
 <p>Destes, Geohash e S2 ainda não oferecem infraestrutura para sua versão híbrida, e o PlusCode ainda não oferece resolução de abreviações. Resultariam nos seguintes códigos:</p>
@@ -159,9 +189,11 @@
 <p>Por ser patenteado está sendo utilizado apenas como exemplo ilustrativo.</p>
 <p><img alt="" src="../assets/CLP-coord-whats3words-ilustra01.png" /></p>
 <h2 id="outros-pontos-de-controle">Outros pontos de controle</h2>
+<p>Jaraguá do Sul... ( JGS é única, portanto equivalente a "SC-JGS",  "SC/JaraguaSul" ou "br;sc;jaragua.sul")</p>
 <p>Exemplificando apenas com Geohash: ...</p>
 <h2 id="exemplos-de-geohash-de-prefixo-do-municipio">Exemplos de Geohash de prefixo do município</h2>
 <p>Conforme o padrão que vier a ser eleito (entre as opções Geohash, PlusCode, S2, etc.), a geometria e tamanho da menor célula a conter o muncípio será diferente. A tabela abaixo exemplifica casos de diversos municípios, mostrando junto o Geohash do seu centroide e em modo absoluto e modo relativa ao prefixo.</p>
+<p>Separar por área maior ou menor a 300 km2.</p>
 <table>
 <thead>
 <tr>
@@ -251,6 +283,13 @@
 <td>~900</td>
 </tr>
 <tr>
+<td>Lagoa (PB-LAG)</td>
+<td><strong>LAG-V49.91GT</strong></td>
+<td>7N</td>
+<td>7NV4991GTE4Z</td>
+<td>~200</td>
+</tr>
+<tr>
 <td>Lutécia (SP-LTC)</td>
 <td><strong>LTC-1J2.4UJ</strong></td>
 <td>6UH</td>
@@ -277,6 +316,13 @@
 <td>6</td>
 <td>6FBK9M4MEGPF</td>
 <td>~3600</td>
+</tr>
+<tr>
+<td>São José do Herval (RS-SQE)</td>
+<td><strong>SQE-DKX.N6</strong></td>
+<td>6FFF</td>
+<td>6FFFDKXN68BS</td>
+<td>~100</td>
 </tr>
 <tr>
 <td>São Paulo (SP-SPA)</td>
@@ -330,6 +376,14 @@ FROM (
       upper(geohash_center) pt
     FROM test_city where abbrev3>'' and random() < 0.006
 ) t;
+
+select avg(km2)  from test_city where length(geohash_envelop)=4; -- 100 km2
+select
+  abbrev3, path, geohash_envelop,
+  code_format(code_cut_prefix(geohash_envelop,geohash_center,9)) x,
+  '~'||(round(km2/10)*10) area
+from  test_city where abbrev3>'' and  length(geohash_envelop)=4 order by path;
+
 -->
 
 <h2 id="exemplos-de-otimizacao-com-o-prefixo-da-cidade">Exemplos de otimização com o prefixo da cidade</h2>

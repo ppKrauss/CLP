@@ -6,6 +6,7 @@
 const fs = require('fs');
 var geo = require('geo-hash');
 //var hash = geo.encode(10.3, -2.4);
+var bigInt = require("big-integer"); // npm i big-integer
 
 
 var level = 9; // geohash precision
@@ -25,3 +26,9 @@ for (const i of geosamples) {
           console.log(i.g+"-pt\tQ"+i.qid+":\t"+id,level);
         }
 }
+
+/*
+        var hx = bigInt(id).toString(cutBase);
+        var hx2 = hx.replace(/0+$/g,'');
+        var show = bigInt(hx2,cutBase).toString(showBase);
+*/

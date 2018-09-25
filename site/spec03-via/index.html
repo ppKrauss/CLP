@@ -56,9 +56,23 @@
     <a href="../spec01-hub/">Geral</a>
 </li>
                             
+  <li class="dropdown-submenu">
+    <a href="#">CLP-coord</a>
+    <ul class="dropdown-menu">
+            
 <li >
-    <a href="../spec02-coord/">CLP-coord</a>
+    <a href="../spec02-coord/">Geral</a>
 </li>
+            
+<li >
+    <a href="../spec02a-coord-Geohash/">Geohash</a>
+</li>
+            
+<li >
+    <a href="../spec02b-coord-S2/">S2</a>
+</li>
+    </ul>
+  </li>
                             
 <li class="active">
     <a href="./">CLP-via</a>
@@ -70,11 +84,27 @@
                         <ul class="dropdown-menu">
                             
 <li >
+    <a href="../locationCodes/">Levantamentos</a>
+</li>
+                            
+<li >
     <a href="../spec04ap01-siglas/">Siglas</a>
 </li>
                             
 <li >
     <a href="../comparacao/">Comparações</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap05-ingenuos/">Algoritmos ingênuos</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap06-dadosCompl/">Dados complementares</a>
+</li>
+                            
+<li >
+    <a href="../spec04ap08-auxTec/">Detalhes técnicos</a>
 </li>
                         </ul>
                     </li>
@@ -90,12 +120,12 @@
                     </a>
                 </li>
                     <li >
-                        <a rel="next" href="../spec02-coord/">
+                        <a rel="next" href="../spec02b-coord-S2/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../spec04ap01-siglas/">
+                        <a rel="prev" href="../locationCodes/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -107,7 +137,8 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#clt-baseado-na-via">CLT baseado na via</a></li>
+        <li class="main active"><a href="#caracteristicas-prefixadas">Características prefixadas</a></li>
+        <li class="main "><a href="#clt-baseado-na-via">CLT baseado na via</a></li>
         <li class="main "><a href="#solucoes-preliminares">Soluções preliminares</a></li>
         <li class="main "><a href="#implementacao">Implementação</a></li>
             <li><a href="#elementos-metodologicos-e-juridicos">Elementos metodológicos e jurídicos</a></li>
@@ -119,6 +150,12 @@
                 <div class="col-md-9" role="main">
 
 <p>((em construção))</p>
+<h2 id="caracteristicas-prefixadas">Características prefixadas</h2>
+<p>Apesar dos algorimos e suas variantes proporcionarem certa liberdade de escolha, as seguintes características de um  CLP-coordenada foram previamente fixadas:</p>
+<ul>
+<li>prefixo hierárquico do código CLP, até <code>abbrev3</code>: definido conforme a <a href="../spec01-hub.md/#prefixo">especificação</a>.</li>
+</ul>
+<p>Dispensa o uso de  <code>macrocells</code>...</p>
 <h2 id="clt-baseado-na-via">CLT baseado na via</h2>
 <p>Código Localizador de Portão baseado no <em>identificador da via</em> e na "localização sobre a via" (do ponto de acesso ao portão). Faz uso dos seguintes critérios e padromozações:
 <em> Usar métodos conhecidos de localização;

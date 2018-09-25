@@ -1,5 +1,14 @@
 ((em construção))
 
+## Características prefixadas
+
+Apesar dos algorimos e suas variantes proporcionarem certa liberdade de escolha, as seguintes características de um  CLP-coordenada foram previamente fixadas:
+
+* prefixo hierárquico do código CLP, até `abbrev3`: definido conforme a [especificação](spec01-hub.md/#prefixo).
+
+Dispensa o uso de  `macrocells`...
+
+
 ## CLT baseado na via
 Código Localizador de Portão baseado no *identificador da via* e na "localização sobre a via" (do ponto de acesso ao portão). Faz uso dos seguintes critérios e padromozações:
 * Usar métodos conhecidos de localização;

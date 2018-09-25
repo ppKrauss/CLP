@@ -1,4 +1,6 @@
-## Comparação
+((em construção))
+**<center><big>COMPARAÇÃO</big></center>**
+
 Comparação entre padrões mais populares: Geohash, PlusCode, MapCode. Foi acescentado ainda o padrão S2, que apesar de não ser ainda muito divulgado, é um dos recomendados.
 
 A comparação se deu em torno de um ponto de controle bem conhecido, na capital de SP.
@@ -10,7 +12,7 @@ A comparação se deu em torno de um ponto de controle bem conhecido, na capital
 * Geohash (base32): `6gyf4bf1n`
 * PlusCode normal (base20): `588MC9X8+RC`
 * PlusCode hibrido (cidade+base20): `C9X8+RC São Paulo`
-* MapCode (híbrido): `SP-RR.56`
+* MapCode (cidade+): `SP-RR.56`
 * S2 (hexadecimal): `94ce59aaf89`
 
 Destes, Geohash e S2 ainda não oferecem infraestrutura para sua versão híbrida, e o PlusCode ainda não oferece resolução de abreviações. Resultariam nos seguintes códigos:
@@ -55,11 +57,14 @@ Por ser patenteado está sendo utilizado apenas como exemplo ilustrativo.
 
 
 ## Outros pontos de controle
+Jaraguá do Sul... ( JGS é única, portanto equivalente a "SC-JGS",  "SC/JaraguaSul" ou "br;sc;jaragua.sul")
 
 Exemplificando apenas com Geohash: ...
 
 ## Exemplos de Geohash de prefixo do município
 Conforme o padrão que vier a ser eleito (entre as opções Geohash, PlusCode, S2, etc.), a geometria e tamanho da menor célula a conter o muncípio será diferente. A tabela abaixo exemplifica casos de diversos municípios, mostrando junto o Geohash do seu centroide e em modo absoluto e modo relativa ao prefixo.
+
+Separar por área maior ou menor a 300 km2.
 
 Município (UF-abbrev3)               | Código CLP<br/>(~4m)    | Geohash<br/>municipal | ponto<br/>(~0.5m)| Área munic.<br/>(km2)
 --------------------------------|---------------|-----------------------|------|----------------
@@ -74,10 +79,12 @@ Holambra (SP-HOL)               | **HOL-X30.JHZ**   | 6GY  | 6GYX30JHZ7C3 | ~100
 Jaci (SP-JCI)                     | **JCI-8ZE.FZD**    | 6UK  | 6UK8ZEFZDM0C | ~100
 Jardim Alegre (PR-JDG)            | **JDG-NM9.1C5**    | 6GE  | 6GENM91C5P7W | ~400
 Lagoa Real (BA-LRL)             | **LRL-9BP.JC74**   | 7J   | 7J9BPJC74SEC | ~900
+Lagoa (PB-LAG)                | **LAG-V49.91GT** | 7N   | 7NV4991GTE4Z | ~200
 Lutécia (SP-LTC)                    | **LTC-1J2.4UJ**   | 6UH  | 6UH1J24UJJYQ | ~500
 Oliveira (MG-OLV)               | **OLV-1YV.9JR**    | 7H2  | 7H21YV9JREW6 | ~900
 Santa Mariana (PR-SNM)          | **SNM-UHF.4YSN**  | 6G   | 6GUHF4YSNY2X | ~400
 São Borja (RS-SJA)                | **SJA-FBK.9M4ME**  | 6    | 6FBK9M4MEGPF | ~3600
+São José do Herval (RS-SQE)   | **SQE-DKX.N6**   | 6FFF | 6FFFDKXN68BS | ~100
 São Paulo (SP-SPA) | **SPA-YC2.BYHD** | 6G   | 6GYC2BYHDXTF | ~1500
 São Paulo de Olivença (AM-SDO)    | **SDO-RNT.1BMP0**  | 6    | 6RNT1BMP0GX0 | ~19700
 Schroeder (SC-SCH)              | **SCH-453.MSP**    | 6GM  | 6GM453MSPZR7 | ~200
@@ -103,6 +110,15 @@ FROM (
       upper(geohash_center) pt
     FROM test_city where abbrev3>'' and random() < 0.006
 ) t;
+
+
+select avg(km2)  from test_city where length(geohash_envelop)=4; -- 100 km2
+select
+  abbrev3, path, geohash_envelop,
+  code_format(code_cut_prefix(geohash_envelop,geohash_center,9)) x,
+  '~'||(round(km2/10)*10) area
+from  test_city where abbrev3>'' and  length(geohash_envelop)=4 order by path;
+
 -->
 
 ## Exemplos de otimização com o prefixo da cidade

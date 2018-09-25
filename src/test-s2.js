@@ -55,3 +55,39 @@ console.log("\nC.4	47e66fc2f4f9 "+bigInt('00001111110000101111010011111001',2).t
 
 console.log("\n dec-interlaced UTM 4332036448930 ="+bigInt('4332036448930',10).toString(36));
 
+//         var hx = bigInt(id).toString(cutBase);
+
+var dentro = ['94de949b2c7c','94de949b2b9c','94de949b2c5b'];
+var box = '94de949c';
+
+var box_id = bigInt(box,16).toString(2);
+var dentro0 = bigInt(dentro[0],16).toString(2);
+var dentro1 = bigInt(dentro[1],16).toString(2);
+var dentro2 = bigInt(dentro[2],16).toString(2);
+
+
+console.log("\n\tbx= "+box_id+"\n\tdo= "+dentro0+"\n");
+console.log("\n\td1= "+dentro1+"\n\td2= "+dentro2);
+
+console.log("\nd0="+bigInt('0110010110001111100',2).toString(32) );
+
+
+console.log("\nd1="+bigInt('0110010101110011100',2).toString(32) );
+console.log("\nd2="+bigInt('0110010110001011011',2).toString(32) );
+
+
+console.log("\nxxx="+bigInt('31',10).toString(32) );
+
+/////////
+
+function showId2(lat,lon,level) {
+        var key = S2.latLngToKey(lat,lon,level);
+        var id = S2.keyToId(key);
+        console.log("\n new Id ="+ bigInt(id).toString(16) );
+}
+
+showId2(-24.007,-46.8264088,20);
+showId2(-23.3570001,-46.3650899,20);
+showId2(-24.007,-46.3650899,20);
+
+
