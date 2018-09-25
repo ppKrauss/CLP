@@ -37,7 +37,7 @@ Opção de CLP proposta|Tecnologia de referência (código padrão) e resoluçã
 **`SPA-1CSI.IN1`**&nbsp;\* | [*S2*](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ae1) de um ponto (`94ce59c94ae1`)&nbsp; ~2x2&nbsp;m
 &nbsp;\* <small>convertido p. base32.</small>|
 
-No debate devemos chamar atenção para que o fato de que o PlusCode não satisfaz o requisito da hierarquia: é fundamental saber, antes de decidir qual tecnologia usar, quais critérios consensuais adotaremos.
+No debate devemos chamar atenção para que o fato de que o PlusCode não satisfaz o requisito da hierarquia nas macroregiões: é fundamental saber, antes de decidir qual tecnologia usar, quais critérios consensuais adotaremos.
 
 Entre os padrões que satisfazem todos os requisitos, como o Geohash e o S2, outras  otimizações podem ainda ser realizadas, levando a códigos mais curtos ou mnemônicos.  Ao fixarmos em normas brasileiras uma tabela de subregiões do município, por exemplo, podemos reduzir em um dígito ambos os casos S2 e Geohash. Se além disso, fazermos uso de estimativas da "mancha urbana futura" como fizeram o CEP e o MapCode, o resultado fica ainda melhor, mas a custo de códigos mais longos no meio rural... Tudo isso seria detalhado pelo presente projeto, para que tenhamos **subsídios para uma decisão racional**.
 
@@ -50,17 +50,18 @@ As recomendações não se limitam à sintaxe dos códigos e sua tradução em l
 
 O CLP  pode também ser  obtido a partir do endereço tradicional, por exemplo *"Avenida Paulista 1578, São Paulo"*, endereço do MASP, supondo que o código oficial da avenida seja `U131`. O código resultaria em algo como &nbsp; **`SPA-U131-1578`**.<!-- "u" de urbano, é o  menor CEP da via, no caso a paulista usa 01310-000, teria o ponto por exempl Quintana do CEP 04965-010 seria 4965.01  -->
 
-Esse tipo de padronização é importante para a representação interna dos endereços de correspondência em bancos de dados abertos (interoperáveis), e para estabelecer critérios mínimos de custo e confiabilidade na conversão dos mesmos para coordenadas geográficas.
+Esse tipo de padronização é importante para a representação interna dos endereços de correspondência em bancos de dados abertos (e interoperáveis).  Como existe um crescente *mercado de geocofificação*, o padrão também ajudaria a regulamentar o setor, com um  CLP-via padronizado pode-se submeter uma lista de endereços pré-processados, com critérios mínimos de custo e confiabilidade na conversão dos mesmos para coordenadas geográficas.
 
 Existem portanto dois grupos principais de "soluções para a localização de um portão":
 
 1. **CLP-via**: soluções baseadas na **proximidade do portão com uma via de acesso** a ele. <br/>O CLP neste caso seria uma escrita simplificada e padronizada do [endereço postal](https://schema.org/PostalAddress) tradicional, baseado em logradouro e numeração predial.
 
-2. **CLP-coordenada**: soluções baseadas na **coordenada geográfica do portão**. <br/> O CLP neste caso seria uma versão compacta do protocolo `geo` da internet, conhecido como [Geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme), para a expressão de coordenadas.
+2. **CLP-coordenada**: soluções baseadas na **coordenada geográfica do portão**. <br/> O CLP neste caso seria uma versão complementar do protocolo `geo` da internet, conhecido como [Geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme), para a expressão de coordenadas. As tecnologias e convenções candidatas a código seriam aquelas discutidos acima na introdução.
 
 Tecnicamente uma pode ser convertida na outra através de [procedimentos de geocodificação](https://en.wikipedia.org/wiki/Geocoding#Geocoding_process).
 
 # Existe um problema?
+
 Parece haver um certo deslocamento, no debate público, a respeito do real problema e decisões a serem tomadas. Enquanto  há de fato uma grande diversidade de alternativas tecnológicas a serem avaliadas, acreditamos que o problema não seria  tanto responder *"Qual a melhor solução tecnológica?"*, mas sim às perguntas:
 
 1. O que de fato precisamos no Brasil? Como chegar a um consenso racional sobre nossas prioridades?
@@ -133,6 +134,12 @@ Como o total de horas estimado foi da ordem de ??  conclui-se que o valor mínim
 Exceto por este texto de apresentação, que tem valor de "carta compromisso" com a comunidade, todos os devem ser considerados rascunhos, foram disponibilizados apenas para facilitar o diálogo com quem deseja participar ou discutir detalhes.
 
 ... Veja o [rascunho inicial das especificações aqui](spec01-hub.md), ..., [comparações aqui](comparacao.md), ...
+
+## Não estamos sozinhos
+
+A busca por soluções é mundial, e floresceu nos anos recentes.  A demanda por códigos de localização abertos não é exclusividade do Brasil. Veja esta lista com uma centena de outros países, analisados quanto à abertura da sua base de códigos postais,  apenas ~5% são considerados razoavelmente abertos:   [OpenDataIndex/Postcodes](https://index.okfn.org/dataset/postcodes/), 90% dos países aida apresentam problemas sérios como o do Brasil.  
+
+Quanto à população mais sensível ao problema de "não ter um endereço para chamar de seu", quem mais sofre é a população do meio rural, e os bairros e regiões em situação de habitação precária &mdash; segundo dados da [TETO Brasil](https://www.techo.org/brasil/) são ~15 milhões habitantes desatendidos pelo CEP ou nome de rua.  Todos beneficiariam enormemente de um código de localização oficial, um CLO para o local onde habitam.
 
 ------
 
