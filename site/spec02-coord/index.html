@@ -115,9 +115,6 @@
         <li class="main "><a href="#conversao-para-prefixo">Conversão para prefixo</a></li>
         <li class="main "><a href="#conversao-para-clp">Conversão para CLP</a></li>
         <li class="main "><a href="#algoritmo-de-traducao-do-clp">Algoritmo de tradução do CLP</a></li>
-        <li class="main "><a href="#jargao-e-definicoes-preliminares">Jargão e Definições preliminares</a></li>
-        <li class="main "><a href="#pefil-do-sufixo-de-clp-coordenada">Pefil do sufixo de CLP-Coordenada</a></li>
-        <li class="main "><a href="#requisitos-do-sufixo-de-clp-coordenada">Requisitos do sufixo de CLP-coordenada</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -164,7 +161,7 @@
 <p>Apresentar licença livre (senso <a href="https://opendefinition.org/od/2.0/pt-br/">OpenDefinition</a>) e não depender de bases de dados não-livres (com copyright como o CEP) ou mecanismos adicionais patenteados (ex. restrições para o uso em QR Code).</p>
 </li>
 </ol>
-<p><strong>Critérios classificatórios</strong> para que os <strong>códigos de sufixo gerados</strong> por dois algoritmos possam ser comparados.</p>
+<p><strong>Critérios e requisitos classificatórios</strong> para que os <em>códigos de sufixo</em> gerados por dois algoritmos possam ser comparados.</p>
 <ol>
 <li>
 <p>Ser curto o suficiente para que possa ser memorizado pelo usuário humano.</p>
@@ -208,55 +205,51 @@
 </li>
 </ol>
 <hr />
-<h2 id="jargao-e-definicoes-preliminares">Jargão e Definições preliminares</h2>
-<ul>
-<li>O lugar identificado pelo CLP é uma célula de <a href="https://en.wikipedia.org/wiki/Discrete_Global_Grid">grade discreta global</a> (do inglês <strong>DGG</strong>), portanto é uma localidade horizontal e existe um código único por localidade.</li>
-</ul>
-<h2 id="pefil-do-sufixo-de-clp-coordenada">Pefil do sufixo de CLP-Coordenada</h2>
-<p>As características do CLP eleito devem ser expressas, quando necessário, com relação sua estrutura e parâmetros de implantação. São elas:</p>
-<ul>
-<li>Referencial tecnológico de DGG na qual está baseado. Exemplos: Geohash, S2, PlusCode, etc.</li>
-<li>Expressão pública: texto   </li>
-<li>Base numérica de referência para a expressão pública. Exemplos: base32, base36, base16.</li>
-<li>Número mínimo de bits por grupo em caso de indexar células-grade. Exemplo: bit-a-bit, 5-a-5, etc.</li>
-</ul>
-<p>Os códigos devem representar uma área, não um ponto, onde o tamanho da área é variável</p>
-<h2 id="requisitos-do-sufixo-de-clp-coordenada">Requisitos do sufixo de CLP-coordenada</h2>
-<p>Atributos desejados e <a href="https://en.wikipedia.org/wiki/Requirements_analysis">requisitos técnicos</a> de um código de localização  capaz de ser traduzido diretamente em coordenadas geográficas. A listagem a seguir não segue uma ordem particular, foi baseada nas <a href="spec05-referencias.md">referências</a> e discussões adicionais.</p>
-<p>Um <strong>código de sufixo de CLP-coordenada</strong> deve:</p>
-<ol>
-<li>Se baseado em uma grade global hierárquica (DGG hierarquica) de indexação do espaço, com tecnologia já consolidada de conversões para latitude/longitude. Essa hierarquia deverá estar presente na sequência de caracteres, de modo que um código com mais caracteres represente um zoom sobre a localidade identificada por aquele de menos caractres.</li>
-</ol>
-<p>Encurtar um código deve representar uma área maior que contém o local original. Um efeito colateral disso é que os códigos próximos terão um prefixo comum;</p>
-<ol>
-<li>
-<p>Ser curto o suficiente para que possa ser memorizado pelo usuário humano.</p>
-</li>
-<li>
-<p>Ser auto-suficiente, não exigindo informações adicionais além daquelas já fornecidas pelo prefixo do código (identificador do município).</p>
-</li>
-<li>
-<p>Evitar caracteres visualmente confusos (por ex. "0" e "O" ou "1" e "l").</p>
-</li>
-<li>
-<p>Ser expresso com pontuação facultativa, para que o usuário humano memorize mais facilmente em grupos de 2 a 4 caracteres.</p>
-</li>
-<li>
-<p>Evitar a formação de fonemas (portanto evitar o uso de vogais mais frequentes) para que não sejam confundidos com palavras curtas (2 a 4 letras) do vocabulário da lingua portuguesa do Brasil (VOLP ou similar sem nomes próprios).</p>
-</li>
-<li>
-<p>O código de um local deve ser gerado de forma determinística, não exigindo nenhuma configuração ou aplicação</p>
-</li>
-<li>
-<p>O software que gera o código a partir da latitude/longitude deve ser leve o suficiente para estar numa página Web ou num aplicativo de smarthfone, e deve funcionar offline.  ... Os códigos devem poder ser gerados e decodificados offline. Redes de dados móveis podem não ser onipresentes ou baratas</p>
-</li>
-<li>
-<p>Os códigos não devem depender de nenhum fornecedor, de modo que não haja risco de que eles parem de funcionar se uma empresa ou site sair do ar.</p>
-</li>
-<li>
-<p>O algoritmo deve ser publicado publicamente e ser livre para usar.</p>
-</li>
-</ol></div>
+<p>((em construção))</p>
+<!-- Jargão e Definições preliminares
+
+* O lugar identificado pelo CLP é uma célula de [grade discreta global](https://en.wikipedia.org/wiki/Discrete_Global_Grid) (do inglês **DGG**), portanto é uma localidade horizontal e existe um código único por localidade.
+
+## Pefil do sufixo de CLP-Coordenada
+
+As características do CLP eleito devem ser expressas, quando necessário, com relação sua estrutura e parâmetros de implantação. São elas:
+
+* Referencial tecnológico de DGG na qual está baseado. Exemplos: Geohash, S2, PlusCode, etc.
+* Expressão pública: texto   
+* Base numérica de referência para a expressão pública. Exemplos: base32, base36, base16.
+* Número mínimo de bits por grupo em caso de indexar células-grade. Exemplo: bit-a-bit, 5-a-5, etc.
+
+Os códigos devem representar uma área, não um ponto, onde o tamanho da área é variável
+
+
+## Requisitos do sufixo de CLP-coordenada
+
+Atributos desejados e [requisitos técnicos](https://en.wikipedia.org/wiki/Requirements_analysis) de um código de localização  capaz de ser traduzido diretamente em coordenadas geográficas. A listagem a seguir não segue uma ordem particular, foi baseada nas [referências](spec05-referencias.md) e discussões adicionais.
+
+Um **código de sufixo de CLP-coordenada** deve:
+
+1. Se baseado em uma grade global hierárquica (DGG hierarquica) de indexação do espaço, com tecnologia já consolidada de conversões para latitude/longitude. Essa hierarquia deverá estar presente na sequência de caracteres, de modo que um código com mais caracteres represente um zoom sobre a localidade identificada por aquele de menos caractres.
+
+Encurtar um código deve representar uma área maior que contém o local original. Um efeito colateral disso é que os códigos próximos terão um prefixo comum;
+
+1. Ser curto o suficiente para que possa ser memorizado pelo usuário humano.
+
+2. Ser auto-suficiente, não exigindo informações adicionais além daquelas já fornecidas pelo prefixo do código (identificador do município).
+
+3. Evitar caracteres visualmente confusos (por ex. "0" e "O" ou "1" e "l").
+
+4. Ser expresso com pontuação facultativa, para que o usuário humano memorize mais facilmente em grupos de 2 a 4 caracteres.
+
+4. Evitar a formação de fonemas (portanto evitar o uso de vogais mais frequentes) para que não sejam confundidos com palavras curtas (2 a 4 letras) do vocabulário da lingua portuguesa do Brasil (VOLP ou similar sem nomes próprios).
+
+5. O código de um local deve ser gerado de forma determinística, não exigindo nenhuma configuração ou aplicação
+
+6. O software que gera o código a partir da latitude/longitude deve ser leve o suficiente para estar numa página Web ou num aplicativo de smarthfone, e deve funcionar offline.  ... Os códigos devem poder ser gerados e decodificados offline. Redes de dados móveis podem não ser onipresentes ou baratas
+
+7. Os códigos não devem depender de nenhum fornecedor, de modo que não haja risco de que eles parem de funcionar se uma empresa ou site sair do ar.
+
+8. O algoritmo deve ser publicado publicamente e ser livre para usar.
+--></div>
         </div>
 
         <footer class="col-md-12">

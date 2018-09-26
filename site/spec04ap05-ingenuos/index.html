@@ -116,10 +116,12 @@
         <li class="main "><a href="#fusao-intrelacada-ingenua">Fusão intrelaçada ingênua</a></li>
         <li class="main "><a href="#indexacao-ingenua-da-grade-municipal">Indexação ingênua da grade municipal</a></li>
             <li><a href="#rotulacao-ingenua-de-indices-contiguos">Rotulação ingênua de índices contíguos</a></li>
+        <li class="main "><a href="#algoritmos-de-geocodificacao">Algoritmos de geocodificação</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
+<p>((em construção))</p>
 <p><strong><center><big>Algoritmos ingênuos: soluções válidas</big></center></strong></p>
 <p>O termo <em>algoritmo</em> em Computação é sinônimo de "receita" utilizada para fazer algo, como um cálculo. Fica caracterizado por seu nome, suas entradas e suas saídas:</p>
 <ul>
@@ -213,12 +215,12 @@
 <li>... <code>fundido=4147504495</code>.</li>
 </ol>
 <p>Agora esse numerão fundido tem o mesmo comportamento por exemplo que o CEP: dois endereços sem primeiros dígitos iguais estarão a muitos quilômetros de distância, talvez extremos diferentes do país; com primeiros digamos 4 dígitos iguais estão numa mesma macro-região... E se diferem apenas nos dois últimos dígitos, são endereços vizinhos.</p>
-<p>Repare que é tão compacto quanto a concatenação direta, o fundido decimal tem 10 dígitos e o base32 (<code>3RJBPBF</code>) 7 dígitos, como no caso concatenado. Sendo assim não há razão alguma para não fundir de forma mais inteligente!</p>
+<p>Repare que é tão compacto quanto a concatenação direta, o fundido decimal tem 10 dígitos e o base32 (<code>3RJBPBF</code>) 7 dígitos, como no caso concatenado. Sendo assim <strong>não há razão alguma para concatenar, é sempre melhor fundir</strong>.</p>
 <p>Mas nem sempre dá sorte de todos os endereços de uma cidade, quando representados dessa forma,  terem um mesmo prefixozão, será um prefixozinho e isso não ajuda muito a compactar pelo "prefixo municipal".  Para se obter um prefixo municipal maior é preciso usar uma base numérica menor, ou seja, menor que a base10 no exemplo. E a menor base possível é a base2, por isso o algoritmo correto, mais eficiente é a intercalação em base2.</p>
 <p><img alt="" src="../assets/bit-enterlace01.png" /></p>
 <p>Esse pequeno milagre de preservar prefixo nas vizinhanças foi descoberto por acaso ao organizarmos melhor a concatenação, e tem uma explicação geométrica, pois o entrelaçamento resulta numa <a href="https://en.wikipedia.org/wiki/Z-order_curve">"curva de ordem Z"</a>... E justamente essa curva explica os problemas residuais de "saltos de vizinhança", que nem o algoritmo binário resolve.  Na verdade o algoritmo Geohash acrescentou uma pequena melhora, trocando as coordenadas usuais pela divisão binária recorrente do globo terrestre, mas ainda assim não resolve os saltos da curva Z.  Só a curva de Hilbert parece dar uma solução mais satisfatória. Ela é usada em algoritmos exóticos, como o <a href="https://github.com/tammoippen/geohash-hilbert">Geohash-hilbert</a>, e em algoritmos padronizados modernos, como o <a href="https://s2geometry.io/">S2-geometry</a>.</p>
 <h2 id="indexacao-ingenua-da-grade-municipal">Indexação ingênua da grade municipal</h2>
-<p>Para qualquer algoritmo de conversão das coordenadas num só código, consta-se que o código será mais compacto quanto menor for o município.</p>
+<p>Para qualquer algoritmo de conversão das coordenadas num só código, consta-se que o código será mais compacto quanto menor for a área do município. Isso alias é um dos fundamentos, já enunciados pelo MapCode ... ((link equação área em função do número de dígitos))</p>
 <p>Assim, uma área municipal muito densa ou muito grande precisa ser subdividida em áreas menores, para garantir resultados mais compactos... Mas ao subdividir haverá o custo adicional de se indicar o código dessa área menor. Nisso consiste a indexação.</p>
 <ul>
 <li>
@@ -247,7 +249,14 @@
 <p>Áreas de células S2 típicas, ilustradas abaixo, são obtias por algoritmos de ajuste parâmetros e otimização, em  algoritmos mais sofisticados.</p>
 <p>Algumas referências (ex. <a href="spec05-referencias.md#ref06">ref06</a>) sugerem associar áreas contíguas a subregiões que já apresentem nomes tradicionais, tais como nomes de bairro ou direções (leste/sul/etc.), criando opções de códigos mais mnemônicos no caso de indexação de dois dígitos.</p>
 <p>Sugere-se que o uso de nomes seja sempre alternativo ao uso de códigos, nunca a única opção. Desse modo teríamos substituídos um ou dois dígitos por rótulos, por exemplo (um portão de Piracicaba SP) ao invés de <code>PIR-1234.456</code> o código seria <code>PIR-sul-234.456</code> ou <code>PIR-madalena-34.456</code>. A rotulação de regiões centro/norte/sul/etc em geral é a mais factivel, todavia causaria confunsão com a delimitação oficial e não chega a substituir um dígito por completo. A rotulação com palavras já seria bem mais artificial, não garante associação com nomes de regiões, apenas uma referência vaga (ex. palavra de nome de uma rua que nasce na célula ou de um parque do seu interior).</p>
-<p>Uma opção mnemônica mais viável seria acrescentando um dígito decimal arbitrário ao nome da região, resultando em códigos como <code>PIR-sul2-34.456</code> ou <code>PIR-madalena3-4.456</code>, tendo em vista que a combinação nome-dígito pode ser suficiente para designar cada célula da subregião.</p></div>
+<p>Uma opção mnemônica mais viável seria acrescentando um dígito decimal arbitrário ao nome da região, resultando em códigos como <code>PIR-sul2-34.456</code> ou <code>PIR-madalena3-4.456</code>, tendo em vista que a combinação nome-dígito pode ser suficiente para designar cada célula da subregião.</p>
+<h1 id="algoritmos-de-geocodificacao">Algoritmos de geocodificação</h1>
+<p>(vai pra Metodolodia e proposta de padr~oes )</p>
+<ol>
+<li>Pré processamemto do endereço tradicional, que pode ser estatístico e gerar nais de um resultado.
+2.
+com um  CLP-via padronizado pode-se submeter uma lista de endereços pré-processados,</li>
+</ol></div>
         </div>
 
         <footer class="col-md-12">
