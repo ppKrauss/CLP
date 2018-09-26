@@ -1,3 +1,4 @@
+((em construção))
 
 **<center><big>Algoritmos ingênuos: soluções válidas</big></center>**
 
@@ -116,3 +117,11 @@ Algumas referências (ex. [ref06](spec05-referencias.md#ref06)) sugerem associar
 Sugere-se que o uso de nomes seja sempre alternativo ao uso de códigos, nunca a única opção. Desse modo teríamos substituídos um ou dois dígitos por rótulos, por exemplo (um portão de Piracicaba SP) ao invés de `PIR-1234.456` o código seria `PIR-sul-234.456` ou `PIR-madalena-34.456`. A rotulação de regiões centro/norte/sul/etc em geral é a mais factivel, todavia causaria confunsão com a delimitação oficial e não chega a substituir um dígito por completo. A rotulação com palavras já seria bem mais artificial, não garante associação com nomes de regiões, apenas uma referência vaga (ex. palavra de nome de uma rua que nasce na célula ou de um parque do seu interior).
 
 Uma opção mnemônica mais viável seria acrescentando um dígito decimal arbitrário ao nome da região, resultando em códigos como `PIR-sul2-34.456` ou `PIR-madalena3-4.456`, tendo em vista que a combinação nome-dígito pode ser suficiente para designar cada célula da subregião.
+
+
+# Algoritmos de geocodificação
+(vai pra Metodolodia e proposta de padr~oes )
+
+1. Pré processamemto do endereço tradicional, que pode ser estatístico e gerar nais de um resultado.
+2.
+com um  CLP-via padronizado pode-se submeter uma lista de endereços pré-processados,

@@ -47,7 +47,7 @@ Um algoritmo de conversão transforma dados da Geo URI em código CLP-coordenada
 
 4. Apresentar licença livre (senso [OpenDefinition](https://opendefinition.org/od/2.0/pt-br/)) e não depender de bases de dados não-livres (com copyright como o CEP) ou mecanismos adicionais patenteados (ex. restrições para o uso em QR Code).
 
-**Critérios classificatórios** para que os **códigos de sufixo gerados** por dois algoritmos possam ser comparados.
+**Critérios e requisitos classificatórios** para que os *códigos de sufixo* gerados por dois algoritmos possam ser comparados.
 
 1. Ser curto o suficiente para que possa ser memorizado pelo usuário humano.
 
@@ -80,8 +80,9 @@ Um algoritmo de tradução transforma o CLP-coordenada em uma Geo URI. **Critér
 
 -----
 
-## Jargão e Definições preliminares
+((em construção))
 
+<!-- Jargão e Definições preliminares
 
 * O lugar identificado pelo CLP é uma célula de [grade discreta global](https://en.wikipedia.org/wiki/Discrete_Global_Grid) (do inglês **DGG**), portanto é uma localidade horizontal e existe um código único por localidade.
 
@@ -124,3 +125,4 @@ Encurtar um código deve representar uma área maior que contém o local origina
 7. Os códigos não devem depender de nenhum fornecedor, de modo que não haja risco de que eles parem de funcionar se uma empresa ou site sair do ar.
 
 8. O algoritmo deve ser publicado publicamente e ser livre para usar.
+-->

@@ -12,16 +12,23 @@ As tecnologias para se implantar e padronizar um CLP  são bem consolidadas, exi
 
 [Queremos substituir o CEP](https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md) por um código que vá além: assim como o CEP, seu prefixo identifica partes maiores, estado, cidade, bairro, rua... E não deveria parar por aí, já existe tecnologia para, com um simples código, chegarmos até o portão!
 
-Para localizar o "portão" do [MASP](https://pt.wikipedia.org/wiki/Museu_de_Arte_de_S%C3%A3o_Paulo), por exemplo,
+Para localizar o "portão" do [MASP](https://pt.wikipedia.org/wiki/Museu_de_Arte_de_S%C3%A3o_Paulo), por exemplo.
 
 ![](assets/masp-comparing2b.jpg)
 
-os códigos de localização existentes podem ser "melhorados para o Brasil", fazer uso do que os brasieiros aprovarem como oficial. Deveria ser natural, por exemplo, o uso de abreviações consagradas como os **códigos de estado**: `BR-SP` ou simplesmente `SP` designa o Estado de São Paulo, `AM` Amazonas...
+Os códigos de localização existentes, como o Geohash ou o PlusCode, podem ser melhorados, **adaptados para o Brasil**, fazer uso do que os brasieiros já usam no dia-a-dia. Deveria ser natural, por exemplo,
 
-Deveriam fazer uso da [abreviação de **3 letras do município**](spec04ap01-siglas.md) (Sampa é `SPA`, a vizinha Guarulhos `GRH` e Piracicaba `PIR`),  da **hierarquia** (`SP-PIR` é diferente de `GO-PIR` que designa Pires do Rio) e do **contexto**. Numa carta internacional acrescentamos prefixo `BR` ficando `BR-SP-SPA`, mas se a carta  circula apenas dentro de SP basta `PIR` ou `SPA`. Isso tudo resultaria em um código CLP mais adequado para o brasileiro usar, e como já vem usando: <br/>é o código que consta nas placas de estradas, federais (ex. BR-116), estaduais (ex. SP-147) ou municipais (ex. PIR-033), e sendo entendido até mesmo pelos [identificadores transparentes de leis e decretos](https://pt.wikipedia.org/wiki/Lex_(URN)).
+* o uso de abreviações consagradas como os **códigos de estado**: `BR-SP` ou simplesmente `SP` designa o Estado de São Paulo, `AM` Amazonas, etc.
+
+* a [abreviação de **3 letras do município**](spec04ap01-siglas.md):  Sampa é `SPA`, a vizinha Guarulhos `GRH` e Piracicaba `PIR`;
+
+* das regras de  **hierarquia**: primeiro sigla estadual depois municipal. A sigla  PIR só tem significado dentro da sua hierarquia, `BR-SP-PIR` significa Piracicaba, que é diferente de `BR-GO-PIR`, de Pires do Rio;
+
+* do **contexto**. Numa carta internacional acrescentamos prefixo `BR` ficando `BR-SP-SPA`, mas se a carta  circula apenas dentro de SP basta `PIR` ou `SPA`.
+
+Isso tudo resultaria em um código CLP mais adequado para o brasileiro usar. As siglas você não vê todos os dias, mas já vinhamos usando: em diversos códigos oficiais, tais como [identificadores LEX de normas jurídicas](https://pt.wikipedia.org/wiki/Lex_(URN)), e nas placas de vias públicas ou mapas oficiais. As siglas estão no código das estradas federais (ex. BR-116), estaduais (ex. SP-147) e municipais (ex. PIR-033).
 
 Voltemos ao CLP do MASP, como é hoje e como seriam pequenas adaptações:
-
 
 Opção de CLP proposta|Tecnologia de referência (código padrão) e resolução |
 ----------------------------------|---------------------
@@ -37,7 +44,7 @@ Opção de CLP proposta|Tecnologia de referência (código padrão) e resoluçã
 **`SPA-1CSI.IN1`**&nbsp;\* | [*S2*](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ae1) de um ponto (`94ce59c94ae1`)&nbsp; ~2x2&nbsp;m
 &nbsp;\* <small>convertido p. base32.</small>|
 
-No debate devemos chamar atenção para que o fato de que o PlusCode não satisfaz o requisito da hierarquia nas macroregiões: é fundamental saber, antes de decidir qual tecnologia usar, quais critérios consensuais adotaremos.
+No debate devemos chamar atenção para o fato de que o PlusCode não satisfaz o requisito da hierarquia nas macroregiões: é fundamental saber, antes de decidir qual tecnologia usar, quais critérios consensuais adotaremos.
 
 Entre os padrões que satisfazem todos os requisitos, como o Geohash e o S2, outras  otimizações podem ainda ser realizadas, levando a códigos mais curtos ou mnemônicos.  Ao fixarmos em normas brasileiras uma tabela de subregiões do município, por exemplo, podemos reduzir em um dígito ambos os casos S2 e Geohash. Se além disso, fazermos uso de estimativas da "mancha urbana futura" como fizeram o CEP e o MapCode, o resultado fica ainda melhor, mas a custo de códigos mais longos no meio rural... Tudo isso seria detalhado pelo presente projeto, para que tenhamos **subsídios para uma decisão racional**.
 
@@ -46,26 +53,42 @@ O <!-- [levantamento sistemático](locationCodes.md)-->levantamento sistemático
 As recomendações não se limitam à sintaxe dos códigos e sua tradução em latitude-longitude.  Hoje a maioria das aplicações é sensível a contexto, por exemplo meu celular sabe que estou no Estado de São Paulo, onde `PIR` significa Piracicaba, sem risco de confusão com Pirai do Sul (`PIR` no Paraná). São também recomendadas regras de decisão para interpretar prefixos internacionais, tais como `BR-SP` para a capital, mais curto que `BR-SP-SPA`.
 -->
 
-# Soluções levantadas
+# Dois padrões, via e corodenada
 
-O CLP  pode também ser  obtido a partir do endereço tradicional, por exemplo *"Avenida Paulista 1578, São Paulo"*, endereço do MASP, supondo que o código oficial da avenida seja `U131`. O código resultaria em algo como &nbsp; **`SPA-U131-1578`**.<!-- "u" de urbano, é o  menor CEP da via, no caso a paulista usa 01310-000, teria o ponto por exempl Quintana do CEP 04965-010 seria 4965.01  -->
+Afinal CLP, *Código Localizador de Portão*, faz também papel de "endereço da casa dona do portão".  Falta então definir um outro padrão que é um código que seja uma versão compacta do  endereço postal tradicional. Por exemplo o endereço do MASP,  *"Avenida Paulista 1578, São Paulo"*. Suponhamos que o código oficial da avenida fosse `U131`, então o CLP  resultaria em algo como &nbsp; **`SPA-U131-1578`**.<!-- "u" de urbano, é o  menor CEP da via, no caso a paulista usa 01310-000, teria o ponto por exempl Quintana do CEP 04965-010 seria 4965.01  -->
 
-Esse tipo de padronização é importante para a representação interna dos endereços de correspondência em bancos de dados abertos (e interoperáveis).  Como existe um crescente *mercado de geocofificação*, o padrão também ajudaria a regulamentar o setor, com um  CLP-via padronizado pode-se submeter uma lista de endereços pré-processados, com critérios mínimos de custo e confiabilidade na conversão dos mesmos para coordenadas geográficas.
+Esse tipo de código é importante para a representação interna dos endereços de correspondência em bancos de dados abertos, e na comunicação entre bancos de dados (interoperabilidade).  
 
-Existem portanto dois grupos principais de "soluções para a localização de um portão":
+Existem portanto dois grupos principais de CLPs:
 
-1. **CLP-via**: soluções baseadas na **proximidade do portão com uma via de acesso** a ele. <br/>O CLP neste caso seria uma escrita simplificada e padronizada do [endereço postal](https://schema.org/PostalAddress) tradicional, baseado em logradouro e numeração predial.
+<table border="0"><tr>
+<th width="50%">Definição do tipo</th> <th>Aplicações e exemplos</th>
+</tr><tr>
+<td><b>CLP-via</b>:<br/>Soluções baseadas na <b>proximidade do portão com uma via de acesso</b> a ele. <br/>O CLP-via seria uma escrita simplificada e padronizada do <a href="https://schema.org/PostalAddress" rel="external">endereço postal</a>; o tradicional, baseado em logradouro e numeração predial.
+</td><td>Garantiria maior  interoperabilidade entre bases de endereços.
+</tr><tr>
+<td><b>CLP-coordenada</b>:<br/> Soluções baseadas na <b>coordenada geográfica do portão</b>.<br/> Um algoritmo seguro, do tipo Geohash, PlusCode ou outro, toma como entrada as coordenadas padrão <a href="https://en.wikipedia.org/wiki/Geo_URI_scheme" rel="external">[Geo URI</a>, e devolve um código compacto, que é adotado como CLP.
+</td>
+<td>Seria um código dado por tecnologias como as exemplificadas, Geohash, S2, PlusCode, etc. Além  do CLP-coordenada de ser proposto como substituto do CEP, seria também proposto como uma opção de expressão de coordenadas dentro do protocolo Geo URI e similares, atingindo um amplo especttro de aplicações.<!-- seria utilizado também localizador em aplicativos, links e outros dispositivos, -->
+</td>
+</tr></table>
 
-2. **CLP-coordenada**: soluções baseadas na **coordenada geográfica do portão**. <br/> O CLP neste caso seria uma versão complementar do protocolo `geo` da internet, conhecido como [Geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme), para a expressão de coordenadas. As tecnologias e convenções candidatas a código seriam aquelas discutidos acima na introdução.
+Tecnicamente um tipo pode ser convertido no outro através de [procedimentos de geocodificação](https://en.wikipedia.org/wiki/Geocoding#Geocoding_process). E como existe um crescente *mercado de geocofificação*, a padronização dos dois tipos de CLP  também ajudaria a regulamentar o setor, garantindo a separação entre pré-processamento do CLP-via (que pode envolver abordagens estatísticas e linguísticas), e a geocodificação, que resulta num *Geo URI* com certo grau de confiabilidade.  
 
-Tecnicamente uma pode ser convertida na outra através de [procedimentos de geocodificação](https://en.wikipedia.org/wiki/Geocoding#Geocoding_process).
+com critérios mínimos de custo e confiabilidade na conversão dos mesmos para coordenadas geográficas.
+
+<!-- O CLP neste caso seria uma versão complementar do protocolo `geo` da internet, conhecido como [Geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme), para a expressão de coordenadas. As tecnologias e convenções candidatas a código seriam aquelas discutidos acima na introdução.-->
+
+
 
 # Existe um problema?
 
 Parece haver um certo deslocamento, no debate público, a respeito do real problema e decisões a serem tomadas. Enquanto  há de fato uma grande diversidade de alternativas tecnológicas a serem avaliadas, acreditamos que o problema não seria  tanto responder *"Qual a melhor solução tecnológica?"*, mas sim às perguntas:
 
 1. O que de fato precisamos no Brasil? Como chegar a um consenso racional sobre nossas prioridades?
-2. Como adaptar qualquer uma das boas soluções tecnológicas, otimizando-as para as necessidades do Brasil?
+
+2. Como adaptar qualquer uma das boas soluções tecnológicas, otimizando-as para as necessidades do Brasil,  incluindo a necessidade de não ficarmos dependentes de multinacionais para isso?
+
 3. Como transformar, mesmo que aos poucos, a decisão consensual em um [padrão *de facto*](https://en.wikipedia.org/wiki/De_facto_standard)? Como garantir que a convenção do CLP venha a ser amplamente adotada?
 
 O que demonstraremos é que, além de ser vantajoso em termos de soberania nacional, a adaptação às condições locais do Brasil são a única maneira de obter um código mais compacto e mais amigável para o brasileiro.
@@ -78,7 +101,7 @@ O sistema mais amplamente utilizado para localização geográfica é o [WGS84](
 
 De fato, existe já na internet um padrão para isso, é a [RFC&nbsp;5870](https://tools.ietf.org/html/rfc5870) do **Geo URI**, basta escrever `geo:-23.56151,-46.65596;u=5`... Isso já foi uma grande conquista, o que queremos mais?<br/>São 14 dígitos, o código CLP do MASP precisa ser mais simples e compacto que isso. A solução seria simplesmente compactar, sem reinventar padrões.   Se conseguirmos compactar para uns 7 dígitos sem depender de terceiros, sem fazer uso de tecnologia sofisticada, estaria resolvido!
 
-Na "receita mágica" de [software mais simples e até ingênuos](spec04ap05-ingenuos.md#exemplo-novamente) já se demonstra que isso é possível: sem infraestrutura complexa ou softwares sofisticados compactamos para 7 dígitos, portanto a tecnologia é uma questão secundária, não há ganho maior numa tecnologia ou outra, o ganho muito maior, como veremos,  surge de:
+Na "receita mágica" de [software mais simples e até ingênuo](spec04ap05-ingenuos.md#exemplo-novamente) já se demonstra que isso é possível: sem infraestrutura complexa ou softwares sofisticados compactamos para 7 dígitos, portanto a tecnologia é uma questão secundária, não há ganho maior numa tecnologia ou outra, o ganho maior surge de:
 
 * fazer uso de **normas brasileiras** tais como as abreviações de 3 letras, ou reconhecer a latitude e longitude máximas de cada município;
 
@@ -105,13 +128,15 @@ Objetivos específicos, metas e resultados previstos:
 
 6. **Oferta pública de protótipos** para a comunidade testar durante um período os padrões e variantes satisfatórios.  
 
-7. **Redação** da especificação técnica do CLP, seguida de disponibilização para **consulta pública** e debate.
+7. **Redação** da especificação técnica do CLP, seguida de disponibilização para **consulta pública** e debate, principalmente terceiro setor,  universidades, etc.
 
 8. **Texto final da especificação técnica do CLP**, redação, e entrega de pareceres.
 
 9. **Apoio a projetos-piloto** com encaminhamento e reutilização da infraestrutura de testes viabilizada.
 
- <br/>Nota: mesmo depois de aprovada a proposta, ela seguiria para uma etapa de adesão por estados e/ou municípios menores (zonas rurais) que demonstrarem interesse em adotar voluntariamente o padrão. Grandes condomínios horizontais e conjuntos de habitações precárias (favelas) também seriam convidados a usar a  infraestrutura da proposta.
+10. **Diálogo com autoridades** e governo em geral: já vem ocorrendo e vai ocorrer em paralelo, ao longo de todo o processo. Mas com resultados seguros e a legitimação da comunidade, o dilágo deixa de ser consultivo e passa a ser mais propositivo. É quando podemos apoiar e somar esforços com as reais autoridades do assunto, tais como SINTER, IBGE, ABNT, etc.
+
+<br/>Nota: mesmo com sorte e um aceno positivo no item 10, o processo é lento, do item 9 seguiria para uma etapa de adesão por estados e/ou municípios menores (zonas rurais) que demonstrarem interesse em adotar voluntariamente o CLP. Grandes condomínios horizontais e conjuntos de habitações precárias (favelas) também seriam convidados nesta etapa de testes-piloto.
 
 ## Custos e prazos
 

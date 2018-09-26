@@ -1,16 +1,19 @@
+((em construção))
 
 **<center><big>SIGLAS BRASILEIRAS</big></center>**
 
-As siglas brasileiras não são apenas um brinquedo da linguagem portuguesa para "encurtar a conversa" quando assim o desejarmos. Elas fazem parte da Língua Portuguesa do Brasil e dos padrões oficiais de identificação e de comunicação.
+As siglas brasileiras não são apenas um brinquedo, um recurso de linguagem  para encurtar a conversa, enxugar o texto quando o espaço é reduzido.  Elas fazem parte do vocabulário oficial da Língua Portuguesa do Brasil e dos padrões oficiais de identificação.
 
-Elas não são apenas um recurso para as ferramentas de busca, a "autoridade definidora da sigla" não é o dono da ferramenta de busca, é a autoridade nacional conforme instituida pela Constituição, e em alguns casos até por tratados internacionais.  Estabelecer as regras e o bom uso dos códigos, siglas e abreviações oficiais é um ato de **soberania nacional**. O "dono da sigla" é, segundo a Constituição da República, um coletivo, os 200 milhões de brasileiros.
+Quem cria a sigla  não é o autor de um catálogo ou as empresas de busca na Internet...  As siglas dos estados, por exemplo, foram criadas e são mantidas pelo IBGE, existem leis e normas técnicas oficializando o uso nacional, e um tratado internacional com a ISO reforçando o uso como código identificador internacional. Nas siglas de nomes de cidade e códigos de rua não é muito diferente.
+
+A "autoridade definidora da sigla" é uma autoridade do governo brasileiro. Ainda assim não é o governo isolado, a sigla não pega, não se consolida se o governo não a desenvolve buscando consenso, com respeito e com a ajuda dos usuários,  os 200 milhões de brasileiros.  Estabelecer as regras e o bom uso dos códigos, siglas e abreviações oficiais é um ato de **soberania nacional**. Podemos confiar nas nossas siglas, e elas são de fato nossas.<!-- ver https://www12.senado.leg.br/manualdecomunicacao/redacao-e-estilo/estilo/siglas  -->
 
 # Siglas de país e estado
-Na escola nos obrigam a decorar todas elas: AM é Amazonas, AC é Acre... É uma das missões do ensino garantir que o cidadão entenda a linguagem oficial, que saiba reconhecer o contexto e designar elementos com simplicidade e sem ambiguidade.
+Na escola aprendemos todas elas: AC é Acre, AM é Amazonas, ... É uma das missões do ensino garantir que o cidadão entenda a linguagem oficial, que saiba reconhecer o contexto e designar elementos com simplicidade e sem ambiguidade.
 
-A história completa das siglas de estado é [descrita por esta tabela](http://datasets.ok.org.br/state-codes/blob/master/data/br-state-codes.csv). Já existiu uma sigla `GB` designando aqui para nós não a Grã-Bretanha, mas o antigo estado da Guanabra. Quem controla isso, para poder referenciar e identificar com precisão as coisas rotuladas por essas siglas,  no presente e no passado, é uma autoridade nacional designada por lei federal, hoje o IBGE.
+A história completa das siglas de estado é [descrita por esta tabela](http://datasets.ok.org.br/state-codes/blob/master/data/br-state-codes.csv). Já existiu uma sigla `GB`, que entre os brasileiros, até 1975, não era Grã-Bretanha, designava o antigo Estado da Guanabra. Quem controla isso, garantindo a identificação sem ambiguidade e apenas dos elementos vigentes, é uma autoridade nacional designada por lei federal: atualmente, e já fazendo algumas décadas, o IBGE.
 
-Uma vez estabelecidas internamente, as siglas passaram a ser também elementos da comunicação internacional. O Brasil é signatário e de acordos e tratados, entre eles aqueles que dão estabilidade e legitimidade ao padrão [**ISO 3166-2:BR**](https://en.wikipedia.org/wiki/ISO_3166-2:BR), que nada mais faz do que replicar para o mundo aquilo que aprendemos na escola.
+Uma vez estabelecidas internamente, as siglas passaram a ser também elementos da comunicação internacional. O Brasil é signatário do acordo que dá estabilidade e legitimidade ao padrão ISO&nbsp;3166, e a autoridade do padrão [**ISO&nbsp;3166-2:BR**](https://en.wikipedia.org/wiki/ISO_3166-2:BR).
 
 **Regra geral** para uso contextualizado das siglas de país e estado:
 
@@ -36,19 +39,19 @@ AAG (Alto Alegre), AAI (Aguaí), ABR (Américo Brasiliense), ACD (Aparecida), AC
 
 ## Quase hashes
 
-O conceito já amplamente estudado e difundido de [função hash](https://en.m.wikipedia.org/wiki/Hash_function) ajuda a conceber as "funções sigla", que convertem um nome qualquer em um código de 3 letras, e que lembre ou seja percebido pelo humano como uma sigla.
+O conceito já amplamente estudado e difundido de [função hash](https://en.m.wikipedia.org/wiki/Hash_function) ajuda a conceber as "funções sigla", que convertem um nome qualquer em um código de 3 letras  que seja percebido (pelo humano) como uma sigla.
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Hash_table_4_1_1_0_0_0_0_LL.svg/240px-Hash_table_4_1_1_0_0_0_0_LL.svg.png)
 
-Enquanto a função hash *H(x)* devolve um número diferente para cada nome *x* de um conjunto *X*, a funsão sigla *S(x)* devolve um código de letras mnemônico.
+Enquanto a função hash *H(x)* devolve um número diferente para cada nome *x* de um conjunto *X*, a função sigla *S(x)* devolve um código de letras mnemônico (que faz lembrar do nome).
 
 Os principais coceitos trazidos da *teoria das funções hash* são
 
 Conceito | definição no escopo de *H(x)* | definição no escopo *S(x)*
 ---------|----------------|-------
-*colisão* | Quando dá o azar de dois elementos de *X*, digamos *x1* e *x2*, resultarem em *H(x1)=H(x2)*. | Idem.
+*colisão* | Quando dá o azar de dois elementos de *X*, digamos *x1* e *x2*, resultarem em *H(x1)=H(x2)*. | Idem, há colisão quando *S(x1)=S(x2)*.
 *domímio* | Conjunto de todos os possíveis nomes, *X*. | idem.
-*contra-domímio* | Conjunto de todos os possíveis resultados de *H(x)*, conjunto *C*. | Mais específico:  todos os possíveis resultados de *S(x)* são todas as combinações de 3 letras do alfabeto utilizado por *X*.  Se usar todas as 26 letras, teremos *\|C\|=26³=17576*.
+*contra-domímio* | Conjunto de todos os possíveis resultados de *H(x)*, conjunto *C*. | Mais específico:  todos os possíveis resultados de *S(x)* são todas as combinações de 3 letras do alfabeto utilizado por *X*.  Se usar 26 letras, teremos *\|C\|=26³=17576*.
 *probabilidade de colisão* | Problabilidade *P(H,X)* em função do número do tamanho do contra-domínio, *\|C\|*. | Idem.|
 
 Em caso de colisão a função hash tradicional, *H(x)*, apenas evita repetição, enquanto a função sigla segue uma ordem de tentativas, começando pelas tentativas de percepção *p* mais amigável (*p=0* significa zero-pior), e recorrendo depois das colisões a valores  *p=1*, *p=2*, etc. até um valor *p=N* pior de fato.   A rigor portanto a função sigla usa também *p* como parâmetro que muda com o número de colisões, *S(x,p)*.
