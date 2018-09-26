@@ -1,4 +1,4 @@
-**<center><big>CLP</big></center>**
+**<center><big>CLP</big><br/>v0.0.1 - rascunho</center>**
 
 Proposta de **C**ódigo **L**ocalizador de **P**ortão, CLP: recomendações, estudos de viabilidade e lançamento de consulta pública para a proposta de um padrão.
 
@@ -73,39 +73,9 @@ Existem portanto dois grupos principais de CLPs:
 </td>
 </tr></table>
 
-Tecnicamente um tipo pode ser convertido no outro através de [procedimentos de geocodificação](https://en.wikipedia.org/wiki/Geocoding#Geocoding_process). E como existe um crescente *mercado de geocofificação*, a padronização dos dois tipos de CLP  também ajudaria a regulamentar o setor, garantindo a separação entre pré-processamento do CLP-via (que pode envolver abordagens estatísticas e linguísticas), e a geocodificação, que resulta num *Geo URI* com certo grau de confiabilidade.  
-
-com critérios mínimos de custo e confiabilidade na conversão dos mesmos para coordenadas geográficas.
+Tecnicamente um tipo pode ser convertido no outro através de [procedimentos de geocodificação](https://en.wikipedia.org/wiki/Geocoding#Geocoding_process). Como existe um crescente *mercado de geocofificação*, a padronização dos dois tipos de CLP  também ajudaria a regulamentar o setor, garantindo a separação entre pré-processamento do CLP-via e a geocodificação, que resulta num *Geo URI* com certo grau de confiabilidade. Quando ambos são fornecidos, ambos podem ser convertidos em coordenadas geográficas e comparados, aferindo-se também um grau de confiabilidade resultante da comparação dos dois.  Critérios mínimos para a avaliação de custo e confiabilidade na geocodificação de endereços brasileiros, portanto, passariam a ser viáveis.
 
 <!-- O CLP neste caso seria uma versão complementar do protocolo `geo` da internet, conhecido como [Geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme), para a expressão de coordenadas. As tecnologias e convenções candidatas a código seriam aquelas discutidos acima na introdução.-->
-
-
-
-# Existe um problema?
-
-Parece haver um certo deslocamento, no debate público, a respeito do real problema e decisões a serem tomadas. Enquanto  há de fato uma grande diversidade de alternativas tecnológicas a serem avaliadas, acreditamos que o problema não seria  tanto responder *"Qual a melhor solução tecnológica?"*, mas sim às perguntas:
-
-1. O que de fato precisamos no Brasil? Como chegar a um consenso racional sobre nossas prioridades?
-
-2. Como adaptar qualquer uma das boas soluções tecnológicas, otimizando-as para as necessidades do Brasil,  incluindo a necessidade de não ficarmos dependentes de multinacionais para isso?
-
-3. Como transformar, mesmo que aos poucos, a decisão consensual em um [padrão *de facto*](https://en.wikipedia.org/wiki/De_facto_standard)? Como garantir que a convenção do CLP venha a ser amplamente adotada?
-
-O que demonstraremos é que, além de ser vantajoso em termos de soberania nacional, a adaptação às condições locais do Brasil são a única maneira de obter um código mais compacto e mais amigável para o brasileiro.
-
-Não basta um padrão "de cima para baixo", sem passar pelas etapas dos itens 1 e 2. Certamente ajudarão e serão relevantes, mas sozinhos, nem o governo federal nem grandes empresas como Google ou Microsoft seriam capazes de impor um padrão *de facto*.  A garantia de racionalidade, soberania e abertura (licenças livres) passa também pelo apoio e adesão gradual nas prefeituras, e o apoio de comunidades acadêmicas e tecnológicas, tais como a OpenStreetMap Brasil.
-
-## Latitude-longitude e contexto, a solução!
-
-O sistema mais amplamente utilizado para localização geográfica é o [WGS84](https://en.wikipedia.org/wiki/World_Geodetic_System) em coordenadas decimais, que especifica longitude e latitude usuais dos mapas digitais, uma para cada local na superfície do planeta. Por exemplo, coordenadas WGS84 que identificam o MASP em São Paulo com precisão de ~5m são *"-23.56151,-46.65596"*.<!-- (23°33′41.432″S 46°39′21.458″W) -->
-
-De fato, existe já na internet um padrão para isso, é a [RFC&nbsp;5870](https://tools.ietf.org/html/rfc5870) do **Geo URI**, basta escrever `geo:-23.56151,-46.65596;u=5`... Isso já foi uma grande conquista, o que queremos mais?<br/>São 14 dígitos, o código CLP do MASP precisa ser mais simples e compacto que isso. A solução seria simplesmente compactar, sem reinventar padrões.   Se conseguirmos compactar para uns 7 dígitos sem depender de terceiros, sem fazer uso de tecnologia sofisticada, estaria resolvido!
-
-Na "receita mágica" de [software mais simples e até ingênuo](spec04ap05-ingenuos.md#exemplo-novamente) já se demonstra que isso é possível: sem infraestrutura complexa ou softwares sofisticados compactamos para 7 dígitos, portanto a tecnologia é uma questão secundária, não há ganho maior numa tecnologia ou outra, o ganho maior surge de:
-
-* fazer uso de **normas brasileiras** tais como as abreviações de 3 letras, ou reconhecer a latitude e longitude máximas de cada município;
-
-*  **preservar a autonomia** dos brasileiros em obter seus códigos **sem** depender de uma autoridade central de "batismo" (como o CEP centrado nos Correios) ou uma tecnologia sofisticada, que só multinacinais possam suprir.
 
 # Planejamento
 O trabalho foi apenas esboçado,  um banco de dados preparado, alguns testes foram feitos... Mas ainda há muito que ser realizado. A seguir o planejamento detalhado, incluindo metas e prazos.
@@ -135,36 +105,6 @@ Objetivos específicos, metas e resultados previstos:
 9. **Apoio a projetos-piloto** com encaminhamento e reutilização da infraestrutura de testes viabilizada.
 
 10. **Diálogo com autoridades** e governo em geral: já vem ocorrendo e vai ocorrer em paralelo, ao longo de todo o processo. Mas com resultados seguros e a legitimação da comunidade, o dilágo deixa de ser consultivo e passa a ser mais propositivo. É quando podemos apoiar e somar esforços com as reais autoridades do assunto, tais como SINTER, IBGE, ABNT, etc.
-
-<br/>Nota: mesmo com sorte e um aceno positivo no item 10, o processo é lento, do item 9 seguiria para uma etapa de adesão por estados e/ou municípios menores (zonas rurais) que demonstrarem interesse em adotar voluntariamente o CLP. Grandes condomínios horizontais e conjuntos de habitações precárias (favelas) também seriam convidados nesta etapa de testes-piloto.
-
-## Custos e prazos
-
-A cada uma das metas acima foram estimadas horas de trabalho bem como tempo mínimo necessário para a discussão com a comunidade e a sua participação em testes e consultas públicas.
-
-Item                              | Horas-trabalho | Tempo de espera
-----------------------------------|----------------|-------------------
-**1.1.** Requisitos do CLP, redação | ~15            | ~1 semana entre redação e revisão
-**1.2.** ", discussão | ~5            | ~2 semanas (horas de trabalho para leitura/resposta e backup)
-**1.3** ", entrega | ~5            | ~1 semana entre redação final, revisão e redação do extrato das discussões.
-**2.1** principais soluções e padrões vigentes, ?? | ~5            | ~1
-**...** ... | ~5            | ~1
-
-Optou-se por adotar um preço fixo e mais baixo para as horas-trabalho, tendo em vista que são horas "semi voluntárias". Enquanto as estimativas não estiverem certas e revisadas, utilizaremos como valor R$30 a hora, depois de revisadas pode ou não chegar ao teto de R$40/hora.
-
-Como o total de horas estimado foi da ordem de ??  conclui-se que o valor mínimo para se concluir o projeto seja da ordem de R$??  ...
-
-# Situação atual
-
-Exceto por este texto de apresentação, que tem valor de "carta compromisso" com a comunidade, todos os devem ser considerados rascunhos, foram disponibilizados apenas para facilitar o diálogo com quem deseja participar ou discutir detalhes.
-
-... Veja o [rascunho inicial das especificações aqui](spec01-hub.md), ..., [comparações aqui](comparacao.md), ...
-
-## Não estamos sozinhos
-
-A busca por soluções é mundial, e floresceu nos anos recentes.  A demanda por códigos de localização abertos não é exclusividade do Brasil. Veja esta lista com uma centena de outros países, analisados quanto à abertura da sua base de códigos postais,  apenas ~5% são considerados razoavelmente abertos:   [OpenDataIndex/Postcodes](https://index.okfn.org/dataset/postcodes/), 90% dos países aida apresentam problemas sérios como o do Brasil.  
-
-Quanto à população mais sensível ao problema de "não ter um endereço para chamar de seu", quem mais sofre é a população do meio rural, e os bairros e regiões em situação de habitação precária &mdash; segundo dados da [TETO Brasil](https://www.techo.org/brasil/) são ~15 milhões habitantes desatendidos pelo CEP ou nome de rua.  Todos beneficiariam enormemente de um código de localização oficial, um CLO para o local onde habitam.
 
 ------
 
