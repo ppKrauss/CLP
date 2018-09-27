@@ -110,7 +110,7 @@ Hoje no Brasil já se praticam em algumas cidades como São Paulo o uso de rotul
 
 ![](assets/nome_reduzido.png)
 
-Essa estratégia é válida em contextos onde o conjunto totais de nomes é *reduzido*. Ao longo de uma via principal, o número de vias perpendiculares é limitado, e do para fins de seleção de palavras não-repetidas pode-se considerar um  *conjunto reduzido*.
+Essa estratégia é válida em contextos onde o conjunto de nomes é *reduzido*. As placas azuis de Sâo Paulo funcionam bem porque ao longo de uma via principal, o número de vias perpendiculares é limitado, e para fins de seleção de palavras não-repetidas pode-se considerar um  *conjunto reduzido*.
 
 * ENTRADAS: conjunto de nomes completos.
 
