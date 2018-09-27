@@ -76,7 +76,7 @@ No algoritmo mais ingênuo, descrito acima, a fusão é realizada por simples co
 
 Agora esse numerão fundido tem o mesmo comportamento por exemplo que o CEP: dois endereços sem primeiros dígitos iguais estarão a muitos quilômetros de distância, talvez extremos diferentes do país; com primeiros digamos 4 dígitos iguais estão numa mesma macro-região... E se diferem apenas nos dois últimos dígitos, são endereços vizinhos.
 
-Repare que é tão compacto quanto a concatenação direta, o fundido decimal tem 10 dígitos e o base32 (`3RJBPBF`) 7 dígitos, como no caso concatenado. Sendo assim não há razão alguma para não fundir de forma mais inteligente!
+Repare que é tão compacto quanto a concatenação direta, o fundido decimal tem 10 dígitos e o base32 (`3RJBPBF`) 7 dígitos, como no caso concatenado. Sendo assim **não há razão alguma para concatenar, é sempre melhor fundir**.
 
 Mas nem sempre dá sorte de todos os endereços de uma cidade, quando representados dessa forma,  terem um mesmo prefixozão, será um prefixozinho e isso não ajuda muito a compactar pelo "prefixo municipal".  Para se obter um prefixo municipal maior é preciso usar uma base numérica menor, ou seja, menor que a base10 no exemplo. E a menor base possível é a base2, por isso o algoritmo correto, mais eficiente é a intercalação em base2.
 
@@ -86,7 +86,7 @@ Esse pequeno milagre de preservar prefixo nas vizinhanças foi descoberto por ac
 
 ## Indexação ingênua da grade municipal
 
-Para qualquer algoritmo de conversão das coordenadas num só código, consta-se que o código será mais compacto quanto menor for o município.
+Para qualquer algoritmo de conversão das coordenadas num só código, consta-se que o código será mais compacto quanto menor for a área do município. Isso alias é um dos fundamentos, já enunciados pelo MapCode ... ((link equação área em função do número de dígitos))
 
 Assim, uma área municipal muito densa ou muito grande precisa ser subdividida em áreas menores, para garantir resultados mais compactos... Mas ao subdividir haverá o custo adicional de se indicar o código dessa área menor. Nisso consiste a indexação.
 
@@ -104,7 +104,54 @@ Passo-a-passo, depois de padronizar a base do código resultante (nos exemplos u
 
 ![](assets/otimizacao1.png)
 
-### Rotulação ingênua de índices contíguos
+### Redução de nomes a palavras
+
+Hoje no Brasil já se praticam em algumas cidades como São Paulo o uso de rotulação abreviada, por "palavra distintiva" do nome rua, tipicamente quando de nomes compostos.
+
+![](assets/nome_reduzido.png)
+
+Essa estratégia é válida em contextos onde o conjunto totais de nomes é *reduzido*. Ao longo de uma via principal, o número de vias perpendiculares é limitado, e do para fins de seleção de palavras não-repetidas pode-se considerar um  *conjunto reduzido*.
+
+* ENTRADAS: conjunto de nomes completos.
+
+* SAÍDA: conjunto de pares `(nome_completo,palavra)`.
+
+Trata-se de um algoritmo estatístico, que toma como entrada nomes completos e devolve palavras.
+
+Policia, ambulância, bombeiro e outros serviços que precisam transmitir por rádio e sem ambiguidade o nome da localização, que por vezes é um cruzamento ou uma quadra idenfinida. Ao invés de soletrarem "B de bola, T de tatu, ... " (ou como radioamador "bravo tango ...") também poderiam fazer uso de algo mais econômico (menos letras) e mais semântico (correlação com nomes das áreas).
+
+Do ponto de vista estatístico é possível evitar ambiguidades e nomes de rua repetidos de uma cidade restringindo-se o conjunto de nomes de rua a uma região, uma sub-divisão da cidade do tipo norte/sul/leste pode ser suficiente. Por exemplo em São Paulo (SPA), seria válido o `geocodigo:cruzamento` (ponto de cruzamento) com nomes conhecidos `SPA-centro-brigadeiro-paulista`.
+
+O mesmo princípio vale para nomes de bairro em uma cidade.  Em Jaraguá do Sul, por exemplo, são quase 40 bairros e sua zona rural. O número é limitado e é possível fazer uma seleção razoável de palavras não-repetidas.
+
+palavra   | Nome do bairro            | palavra  |  Nome do bairro            
+----------|------------------------------|----------|------------------------------
+`agua`         | Água Verde         | `joao`        | João Pessoa
+`amizade`     | Amizade            | `lalau`       | Vila Lalau
+`antonio`     | Santo Antônio      | `lenzi`       | Vila Lenzi
+`baependi`    | Vila Baependi      | `luz`         | Rio da Luz
+`cerro`      | Barra do Rio Cerro  | `luzia`       | Santa Luzia
+`bmolha`      | Barra do Rio Molha | `malwee`      | Parque Malwee
+`boa`         | Boa Vista          | `molha`       | Rio Molha
+`braco`       | Braço do Ribeirão Cavalo| `monos`       | Tifa Monos
+`brasilia`    | Nova Brasília      | `nereu`       | Nereu Ramos
+`cavalo`      | Ribeirão Cavalo    | `nova`        | Vila Nova
+`centenario`  | Centenário         | `noventa`     | Jaraguá 99
+`centro`      | Centro             | `oitenta`     | Jaraguá 84
+`riocerro`       | Rio Cerro I     | `rau`         | Rau
+`cerrodois`   | Rio Cerro II       | `rural`       | Área Rural de Jaraguá do Sul
+`chico`       | Chico de Paulo     | `sluiz`       | São Luís
+`claras`      | Águas Claras       | `tifa`        | Tifa Martins
+`czerniewicz` | Czerniewicz        | `tresnorte`        | Três Rios do Norte
+`esquerdo`    | Jaraguá Esquerdo   | `tressul`    | Três Rios do Sul
+`estrada`     | Estrada Nova       | `vieira`      | Vieira
+`ilha`        | Ilha da Figueira   | |
+
+Conforme veremos a estratégia de criar palavras pode ser substituida por composições norte/sul/leste/oeste dadas automaticamente pelo algoritmo a seguir.
+
+### Rotulação de índices contíguos
+
+A rotulação tem sido sugerida por pressão do destaque que tomou o padrão [what3words](https://what3words.com/). A contra-partida dos geocódigos não-mnemônicos tem sido a sugestão de nomes alternativos a prefixos de código (sinônimos de prefixos), baseados em palavras derivadas de nomes mais afinados com nomes consagrados de áreas, bairros ou marcos geográficos.
 
 No caso de partição usando S2, que identifica cada célula por uma curva de Hilbert, a ordenação pelo índice em geral permitirá  ilustrar a sequência por intervalos associados a  áreas contíguas:
 
@@ -118,10 +165,14 @@ Sugere-se que o uso de nomes seja sempre alternativo ao uso de códigos, nunca a
 
 Uma opção mnemônica mais viável seria acrescentando um dígito decimal arbitrário ao nome da região, resultando em códigos como `PIR-sul2-34.456` ou `PIR-madalena3-4.456`, tendo em vista que a combinação nome-dígito pode ser suficiente para designar cada célula da subregião.
 
+No exemplo de bairros de Jaraguá do Sul, que é uma cidade menor cujas macro-células possuem da ordem de 1km, é possível estabelecer as "domínios de bairro" e neles, quando for mais de um, diferenciar pela direção. Bairros maiores como Cerro, Centro, Ilha e Amizade, teriam suas células rotuladas na forma `cerro_sul`, `cerro_norte`, `centro_leste`, `ilha_oeste`, `amizade_norte`.
+<!-- select name_bairro, count(*) n  from  cepaberto.vias where id_city=4700  GROUP BY 1 order by 2 desc,1; -->
 
+<!--
 # Algoritmos de geocodificação
 (vai pra Metodolodia e proposta de padr~oes )
 
 1. Pré processamemto do endereço tradicional, que pode ser estatístico e gerar nais de um resultado.
 2.
 com um  CLP-via padronizado pode-se submeter uma lista de endereços pré-processados,
+-->

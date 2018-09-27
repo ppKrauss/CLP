@@ -115,8 +115,8 @@
             <li><a href="#exemplo-novamente">Exemplo novamente</a></li>
         <li class="main "><a href="#fusao-intrelacada-ingenua">Fusão intrelaçada ingênua</a></li>
         <li class="main "><a href="#indexacao-ingenua-da-grade-municipal">Indexação ingênua da grade municipal</a></li>
-            <li><a href="#rotulacao-ingenua-de-indices-contiguos">Rotulação ingênua de índices contíguos</a></li>
-        <li class="main "><a href="#algoritmos-de-geocodificacao">Algoritmos de geocodificação</a></li>
+            <li><a href="#reducao-de-nomes-a-palavras">Redução de nomes a palavras</a></li>
+            <li><a href="#rotulacao-de-indices-contiguos">Rotulação de índices contíguos</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -243,20 +243,173 @@
 </li>
 </ol>
 <p><img alt="" src="../assets/otimizacao1.png" /></p>
-<h3 id="rotulacao-ingenua-de-indices-contiguos">Rotulação ingênua de índices contíguos</h3>
+<h3 id="reducao-de-nomes-a-palavras">Redução de nomes a palavras</h3>
+<p>Hoje no Brasil já se praticam em algumas cidades como São Paulo o uso de rotulação abreviada, por "palavra distintiva" do nome rua, tipicamente quando de nomes compostos.</p>
+<p><img alt="" src="../assets/nome_reduzido.png" /></p>
+<p>Essa estratégia é válida em contextos onde o conjunto totais de nomes é <em>reduzido</em>. Ao longo de uma via principal, o número de vias perpendiculares é limitado, e do para fins de seleção de palavras não-repetidas pode-se considerar um  <em>conjunto reduzido</em>.</p>
+<ul>
+<li>
+<p>ENTRADAS: conjunto de nomes completos.</p>
+</li>
+<li>
+<p>SAÍDA: conjunto de pares <code>(nome_completo,palavra)</code>.</p>
+</li>
+</ul>
+<p>Trata-se de um algoritmo estatístico, que toma como entrada nomes completos e devolve palavras.</p>
+<p>Policia, ambulância, bombeiro e outros serviços que precisam transmitir por rádio e sem ambiguidade o nome da localização, que por vezes é um cruzamento ou uma quadra idenfinida. Ao invés de soletrarem "B de bola, T de tatu, ... " (ou como radioamador "bravo tango ...") também poderiam fazer uso de algo mais econômico (menos letras) e mais semântico (correlação com nomes das áreas).</p>
+<p>Do ponto de vista estatístico é possível evitar ambiguidades e nomes de rua repetidos de uma cidade restringindo-se o conjunto de nomes de rua a uma região, uma sub-divisão da cidade do tipo norte/sul/leste pode ser suficiente. Por exemplo em São Paulo (SPA), seria válido o <code>geocodigo:cruzamento</code> (ponto de cruzamento) com nomes conhecidos <code>SPA-centro-brigadeiro-paulista</code>.</p>
+<p>O mesmo princípio vale para nomes de bairro em uma cidade.  Em Jaraguá do Sul, por exemplo, são quase 40 bairros e sua zona rural. O número é limitado e é possível fazer uma seleção razoável de palavras não-repetidas.</p>
+<table>
+<thead>
+<tr>
+<th>palavra</th>
+<th>Nome do bairro</th>
+<th>palavra</th>
+<th>Nome do bairro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>agua</code></td>
+<td>Água Verde</td>
+<td><code>joao</code></td>
+<td>João Pessoa</td>
+</tr>
+<tr>
+<td><code>amizade</code></td>
+<td>Amizade</td>
+<td><code>lalau</code></td>
+<td>Vila Lalau</td>
+</tr>
+<tr>
+<td><code>antonio</code></td>
+<td>Santo Antônio</td>
+<td><code>lenzi</code></td>
+<td>Vila Lenzi</td>
+</tr>
+<tr>
+<td><code>baependi</code></td>
+<td>Vila Baependi</td>
+<td><code>luz</code></td>
+<td>Rio da Luz</td>
+</tr>
+<tr>
+<td><code>cerro</code></td>
+<td>Barra do Rio Cerro</td>
+<td><code>luzia</code></td>
+<td>Santa Luzia</td>
+</tr>
+<tr>
+<td><code>bmolha</code></td>
+<td>Barra do Rio Molha</td>
+<td><code>malwee</code></td>
+<td>Parque Malwee</td>
+</tr>
+<tr>
+<td><code>boa</code></td>
+<td>Boa Vista</td>
+<td><code>molha</code></td>
+<td>Rio Molha</td>
+</tr>
+<tr>
+<td><code>braco</code></td>
+<td>Braço do Ribeirão Cavalo</td>
+<td><code>monos</code></td>
+<td>Tifa Monos</td>
+</tr>
+<tr>
+<td><code>brasilia</code></td>
+<td>Nova Brasília</td>
+<td><code>nereu</code></td>
+<td>Nereu Ramos</td>
+</tr>
+<tr>
+<td><code>cavalo</code></td>
+<td>Ribeirão Cavalo</td>
+<td><code>nova</code></td>
+<td>Vila Nova</td>
+</tr>
+<tr>
+<td><code>centenario</code></td>
+<td>Centenário</td>
+<td><code>noventa</code></td>
+<td>Jaraguá 99</td>
+</tr>
+<tr>
+<td><code>centro</code></td>
+<td>Centro</td>
+<td><code>oitenta</code></td>
+<td>Jaraguá 84</td>
+</tr>
+<tr>
+<td><code>riocerro</code></td>
+<td>Rio Cerro I</td>
+<td><code>rau</code></td>
+<td>Rau</td>
+</tr>
+<tr>
+<td><code>cerrodois</code></td>
+<td>Rio Cerro II</td>
+<td><code>rural</code></td>
+<td>Área Rural de Jaraguá do Sul</td>
+</tr>
+<tr>
+<td><code>chico</code></td>
+<td>Chico de Paulo</td>
+<td><code>sluiz</code></td>
+<td>São Luís</td>
+</tr>
+<tr>
+<td><code>claras</code></td>
+<td>Águas Claras</td>
+<td><code>tifa</code></td>
+<td>Tifa Martins</td>
+</tr>
+<tr>
+<td><code>czerniewicz</code></td>
+<td>Czerniewicz</td>
+<td><code>tresnorte</code></td>
+<td>Três Rios do Norte</td>
+</tr>
+<tr>
+<td><code>esquerdo</code></td>
+<td>Jaraguá Esquerdo</td>
+<td><code>tressul</code></td>
+<td>Três Rios do Sul</td>
+</tr>
+<tr>
+<td><code>estrada</code></td>
+<td>Estrada Nova</td>
+<td><code>vieira</code></td>
+<td>Vieira</td>
+</tr>
+<tr>
+<td><code>ilha</code></td>
+<td>Ilha da Figueira</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Conforme veremos a estratégia de criar palavras pode ser substituida por composições norte/sul/leste/oeste dadas automaticamente pelo algoritmo a seguir.</p>
+<h3 id="rotulacao-de-indices-contiguos">Rotulação de índices contíguos</h3>
+<p>A rotulação tem sido sugerida por pressão do destaque que tomou o padrão <a href="https://what3words.com/">what3words</a>. A contra-partida dos geocódigos não-mnemônicos tem sido a sugestão de nomes alternativos a prefixos de código (sinônimos de prefixos), baseados em palavras derivadas de nomes mais afinados com nomes consagrados de áreas, bairros ou marcos geográficos.</p>
 <p>No caso de partição usando S2, que identifica cada célula por uma curva de Hilbert, a ordenação pelo índice em geral permitirá  ilustrar a sequência por intervalos associados a  áreas contíguas:</p>
 <p><img alt="" src="../assets/Hilbert_curve02b.png" /></p>
 <p>Áreas de células S2 típicas, ilustradas abaixo, são obtias por algoritmos de ajuste parâmetros e otimização, em  algoritmos mais sofisticados.</p>
 <p>Algumas referências (ex. <a href="spec05-referencias.md#ref06">ref06</a>) sugerem associar áreas contíguas a subregiões que já apresentem nomes tradicionais, tais como nomes de bairro ou direções (leste/sul/etc.), criando opções de códigos mais mnemônicos no caso de indexação de dois dígitos.</p>
 <p>Sugere-se que o uso de nomes seja sempre alternativo ao uso de códigos, nunca a única opção. Desse modo teríamos substituídos um ou dois dígitos por rótulos, por exemplo (um portão de Piracicaba SP) ao invés de <code>PIR-1234.456</code> o código seria <code>PIR-sul-234.456</code> ou <code>PIR-madalena-34.456</code>. A rotulação de regiões centro/norte/sul/etc em geral é a mais factivel, todavia causaria confunsão com a delimitação oficial e não chega a substituir um dígito por completo. A rotulação com palavras já seria bem mais artificial, não garante associação com nomes de regiões, apenas uma referência vaga (ex. palavra de nome de uma rua que nasce na célula ou de um parque do seu interior).</p>
 <p>Uma opção mnemônica mais viável seria acrescentando um dígito decimal arbitrário ao nome da região, resultando em códigos como <code>PIR-sul2-34.456</code> ou <code>PIR-madalena3-4.456</code>, tendo em vista que a combinação nome-dígito pode ser suficiente para designar cada célula da subregião.</p>
-<h1 id="algoritmos-de-geocodificacao">Algoritmos de geocodificação</h1>
-<p>(vai pra Metodolodia e proposta de padr~oes )</p>
-<ol>
-<li>Pré processamemto do endereço tradicional, que pode ser estatístico e gerar nais de um resultado.
+<p>No exemplo de bairros de Jaraguá do Sul, que é uma cidade menor cujas macro-células possuem da ordem de 1km, é possível estabelecer as "domínios de bairro" e neles, quando for mais de um, diferenciar pela direção. Bairros maiores como Cerro, Centro, Ilha e Amizade, teriam suas células rotuladas na forma <code>cerro_sul</code>, <code>cerro_norte</code>, <code>centro_leste</code>, <code>ilha_oeste</code>, <code>amizade_norte</code>.
+<!-- select name_bairro, count(*) n  from  cepaberto.vias where id_city=4700  GROUP BY 1 order by 2 desc,1; --></p>
+<!--
+# Algoritmos de geocodificação
+(vai pra Metodolodia e proposta de padr~oes )
+
+1. Pré processamemto do endereço tradicional, que pode ser estatístico e gerar nais de um resultado.
 2.
-com um  CLP-via padronizado pode-se submeter uma lista de endereços pré-processados,</li>
-</ol></div>
+com um  CLP-via padronizado pode-se submeter uma lista de endereços pré-processados,
+--></div>
         </div>
 
         <footer class="col-md-12">

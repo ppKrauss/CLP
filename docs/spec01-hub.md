@@ -3,10 +3,10 @@
 
 Especificações Técnicas do **Código Localizador de Portão** (CLP), conforme testes, levantamentos e consulta pública realizada em [projeto de iniciativa da Comunidade OSM Brasil](https://github.com/OSMBrasil/CLP).
 
-## Sintaxe básica 
-A CLP é um tipo de código identificador, que toma a forma de [cadeia de caracteres](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres) dividida em duas partes, um prefixo e um sufixo, separadas por um hífen:<br/>&nbsp; **`<CLP> = <prefixo><sufixo>`**
+## Sintaxe básica
+A CLP é um tipo de código identificador, que toma a forma de [cadeia de caracteres](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres) dividida em duas partes, um prefixo e um sufixo, separadas por um hífen:<br/>&nbsp; **`<CLP> = <prefixo> "-" <sufixo>`**
 
-Onde o prefixo é uma sigla [ISO_3166-2:BR](https://pt.wikipedia.org/wiki/ISO_3166-2:BR) composta de código do país (Brasil=BR), `<country>`, código da unidade da federação (por ex. estado de São Paulo é SP), `<uf>`, e uma sigla de 3 letras do nome do município, `<abbrev3>`,<br/>&nbsp; **`<prefixo> = <country>-<uf>-<abbrev3>`**.
+Onde o prefixo é uma sigla [ISO&nbsp;3166-2:BR](https://pt.wikipedia.org/wiki/ISO_3166-2:BR) composta de código do país (Brasil=BR), `<country>`, código da unidade da federação (por ex. estado de São Paulo é SP), `<uf>`, e uma sigla de 3 letras do nome do município, `<abbrev3>`,<br/>&nbsp; **`<prefixo> = <country> "-" <uf> "-" <abbrev3>`**.
 
 O CLP não existe sozinho como se fosse um nome, ele dependente também da sua "infraestrutura de *resolução do CLP*", que é o mecanismo que garante a tradução do código em coordenadas geográficas de latitude e longitude.
 
