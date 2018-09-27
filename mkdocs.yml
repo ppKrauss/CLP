@@ -13,6 +13,7 @@ pages:
       - Siglas: spec04ap01-siglas.md
       - Comparações: comparacao.md
       - Algoritmos ingênuos: spec04ap05-ingenuos.md
+      - Segunda camada: spec04ap05b-segundaCamada.md
 
     - Créditos: assets/README.md
 

@@ -27,15 +27,11 @@ Uma vez estabelecidas internamente, as siglas passaram a ser também elementos d
 Considerações sobre a padronização das siglas de 3 letras para a identificação municípios.
 Apesar de terem sido propostos e setorialmente adotados alguns padrões de codificação, eles são incompativeis e distintios.  Os principais são:
 
-* ANATEL: uso interno.
+* Siglas em escopo **federal**: padrão **ANATEL**, de uso interno.
 
-* DER - Departamento de Estradas de Rodagem: uso já consolidado em placas e mapas. Conforme o estado há uma autoridade diferente (ex. DER/MG é de Minas  Gerais) e grau de uso/maturidade diferente.
+* Siglas de escopo **estadual**:   padrão **DER - Departamento de Estradas de Rodagem**, com uso já consolidado em placas e mapas. Conforme o estado há uma autoridade diferente (ex. DER/MG é de Minas  Gerais) e grau de uso/maturidade diferente.
 
-* Assembleia de SP: está regulamentando de forma mais ampla o uso das siglas do DER/SP.
-
-Abaixo uma amostra da lista completa de todas as abreviações de municipios de São Paulo:<!-- copy (select abbrev3 ||' ('|| name||')' from test_city where state='SP' order by 1) to '/tmp/lix' -->
-<blockquote>
-AAG (Alto Alegre), AAI (Aguaí), ABR (Américo Brasiliense), ACD (Aparecida), ACP (Américo de Campos), ADD (Andradina), ADF (Adolfo), ADM (Adamantina), ADT (Aparecida d'Oeste), AEI (Areias), AEP (Areiópolis), AFM (Alfredo Marcondes), AGD (Agudos), AGL (Águas de Lindóia), ...  <br/>..., PBT (Pereira Barreto), PBU (Pacaembu), PCT (Piacatu), PDB (Pedra Bela), PDD (Piedade), PDH (Pindamonhangaba), PDM (Pindorama), PDN (Pederneiras), PDP (Pradópolis), PDR (Pedreira), PEP (Pedrinhas Paulista), PFR (Porto Ferreira), PFZ (Porto Feliz), PGA (Porangaba), PGH (Pedregulho), PGI (Pirangi), PGP (Paraguaçu Paulista), PGR (Pitangueiras), PGT (Pontes Gestal), PIR (Piracicaba), PIZ (Pinhalzinho), PLC (Paulicéia), PLF (Paulo de Faria), PLN (Paulínia), PLO (Palmeira d'Oeste), PLP (Palmares Paulista), PLS (Pilar do Sul), PLT (Planalto), PMP (Pompéia), PMT (Palmital), PNG (Pirassununga), PNL (Pedranópolis), PNP (Penápolis), PNR (Panorama), POA (Poá), POG (Pongaí), POL (Poloni), PON (Pontal), POT (Potim), PPL (Populina), PPM (Paranapanema), PQA (Pariquera-Açu), PQB (Piquerobi), PQT (Piquete), PRA (Pracinha), PRB (Peruíbe), PRC (Piracaia), PRD (Pardinho), PRG (Praia Grande), PRI (Pirajuí), PRJ (Piraju), PRN (Paranapuã), PRP (Parapuã), PRR (Pereiras), PRS (Paraíso), PRT (Pratânia), PSA (Presidente Alves), PSB (Presidente Bernardes), ...<br/>..., UBT (Ubatuba), UCH (Uchoa), UJR (Ubirajara), UNP (União Paulista), URN (Urânia), URP (Urupês), URU (Uru), VAR (Vargem), VAT (Vista Alegre do Alto), VCR (Vera Cruz), VGP (Vargem Grande Paulista), VGS (Vargem Grande do Sul), VLG (Valentim Gentil), VLH (Valinhos), VNH (Vinhedo), VOT (Votorantim), VPS (Valparaíso), VRD (Viradouro), VTB (Vitória Brasil), VTG (Votuporanga), VZP (Várzea Paulista), ZAC (Zacarias).</blockquote>
+Na seção [Padrão Estadual](#padrao-estadual), abaixo, é apresentado o exemplo de SP. Atualmente a Assembleia de SP está regulamentando de forma mais ampla o uso das siglas do DER/SP, sendo prevista a publicação de decreto estadual relativo ao assunto.
 
 ## Quase hashes
 
@@ -111,11 +107,11 @@ Na prática, como [vimos](#siglas-boas-mnemonicas), existem mais de quatro regra
 
 ## Um padrão nacional nunca será mnemônico
 
-A experiência mostra que, se a suposta sigla não for relativamente fácil de lembrar, acaba sendo **pior do que um código numérico**, pois é natural do ser humano não assumir que esqueceu aquilo que quase lembra... Ao preencher um formulário, por exemplo, podemos nos equivocar trocando a sigla certa por uma parecida, causando mais confusão do que deixando o campo em branco.
+A experiência mostra que, se a suposta sigla não for relativamente fácil de lembrar, acaba sendo **pior do que um código numérico**, pois é natural do ser humano não assumir que esqueceu "aquilo que quase lembra"... Ao preencher um formulário, por exemplo, podemos nos equivocar trocando a sigla certa por uma parecida, causando mais confusão do que deixando o campo em branco.
 
-Mesmo um código alfanumérico, como placa de carro, assumidamente "código", sem compromisso ou confusão com nomes: os ~5600 municípios representam itens do número 1 ao 5600, que em base36 seriam repersentados por códigos alfanuméricos do `001` ao `F9K` (com decimal intercalado).
+Mesmo um código alfanumérico longo<!-- , como placa de carro-->, assumidamente "código", sem compromisso ou confusão com nomes: os ~5600 municípios representam itens do número 1 ao 5600, que em [base36](https://en.wikipedia.org/wiki/Base36) seriam repersentados por números identificadores do `001` ao `F9K` (com decimal intercalado).
 
-Apesar de não ser endossado por outros órgãos, o padrão Anatel de siglas de 3 letras é de abrangência nacional, uma para cada nome de município. A proposta é razoável, fez o possível para que as os códigos se pareçam siglas nas capitais e cidades mais populares, mas como são quase 5600 nomes, eles representam mais que 34% das 26<sup>3</sup>=17576 [combinações das letras em uma sigla de 3 letras](https://www.quora.com/How-many-combinations-of-three-letters-in-a-26-letter-alphabet-are-there).
+Apesar de não ser endossado por outros órgãos, o padrão Anatel de siglas de 3 letras é de abrangência nacional, uma para cada nome de município. A proposta é razoável, fez o possível para que as os códigos se pareçam siglas nas capitais e cidades mais populares, mas como são quase 5600 nomes, eles representam mais que 34% das 26<sup>3</sup>=17576 [combinações das letras do alfabeto em sigla de 3 letras](https://www.quora.com/How-many-combinations-of-three-letters-in-a-26-letter-alphabet-are-there).
 
 A recomendação matemática para se ter boa liberdade de escolha na sigla de cada nome, como vimos acima, é que não ultrapasse 500, portanto as 5600 siglas da Anatel representam uma dose 10 vezes maior do que a recomendada.
 
@@ -196,9 +192,20 @@ WITH distrib AS (
 ```
 
 ## Padrão estadual
-É o escopo correto para se obter siglas boas ou razoáveis, bons mnemônicos para o cidadão.  A média de municípios por estado é ~210<!--213.77--> (mediana ~140) e o pior caso é MG com ~850. Praticamente todos estão dentro do limite razoável de 500 nomes, e mais 50% dos municípios satisfaz a condição de  *\|C\|*&lt;150, para ter *boas siglas*.
-<!-- Tanto a média como o pior caso são inferiores a 10% das 17576 combinações possíveis, e .. com as letras mais frequentes. Se desejamos usar "siglas de fato", que façam uso das letras do nome, e sejam fáceis de lembrar, é importante adotar -->
 
-...
+É o escopo correto para se obter siglas boas ou razoáveis, bons mnemônicos para o cidadão.  A média de municípios por estado é ~210<!--213.77--> (mediana ~140) e o pior caso é MG com ~850 municípios. Praticamente todos estão dentro do limite razoável de 500 nomes, e mais 50% dos municípios satisfaz a condição de  *\|C\|*&lt;150, para ter *boas siglas*.
+
+Abaixo uma amostra da lista completa de todas as abreviações de municipios de São Paulo:<!-- copy (select abbrev3 ||' ('|| name||')' from test_city where state='SP' order by 1) to '/tmp/lix' -->
+<blockquote>
+AAG (Alto Alegre), AAI (Aguaí), ABR (Américo Brasiliense), ACD (Aparecida), ACP (Américo de Campos), ADD (Andradina), ADF (Adolfo), ADM (Adamantina), ADT (Aparecida d'Oeste), AEI (Areias), AEP (Areiópolis), AFM (Alfredo Marcondes), AGD (Agudos), AGL (Águas de Lindóia), ...  <br/>..., PBT (Pereira Barreto), PBU (Pacaembu), PCT (Piacatu), PDB (Pedra Bela), PDD (Piedade), PDH (Pindamonhangaba), PDM (Pindorama), PDN (Pederneiras), PDP (Pradópolis), PDR (Pedreira), PEP (Pedrinhas Paulista), PFR (Porto Ferreira), PFZ (Porto Feliz), PGA (Porangaba), PGH (Pedregulho), PGI (Pirangi), PGP (Paraguaçu Paulista), PGR (Pitangueiras), PGT (Pontes Gestal), PIR (Piracicaba), PIZ (Pinhalzinho), PLC (Paulicéia), PLF (Paulo de Faria), PLN (Paulínia), PLO (Palmeira d'Oeste), PLP (Palmares Paulista), PLS (Pilar do Sul), PLT (Planalto), PMP (Pompéia), PMT (Palmital), PNG (Pirassununga), PNL (Pedranópolis), PNP (Penápolis), PNR (Panorama), POA (Poá), POG (Pongaí), POL (Poloni), PON (Pontal), POT (Potim), PPL (Populina), PPM (Paranapanema), PQA (Pariquera-Açu), PQB (Piquerobi), PQT (Piquete), PRA (Pracinha), PRB (Peruíbe), PRC (Piracaia), PRD (Pardinho), PRG (Praia Grande), PRI (Pirajuí), PRJ (Piraju), PRN (Paranapuã), PRP (Parapuã), PRR (Pereiras), PRS (Paraíso), PRT (Pratânia), PSA (Presidente Alves), PSB (Presidente Bernardes), ...<br/>..., UBT (Ubatuba), UCH (Uchoa), UJR (Ubirajara), UNP (União Paulista), URN (Urânia), URP (Urupês), URU (Uru), VAR (Vargem), VAT (Vista Alegre do Alto), VCR (Vera Cruz), VGP (Vargem Grande Paulista), VGS (Vargem Grande do Sul), VLG (Valentim Gentil), VLH (Valinhos), VNH (Vinhedo), VOT (Votorantim), VPS (Valparaíso), VRD (Viradouro), VTB (Vitória Brasil), VTG (Votuporanga), VZP (Várzea Paulista), ZAC (Zacarias).</blockquote>
+
+A recomendação para que as siglas sejam mnemônicas, já apresentada acima neste mesmo apêndice, é que se use sempre o "escopo Estado", **jamais escopo nacional**. Tecnicamente dizemos isso afirmando que o *namaspece* é o conjunto de municípios de um estado. A rigor são dois estados que fogem ligeiramente do limite de  ~500 nomes por *namespace*.  Por isso, na metodologia de construção ou revisão das siglas do DER, os estados de MG e SP deveriam estabelecer regras justas de escolha, com critérios objetivos. A escolha de boas siglas priorizaria, por exemplo, a capital, as cidades com nomes curtos e as ~200 cidades com projeção de população maior que as demais.
+
+Para os demais estados os procedimentos de revisão são igualmente válidos, mas não parece ser necessário sugerir tal acréscimo de complexidade. Cabe a cada "comunidade do estado" avaliar a sua tabela de siglas, antes de decidir se submete ou não a tabela DER do seu estado a uma revisão.
+
+Revisões de tabelas DER só fazem sentido dentro da perspectiva de uma iniciativa conjunta das prefeituras e/ou as câmaras municipais dos municípios "lezados". Seriam a parte legítima em um pedido conjunto de revisão na tabela do seu estado, antes de iniciar um processo de maior investimento no uso das siglas oficiais.
+
+<!-- Tanto a média como o pior caso são inferiores a 10% das 17576 combinações possíveis, e .. com as letras mais frequentes. Se desejamos usar "siglas de fato", que façam uso das letras do nome, e sejam fáceis de lembrar, é importante adotar....
 
 A recomendação é que se use sempre o "escopo Estado" para que as siglas sejam mnemônicas. Apenas o estado de MG foge um pouco demais dos limites. A rigor, por terem mais de 500 municípios, os estados de MG e SP deveriam estabelecer regras justas de escolha, priorizando por exemplo a capital, as cidades com nomes curtos e as 200 cidades com projeção de população maior que as demais.
+-->
