@@ -112,7 +112,7 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<p><strong><center><big>CLP</big><br/><small style="font-size:8pt">v0.0.2 - rascunho de 1/10/2018</small></center></strong></p>
+<p><strong><center><big>CLP</big><br/><small style="font-size:8pt">v0.0.2b - rascunho de 1/10/2018</small></center></strong></p>
 <p>Proposta de <strong>C</strong>ódigo <strong>L</strong>ocalizador de <strong>P</strong>ortão, CLP: recomendações, estudos de viabilidade e lançamento de consulta pública para a proposta de um padrão.</p>
 <p>A ideia central do CLP é <strong>oferecer de maneira simples e padronizada, através de um código, a localização geográfica de um portão</strong>. O código seria usado também como  <strong>"endereço do <em>local</em>"</strong> ao qual o portão dá acesso.</p>
 <!-- Portaria, portão, porta ou portal: -->
@@ -123,7 +123,7 @@
 <p>Outro aspecto, a ser decidido com a comunidade, será quanto à estrutura hierárquica ou não-hierárquica do código CLP, e quanto ao uso ou não de siglas. No Brasil nos acostumamos com o CEP, que é um código hierárquico, conforme ilustrado abaixo.</p>
 <p><img alt="" src="./assets/cep-digitos123d.png" /></p>
 <p>O CEP com mais dígitos vai representando com mais detalhe uma região do espaço... Mas são 8 dígitos no CEP completo, e ainda assim não representa o endereço exato do portão. <strong>Com o CLP podemos fazer melhor</strong>, e  justamente por isso, entre outras aplicações, <a href="https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md">o CLP substituiria o CEP</a>, para num só código, de 7 ou 8 caracteres, chegarmos no portão.</p>
-<p>Vejamos como seria, por exemplo, o CLP para localizar o "portão" do <a href="https://pt.wikipedia.org/wiki/Museu_de_Arte_de_S%C3%A3o_Paulo">MASP</a>.</p>
+<p>Vejamos como seria  o CLP, por exemplo, para localizar o "portão" do <a href="https://pt.wikipedia.org/wiki/Museu_de_Arte_de_S%C3%A3o_Paulo">MASP</a>.</p>
 <p><img alt="" src="./assets/masp-comparing2b.jpg" /></p>
 <p>Os códigos de localização existentes, como o Geohash ou o PlusCode, assim como estão já seriam melhores do que o CEP. Mas eles também podem ser melhorados, <strong>adaptados para o Brasil</strong>, fazer uso do que os brasieiros já usam no dia-a-dia. Deveria ser natural, por exemplo:</p>
 <ul>
@@ -134,7 +134,7 @@
 <p>a <a href="spec04ap01-siglas.md">abreviação de <strong>3 letras do município</strong></a>:  Sampa é <code>SPA</code>, a vizinha Guarulhos <code>GRH</code> e Piracicaba <code>PIR</code>... Jaraguá do Sul em SC é <code>JGS</code>.<!-- ver rodovia municipal JGS-489 --></p>
 </li>
 <li>
-<p>das regras de  <strong>hierarquia</strong>: primeiro sigla estadual depois municipal. A sigla  PIR só tem significado dentro da sua hierarquia, <code>BR-SP-PIR</code> significa Piracicaba, que é diferente de <code>BR-GO-PIR</code>, de Pires do Rio;</p>
+<p>das regras de  <strong>hierarquia</strong>: primeiro sigla estadual depois municipal. A sigla  PIR só tem significado dentro da sua hierarquia, <code>SP-PIR</code> significa Piracicaba, que é diferente de <code>GO-PIR</code>, de Pires do Rio;</p>
 </li>
 <li>
 <p>do <strong>contexto</strong>. Numa carta internacional acrescentamos prefixo <code>BR</code> ficando <code>BR-SP-SPA</code>, mas se a carta  circula apenas dentro de SP basta a sigla do município, como <code>PIR</code> ou <code>SPA</code>.</p>
@@ -202,13 +202,13 @@
 </table>
 <p>No debate devemos chamar atenção para o fato de que o PlusCode não satisfaz o requisito da hierarquia nas macroregiões: é fundamental saber, antes de decidir qual tecnologia usar, quais critérios consensuais adotaremos.</p>
 <p>Entre os padrões que satisfazem todos os requisitos, como o Geohash e o S2, outras  otimizações podem ainda ser realizadas, levando a códigos mais curtos ou mnemônicos.  Ao fixarmos em normas brasileiras uma tabela de subregiões do município, por exemplo, podemos reduzir em um dígito ambos os casos S2 e Geohash. Se além disso, fazermos uso de estimativas da "mancha urbana futura" como fizeram o CEP e o MapCode, o resultado fica ainda melhor, mas a custo de códigos mais longos no meio rural... Tudo isso seria detalhado pelo presente projeto, para que tenhamos <strong>subsídios para uma decisão racional</strong>.</p>
-<p>O <!-- <a href="locationCodes.md">levantamento sistemático</a>-->levantamento sistemático, com seleção de otimizações viáveis e a <a href="comparacao.md">comparação</a> dos resultados otimizados é também tema central da presente proposta, um resultado importante de ser apresentado.
+<p>O <!-- <a href="locationCodes.md">levantamento sistemático</a>-->levantamento sistemático, com seleção de otimizações viáveis e a <a href="index_CLPcoord/#comparando-candidatos">comparação</a> dos resultados otimizados é também tema central da presente proposta, um resultado importante de ser apresentado.
 <!--
 As recomendações não se limitam à sintaxe dos códigos e sua tradução em latitude-longitude.  Hoje a maioria das aplicações é sensível a contexto, por exemplo meu celular sabe que estou no Estado de São Paulo, onde <code>PIR</code> significa Piracicaba, sem risco de confusão com Pirai do Sul (<code>PIR</code> no Paraná). São também recomendadas regras de decisão para interpretar prefixos internacionais, tais como <code>BR-SP</code> para a capital, mais curto que <code>BR-SP-SPA</code>.
 --></p>
 <h1 id="dois-padroes-via-e-coordenada">Dois padrões, via e coordenada</h1>
-<p>Afinal CLP, <em>Código Localizador de Portão</em>, faz também papel de "endereço da casa dona do portão".  Falta então definir um outro padrão que é um código que seja uma versão compacta do  endereço postal tradicional. Por exemplo o endereço do MASP,  <em>"Avenida Paulista 1578, São Paulo"</em>. Suponhamos que o código oficial da avenida fosse <code>U131</code>, então o CLP  resultaria em algo como &nbsp; <strong><code>SPA-U131-1578</code></strong>. <br/>Alternativamente, em um contexto onde não se disponha do código do logradouro, o padrão também deve prever a expressão por extenso, que no exemplo resultaria em <strong><code>SPA-av_paulista-1578</code></strong>.  <!-- "u" de urbano, é o  menor CEP da via, no caso a paulista usa 01310-000, teria o ponto por exempl Quintana do CEP 04965-010 seria 4965.01  --></p>
-<p>Esse tipo de código é importante para a representação interna dos endereços de correspondência em bancos de dados abertos, links da internet, e na comunicação entre bancos de dados (interoperabilidade).  </p>
+<p>Afinal CLP, <em>Código Localizador de Portão</em>, faz também papel de "endereço da casa dona do portão".  Falta então definir um outro padrão, que seria uma expressão compacta do  endereço postal tradicional. Por exemplo o endereço do MASP,  <em>"Avenida Paulista 1578, São Paulo"</em>. Suponhamos que o código oficial da avenida fosse <code>U131</code>, então o CLP  resultaria em algo como &nbsp; <strong><code>SPA-U131-1578</code></strong>. <br/>Alternativamente, em um contexto onde não se disponha do código do logradouro, o padrão também deve prever a expressão por extenso, que no exemplo resultaria em <strong><code>SPA-av_paulista-1578</code></strong>.  <!-- "u" de urbano, é o  menor CEP da via, no caso a paulista usa 01310-000, teria o ponto por exempl Quintana do CEP 04965-010 seria 4965.01  --></p>
+<p>Esse tipo de código é importante para a representação interna dos endereços de correspondência em bancos de dados, links da internet, e na comunicação entre bancos de dados (interoperabilidade).  </p>
 <p>Existem portanto dois grupos principais de CLPs:</p>
 <table border="0"><tr>
 <th width="50%">Definição do tipo</th> <th>Aplicações e exemplos</th>
@@ -223,11 +223,11 @@ As recomendações não se limitam à sintaxe dos códigos e sua tradução em l
 </tr></table>
 
 <p>Tecnicamente um tipo pode ser convertido no outro através de <a href="https://en.wikipedia.org/wiki/Geocoding#Geocoding_process">procedimentos de geocodificação</a>. Como existe um crescente <em>mercado de geocofificação</em>, a padronização dos dois tipos de CLP  também ajudaria a regulamentar o setor, garantindo a separação entre pré-processamento do CLP-via e a geocodificação, que resulta num <em>Geo URI</em> com certo grau de confiabilidade. Quando ambos são fornecidos, ambos podem ser convertidos em coordenadas geográficas e comparados, aferindo-se também um grau de confiabilidade resultante da comparação dos dois.  Critérios mínimos para a avaliação de custo e confiabilidade na geocodificação de endereços brasileiros, portanto, passariam a ser viáveis.</p>
-<p>A rigor ambos os códigos, CLP-via e CLP-coordenada, são expressões simbólicas cabíveis dentro das regras de construção de nomes fixadas pelo <a href="https://www.rfc-editor.org/info/rfc8141">padrão RFC-8141</a>, referente à expressão de URNs (do inglês <em>Uniform Resource Names</em>). A expressão formal do CLP-coordenada do MASP seria algo como <code>urn:geocode:br-sp-spa:2pp55c</code>, e do seu CLP-via algo como <code>urn:geocode:br-sp-spa:via:av_paulista-1578</code>, mas isso apareceria apenas no código-fonte de links ou bancos de dados.</p>
-<p>Na prática os códigos impressos, para leitura humana, sinalização, correspondẽncia, etc. aparecem em contextos onde a syntaxe completa de  <code>urn</code> é dispensável, ficando apenas a estrutura essencial:</p>
+<p>A rigor ambos os códigos, CLP-via e CLP-coordenada, são expressões simbólicas cabíveis dentro das regras de construção de nomes fixadas pelo <a href="https://www.rfc-editor.org/info/rfc8141">padrão RFC-8141</a>, referente à expressão de URNs (do inglês <em>Uniform Resource Names</em>). A expressão formal do CLP-coordenada do MASP seria algo como <code>urn:geocode:br-sp-spa:2pp55c</code>, e do seu CLP-via algo como <code>urn:geocode:br-sp-spa:via:av_paulista-1578</code>, mas isso apareceria apenas em links e bancos de dados.</p>
+<p>Na prática os códigos impressos, para leitura humana, sinalização, correspondência, etc. aparecem em contextos onde a syntaxe completa de  <code>urn</code> é dispensável, ficando apenas a estrutura essencial:</p>
 <p><img alt="" src="./assets/CLPcoordenada-syntax2.png" />
 <img alt="" src="./assets/CLPvia-syntax2.png" /></p>
-<p>Em ambos os casos o significado de "resolver o código" é transformar o código em uma coordenada geográfica, um ponto ou "célula" no mapa representando a localização do portão.  Os algorítmos (softwares) de transformação precisam ser abertos, assim como os dados, disponíveis por exemplo no <a href="http://datasets.ok.org.br/city-codes">datasets.ok.org.br</a>  e no <a href="http://OpenStreetMap.org">OpenStreetMap.org</a>.</p>
+<p>Em ambos os casos o significado de "resolver o código" é transformar o código em uma coordenada geográfica, um ponto ou "célula" no mapa representando a localização do portão.  Os algorítmos (softwares) de transformação precisam ser abertos, assim como os dados &mdash; disponíveis por exemplo em <a href="http://datasets.ok.org.br/city-codes">datasets.ok.org.br</a>  e no <a href="http://OpenStreetMap.org">OpenStreetMap.org</a>.</p>
 <h1 id="planejamento">Planejamento</h1>
 <p>O trabalho foi apenas esboçado,  um banco de dados está sendo preparado, alguns testes foram feitos, parte da comunidade já está dialogando... Todavia há muito  que ser realizado, completando tarefas, coordenando voluntários, ampliando o debate e sistematizando decisões. Não é muito diferente do ciclo de construção de normas técnicas. A seguir o planejamento detalhado, incluindo metas e prazos.</p>
 <h2 id="objetivo-e-metas-do-trabalho">Objetivo e metas do trabalho</h2>
@@ -288,9 +288,10 @@ Todo o relacionamento com a comunidade seria realizado através da metodogia das
 -->
 
 <h2 id="nao-estamos-sozinhos">Não estamos sozinhos</h2>
-<p>A busca por soluções eficientes e abertas é mundial, floresceu nos anos recentes. Veja esta lista com uma centena de outros países, analisados quanto à abertura da sua base de códigos postais (análogos do CEP a cada país),  apenas ~5% são considerados razoavelmente abertos:   <a href="https://index.okfn.org/dataset/postcodes/">OpenDataIndex/Postcodes</a>, 90% dos países ainda apresentam problemas sérios de licença privada e exploração comercial sobre dado público, como no Brasil.</p>
-<p>Na Europa, Japão e outros países já se estuda um "upgrade" dos respectivos CEPs. Na Irlanda por exemplo <a href="https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland#Alternative_location_codes">diversas alternativas foram estudadas entre 2010 e 2011</a> e hoje já se encontra implantado um sistema mais moderno, baseado em coordenadas geográficas.</p>
-<p>Quanto à população mais sensível ao problema de "não ter um endereço para chamar de seu", no Brasil, quem mais sofre é a população do <strong>meio rural</strong>, e os bairros e regiões em situação de <strong>habitação precária</strong> &mdash; segundo dados da <a href="https://www.techo.org/brasil/">TETO Brasil</a> são ~15 milhões habitantes desatendidos pelo CEP ou nome de rua.  Todos beneficiariam enormemente de um código de localização oficial, um CLO para o local onde habitam.</p>
+<p>A busca por soluções tecnológicas é mundial, floresceu nos anos recentes. As principais motivações são a ineficiência dos códigos tradicionais e a sua falta de abertura. A lista de <a href="https://index.okfn.org/dataset/postcodes/">OpenDataIndex referente a <em>Postcodes</em></a>, os análogos do CEP, com uma centena de outros países, destaca que apenas ~5% são considerados razoavelmente abertos: 90% dos países ainda apresentam problemas sérios de licença privada e exploração comercial sobre dado público, como no Brasil.</p>
+<p><img alt="" src="./assets/cep-rank_ODI-800px.png" /></p>
+<p>Quanto à tecnologia, na Europa, Japão e outros países já se estuda um "<em>upgrade</em>" dos respectivos CEPs. Na Irlanda por exemplo <a href="https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland#Alternative_location_codes">diversas alternativas tecnológicas foram estudadas entre 2010 e 2011</a>, resultando mais tarde na implantação de um sistema mais moderno, o Eircode, baseado em coordenadas geográficas.</p>
+<p>Quanto à população mais sensível ao problema de "não ter um endereço para chamar de seu", no Brasil, quem mais sofre é a população do <strong>meio rural</strong>, e os bairros e regiões em situação de <strong>habitação precária</strong> &mdash; segundo dados da <a href="https://www.techo.org/brasil/">TETO Brasil</a> são ~15 milhões habitantes desatendidos pelo CEP ou nome de rua.  Todos beneficiariam enormemente de um código de localização oficial, um CLP para o local onde habitam.</p>
 <hr />
 <p>&#160;&#160;Conteúdos e dados deste projeto são dedicados ao domínio público. Ver também <a href="assets/README/#Imagens">Créditos das imagens</a>.   <br/>&#160;&#160;<a href="assets/README/"><img alt="" src="./assets/CC0-logo-200px.png" /> </a></p></div>
         </div>
@@ -332,5 +333,5 @@ Todo o relacionamento com a comunidade seria realizado através da metodogia das
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-10-08 01:31:12
+Build Date UTC : 2018-10-08 22:57:03
 -->
