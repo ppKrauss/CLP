@@ -1,5 +1,7 @@
 ((em construção))
 
+Conferir https://github.com/OSMBrasil/CRP/wiki/Testes-para-o-CLP
+
 ## Características prefixadas
 
 Apesar dos algorimos e suas variantes proporcionarem certa liberdade de escolha, as seguintes características de um  CLP-coordenada foram previamente fixadas:

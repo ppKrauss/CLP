@@ -45,8 +45,22 @@
         <div class="navbar-collapse collapse">
                 <!-- Main navigation -->
                 <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href=".">Apresentação</a>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apresentação <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li class="active">
+    <a href=".">Geral</a>
+</li>
+                            
+<li >
+    <a href="index_CLPvia/">CLP-via</a>
+</li>
+                            
+<li >
+    <a href="index_CLPcoord/">CLP-coordenada</a>
+</li>
+                        </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Especificações <b class="caret"></b></a>
@@ -57,32 +71,7 @@
 </li>
                             
 <li >
-    <a href="spec02-coord/">CLP-coord</a>
-</li>
-                            
-<li >
-    <a href="spec03-via/">CLP-via</a>
-</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apêndices <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
-<li >
-    <a href="spec04ap01-siglas/">Siglas</a>
-</li>
-                            
-<li >
-    <a href="comparacao/">Comparações</a>
-</li>
-                            
-<li >
-    <a href="spec04ap05-ingenuos/">Algoritmos ingênuos</a>
-</li>
-                            
-<li >
-    <a href="spec04ap05b-segundaCamada/">Segunda camada</a>
+    <a href="spec05-referencias/">Referências</a>
 </li>
                         </ul>
                     </li>
@@ -103,7 +92,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="spec01-hub/">
+                        <a rel="prev" href="index_CLPvia/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -118,41 +107,46 @@
         <li class="main active"><a href="#dois-padroes-via-e-coordenada">Dois padrões, via e coordenada</a></li>
         <li class="main "><a href="#planejamento">Planejamento</a></li>
             <li><a href="#objetivo-e-metas-do-trabalho">Objetivo e metas do trabalho</a></li>
+            <li><a href="#nao-estamos-sozinhos">Não estamos sozinhos</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<p><strong><center><big>CLP</big><br/>v0.0.1 - rascunho</center></strong></p>
+<p><strong><center><big>CLP</big><br/><small style="font-size:8pt">v0.0.2 - rascunho de 1/10/2018</small></center></strong></p>
 <p>Proposta de <strong>C</strong>ódigo <strong>L</strong>ocalizador de <strong>P</strong>ortão, CLP: recomendações, estudos de viabilidade e lançamento de consulta pública para a proposta de um padrão.</p>
 <p>A ideia central do CLP é <strong>oferecer de maneira simples e padronizada, através de um código, a localização geográfica de um portão</strong>. O código seria usado também como  <strong>"endereço do <em>local</em>"</strong> ao qual o portão dá acesso.</p>
-<p>Porteira, portão, porta ou portal: no meio urbano a menor distância entre portões é da ordem de 3 metros, no meio rural é da ordem de 15 metros. Portões de condomínios, parques, etc. no meio urbano, requerem menos precisão, como no meio rural.</p>
+<!-- Portaria, portão, porta ou portal: -->
+
+<p>Portão em sentido amplo, de portaria, porteira, porta, acesso ou portal: no meio urbano a menor distância entre portões é da ordem de 3 metros, no meio rural é da ordem de 15 metros. Portões de condomínios, parques, etc. no meio urbano, requerem menos precisão, como no meio rural.</p>
 <p><img alt="" src="./assets/ilustra-escalas01.jpg" /></p>
 <p>As tecnologias para se implantar e padronizar um CLP  são bem consolidadas, existem opções como o <a href="http://geohash.org/6gyf4bf1n">Geohash</a>, <a href="https://s2geometry.io/">S2</a> ou <a href="https://plus.codes/588MC9X8+RC">PlusCode</a>, que são padrões livres, e <a href="http://www.mapcode.com/getcoords.html?iso3=331&amp;mapcode=RR.56&amp;xx=-46.633956&amp;yy=-23.550385">MapCode</a> ou Whats3words, patenteados mas úteis como exemplo. Estas opções podem ser melhor adaptadas às condições e padrões locais do Brasil, e nisto consistirá uma parte relevante dos estudos e recomendações realizados pelo presente projeto.</p>
-<p><a href="https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md">Queremos substituir o CEP</a> por um código que vá além: assim como o CEP, seu prefixo identifica partes maiores, estado, cidade, bairro, rua... E não deveria parar por aí, já existe tecnologia para, com um simples código, chegarmos até o portão!</p>
-<p>Para localizar o "portão" do <a href="https://pt.wikipedia.org/wiki/Museu_de_Arte_de_S%C3%A3o_Paulo">MASP</a>, por exemplo.</p>
+<p>Outro aspecto, a ser decidido com a comunidade, será quanto à estrutura hierárquica ou não-hierárquica do código CLP, e quanto ao uso ou não de siglas. No Brasil nos acostumamos com o CEP, que é um código hierárquico, conforme ilustrado abaixo.</p>
+<p><img alt="" src="./assets/cep-digitos123d.png" /></p>
+<p>O CEP com mais dígitos vai representando com mais detalhe uma região do espaço... Mas são 8 dígitos no CEP completo, e ainda assim não representa o endereço exato do portão. <strong>Com o CLP podemos fazer melhor</strong>, e  justamente por isso, entre outras aplicações, <a href="https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md">o CLP substituiria o CEP</a>, para num só código, de 7 ou 8 caracteres, chegarmos no portão.</p>
+<p>Vejamos como seria, por exemplo, o CLP para localizar o "portão" do <a href="https://pt.wikipedia.org/wiki/Museu_de_Arte_de_S%C3%A3o_Paulo">MASP</a>.</p>
 <p><img alt="" src="./assets/masp-comparing2b.jpg" /></p>
-<p>Os códigos de localização existentes, como o Geohash ou o PlusCode, podem ser melhorados, <strong>adaptados para o Brasil</strong>, fazer uso do que os brasieiros já usam no dia-a-dia. Deveria ser natural, por exemplo,</p>
+<p>Os códigos de localização existentes, como o Geohash ou o PlusCode, assim como estão já seriam melhores do que o CEP. Mas eles também podem ser melhorados, <strong>adaptados para o Brasil</strong>, fazer uso do que os brasieiros já usam no dia-a-dia. Deveria ser natural, por exemplo:</p>
 <ul>
 <li>
 <p>o uso de abreviações consagradas como os <strong>códigos de estado</strong>: <code>BR-SP</code> ou simplesmente <code>SP</code> designa o Estado de São Paulo, <code>AM</code> Amazonas, etc.</p>
 </li>
 <li>
-<p>a <a href="spec04ap01-siglas/">abreviação de <strong>3 letras do município</strong></a>:  Sampa é <code>SPA</code>, a vizinha Guarulhos <code>GRH</code> e Piracicaba <code>PIR</code>;</p>
+<p>a <a href="spec04ap01-siglas.md">abreviação de <strong>3 letras do município</strong></a>:  Sampa é <code>SPA</code>, a vizinha Guarulhos <code>GRH</code> e Piracicaba <code>PIR</code>... Jaraguá do Sul em SC é <code>JGS</code>.<!-- ver rodovia municipal JGS-489 --></p>
 </li>
 <li>
 <p>das regras de  <strong>hierarquia</strong>: primeiro sigla estadual depois municipal. A sigla  PIR só tem significado dentro da sua hierarquia, <code>BR-SP-PIR</code> significa Piracicaba, que é diferente de <code>BR-GO-PIR</code>, de Pires do Rio;</p>
 </li>
 <li>
-<p>do <strong>contexto</strong>. Numa carta internacional acrescentamos prefixo <code>BR</code> ficando <code>BR-SP-SPA</code>, mas se a carta  circula apenas dentro de SP basta <code>PIR</code> ou <code>SPA</code>.</p>
+<p>do <strong>contexto</strong>. Numa carta internacional acrescentamos prefixo <code>BR</code> ficando <code>BR-SP-SPA</code>, mas se a carta  circula apenas dentro de SP basta a sigla do município, como <code>PIR</code> ou <code>SPA</code>.</p>
 </li>
 </ul>
-<p>Isso tudo resultaria em um código CLP mais adequado para o brasileiro usar. As siglas você não vê todos os dias, mas já vinhamos usando: em diversos códigos oficiais, tais como <a href="https://pt.wikipedia.org/wiki/Lex_(URN)">identificadores LEX de normas jurídicas</a>, e nas placas de vias públicas ou mapas oficiais. As siglas estão no código das estradas federais (ex. BR-116), estaduais (ex. SP-147) e municipais (ex. PIR-033).</p>
+<p>Isso tudo resultaria em um código CLP mais adequado para o brasileiro usar. As siglas, não se vê todos os dias, mas já vinhamos usando: em diversos códigos oficiais, tais como <a href="https://pt.wikipedia.org/wiki/Lex_(URN)">identificadores LEX de normas jurídicas</a>, e nas placas de vias públicas ou mapas oficiais. As siglas estão no código das estradas federais (ex. BR-116), estaduais (ex. SP-147) e municipais (ex. PIR-033).</p>
 <p>Voltemos ao CLP do MASP, como é hoje e como seriam pequenas adaptações:</p>
 <table>
 <thead>
 <tr>
-<th>Opção de CLP proposta</th>
-<th>Tecnologia de referência (código padrão) e resolução</th>
+<th>Opção de CLP proposta<br>(contexto BR)</th>
+<th>portão do MASP na tecnologia de referência</th>
 </tr>
 </thead>
 <tbody>
@@ -166,11 +160,15 @@
 </tr>
 <tr>
 <td><strong><code>SP-SPA</code></strong></td>
-<td><a href="spec04ap01-siglas/"><strong>Código Oficial</strong> do município</a> (<code>BR-SP-SPA</code>)</td>
+<td><a href="spec04ap01-siglas.md#padrao-estadual"><strong>Código Oficial</strong> do município</a> (<code>BR-SP-SPA</code>)</td>
 </tr>
 <tr>
 <td><strong><code>SP:YCF</code></strong></td>
 <td><a href="http://geohash.org/6gycf"><em>Geohash</em></a> da sub-região (<code>6gycf</code>)&nbsp; ~4x5 km</td>
+</tr>
+<tr>
+<td>(supondo contexto SP)</td>
+<td></td>
 </tr>
 <tr>
 <td><strong><code>SPA-YCFQ.F0</code></strong></td>
@@ -204,67 +202,95 @@
 </table>
 <p>No debate devemos chamar atenção para o fato de que o PlusCode não satisfaz o requisito da hierarquia nas macroregiões: é fundamental saber, antes de decidir qual tecnologia usar, quais critérios consensuais adotaremos.</p>
 <p>Entre os padrões que satisfazem todos os requisitos, como o Geohash e o S2, outras  otimizações podem ainda ser realizadas, levando a códigos mais curtos ou mnemônicos.  Ao fixarmos em normas brasileiras uma tabela de subregiões do município, por exemplo, podemos reduzir em um dígito ambos os casos S2 e Geohash. Se além disso, fazermos uso de estimativas da "mancha urbana futura" como fizeram o CEP e o MapCode, o resultado fica ainda melhor, mas a custo de códigos mais longos no meio rural... Tudo isso seria detalhado pelo presente projeto, para que tenhamos <strong>subsídios para uma decisão racional</strong>.</p>
-<p>O <!-- <a href="locationCodes.md">levantamento sistemático</a>-->levantamento sistemático, com seleção de otimizações viáveis e a <a href="comparacao/">comparação</a> dos resultados otimizados é também tema central da presente proposta, um resultado importante de ser apresentado.
+<p>O <!-- <a href="locationCodes.md">levantamento sistemático</a>-->levantamento sistemático, com seleção de otimizações viáveis e a <a href="comparacao.md">comparação</a> dos resultados otimizados é também tema central da presente proposta, um resultado importante de ser apresentado.
 <!--
 As recomendações não se limitam à sintaxe dos códigos e sua tradução em latitude-longitude.  Hoje a maioria das aplicações é sensível a contexto, por exemplo meu celular sabe que estou no Estado de São Paulo, onde <code>PIR</code> significa Piracicaba, sem risco de confusão com Pirai do Sul (<code>PIR</code> no Paraná). São também recomendadas regras de decisão para interpretar prefixos internacionais, tais como <code>BR-SP</code> para a capital, mais curto que <code>BR-SP-SPA</code>.
 --></p>
 <h1 id="dois-padroes-via-e-coordenada">Dois padrões, via e coordenada</h1>
-<p>Afinal CLP, <em>Código Localizador de Portão</em>, faz também papel de "endereço da casa dona do portão".  Falta então definir um outro padrão que é um código que seja uma versão compacta do  endereço postal tradicional. Por exemplo o endereço do MASP,  <em>"Avenida Paulista 1578, São Paulo"</em>. Suponhamos que o código oficial da avenida fosse <code>U131</code>, então o CLP  resultaria em algo como &nbsp; <strong><code>SPA-U131-1578</code></strong>.<!-- "u" de urbano, é o  menor CEP da via, no caso a paulista usa 01310-000, teria o ponto por exempl Quintana do CEP 04965-010 seria 4965.01  --></p>
-<p>Esse tipo de código é importante para a representação interna dos endereços de correspondência em bancos de dados abertos, e na comunicação entre bancos de dados (interoperabilidade).  </p>
+<p>Afinal CLP, <em>Código Localizador de Portão</em>, faz também papel de "endereço da casa dona do portão".  Falta então definir um outro padrão que é um código que seja uma versão compacta do  endereço postal tradicional. Por exemplo o endereço do MASP,  <em>"Avenida Paulista 1578, São Paulo"</em>. Suponhamos que o código oficial da avenida fosse <code>U131</code>, então o CLP  resultaria em algo como &nbsp; <strong><code>SPA-U131-1578</code></strong>. <br/>Alternativamente, em um contexto onde não se disponha do código do logradouro, o padrão também deve prever a expressão por extenso, que no exemplo resultaria em <strong><code>SPA-av_paulista-1578</code></strong>.  <!-- "u" de urbano, é o  menor CEP da via, no caso a paulista usa 01310-000, teria o ponto por exempl Quintana do CEP 04965-010 seria 4965.01  --></p>
+<p>Esse tipo de código é importante para a representação interna dos endereços de correspondência em bancos de dados abertos, links da internet, e na comunicação entre bancos de dados (interoperabilidade).  </p>
 <p>Existem portanto dois grupos principais de CLPs:</p>
 <table border="0"><tr>
 <th width="50%">Definição do tipo</th> <th>Aplicações e exemplos</th>
 </tr><tr>
-<td><b>CLP-via</b>:<br/>Soluções baseadas na <b>proximidade do portão com uma via de acesso</b> a ele. <br/>O CLP-via seria uma escrita simplificada e padronizada do <a href="https://schema.org/PostalAddress" rel="external">endereço postal</a>; o tradicional, baseado em logradouro e numeração predial.
-</td><td>Garantiria maior  interoperabilidade entre bases de endereços.
+<td><b><a href="index_CLPvia">CLP-via</a></b>:<br/>Soluções baseadas na <b>proximidade do portão com uma via de acesso</b> a ele. <br/>O CLP-via seria uma escrita simplificada e padronizada do <a href="https://schema.org/PostalAddress" rel="external">endereço postal</a>; o tradicional, baseado em logradouro e numeração predial.
+</td><td>Garantiria links corretos e maior interoperabilidade entre bases de endereços.
 </tr><tr>
-<td><b>CLP-coordenada</b>:<br/> Soluções baseadas na <b>coordenada geográfica do portão</b>.<br/> Um algoritmo seguro, do tipo Geohash, PlusCode ou outro, toma como entrada as coordenadas padrão <a href="https://en.wikipedia.org/wiki/Geo_URI_scheme" rel="external">[Geo URI</a>, e devolve um código compacto, que é adotado como CLP.
+<td><b><a href="index_CLPcoord">CLP-coordenada</a></b>:<br/> Soluções baseadas na <b>coordenada geográfica do portão</b>.<br/> Um algoritmo seguro, do tipo Geohash ou outro, toma como entrada as coordenadas padrão <a href="https://en.wikipedia.org/wiki/Geo_URI_scheme" rel="external">Geo URI</a>,<!-- RFC 5870 --> e devolve um código compacto, que é adotado como CLP.
 </td>
 <td>Seria um código dado por tecnologias como as exemplificadas, Geohash, S2, PlusCode, etc. Além  do CLP-coordenada ser proposto como substituto do CEP, seria também proposto como uma opção de expressão de geocódigo ou de coordenadas em protocolos similares ao Geo URI.<!-- seria utilizado também localizador em aplicativos, links e outros dispositivos, -->
 </td>
 </tr></table>
 
 <p>Tecnicamente um tipo pode ser convertido no outro através de <a href="https://en.wikipedia.org/wiki/Geocoding#Geocoding_process">procedimentos de geocodificação</a>. Como existe um crescente <em>mercado de geocofificação</em>, a padronização dos dois tipos de CLP  também ajudaria a regulamentar o setor, garantindo a separação entre pré-processamento do CLP-via e a geocodificação, que resulta num <em>Geo URI</em> com certo grau de confiabilidade. Quando ambos são fornecidos, ambos podem ser convertidos em coordenadas geográficas e comparados, aferindo-se também um grau de confiabilidade resultante da comparação dos dois.  Critérios mínimos para a avaliação de custo e confiabilidade na geocodificação de endereços brasileiros, portanto, passariam a ser viáveis.</p>
-<!-- O CLP neste caso seria uma versão complementar do protocolo `geo` da internet, conhecido como [Geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme), para a expressão de coordenadas. As tecnologias e convenções candidatas a código seriam aquelas discutidos acima na introdução.-->
-
+<p>A rigor ambos os códigos, CLP-via e CLP-coordenada, são expressões simbólicas cabíveis dentro das regras de construção de nomes fixadas pelo <a href="https://www.rfc-editor.org/info/rfc8141">padrão RFC-8141</a>, referente à expressão de URNs (do inglês <em>Uniform Resource Names</em>). A expressão formal do CLP-coordenada do MASP seria algo como <code>urn:geocode:br-sp-spa:2pp55c</code>, e do seu CLP-via algo como <code>urn:geocode:br-sp-spa:via:av_paulista-1578</code>, mas isso apareceria apenas no código-fonte de links ou bancos de dados.</p>
+<p>Na prática os códigos impressos, para leitura humana, sinalização, correspondẽncia, etc. aparecem em contextos onde a syntaxe completa de  <code>urn</code> é dispensável, ficando apenas a estrutura essencial:</p>
+<p><img alt="" src="./assets/CLPcoordenada-syntax2.png" />
+<img alt="" src="./assets/CLPvia-syntax2.png" /></p>
+<p>Em ambos os casos o significado de "resolver o código" é transformar o código em uma coordenada geográfica, um ponto ou "célula" no mapa representando a localização do portão.  Os algorítmos (softwares) de transformação precisam ser abertos, assim como os dados, disponíveis por exemplo no <a href="http://datasets.ok.org.br/city-codes">datasets.ok.org.br</a>  e no <a href="http://OpenStreetMap.org">OpenStreetMap.org</a>.</p>
 <h1 id="planejamento">Planejamento</h1>
-<p>O trabalho foi apenas esboçado,  um banco de dados preparado, alguns testes foram feitos... Mas ainda há muito que ser realizado. A seguir o planejamento detalhado, incluindo metas e prazos.</p>
+<p>O trabalho foi apenas esboçado,  um banco de dados está sendo preparado, alguns testes foram feitos, parte da comunidade já está dialogando... Todavia há muito  que ser realizado, completando tarefas, coordenando voluntários, ampliando o debate e sistematizando decisões. Não é muito diferente do ciclo de construção de normas técnicas. A seguir o planejamento detalhado, incluindo metas e prazos.</p>
 <h2 id="objetivo-e-metas-do-trabalho">Objetivo e metas do trabalho</h2>
-<p>Objetivo geral: <blockquote>Revisar, debater e publicar os resultados da consulta pública sobre  <strong>especificação técnica e recomendações para um CLP</strong>, bem como disponibilizar protótipos para a realização de testes abertos durante a consulta pública.</blockquote></p>
-<p>Objetivos específicos, metas e resultados previstos:</p>
+<p>Resumo:</p>
+<blockquote>
+<p>Construir, debater e revisar com a comunidade os <strong>requisitos do CLP</strong>, que subsidiarão os testes, seleção e debate das principais alternativas tecnológicas &mdash;  por exemplo Geohash, PlusCode e S2geometry &mdash;, elegendo-se entre elas o fundamento do CLP .<br/><br/>Construir, debater e revisar com a comunidade a <strong>especificação&nbsp;técnica&nbsp;do&nbsp;CLP&nbsp;v1.0</strong>, bem como disponibilizar protótipos para a realização de testes abertos durante a consulta pública. <br/><br/>Alinhar a proposta através do diálogo com autoridades técnicas (ex. ABNT, IBGE e universidades) e governamentais (ex. SINTER e secretarias de estado), oferecendo após consulta pública, uma <strong>proposta&nbsp;CLP&nbsp;v1.1</strong> mais consistente e consensual.</p>
+</blockquote>
+<p>As discussões e  decisões coletivas seguirão a  <a href="https://wiki.openstreetmap.org/wiki/WikiProject_Brazil/Associa%C3%A7%C3%A3o/Rodadas">"metodologia das rodadas de discussão estruturada"</a>, ou similar. Incialmente em um grupo mais especializado depois crescendo para um coletivo mais amplo na análise das soluções:</p>
 <ol>
 <li>
-<p>Estabelecer formalmente os <strong>requisitos do CLP</strong>, traduzindo em parâmetros objetivos as decisões tomadas em consenso, primeiramente na comunidade técnica/acadêmica e depois refinando decisões com a comunidade de potenciais usuários.</p>
+<p>Comunidades OpenStreetMap e Wikidata. Esse núcleo inicial tem ajudado a delimitar o escopo nos requisitos e a listar todas as potenciais soluções.</p>
 </li>
 <li>
-<p>Levantamento, com apoio da comunidade, das <strong>principais soluções e padrões vigentes</strong>. A cada solução avaliar se ela satisfaz os requisitos e se existem casos de uso em prefeituras ou outros países. Em seguida classificar variantes quando existirem alternativas ou parametrizações. <br/>PS: soluções sem  licença aberta ou adaptações em conflito com patentes ou <em>copyright</em> já seriam  eliminadas nesta etapa.</p>
+<p>Representantes das demais comunidades do terceiro setor e universidades. Por exemplo ONGs de inclusão social e construção de habitações já vem apoiando a formalação dos requisitos. ONGs orientadas a software e dados abertos ajudam a testar soluções. Todas, através dos testes e do diálogo tomam parte nas rodadas de busca de consenso para as melhores práticas e soluções.</p>
 </li>
 <li>
-<p>Estabelecer formalmente <strong>versões adaptadas</strong> e não-adaptadas às condições do Brasil (ao uso de abreviaturas de nomes de cidade por exemplo).</p>
+<p>Empresas. Ajudam a avaliar a viablidade do "ecossistema de soluções" que poderiam surgir em torno do padrão, e em todas as instâncias do debate técnico.</p>
 </li>
 <li>
-<p>Definição, com apoio da Comunidade, de um <strong>conjunto de testes</strong> (<em>benchmark</em>) ao qual todas as soluções e suas variantes serão submetidas, estabelecendo critérios de rejeição e parâmetros de comparação.</p>
+<p>Prefeituras menores. É prevista a realização de testes concretos em municípios menores, com o apoio de prefereituras que já vinham aderindo a soluções abertas e uso do OpenStreetMap.</p>
 </li>
 <li>
-<p><strong>Relatório dos resultados</strong> de testes principais, alguns eliminatórios.</p>
-</li>
-<li>
-<p><strong>Oferta pública de protótipos</strong> para a comunidade testar durante um período os padrões e variantes satisfatórios.  </p>
-</li>
-<li>
-<p><strong>Redação</strong> da especificação técnica do CLP, seguida de disponibilização para <strong>consulta pública</strong> e debate, principalmente terceiro setor,  universidades, etc.</p>
-</li>
-<li>
-<p><strong>Texto final da especificação técnica do CLP</strong>, redação, e entrega de pareceres.</p>
-</li>
-<li>
-<p><strong>Apoio a projetos-piloto</strong> com encaminhamento e reutilização da infraestrutura de testes viabilizada.</p>
-</li>
-<li>
-<p><strong>Diálogo com autoridades</strong> e governo em geral: já vem ocorrendo e vai ocorrer em paralelo, ao longo de todo o processo. Mas com resultados seguros e a legitimação da comunidade, o dilágo deixa de ser consultivo e passa a ser mais propositivo. É quando podemos apoiar e somar esforços com as reais autoridades do assunto, tais como SINTER, IBGE, ABNT, etc.</p>
+<p>Autoridades governamentais.   Já vem ocorrendo o diálogo por exemplo com o SINTER (Sistema nacional de gestão de informações territoriais), ligado à Receita Federal, e Secretarias do Estado em SP. Apesar de ser importante o diálogo ao longo de todo processo, a formalização se dará apenas no final, com a proposta v1.0 consolidada. Outros importantes atores no setor são o IBGE, a ABNT e as diversas Secretarias de Estado, na Agricultura, na Habitação, no Turismo, e no Meio Ambeinte.</p>
 </li>
 </ol>
-<p>Todo o relacionamento com a comunidade seria realizado através da metodogia das <a href="https://wiki.openstreetmap.org/wiki/WikiProject_Brazil/Associa%C3%A7%C3%A3o/Rodadas">"rodadas de discussão estruturada"</a>, ou similar, já bem testado com a Comunidade OSM Brasil, e aberto a outros grupos interessados.</p>
+<!--
+1. Estabelecer formalmente os **requisitos do CLP**, traduzindo em parâmetros objetivos as decisões discutidas. [[esboço](spec01-hub.md)]
+
+2. Levantamento, com apoio da comunidade, das **principais soluções e padrões vigentes** para os requisitos fixados.
+!--
+ A cada solução avaliar se ela satisfaz os requisitos e se existem casos de uso em prefeituras ou outros países. Em seguida classificar variantes quando existirem alternativas ou parametrizações. <br/>Soluções sem  licença aberta ou adaptações em conflito com patentes ou *copyright* já seriam  eliminadas nesta etapa.--!
+
+3. Estabelecer formalmente todos os **algoritmos candidatos**, incluindo  **variantes adaptadas** às condições do Brasil (uso de abreviaturas de nomes de cidade por exemplo).
+
+4. Definição, com apoio da Comunidade, de um **conjunto de testes** (*benchmark*) ao qual todas as soluções e suas variantes serão submetidas, estabelecendo critérios de rejeição e parâmetros de comparação.
+
+5. **Relatório dos resultados** de testes principais, alguns eliminatórios.
+
+6. **Oferta pública de protótipos** para a comunidade testar durante um período os padrões e variantes satisfatórios.  
+
+7. **Redação** e revisão da especificação técnica do CLP, seguida de disponibilização para **consulta pública** e debate, principalmente terceiro setor,  universidades, etc.
+
+8. **Texto final da especificação técnica do CLP**, redação, e entrega de pareceres.
+
+9. **Adoção e apoio a projetos-piloto** com encaminhamento e reutilização da infraestrutura de testes viabilizada. Já se encontram em negociação, por exemplo, pequenas prefeituras e entidades como a TETO Brasil.
+
+10. **Diálogo com autoridades locais** e governo em geral. Já vem ocorrendo e **vai ocorrer em paralelo**, ao longo de todo o processo.
+
+    * Municípios: representantes do Executivo e/ou Legislativo.
+
+    * Seretarias de estado: DER, Agricultura, Meio Ambiente, Turismo, etc.
+
+11. **Diálogo com autoridades nacionais**. Com resultados seguros e a legitimação das comunidades e autoridades locais, o dilágo deixa de ser consultivo e passa a ser mais propositivo. É quando podemos apoiar e somar esforços com as autoridades técnicas do assunto, tais como **SINTER**, IBGE, ABNT, etc. Mesmo que não estejam envolvidas diretamente com a questão do endereçamento, o ideial é que façam uso de mesma infraestrutura e fundamentos tecnológicos, reusando cada qual no seu setor. !-- são os órgãos que avaliam e determinam os padrões nacionais desse tipo.--!
+
+12. **Revisão final e publicação da versão 1.1**. Após o diálogo com autoridades, mediado pela versão&nbsp;1.0, pode surgir a demanda por adaptações menores, resultando na consulta pública, revisão e publicação da versão&nbsp;1.1 da proposta do CLP.
+
+Todo o relacionamento com a comunidade seria realizado através da metodogia das ["rodadas de discussão estruturada"](https://wiki.openstreetmap.org/wiki/WikiProject_Brazil/Associa%C3%A7%C3%A3o/Rodadas), ou similar, já bem testado com a Comunidade OSM Brasil, e aberto a outros grupos interessados.
+-->
+
+<h2 id="nao-estamos-sozinhos">Não estamos sozinhos</h2>
+<p>A busca por soluções eficientes e abertas é mundial, floresceu nos anos recentes. Veja esta lista com uma centena de outros países, analisados quanto à abertura da sua base de códigos postais (análogos do CEP a cada país),  apenas ~5% são considerados razoavelmente abertos:   <a href="https://index.okfn.org/dataset/postcodes/">OpenDataIndex/Postcodes</a>, 90% dos países ainda apresentam problemas sérios de licença privada e exploração comercial sobre dado público, como no Brasil.</p>
+<p>Na Europa, Japão e outros países já se estuda um "upgrade" dos respectivos CEPs. Na Irlanda por exemplo <a href="https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland#Alternative_location_codes">diversas alternativas foram estudadas entre 2010 e 2011</a> e hoje já se encontra implantado um sistema mais moderno, baseado em coordenadas geográficas.</p>
+<p>Quanto à população mais sensível ao problema de "não ter um endereço para chamar de seu", no Brasil, quem mais sofre é a população do <strong>meio rural</strong>, e os bairros e regiões em situação de <strong>habitação precária</strong> &mdash; segundo dados da <a href="https://www.techo.org/brasil/">TETO Brasil</a> são ~15 milhões habitantes desatendidos pelo CEP ou nome de rua.  Todos beneficiariam enormemente de um código de localização oficial, um CLO para o local onde habitam.</p>
 <hr />
 <p>&#160;&#160;Conteúdos e dados deste projeto são dedicados ao domínio público. Ver também <a href="assets/README/#Imagens">Créditos das imagens</a>.   <br/>&#160;&#160;<a href="assets/README/"><img alt="" src="./assets/CC0-logo-200px.png" /> </a></p></div>
         </div>
@@ -306,5 +332,5 @@ As recomendações não se limitam à sintaxe dos códigos e sua tradução em l
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-09-27 15:16:01
+Build Date UTC : 2018-10-08 01:31:12
 -->

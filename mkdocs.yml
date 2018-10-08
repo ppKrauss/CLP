@@ -2,18 +2,14 @@ site_name: CLP
 docs_dir: ./docs
 pages:
 
-    - Apresentação: index.md
+    - Apresentação: 
+       - Geral: index.md
+       - CLP-via: index_CLPvia.md
+       - CLP-coordenada: index_CLPcoord.md
 
     - Especificações:
       - Geral: spec01-hub.md
-      - CLP-coord: spec02-coord.md
-      - CLP-via: spec03-via.md
-
-    - Apêndices:
-      - Siglas: spec04ap01-siglas.md
-      - Comparações: comparacao.md
-      - Algoritmos ingênuos: spec04ap05-ingenuos.md
-      - Segunda camada: spec04ap05b-segundaCamada.md
+      - Referências: spec05-referencias.md
 
     - Créditos: assets/README.md
 

@@ -1,5 +1,19 @@
 ((em construção))
 
+Ver (e deletar) também https://github.com/datasets-br/city-codes/wiki/Abrevia%C3%A7%C3%A3o-de-3-letras
+
+Exemplo de mudança de nome: [Serra Caiada](https://pt.wikipedia.org/wiki/Serra_Caiada) (IBGE 2410306) a partir de 2012. Antes (a partir de 1963) era "Presidente Juscelino", em 1964 "Presidente Kubitschek", e 2013 "Serra Caiada".
+
+Exemplo de mudança de território: ...
+
+Município | sigla Anatel  | sigla ideal| Regra | ordem
+----------|---------------|-------------|------|-------
+brasilia/DF  |  BSA | BRA|cut |1 (capital)
+barra de santo antonio/AL | BNA |BSA|(3 palavras) - iniciais |2 (exata)
+brasileia/AC | BLI |BRL| (1 palavra) - consoantes| 3 (demais)
+brejao/PE    | BRA |BRJ|(1 palavra) - consoantes|3 (demais)
+brejo/MA     | BRJ |BJO|(1 palavra) - inicial e cut final |3 (demais)
+
 **<center><big>SIGLAS BRASILEIRAS</big></center>**
 
 As siglas brasileiras não são apenas um brinquedo, um recurso de linguagem  para encurtar a conversa, enxugar o texto quando o espaço é reduzido.  Elas fazem parte do vocabulário oficial da Língua Portuguesa do Brasil e dos padrões oficiais de identificação.
@@ -141,6 +155,8 @@ Se olharmos com lupa, veremos ainda que não são todas as 26 letras do alfabeto
  M     |  1757 | W     |    15
  P     |  1725 | K     |     8
 
+&nbsp; Fonte: [consulta `stat02-sigl01`, distrib. de freq. de letras](src_sql_consultas.md#stat02-sigl01).
+
 Como a maior parte das "siglas bacanas" é composta por uma ou mais inicias das palavras que formam o nome, eliminando preposições e ficando com as primeiras letras teremos a seguinte distribuição:
 
 Inicial |   freq   | Inicial | freq
@@ -158,38 +174,11 @@ G       |  245 (5%)|W       |    8 (0%)
 R       |  202 (4%)|Z       |    4 (0%)
 N       |  177 (3%)|K       |    2 (0%)
 L       |  173 (3%)|Y  |0 (0%)
+&nbsp; Fonte: [consulta `stat02-sigl01`, freq. de iniciais](src_sql_consultas.md#stat02-sigl01).
 
 É nula a frequência de uso do Y entre as iniciais dos municípios, e percentualmente nula, 0%, para as letras K, Z, W e X.  Todas com frequência inferior a 1/3 da mediana de ~170 em 5559 (~3%). Dessa forma se justificaria usar um alfabeto reduzido, de 21 letras, para avaliar melhor avaliar as chances de obtenção de siglas baseadas em iniciais.
 
 Fazendo as contas, 21<sup>3</sup>=9261, logo os nomes ocupam  ~60%, ainda bem longe dos 10% ou menos recomendados para ter uma folga.
-
-```SQL
--- Distribuição de freq. de letras nos nomes:
-SELECT  regexp_split_to_table(replace("lexLabel",'.',''), '') letra,  count(*) as n
-FROM test_city GROUP BY 1 ORDER BY 2 DESC; --  mediana em D (1402).
-
--- Distribuição não usada (sem peso):
-SELECT substr(regexp_split_to_table("lexLabel", '\.'),1,1) letra, count(*) as n
-FROM test_city GROUP BY 1 ORDER BY 2 DESC;
--- Mediana  entre L (288) e F (287), pode ser arredondada para 290.
-
--- Distribuição consistente de freq. de iniciais:
-WITH distrib AS (
- SELECT inicial, sum(n) freq
- FROM  (
-   SELECT substr(unnest(pals),1,1) inicial, n1::float/array_length(pals,1) n
-   FROM (
-      SELECT regexp_split_to_array("lexLabel", '\.') pals, count(*) n1
-      FROM test_city  
-     GROUP BY 1
-   ) t1
- ) t2 GROUP BY 1 ORDER BY 2 DESC
-)  SELECT upper(inicial) inicial,
-          round(freq) || ' ('||round(100.0*freq/5292.0)||'%)' freq
-   FROM distrib
-; -- Novamente mediana  entre L (173) e F (164),
-  -- pode ser arredondada para 169 (de um total de 5292)
-```
 
 ## Padrão estadual
 
