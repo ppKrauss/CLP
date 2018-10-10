@@ -1,6 +1,6 @@
 **<center><big>CLP baseado na coordenada</big></center>**
 
-As coordenadas geográficas e a sua representação em padrões abertos não dependem de qualquer infraestrutura e, portanto, não dependem de empresas ou do governo para a  sua existência e uso continuado. O padrão básico se chama [Geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme) e vem sendo usado em links da internet ([exemplo](geo:37.786971,-122.399677)), na troca de dados (ex. vCard), na telefonia móvel (GeoSMS), no Android, e numa infinidade de outras tecnologias.
+As coordenadas geográficas e a sua representação em padrões abertos não dependem de qualquer infraestrutura e, portanto, não dependem de empresas ou do governo para a  sua existência e uso continuado. O padrão básico se chama [Geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme) e vem sendo usado em links da internet ([exemplo](geo:37.786971,-122.399677)), na troca de dados (ex. vCard), na telefonia móvel (GeoSMS), no Android, e uma infinidade de outras.
 
 A proposta de um Código Localizador de Portão baseado em coordenada (**CLP-coordenada**) consiste, a grosso modo, em representar de maneira hierárquica e compacta as coordenadas. Com uma hierarquia que começa na escala do município, representado por um código de 3 letras, até chegar no portão, cuja localização seria representada  por um código do tipo Geohash &mdash; ou outro qualquer que venhamos a eleger no presente projeto.
 
@@ -12,79 +12,47 @@ O primeiro passo é transformar esses 12 elementos em 8, ao traduzirmos as coord
 
 O segundo passo, para compactar mais um pouco, é fazer uso do contexto: se já sabemos que estamos localizados em `SP` e a sigla `PIR` já diz que é Piracicaba, então o Geohash não precisa dizer que estamos no hemisfério sul, etc. dispensamos o prefixo `6G` do Geohash, comum a todos os pontos de Piracicaba. **Sobram 6** caracteres: o código `PIR-VVV.W3D` é mais "palatável" para memorizar ou digitar.
 
+## Sintaxe
+
+O código CLP é uma sequência de letras (A-Z) e números (0-9), com grupos separados por hífen ("-"). Essa sequência tem um prefixo e um sufixo, conforme a seguinte regra sintática, onde o prefixo é um código de jurisdição e o sufixo um códido de coordenada gegráfica válido para o interior do territorio da jurisdição:
+
+![](assets/CLPcoordenada-syntax.png)
+
+Por ser um padrão restrito ao território brasileiro inicia pela sigla `BR`.  As jurisdições `"BR-" <uf>`, referentes às unidades da federação, são determinadas pelo padrão [ISO&nbsp;3166-2:BR](https://pt.wikipedia.org/wiki/ISO_3166-2:BR), ou seja, são as tradicionais siglas de estado padronizadas pelo IBGE. Em seguida a última parte do código de jurisdição é o Município.
+
+Como há a opção de usar o CLP para designar porções maiores e menores da hierarquia territorial, a UF e o Município são opcionais:
+
+![](assets/CLPjurisdicao-syntax.png)
+
+A designação de município faz uso das **siglas de 3 letras** do padrão já em uso nos identificadores de estradas. Como o CLP é **sensível a contexto** de país e UF, o uso do prefixo `BR` é dispensável no "contexto Brasil" e o uso da UF também dispensável quando as partes usuárias do CLP forem capazes de deduzir com certeza a UF.
+
 -----
-
-# Lietaratura
-
-As comparações entre tecnologias que solucionam o problema também tem sido realizadas, por exemplo []()
-
-* "[Addresses and Geocoding: Comparing New & Old Methods](https://www.fulcrumapp.com/blog/comparing-address-and-coordinate-systems/)", 2015.
-
-* "[Comparative Evaluation of Alternative Addressing Schemes](https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119)", 2016.
-
-* "[Location Encoding Systems – Could geographic coordinates be replaced and at what cost?](http://www2.unb.ca/~estef/papers/go_geomatics_stefanakis_march_2016.pdf)",  2016.<!-- demonstra vantagem das silabas e sugere uso de palavras como digito-corretor -->
-
-* [Comparação orientada ao PlusCode](https://github.com/google/open-location-code/wiki/Evaluation-of-Location-Encoding-Systems), ~2015.
-
-Na Irlanda hove um concurso entre 2010 e 2011 para  selecionar propostas sistema de código postal.[[ref](https://web.archive.org/web/20150715224453/http://www.irishtimes.com/news/tender-process-for-postal-codes-launched-1.615952)] Infelizmente na época as soluções abertas não eram tão difundidas e optou-se por um modelo tradicional que supunha alto custo de manutenção, e portanto com demanda por reimbolso através de licenceamento privado.[[ref](https://web.archive.org/web/20091028200100/http://archives.tcm.ie/businesspost/2008/12/07/story38097.asp)],[[ref](https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland#Legislation)]
-
-# Comparando com o CEP
-
-Como uma das metas do CLP é se apresentar como potencial substituto do CEP no endereçamento postal, alguns requisitos, tais como a hierarquia desde macro região (siglas de estado e cidade), são decorrentes desta demanda. As principais diferenças entre o CEP e o CLP são:
-
-Característica | CEP | CLP-coordenada
----------------|-----|------------------
-É **um código só** para o usuário lembrar? | sim | sim (um código só)
-É mais **fácil de lembrar** do que um número de telefone? | Não. O CEP faz uso de "números opacos", ou seja, não são siglas e não são números com significado que possa ser lembrado. | Talvez. O CLP oferece prefixo mnemônico, baseado nas siglas de estado e município.
-Demanda **autoridade central**? | sim | não
-Existe **custo** para o uso do sistema crescer? |sim | não
-Entidade espacial **representada**: |Região ou logradouro.<br/>Na sua hierarquia o CEP representa macro-regiões, tais como um estado inteiro (2 dígitos), depois municípios (5 dígitos), até chegar na escala do logradouro (8 dígitos).<!-- <br/>Vantagem: uma casa demolida e reconstruída em outro local da rua terá um mesmo CEP.--> |Posição da porta em goordenadas do globo terrestre. <br/>Conforme o número de dígitos representa "células" de uma grade hierárquica, permitindo indicar portões maiores ou menores.
-**precisão** no resultado da transformação do código em localização no mapa|Varia conforme seja apenas um "CEP geral da cidde", um CEP de logradouro ou CEP de grande receptor. Em geral nas áreas rurais não existe CEP do logradouro. | Sempre define uma célula de mesma área com opção de acrescentar mais um dígitos para ficar mais preciso. Algumas alternativas permitem mais precisão (menos um dígito) na região da mancha urbana prevista para uma ou mais décadas.
-
-Uma comparação similar foi realizada por K. Clemens em 2016 ([ref](https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119)), ao levandar as características de geocódigos e de códigos postais em geral, de diversos países.
-<!---
-table align="center" border="0" style="width:75%">
-<tr> <td colspan=4 align="center" style="background:#87cefa; color:#000000;"> <b>CÓDIGO POSTAL (tipo CEP)</b>
-<tr style="background:#87cefa; color:#000000;" align="center">
-   <td colspan=2 align="center" style="background:#ff4500; color:#ffffff;"> Prefixo (geral)
-   <td colspan=2 align="center" style="background:#ff4500; color:#ffffff;"> Sufixo (específico)
-<tr style="background:#ff4500; color:#000000;" align="center">
-   <td> UF (região) <td>Município (distrito) <td> Logradouro <td> Unidade
-   <tr style="background:#2222cd; color:#000000;" align="center">
-     <td> 699xx AC <td>69901<br/>Acrelândia<td>- <td>-
- <tr style="background:#2222cd; color:#000000;" align="center">
-   <td> 699xx AC <td>69901<br/>Capital<td>-000 a -899 vias <td>-9xx condomínios
- <tr style="background:#0000fe; color:#000000;" align="center">
-    <td> 65xxx MA<td>65000...65180<br/>São Luiz <td>-000 a -899 vias <td>-9xx condomínios
- <tr style="background:#0000fe; color:#000000;" align="center">
-     <td> 65xxx MA<td>65000...65180<br/>São Luiz <td>-000 a -899 vias <td>-9xx condomínios
-</table>
--->
 
 # Comparando candidatos
 
-Comparação entre padrões mais populares: Geohash, PlusCode, MapCode. Foi acescentado ainda o padrão S2, que apesar de não ser ainda muito divulgado, é um dos recomendados.
+Comparação entre padrões abertos mais difundidos e tecnicamente satisfatórios: Geohash, PlusCode e S2. Outras tecnologias podem vir a ser acrescentadas como opção para se eleger o melhor fundamento para o código CLP.
 
-A comparação se deu em torno de um ponto de controle bem conhecido, na capital de SP.
+A seguir comparação se deu em torno de um ponto de controle bem conhecido, na capital do Estado de São Paulo, o [Marco Zero](https://pt.wikipedia.org/wiki/Marco_zero_da_cidade_de_S%C3%A3o_Paulo) (*latitude -23.550385, longitude -46.633956*). O pedestal do Marco tem aproximadamente 3 metros de diâmetro, as dimensões usuais de um portão urbano.
 
-**Códigos do Marco-Zero de SP**
-
-[Marco Zero](https://pt.wikipedia.org/wiki/Marco_zero_da_cidade_de_S%C3%A3o_Paulo) (*latitude -23.550385, longitude -46.633956*) com ~5m de precisão nos padrões mais populares de 2018 e com infraestrutura em operação:
+Códigos em sua extensão completa, sem cortar prefixo de município, e sem qualquer outra adaptação, tal como a base numérica dos seus dígitos:
 
 * Geohash (base32): `6gyf4bf1n`
 * PlusCode normal (base20): `588MC9X8+RC`
-* PlusCode hibrido (cidade+base20): `C9X8+RC São Paulo`
-* MapCode (cidade+): `SP-RR.56`
 * S2 (hexadecimal): `94ce59aaf89`
 
-Destes, Geohash e S2 ainda não oferecem infraestrutura para sua versão híbrida, e o PlusCode ainda não oferece resolução de abreviações. Resultariam nos seguintes códigos:
+O uso de códigos híbridos, que misturam a designação do município com a coordenada do ponto, é realizado apenas em duas das tecnologias populares analisadas:
+
+* PlusCode hibrido (cidade+base20): `C9X8+RC São Paulo, Brasil`
+* MapCode (cidade+base32): `BR-SP-RR.56`
+
+Ainda assim o PlusCode não oferece resolução de abreviações, e o MapCode trata `BR-SP-SPA` como `SP`, subintendendo que é a capital. Como qualquer uma das tecnologias abertas pode ser livremente adaptada, com a inclusão da sigla de município resultariam nos seguintes códigos:
 
 * Geohash Hibrido: `SPA-YF4B.F1N`
 * PlusCode com sigla da cidade: `SPA-C9X8+RC`
-* S2 em base36: `3MHP9.IW09`
+<!-- * S2 em base36: `3MHP9.IW09`-->
 * S2 em base 36 com prefixo SPA: `SPA-XIW.09`
 
-A seguir cada um dos exemplos ilustrado pelo mapa fornecido na respectiva infraestrutura pública.
+A seguir cada um dos exemplos será ilustrado pelo mapa fornecido na respectiva infraestrutura.
 
 ## Geohash
 Localização do Marco-zero representada por Geohash:  [`6gyf4bf1n`](http://geohash.org/6gyf4bf1n).
@@ -138,6 +106,59 @@ O *software Syllagloble* é apenas um experimento da empresa "Here". Similar ao 
 
 ![](assets/CLP-coord-syllagloble-ilustra01.png)
 
-## Algoritmo ingênuo
+# Outras comparações
+
+## com algoritmo ingênuo
 
 As coordenadas geográficas podem ser [tratadas matematicamente e transformadas em um código mais compacto](spec04ap05-ingenuos.md#compactacao-ingenua), e existem várias maneiras de se fazer isso. Uma delas foi batizada de  Geohash, que é apenas uma das tecnologias candidatas, mas aqui tomaremos como exemplo para ilustrar a anatomia de um CLP-coordenada. Neste projeto serão analisados também o MapCode, o PlusCode e o S2geometry.
+
+## com o CEP
+
+
+Como uma das metas do CLP é se apresentar como potencial substituto do CEP no endereçamento postal, alguns requisitos, tais como a hierarquia desde macro região (siglas de estado e cidade), são decorrentes desta demanda. As principais diferenças entre o CEP e o CLP são:
+
+Característica | CEP | CLP-coordenada
+---------------|-----|------------------
+É **um código só** para o usuário lembrar? | sim | sim (um código só)
+É mais **fácil de lembrar** do que um número de telefone? | Não. O CEP faz uso de "números opacos", ou seja, não são siglas e não são números com significado que possa ser lembrado. | Talvez. O CLP oferece prefixo mnemônico, baseado nas siglas de estado e município.
+Demanda **autoridade central**? | sim | não
+Existe **custo** para o uso do sistema crescer? |sim | não
+Entidade espacial **representada**: |Região ou logradouro.<br/>Na sua hierarquia o CEP representa macro-regiões, tais como um estado inteiro (2 dígitos), depois municípios (5 dígitos), até chegar na escala do logradouro (8 dígitos).<!-- <br/>Vantagem: uma casa demolida e reconstruída em outro local da rua terá um mesmo CEP.--> |Posição da porta em goordenadas do globo terrestre. <br/>Conforme o número de dígitos representa "células" de uma grade hierárquica, permitindo indicar portões maiores ou menores.
+**precisão** no resultado da transformação do código em localização no mapa|Varia conforme seja apenas um "CEP geral da cidde", um CEP de logradouro ou CEP de grande receptor. Em geral nas áreas rurais não existe CEP do logradouro. | Sempre define uma célula de mesma área com opção de acrescentar mais um dígitos para ficar mais preciso. Algumas alternativas permitem mais precisão (menos um dígito) na região da mancha urbana prevista para uma ou mais décadas.
+
+Uma comparação similar foi realizada por K. Clemens em 2016 ([ref](https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119)), ao levandar as características de geocódigos e de códigos postais em geral, de diversos países.
+<!---
+table align="center" border="0" style="width:75%">
+<tr> <td colspan=4 align="center" style="background:#87cefa; color:#000000;"> <b>CÓDIGO POSTAL (tipo CEP)</b>
+<tr style="background:#87cefa; color:#000000;" align="center">
+   <td colspan=2 align="center" style="background:#ff4500; color:#ffffff;"> Prefixo (geral)
+   <td colspan=2 align="center" style="background:#ff4500; color:#ffffff;"> Sufixo (específico)
+<tr style="background:#ff4500; color:#000000;" align="center">
+   <td> UF (região) <td>Município (distrito) <td> Logradouro <td> Unidade
+   <tr style="background:#2222cd; color:#000000;" align="center">
+     <td> 699xx AC <td>69901<br/>Acrelândia<td>- <td>-
+ <tr style="background:#2222cd; color:#000000;" align="center">
+   <td> 699xx AC <td>69901<br/>Capital<td>-000 a -899 vias <td>-9xx condomínios
+ <tr style="background:#0000fe; color:#000000;" align="center">
+    <td> 65xxx MA<td>65000...65180<br/>São Luiz <td>-000 a -899 vias <td>-9xx condomínios
+ <tr style="background:#0000fe; color:#000000;" align="center">
+     <td> 65xxx MA<td>65000...65180<br/>São Luiz <td>-000 a -899 vias <td>-9xx condomínios
+</table>
+-->
+
+-----
+
+
+# Lietaratura
+
+As comparações entre tecnologias que solucionam o problema também tem sido realizadas, por exemplo []()
+
+* "[Addresses and Geocoding: Comparing New & Old Methods](https://www.fulcrumapp.com/blog/comparing-address-and-coordinate-systems/)", 2015.
+
+* "[Comparative Evaluation of Alternative Addressing Schemes](https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119)", 2016.
+
+* "[Location Encoding Systems – Could geographic coordinates be replaced and at what cost?](http://www2.unb.ca/~estef/papers/go_geomatics_stefanakis_march_2016.pdf)",  2016.<!-- demonstra vantagem das silabas e sugere uso de palavras como digito-corretor -->
+
+* [Comparação orientada ao PlusCode](https://github.com/google/open-location-code/wiki/Evaluation-of-Location-Encoding-Systems), ~2015.
+
+Na Irlanda hove um concurso entre 2010 e 2011 para  selecionar propostas sistema de código postal.[[ref](https://web.archive.org/web/20150715224453/http://www.irishtimes.com/news/tender-process-for-postal-codes-launched-1.615952)] Infelizmente na época as soluções abertas não eram tão difundidas e optou-se por um modelo tradicional que supunha alto custo de manutenção, e portanto com demanda por reimbolso através de licenceamento privado.[[ref](https://web.archive.org/web/20091028200100/http://archives.tcm.ie/businesspost/2008/12/07/story38097.asp)],[[ref](https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland#Legislation)]

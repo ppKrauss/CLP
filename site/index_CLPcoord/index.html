@@ -104,8 +104,7 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#lietaratura">Lietaratura</a></li>
-        <li class="main "><a href="#comparando-com-o-cep">Comparando com o CEP</a></li>
+        <li class="main active"><a href="#sintaxe">Sintaxe</a></li>
         <li class="main "><a href="#comparando-candidatos">Comparando candidatos</a></li>
             <li><a href="#geohash">Geohash</a></li>
             <li><a href="#pluscode">PlusCode</a></li>
@@ -114,37 +113,84 @@
             <li><a href="#mapcode">MapCode</a></li>
             <li><a href="#whats3words">Whats3words</a></li>
             <li><a href="#syllagloble">Syllagloble</a></li>
-            <li><a href="#algoritmo-ingenuo">Algoritmo ingênuo</a></li>
+        <li class="main "><a href="#outras-comparacoes">Outras comparações</a></li>
+            <li><a href="#com-algoritmo-ingenuo">com algoritmo ingênuo</a></li>
+            <li><a href="#com-o-cep">com o CEP</a></li>
+        <li class="main "><a href="#lietaratura">Lietaratura</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
 <p><strong><center><big>CLP baseado na coordenada</big></center></strong></p>
-<p>As coordenadas geográficas e a sua representação em padrões abertos não dependem de qualquer infraestrutura e, portanto, não dependem de empresas ou do governo para a  sua existência e uso continuado. O padrão básico se chama <a href="https://en.wikipedia.org/wiki/Geo_URI_scheme">Geo URI</a> e vem sendo usado em links da internet (<a href="geo:37.786971,-122.399677">exemplo</a>), na troca de dados (ex. vCard), na telefonia móvel (GeoSMS), no Android, e numa infinidade de outras tecnologias.</p>
+<p>As coordenadas geográficas e a sua representação em padrões abertos não dependem de qualquer infraestrutura e, portanto, não dependem de empresas ou do governo para a  sua existência e uso continuado. O padrão básico se chama <a href="https://en.wikipedia.org/wiki/Geo_URI_scheme">Geo URI</a> e vem sendo usado em links da internet (<a href="geo:37.786971,-122.399677">exemplo</a>), na troca de dados (ex. vCard), na telefonia móvel (GeoSMS), no Android, e uma infinidade de outras.</p>
 <p>A proposta de um Código Localizador de Portão baseado em coordenada (<strong>CLP-coordenada</strong>) consiste, a grosso modo, em representar de maneira hierárquica e compacta as coordenadas. Com uma hierarquia que começa na escala do município, representado por um código de 3 letras, até chegar no portão, cuja localização seria representada  por um código do tipo Geohash &mdash; ou outro qualquer que venhamos a eleger no presente projeto.</p>
 <p><img alt="" src="../assets/CLP-anatomia-coord.png" /></p>
 <p>As coordenadas geográficas são muito longas. <a href="https://www.openstreetmap.org/?mlat=-22.860799&amp;mlon=-47.920199&amp;zoom=18">No exemplo</a>, se ficarmos só nos dígitos <strong>seriam ao todo 12</strong>, os dígitos "228607" da latitude e "479201" da longitude. Difícil decorar e trabalhoso digitar.</p>
 <p>O primeiro passo é transformar esses 12 elementos em 8, ao traduzirmos as coordenadas para Geohash, <a href="http://geohash.org/6gvvvw3d"><code>6GVVVW3D</code></a>.</p>
 <p>O segundo passo, para compactar mais um pouco, é fazer uso do contexto: se já sabemos que estamos localizados em <code>SP</code> e a sigla <code>PIR</code> já diz que é Piracicaba, então o Geohash não precisa dizer que estamos no hemisfério sul, etc. dispensamos o prefixo <code>6G</code> do Geohash, comum a todos os pontos de Piracicaba. <strong>Sobram 6</strong> caracteres: o código <code>PIR-VVV.W3D</code> é mais "palatável" para memorizar ou digitar.</p>
+<h2 id="sintaxe">Sintaxe</h2>
+<p>O código CLP é uma sequência de letras (A-Z) e números (0-9), com grupos separados por hífen ("-"). Essa sequência tem um prefixo e um sufixo, conforme a seguinte regra sintática, onde o prefixo é um código de jurisdição e o sufixo um códido de coordenada gegráfica válido para o interior do territorio da jurisdição:</p>
+<p><img alt="" src="../assets/CLPcoordenada-syntax.png" /></p>
+<p>Por ser um padrão restrito ao território brasileiro inicia pela sigla <code>BR</code>.  As jurisdições <code>"BR-" &lt;uf&gt;</code>, referentes às unidades da federação, são determinadas pelo padrão <a href="https://pt.wikipedia.org/wiki/ISO_3166-2:BR">ISO&nbsp;3166-2:BR</a>, ou seja, são as tradicionais siglas de estado padronizadas pelo IBGE. Em seguida a última parte do código de jurisdição é o Município.</p>
+<p>Como há a opção de usar o CLP para designar porções maiores e menores da hierarquia territorial, a UF e o Município são opcionais:</p>
+<p><img alt="" src="../assets/CLPjurisdicao-syntax.png" /></p>
+<p>A designação de município faz uso das <strong>siglas de 3 letras</strong> do padrão já em uso nos identificadores de estradas. Como o CLP é <strong>sensível a contexto</strong> de país e UF, o uso do prefixo <code>BR</code> é dispensável no "contexto Brasil" e o uso da UF também dispensável quando as partes usuárias do CLP forem capazes de deduzir com certeza a UF.</p>
 <hr />
-<h1 id="lietaratura">Lietaratura</h1>
-<p>As comparações entre tecnologias que solucionam o problema também tem sido realizadas, por exemplo <a href=""></a></p>
+<h1 id="comparando-candidatos">Comparando candidatos</h1>
+<p>Comparação entre padrões abertos mais difundidos e tecnicamente satisfatórios: Geohash, PlusCode e S2. Outras tecnologias podem vir a ser acrescentadas como opção para se eleger o melhor fundamento para o código CLP.</p>
+<p>A seguir comparação se deu em torno de um ponto de controle bem conhecido, na capital do Estado de São Paulo, o <a href="https://pt.wikipedia.org/wiki/Marco_zero_da_cidade_de_S%C3%A3o_Paulo">Marco Zero</a> (<em>latitude -23.550385, longitude -46.633956</em>). O pedestal do Marco tem aproximadamente 3 metros de diâmetro, as dimensões usuais de um portão urbano.</p>
+<p>Códigos em sua extensão completa, sem cortar prefixo de município, e sem qualquer outra adaptação, tal como a base numérica dos seus dígitos:</p>
 <ul>
-<li>
-<p>"<a href="https://www.fulcrumapp.com/blog/comparing-address-and-coordinate-systems/">Addresses and Geocoding: Comparing New &amp; Old Methods</a>", 2015.</p>
-</li>
-<li>
-<p>"<a href="https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119">Comparative Evaluation of Alternative Addressing Schemes</a>", 2016.</p>
-</li>
-<li>
-<p>"<a href="http://www2.unb.ca/~estef/papers/go_geomatics_stefanakis_march_2016.pdf">Location Encoding Systems – Could geographic coordinates be replaced and at what cost?</a>",  2016.<!-- demonstra vantagem das silabas e sugere uso de palavras como digito-corretor --></p>
-</li>
-<li>
-<p><a href="https://github.com/google/open-location-code/wiki/Evaluation-of-Location-Encoding-Systems">Comparação orientada ao PlusCode</a>, ~2015.</p>
-</li>
+<li>Geohash (base32): <code>6gyf4bf1n</code></li>
+<li>PlusCode normal (base20): <code>588MC9X8+RC</code></li>
+<li>S2 (hexadecimal): <code>94ce59aaf89</code></li>
 </ul>
-<p>Na Irlanda hove um concurso entre 2010 e 2011 para  selecionar propostas sistema de código postal.[<a href="https://web.archive.org/web/20150715224453/http://www.irishtimes.com/news/tender-process-for-postal-codes-launched-1.615952">ref</a>] Infelizmente na época as soluções abertas não eram tão difundidas e optou-se por um modelo tradicional que supunha alto custo de manutenção, e portanto com demanda por reimbolso através de licenceamento privado.[<a href="https://web.archive.org/web/20091028200100/http://archives.tcm.ie/businesspost/2008/12/07/story38097.asp">ref</a>],[<a href="https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland#Legislation">ref</a>]</p>
-<h1 id="comparando-com-o-cep">Comparando com o CEP</h1>
+<p>O uso de códigos híbridos, que misturam a designação do município com a coordenada do ponto, é realizado apenas em duas das tecnologias populares analisadas:</p>
+<ul>
+<li>PlusCode hibrido (cidade+base20): <code>C9X8+RC São Paulo, Brasil</code></li>
+<li>MapCode (cidade+base32): <code>BR-SP-RR.56</code></li>
+</ul>
+<p>Ainda assim o PlusCode não oferece resolução de abreviações, e o MapCode trata <code>BR-SP-SPA</code> como <code>SP</code>, subintendendo que é a capital. Como qualquer uma das tecnologias abertas pode ser livremente adaptada, com a inclusão da sigla de município resultariam nos seguintes códigos:</p>
+<ul>
+<li>Geohash Hibrido: <code>SPA-YF4B.F1N</code></li>
+<li>PlusCode com sigla da cidade: <code>SPA-C9X8+RC</code>
+<!-- * S2 em base36: <code>3MHP9.IW09</code>--></li>
+<li>S2 em base 36 com prefixo SPA: <code>SPA-XIW.09</code></li>
+</ul>
+<p>A seguir cada um dos exemplos será ilustrado pelo mapa fornecido na respectiva infraestrutura.</p>
+<h2 id="geohash">Geohash</h2>
+<p>Localização do Marco-zero representada por Geohash:  <a href="http://geohash.org/6gyf4bf1n"><code>6gyf4bf1n</code></a>.</p>
+<p>O link acima envia aponta para <code>geohash.org</code> que não dá zoom compativel com a resolução do Geohash. Para a ilustração abaixo foi utilizada a interface manual de <a href="https://movable-type.co.uk/scripts/geohash.html">movable-type.co.uk/scripts/geohash</a>.</p>
+<p><img alt="" src="../assets/CLP-coord-geohash-ilustra01.png" /></p>
+<p>Os dois primeiros dígitos podem ser cortados quando sabemos que o contexto é a cidade de São Paulo (prefixo <code>6g</code>).</p>
+<p>Porta principal (~10m), escadaria da igreja da Sé
+<em> Geohash (base32), 9 dígitos: <code>6gyf4bdn9</code> precisão ~5x5m
+</em> Geohash (base32), 8 dígitos: <code>6gyf4bdn</code> precisão ~35x20m</p>
+<p><img alt="" src="../assets/CLP-coord-geohash-ilustra03.png" /></p>
+<h2 id="pluscode">PlusCode</h2>
+<p>Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>.</p>
+<p><img alt="" src="../assets/CLP-coord-plusCode-ilustra01.png" /></p>
+<h2 id="s2">S2</h2>
+<p><a href="https://s2.sidewalklabs.com/regioncoverer/?cells=94ce59aaf89f&amp;center=-23.550385%2C-46.633956&amp;zoom=20"><strong>S2</strong></a></p>
+<p><img alt="" src="../assets/CLP-coord-s2-ilustra01c.png" /></p>
+<h1 id="comparando-com-nao-candidatos">Comparando com não-candidatos</h1>
+<p>Alguns algoritmos/tecnologias são muito ruins e por isso devem ser descartados do estudo comparativo. Um desses algoritmos foi apelidado de <em>algoritmo ingênuo</em> e, apesar de não ser candidato, é uma referência importante, estabelecendo o critério de "miínima performance". Ou seja, nenhum "algoritmo candidato a CLP-coordenada" pode ser pior do que o ingênuo.</p>
+<p>Outras tecnologias são até muito boas, mas já foram de ante-mão barradas por não serem livres: são restritas por patentes ou direitos autorais. O Whats3words por exemplo é um destes casos.</p>
+<h2 id="mapcode">MapCode</h2>
+<p><a href="http://www.mapcode.com/getcoords.html?iso3=331&amp;mapcode=RR.56&amp;xx=-46.633956&amp;yy=-23.550385"><strong>MapCode</strong></a></p>
+<p><img alt="" src="../assets/CLP-coord-mapCode-ilustra01b.png" /></p>
+<h2 id="whats3words">Whats3words</h2>
+<p><a href="https://map.what3words.com/funil.leites.chaves"><strong>Whats3words</strong></a></p>
+<p>Por ser patenteado está sendo utilizado apenas como exemplo ilustrativo.</p>
+<p><img alt="" src="../assets/CLP-coord-whats3words-ilustra01.png" /></p>
+<h2 id="syllagloble">Syllagloble</h2>
+<p><a href="http://syllagloble.appspot.com"><strong>Syllagloble</strong></a></p>
+<p>O <em>software Syllagloble</em> é apenas um experimento da empresa "Here". Similar ao What3words, faz uso de 4 sílabas ou palavras curtas, no lugar de 3 palavras longas.</p>
+<p><img alt="" src="../assets/CLP-coord-syllagloble-ilustra01.png" /></p>
+<h1 id="outras-comparacoes">Outras comparações</h1>
+<h2 id="com-algoritmo-ingenuo">com algoritmo ingênuo</h2>
+<p>As coordenadas geográficas podem ser <a href="spec04ap05-ingenuos.md#compactacao-ingenua">tratadas matematicamente e transformadas em um código mais compacto</a>, e existem várias maneiras de se fazer isso. Uma delas foi batizada de  Geohash, que é apenas uma das tecnologias candidatas, mas aqui tomaremos como exemplo para ilustrar a anatomia de um CLP-coordenada. Neste projeto serão analisados também o MapCode, o PlusCode e o S2geometry.</p>
+<h2 id="com-o-cep">com o CEP</h2>
 <p>Como uma das metas do CLP é se apresentar como potencial substituto do CEP no endereçamento postal, alguns requisitos, tais como a hierarquia desde macro região (siglas de estado e cidade), são decorrentes desta demanda. As principais diferenças entre o CEP e o CLP são:</p>
 <table>
 <thead>
@@ -206,57 +252,24 @@ table align="center" border="0" style="width:75%">
      <td> 65xxx MA<td>65000...65180<br/>São Luiz <td>-000 a -899 vias <td>-9xx condomínios
 </table>
 --></p>
-<h1 id="comparando-candidatos">Comparando candidatos</h1>
-<p>Comparação entre padrões mais populares: Geohash, PlusCode, MapCode. Foi acescentado ainda o padrão S2, que apesar de não ser ainda muito divulgado, é um dos recomendados.</p>
-<p>A comparação se deu em torno de um ponto de controle bem conhecido, na capital de SP.</p>
-<p><strong>Códigos do Marco-Zero de SP</strong></p>
-<p><a href="https://pt.wikipedia.org/wiki/Marco_zero_da_cidade_de_S%C3%A3o_Paulo">Marco Zero</a> (<em>latitude -23.550385, longitude -46.633956</em>) com ~5m de precisão nos padrões mais populares de 2018 e com infraestrutura em operação:</p>
+<hr />
+<h1 id="lietaratura">Lietaratura</h1>
+<p>As comparações entre tecnologias que solucionam o problema também tem sido realizadas, por exemplo <a href=""></a></p>
 <ul>
-<li>Geohash (base32): <code>6gyf4bf1n</code></li>
-<li>PlusCode normal (base20): <code>588MC9X8+RC</code></li>
-<li>PlusCode hibrido (cidade+base20): <code>C9X8+RC São Paulo</code></li>
-<li>MapCode (cidade+): <code>SP-RR.56</code></li>
-<li>S2 (hexadecimal): <code>94ce59aaf89</code></li>
+<li>
+<p>"<a href="https://www.fulcrumapp.com/blog/comparing-address-and-coordinate-systems/">Addresses and Geocoding: Comparing New &amp; Old Methods</a>", 2015.</p>
+</li>
+<li>
+<p>"<a href="https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119">Comparative Evaluation of Alternative Addressing Schemes</a>", 2016.</p>
+</li>
+<li>
+<p>"<a href="http://www2.unb.ca/~estef/papers/go_geomatics_stefanakis_march_2016.pdf">Location Encoding Systems – Could geographic coordinates be replaced and at what cost?</a>",  2016.<!-- demonstra vantagem das silabas e sugere uso de palavras como digito-corretor --></p>
+</li>
+<li>
+<p><a href="https://github.com/google/open-location-code/wiki/Evaluation-of-Location-Encoding-Systems">Comparação orientada ao PlusCode</a>, ~2015.</p>
+</li>
 </ul>
-<p>Destes, Geohash e S2 ainda não oferecem infraestrutura para sua versão híbrida, e o PlusCode ainda não oferece resolução de abreviações. Resultariam nos seguintes códigos:</p>
-<ul>
-<li>Geohash Hibrido: <code>SPA-YF4B.F1N</code></li>
-<li>PlusCode com sigla da cidade: <code>SPA-C9X8+RC</code></li>
-<li>S2 em base36: <code>3MHP9.IW09</code></li>
-<li>S2 em base 36 com prefixo SPA: <code>SPA-XIW.09</code></li>
-</ul>
-<p>A seguir cada um dos exemplos ilustrado pelo mapa fornecido na respectiva infraestrutura pública.</p>
-<h2 id="geohash">Geohash</h2>
-<p>Localização do Marco-zero representada por Geohash:  <a href="http://geohash.org/6gyf4bf1n"><code>6gyf4bf1n</code></a>.</p>
-<p>O link acima envia aponta para <code>geohash.org</code> que não dá zoom compativel com a resolução do Geohash. Para a ilustração abaixo foi utilizada a interface manual de <a href="https://movable-type.co.uk/scripts/geohash.html">movable-type.co.uk/scripts/geohash</a>.</p>
-<p><img alt="" src="../assets/CLP-coord-geohash-ilustra01.png" /></p>
-<p>Os dois primeiros dígitos podem ser cortados quando sabemos que o contexto é a cidade de São Paulo (prefixo <code>6g</code>).</p>
-<p>Porta principal (~10m), escadaria da igreja da Sé
-<em> Geohash (base32), 9 dígitos: <code>6gyf4bdn9</code> precisão ~5x5m
-</em> Geohash (base32), 8 dígitos: <code>6gyf4bdn</code> precisão ~35x20m</p>
-<p><img alt="" src="../assets/CLP-coord-geohash-ilustra03.png" /></p>
-<h2 id="pluscode">PlusCode</h2>
-<p>Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>.</p>
-<p><img alt="" src="../assets/CLP-coord-plusCode-ilustra01.png" /></p>
-<h2 id="s2">S2</h2>
-<p><a href="https://s2.sidewalklabs.com/regioncoverer/?cells=94ce59aaf89f&amp;center=-23.550385%2C-46.633956&amp;zoom=20"><strong>S2</strong></a></p>
-<p><img alt="" src="../assets/CLP-coord-s2-ilustra01c.png" /></p>
-<h1 id="comparando-com-nao-candidatos">Comparando com não-candidatos</h1>
-<p>Alguns algoritmos/tecnologias são muito ruins e por isso devem ser descartados do estudo comparativo. Um desses algoritmos foi apelidado de <em>algoritmo ingênuo</em> e, apesar de não ser candidato, é uma referência importante, estabelecendo o critério de "miínima performance". Ou seja, nenhum "algoritmo candidato a CLP-coordenada" pode ser pior do que o ingênuo.</p>
-<p>Outras tecnologias são até muito boas, mas já foram de ante-mão barradas por não serem livres: são restritas por patentes ou direitos autorais. O Whats3words por exemplo é um destes casos.</p>
-<h2 id="mapcode">MapCode</h2>
-<p><a href="http://www.mapcode.com/getcoords.html?iso3=331&amp;mapcode=RR.56&amp;xx=-46.633956&amp;yy=-23.550385"><strong>MapCode</strong></a></p>
-<p><img alt="" src="../assets/CLP-coord-mapCode-ilustra01b.png" /></p>
-<h2 id="whats3words">Whats3words</h2>
-<p><a href="https://map.what3words.com/funil.leites.chaves"><strong>Whats3words</strong></a></p>
-<p>Por ser patenteado está sendo utilizado apenas como exemplo ilustrativo.</p>
-<p><img alt="" src="../assets/CLP-coord-whats3words-ilustra01.png" /></p>
-<h2 id="syllagloble">Syllagloble</h2>
-<p><a href="http://syllagloble.appspot.com"><strong>Syllagloble</strong></a></p>
-<p>O <em>software Syllagloble</em> é apenas um experimento da empresa "Here". Similar ao What3words, faz uso de 4 sílabas ou palavras curtas, no lugar de 3 palavras longas.</p>
-<p><img alt="" src="../assets/CLP-coord-syllagloble-ilustra01.png" /></p>
-<h2 id="algoritmo-ingenuo">Algoritmo ingênuo</h2>
-<p>As coordenadas geográficas podem ser <a href="spec04ap05-ingenuos.md#compactacao-ingenua">tratadas matematicamente e transformadas em um código mais compacto</a>, e existem várias maneiras de se fazer isso. Uma delas foi batizada de  Geohash, que é apenas uma das tecnologias candidatas, mas aqui tomaremos como exemplo para ilustrar a anatomia de um CLP-coordenada. Neste projeto serão analisados também o MapCode, o PlusCode e o S2geometry.</p></div>
+<p>Na Irlanda hove um concurso entre 2010 e 2011 para  selecionar propostas sistema de código postal.[<a href="https://web.archive.org/web/20150715224453/http://www.irishtimes.com/news/tender-process-for-postal-codes-launched-1.615952">ref</a>] Infelizmente na época as soluções abertas não eram tão difundidas e optou-se por um modelo tradicional que supunha alto custo de manutenção, e portanto com demanda por reimbolso através de licenceamento privado.[<a href="https://web.archive.org/web/20091028200100/http://archives.tcm.ie/businesspost/2008/12/07/story38097.asp">ref</a>],[<a href="https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland#Legislation">ref</a>]</p></div>
         </div>
 
         <footer class="col-md-12">
