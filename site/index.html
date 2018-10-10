@@ -221,7 +221,7 @@
 As recomendações não se limitam à sintaxe dos códigos e sua tradução em latitude-longitude.  Hoje a maioria das aplicações é sensível a contexto, por exemplo meu celular sabe que estou no Estado de São Paulo, onde <code>PIR</code> significa Piracicaba, sem risco de confusão com Pirai do Sul (<code>PIR</code> no Paraná). São também recomendadas regras de decisão para interpretar prefixos internacionais, tais como <code>BR-SP</code> para a capital, mais curto que <code>BR-SP-SPA</code>.
 --></p>
 <h1 id="dois-padroes-via-e-coordenada">Dois padrões, via e coordenada</h1>
-<p>Afinal CLP, <em>Código Localizador de Portão</em>, faz também papel de "endereço da casa dona do portão".  Falta então definir um outro padrão, que seria uma expressão compacta do  endereço postal tradicional. Por exemplo o endereço do MASP,  <em>"Avenida Paulista 1578, São Paulo"</em>. Suponhamos que o código oficial da avenida fosse <code>U131</code>, então o CLP  resultaria em algo como &nbsp; <strong><code>SPA-U131-1578</code></strong>. <br/>Alternativamente, em um contexto onde não se disponha do código do logradouro, o padrão também deve prever a expressão por extenso, que no exemplo resultaria em <strong><code>SPA-av_paulista-1578</code></strong>.  <!-- "u" de urbano, é o  menor CEP da via, no caso a paulista usa 01310-000, teria o ponto por exempl Quintana do CEP 04965-010 seria 4965.01  --></p>
+<p>Afinal CLP, <em>Código Localizador de Portão</em>, faz também papel de "endereço da casa dona do portão".  Falta então definir um outro padrão, que seria uma <strong>expressão compacta do  endereço postal tradicional</strong>. Por exemplo o endereço do MASP,  <em>"Avenida Paulista 1578, São Paulo"</em>. Suponhamos que o código oficial da avenida fosse <code>U131</code>, então o CLP  resultaria em algo como &nbsp; <strong><code>SPA-U131-1578</code></strong>. <br/>Alternativamente, em um contexto onde não se disponha do código do logradouro, o padrão também deve prever a expressão por extenso, que no exemplo resultaria em <strong><code>SPA-av_paulista-1578</code></strong>.  <!-- "u" de urbano, é o  menor CEP da via, no caso a paulista usa 01310-000, teria o ponto por exempl Quintana do CEP 04965-010 seria 4965.01  --></p>
 <p>Esse tipo de código é importante para a representação interna dos endereços de correspondência em bancos de dados, links da internet, e na comunicação entre bancos de dados (interoperabilidade).  </p>
 <p>Existem portanto dois grupos principais de CLPs:</p>
 <table border="0"><tr>
@@ -347,5 +347,5 @@ Todo o relacionamento com a comunidade seria realizado através da metodogia das
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-10-10 17:10:00
+Build Date UTC : 2018-10-10 19:45:53
 -->
