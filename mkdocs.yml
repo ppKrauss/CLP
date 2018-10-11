@@ -4,8 +4,8 @@ pages:
 
     - Apresentação: 
        - Geral: index.md
-       - CLP-via: index_CLPvia.md
        - CLP-coordenada: index_CLPcoord.md
+       - CLP-via: index_CLPvia.md
 
     - Especificações:
       - Geral: spec01-hub.md

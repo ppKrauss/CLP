@@ -54,11 +54,11 @@
 </li>
                             
 <li >
-    <a href="index_CLPvia/">CLP-via</a>
+    <a href="index_CLPcoord/">CLP-coordenada</a>
 </li>
                             
 <li >
-    <a href="index_CLPcoord/">CLP-coordenada</a>
+    <a href="index_CLPvia/">CLP-via</a>
 </li>
                         </ul>
                     </li>
@@ -92,7 +92,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="index_CLPvia/">
+                        <a rel="prev" href="index_CLPcoord/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -116,7 +116,7 @@
 
 <!-- pode ficar mais curto? -->
 
-<p><strong><center><big>CLP</big><br/><small style="font-size:8pt">v0.0.4 - rascunho de 8/10/2018</small></center></strong></p>
+<p><strong><center><big>CLP</big><br/><small style="font-size:8pt">v0.0.5</small></center></strong></p>
 <p>Proposta de <strong>C</strong>ódigo <strong>L</strong>ocalizador de <strong>P</strong>ortão, CLP:  estudos de viabilidade e consulta pública.</p>
 <p>A ideia central do CLP é <strong>oferecer de maneira simples e padronizada, através de um código, a localização geográfica de um portão</strong>. O código será também recomendado como substituto do CEP, no  <strong>endereço da casa</strong> ou local ao qual o portão dá acesso.</p>
 <!-- Portaria, portão, porta ou portal: -->
@@ -127,11 +127,12 @@
 <p>O <strong>CEP <code>69010-060</code></strong> de uma casa em Manaus não nos diz onde ela está,<br/>mas o <strong><a href="https://plus.codes/678XVXCG+3R4">PlusCode <code>VXCG+3R4</code></a></strong> diz exatamente onde está o seu portão! <br/>O que seria melhor fazer, melhorar o CEP ou implantar o PlusCode? Tecnologia Geohash, S2 ou PlusCode? Podemos melhorar o Geohash, melhorar o PlusCode?</p>
 <p>A seguir um breve resumo de como tentaremos responder a estas e outras questões, junto com a comunidade, através da construção da proposta do CLP.</p>
 <h2 id="aprendizados-com-o-cep">Aprendizados com o CEP</h2>
-<p>Depois de décadas usando o CEP aprendendos que ele tem problemas intríncecos do código, e problemas de operação, do "Sistema CEP" como um todo, por reter patentes e direitos autorais, ser centralizado, etc.</p>
-<p>Um dos problemas intrínsecos é a dificuldade de se memorizar, o CEP é tão pouco <em>mnemônico</em> (pouco amigável para memorização) quanto um número de telefone. O uso de siglas já padronizadas, que já estão em nossa memória, seria um grande avanço. Podemos melhorar o CEP <a href="http://www.openstreetmap.com.br/CRP/">substituindo prefixos por siglas</a>. O código de um CEP do Amazonas (AM) pode ser <code>AM150-088</code> ao invés de <code>69150-088</code>, de um CEP de Tocantins (TO), <code>TO500-360</code> ao invés de <code>77500-360</code>.</p>
+<p>Depois de décadas usando o CEP aprendendos que <a href="https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md">ele tem problemas</a> intríncecos do código, e problemas de operação, do "Sistema CEP" como um todo, por reter patentes e direitos autorais, ser centralizado, etc. Sabemos que precisamos do oposto,  <strong>queremos códigos livres</strong> e descentralizados.</p>
+<p>Um dos problemas intrínsecos é a dificuldade de se memorizar, o CEP é tão pouco <strong>mnemônico</strong> (pouco amigável para memorização) quanto um número de telefone. O uso de siglas já padronizadas, que já estão em nossa memória, seria um grande avanço. Podemos melhorar o CEP <a href="http://www.openstreetmap.com.br/CRP/">substituindo prefixos por siglas</a>. O&nbsp;código de um CEP do Amazonas (AM) pode ser <code>AM150-088</code> ao invés de <code>69150-088</code>, de um CEP de Tocantins (TO), <code>TO500-360</code> ao invés de <code>77500-360</code>.</p>
 <p>Também aprendemos com o uso do CEP que um código com hierarquia é útil. Se formos substituir o CEP por um novo padrão, o CLP, queremos que ele preserve essa característica de ser um código hierárquico.</p>
 <p><img alt="" src="./assets/cep-digitos123d.png" /></p>
-<p>O CEP com mais dígitos vai representando com mais detalhe uma região do espaço... Mas são 8 dígitos no CEP completo, e ainda assim não representa o endereço exato do portão. <strong>Com o CLP podemos fazer melhor</strong>, e  justamente por isso, entre outras aplicações, o CLP <a href="https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md">substituiria o CEP</a>, para num só código, de 7 ou 8 caracteres, chegarmos no portão.</p>
+<p>A hierarquia garante que dois CEPs, digamos <code>13165</code> e <code>13170</code>, se possuem prefixos iguais, então são vizinhos, estão dentro de uma mesma região, representada pelo prefixo comum, <code>131</code> no exemplo.</p>
+<p>O CEP com mais dígitos vai representando com mais detalhe uma região do espaço... Mas são 8 dígitos no CEP completo, e ainda assim não representa o endereço exato do portão. <strong>Com o CLP podemos fazer melhor</strong>, e  justamente por isso, entre outras aplicações, o CLP substituiria o CEP, para num só código, de 7 ou 8 caracteres, chegarmos no portão.</p>
 <h2 id="comparacoes-e-como-seria">Comparações e como seria</h2>
 <p>Vejamos como seria  o CLP, por exemplo, para localizar o "portão" do <a href="https://pt.wikipedia.org/wiki/Museu_de_Arte_de_S%C3%A3o_Paulo">MASP</a>.</p>
 <p><img alt="" src="./assets/masp-comparing2b.jpg" /></p>
@@ -177,8 +178,8 @@
 <td>opção <a href="http://geohash.org/6gycf"><em>Geohash</em></a> da sub-região (<code>6gycf</code>)&nbsp; ~4x5 km</td>
 </tr>
 <tr>
-<td><strong><code>SP:94ce</code></strong></td>
-<td>opção <a href="https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&amp;zoom=20&amp;cells=94ce"><em>S2</em></a> da sub-região (<code>94ce</code>)&nbsp; ~4x5 km <!-- REVISAR --></td>
+<td><strong><code>SP:E59</code></strong></td>
+<td>opção <a href="https://s2.sidewalklabs.com/regioncoverer/?center=-23.543286%2C-46.649618&amp;zoom=12&amp;cells=94ce59"><em>S2</em></a> da sub-região (<code>94ce59</code>)&nbsp; ~8x8 km <!-- estado SP = 94c, 94ce59 é macro do MASP --></td>
 </tr>
 <tr>
 <td>(contexto BR-SP)</td>
@@ -215,7 +216,7 @@
 </tbody>
 </table>
 <p>No debate devemos chamar atenção para o fato de que o PlusCode não satisfaz o requisito da hierarquia nas macroregiões: é fundamental saber, antes de decidir qual tecnologia usar, quais critérios consensuais adotaremos.</p>
-<p>Entre os padrões que satisfazem todos os requisitos, como o Geohash e o S2, outras  otimizações podem ainda ser realizadas, levando a códigos mais curtos ou mnemônicos.  Ao fixarmos em normas brasileiras uma tabela de subregiões do município, por exemplo, podemos reduzir em um dígito ambos os casos S2 e Geohash. Se além disso, fazermos uso de estimativas da "mancha urbana futura" como fizeram o CEP e o MapCode, o resultado fica ainda melhor, mas a custo de códigos mais longos no meio rural... Tudo isso seria detalhado pelo presente projeto, para que tenhamos <strong>subsídios para uma decisão racional</strong>.</p>
+<p>Entre os padrões que satisfazem todos os requisitos, como o Geohash e o S2, outras  otimizações podem ainda ser realizadas, levando a códigos mais curtos ou mais mnemônicos.  Ao fixarmos em normas brasileiras uma tabela de subregiões do município, por exemplo, podemos reduzir em um dígito ambos os casos S2 e Geohash. Se além disso, fazermos uso de estimativas da "mancha urbana futura" como fizeram o CEP e o MapCode, o resultado fica ainda melhor, mas a custo de códigos mais longos nas vilas do meio rural... Tudo isso seria detalhado pelo presente projeto, para que tenhamos <strong>subsídios para uma decisão racional</strong>.</p>
 <p>O <!-- <a href="locationCodes.md">levantamento sistemático</a>-->levantamento sistemático, com seleção de otimizações viáveis e a <a href="index_CLPcoord/#comparando-candidatos">comparação</a> dos resultados otimizados é também tema central da presente proposta, um resultado importante de ser apresentado.
 <!--
 As recomendações não se limitam à sintaxe dos códigos e sua tradução em latitude-longitude.  Hoje a maioria das aplicações é sensível a contexto, por exemplo meu celular sabe que estou no Estado de São Paulo, onde <code>PIR</code> significa Piracicaba, sem risco de confusão com Pirai do Sul (<code>PIR</code> no Paraná). São também recomendadas regras de decisão para interpretar prefixos internacionais, tais como <code>BR-SP</code> para a capital, mais curto que <code>BR-SP-SPA</code>.
@@ -227,7 +228,7 @@ As recomendações não se limitam à sintaxe dos códigos e sua tradução em l
 <table border="0"><tr>
 <th width="50%">Definição do tipo</th> <th>Aplicações e exemplos</th>
 </tr><tr>
-<td><b><a href="index_CLPvia">CLP-via</a></b>:<br/>Soluções baseadas na <b>proximidade do portão com uma via de acesso</b> a ele. <br/>O CLP-via seria uma escrita simplificada e padronizada do <a href="https://schema.org/PostalAddress" rel="external">endereço postal</a>; o tradicional, baseado em logradouro e numeração predial.
+<td><b><a href="index_CLPvia">CLP-via</a></b>:<br/>Soluções baseadas na <b>proximidade do portão com uma via de acesso</b> a ele, contendo o código da via e a numeração praticada na via. <br/>O CLP-via seria uma escrita simplificada e padronizada do <a href="https://schema.org/PostalAddress" rel="external">endereço postal</a> tradicional, baseado em logradouro e numeração predial.
 </td><td>Garantiria links corretos e maior interoperabilidade entre bases de endereços.
 </tr><tr>
 <td><b><a href="index_CLPcoord">CLP-coordenada</a></b>:<br/> Soluções baseadas na <b>coordenada geográfica do portão</b>.<br/> Um algoritmo seguro, do tipo Geohash ou outro, toma como entrada as coordenadas padrão <a href="https://en.wikipedia.org/wiki/Geo_URI_scheme" rel="external">Geo URI</a>,<!-- RFC 5870 --> e devolve um código compacto, que é adotado como CLP.
@@ -237,7 +238,8 @@ As recomendações não se limitam à sintaxe dos códigos e sua tradução em l
 </tr></table>
 
 <p>Tecnicamente um tipo pode ser convertido no outro através de <a href="https://en.wikipedia.org/wiki/Geocoding#Geocoding_process">procedimentos de geocodificação</a>. Como existe um crescente <em>mercado de geocofificação</em>, a padronização dos dois tipos de CLP  também ajudaria a regulamentar o setor, garantindo a separação entre pré-processamento do CLP-via e a geocodificação, que resulta num <em>Geo URI</em> com certo grau de confiabilidade. Quando ambos são fornecidos, ambos podem ser convertidos em coordenadas geográficas e comparados, aferindo-se também um grau de confiabilidade resultante da comparação dos dois.  Critérios mínimos para a avaliação de custo e confiabilidade na geocodificação de endereços brasileiros, portanto, passariam a ser viáveis.</p>
-<p>A rigor ambos os códigos, CLP-via e CLP-coordenada, são expressões simbólicas cabíveis dentro das regras de construção de nomes fixadas pelo <a href="https://www.rfc-editor.org/info/rfc8141">padrão RFC-8141</a>, referente à expressão de URNs (do inglês <em>Uniform Resource Names</em>). A expressão formal do CLP-coordenada do MASP seria algo como <code>urn:geocode:br-sp-spa:2pp55c</code>, e do seu CLP-via algo como <code>urn:geocode:br-sp-spa:via:av_paulista-1578</code>, mas isso apareceria apenas em links e bancos de dados.</p>
+<p>A rigor ambos os códigos, CLP-via e CLP-coordenada, são expressões simbólicas cabíveis dentro das regras de construção de nomes fixadas pelo <a href="https://www.rfc-editor.org/info/rfc8141">padrão RFC-8141</a>, referente à expressão de URNs (do inglês <em>Uniform Resource Names</em>). Diversas URNs já são usadas no Brasil, tais como <a href="http://www.isbn.bn.br">código de livro ISBN</a>, e a <a href="http://projeto.lexml.gov.br/documentacao/Parte-2-LexML-URN.pdf">URN LEX</a>, o código oficial identificador de leis e decretos.</p>
+<p>A expressão formal do CLP-coordenada do MASP seria algo como <code>urn:geocode:br-sp-spa:2pp55c</code>, e do seu CLP-via algo como <code>urn:geocode:br-sp-spa:via:av_paulista-1578</code>, mas isso apareceria apenas em links e bancos de dados.</p>
 <p><a name="sintaxe">Na prática</a> os códigos impressos, para leitura humana, sinalização, correspondência, etc. aparecem em contextos onde a syntaxe completa de  <code>urn</code> é dispensável, ficando apenas a estrutura essencial:</p>
 <p><img alt="" src="./assets/CLPcoordenada-syntax2.png" />
 <img alt="" src="./assets/CLPvia-syntax2.png" /></p>
@@ -307,6 +309,7 @@ Todo o relacionamento com a comunidade seria realizado através da metodogia das
 <p>Quanto à tecnologia, na Europa, Japão e outros países já se estuda um "<em>upgrade</em>" dos respectivos CEPs. Na Irlanda por exemplo <a href="https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland#Alternative_location_codes">diversas alternativas tecnológicas foram estudadas entre 2010 e 2011</a>, resultando mais tarde na implantação de um sistema mais moderno, o Eircode, baseado em coordenadas geográficas.</p>
 <p>Quanto à população mais sensível ao problema de "não ter um endereço para chamar de seu", no Brasil, quem mais sofre é a população do <strong>meio rural</strong>, e os bairros e regiões em situação de <strong>habitação precária</strong> &mdash; segundo dados da <a href="https://www.techo.org/brasil/">TETO Brasil</a> são ~15 milhões habitantes desatendidos pelo CEP ou nome de rua.  Todos beneficiariam enormemente de um código de localização oficial, um CLP para o local onde habitam.</p>
 <hr />
+<p>&#160;&#160;Este projeto se encontra disponível em <a href="https://github.com/OSMBrasil/CLP">github.com/<strong>OSMBrasil/CLP</strong></a> (<a href="https://github.com/OSMBrasil/CLP/issues">discutir aqui</a>).</p>
 <p>&#160;&#160;Conteúdos e dados deste projeto são dedicados ao domínio público. Ver também <a href="assets/README/#Imagens">Créditos das imagens</a>.   <br/>&#160;&#160;<a href="assets/README/"><img alt="" src="./assets/CC0-logo-200px.png" /> </a></p></div>
         </div>
 
@@ -347,5 +350,5 @@ Todo o relacionamento com a comunidade seria realizado através da metodogia das
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-10-10 19:45:53
+Build Date UTC : 2018-10-11 10:13:22
 -->

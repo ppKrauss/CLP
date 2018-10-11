@@ -53,12 +53,12 @@
     <a href="..">Geral</a>
 </li>
                             
-<li >
-    <a href="../index_CLPvia/">CLP-via</a>
-</li>
-                            
 <li class="active">
     <a href="./">CLP-coordenada</a>
+</li>
+                            
+<li >
+    <a href="../index_CLPvia/">CLP-via</a>
 </li>
                         </ul>
                     </li>
@@ -87,12 +87,12 @@
                     </a>
                 </li>
                     <li >
-                        <a rel="next" href="../index_CLPvia/">
+                        <a rel="next" href="..">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../spec01-hub/">
+                        <a rel="prev" href="../index_CLPvia/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -113,9 +113,6 @@
             <li><a href="#mapcode">MapCode</a></li>
             <li><a href="#whats3words">Whats3words</a></li>
             <li><a href="#syllagloble">Syllagloble</a></li>
-        <li class="main "><a href="#outras-comparacoes">Outras comparações</a></li>
-            <li><a href="#com-algoritmo-ingenuo">com algoritmo ingênuo</a></li>
-            <li><a href="#com-o-cep">com o CEP</a></li>
         <li class="main "><a href="#lietaratura">Lietaratura</a></li>
     </ul>
 </div></div>
@@ -123,7 +120,7 @@
 
 <p><strong><center><big>CLP baseado na coordenada</big></center></strong></p>
 <p>As coordenadas geográficas e a sua representação em padrões abertos não dependem de qualquer infraestrutura e, portanto, não dependem de empresas ou do governo para a  sua existência e uso continuado. O padrão básico se chama <a href="https://en.wikipedia.org/wiki/Geo_URI_scheme">Geo URI</a> e vem sendo usado em links da internet (<a href="geo:37.786971,-122.399677">exemplo</a>), na troca de dados (ex. vCard), na telefonia móvel (GeoSMS), no Android, e uma infinidade de outras.</p>
-<p>A proposta de um Código Localizador de Portão baseado em coordenada (<strong>CLP-coordenada</strong>) consiste, a grosso modo, em representar de maneira hierárquica e compacta as coordenadas. Com uma hierarquia que começa na escala do município, representado por um código de 3 letras, até chegar no portão, cuja localização seria representada  por um código do tipo Geohash &mdash; ou outro qualquer que venhamos a eleger no presente projeto.</p>
+<p>A proposta de um <a href="..">Código Localizador de Portão</a> baseado em coordenada (<strong>CLP-coordenada</strong>) consiste, a grosso modo, em representar de maneira hierárquica e compacta as coordenadas. Com uma hierarquia que começa na escala do município, representado por um código de 3 letras, até chegar no portão, cuja localização seria representada  por um código do tipo Geohash &mdash; ou outro qualquer que venhamos a eleger no presente projeto.</p>
 <p><img alt="" src="../assets/CLP-anatomia-coord.png" /></p>
 <p>As coordenadas geográficas são muito longas. <a href="https://www.openstreetmap.org/?mlat=-22.860799&amp;mlon=-47.920199&amp;zoom=18">No exemplo</a>, se ficarmos só nos dígitos <strong>seriam ao todo 12</strong>, os dígitos "228607" da latitude e "479201" da longitude. Difícil decorar e trabalhoso digitar.</p>
 <p>O primeiro passo é transformar esses 12 elementos em 8, ao traduzirmos as coordenadas para Geohash, <a href="http://geohash.org/6gvvvw3d"><code>6GVVVW3D</code></a>.</p>
@@ -162,78 +159,144 @@
 <p>Localização do Marco-zero representada por Geohash:  <a href="http://geohash.org/6gyf4bf1n"><code>6gyf4bf1n</code></a>.</p>
 <p>O link acima envia aponta para <code>geohash.org</code> que não dá zoom compativel com a resolução do Geohash. Para a ilustração abaixo foi utilizada a interface manual de <a href="https://movable-type.co.uk/scripts/geohash.html">movable-type.co.uk/scripts/geohash</a>.</p>
 <p><img alt="" src="../assets/CLP-coord-geohash-ilustra01.png" /></p>
-<p>Os dois primeiros dígitos podem ser cortados quando sabemos que o contexto é a cidade de São Paulo (prefixo <code>6g</code>).</p>
-<p>Porta principal (~10m), escadaria da igreja da Sé
-<em> Geohash (base32), 9 dígitos: <code>6gyf4bdn9</code> precisão ~5x5m
-</em> Geohash (base32), 8 dígitos: <code>6gyf4bdn</code> precisão ~35x20m</p>
+<p>Os dois primeiros dígitos (prefixo <code>6g</code>) podem ser cortados quando sabemos que o contexto é a cidade de São Paulo, disso resulta o código mais compacto <code>YF4B.F1N</code>.</p>
+<p>Para completar a ilustração, vejamos a localização de um portão vizinho do Marco, como a <em>entrada da Catedral da Sé</em>, com sua escadaria de ~10m</p>
+<ul>
+<li>Geohash (base32), 9 dígitos: <code>6gyf4bdn9</code> (SPA-YF4B.DN9) precisão ~5x5m</li>
+<li>Geohash (base32), 8 dígitos: <code>6gyf4bdn</code> (SPA-YF4B.DN) precisão ~35x20m</li>
+</ul>
 <p><img alt="" src="../assets/CLP-coord-geohash-ilustra03.png" /></p>
+<p>A assimetria das células que ocorre em certos níveis hierárquicos, como o de 8 dígitos ilustrado acima, tem origem  num problema intrínseco do sistema Latitude-longitude, quando não se recorre a uma projeção ou correção geométrica. Originado pela mesma causa, há também o problema das células Geohash perderem precisão com a latitude &mdash; crescendo a área da célula conforme nos aproximamos do Equador, ao norte do país. A área das células de 8 dígitos varia de 25,1±0,2 m² no RS; até 26,9±0,1 m² no AM. Nas células de 9 dígitos a variação é de 4,4 m² a 4,8 m².</p>
+<p>Por fim, apesar de ser um sistema inteligente na sua hierarquia, matematicamente ele se baseia num fractal que "dá saltos", a <a href="https://en.wikipedia.org/wiki/Z-order_curve"><em>curva de ordem Z</em></a>, perdendo-se a propriedade de "células vizinhas com prefixos iguais", que o tornou atrativo. No <a href="https://github.com/tammoippen/geohash-hilbert">Geohash-Hilbert</a> o problema foi corrigido, assim como no <a href="#s2">S2</a> descrito a seguir.</p>
+<p><strong>Resumo das características do Geohash:</strong>
+<table border="1" width="95%">
+<tr>
+  <td width="180"><i>Representação numérica</i>:<br/> <b>base32</b></td>
+  <td width="155"><i>Célula títipica</i>:<br/> <b>9 dígitos ~5×5 m</b></td>
+  <td><i>Hierarquia</i>:<br/> <b>sim</b>, podendo ser melhor adaptada</td>
+</tr>
+<tr>
+  <td colspan="2"><i>Algoritmos de referência</i>:
+    <br/>- <a href="https://github.com/kungfoo/geohash-java">código Java</a> (licença <a href="https://github.com/kungfoo/geohash-java/blob/master/LICENSE">Apache2</a>);
+    <br/>- <a href="https://postgis.net/docs/ST_GeoHash.html">ST_GeoHash()</a> do PostGIS (licença <a href="https://opensource.org/licenses/gpl-2.0.php">GPL2</a>).
+  </td>
+  <td><i>Potencial de adaptação</i>:<br/>
+    <b>médio</b>, pode-se mudar o alfabeto da base, e acomodar o uso de prefixo de município.
+  </td>
+</tr>
+</table>  </p>
 <h2 id="pluscode">PlusCode</h2>
-<p>Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>.</p>
+<p>Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>, com célula de ~10×10m. A definição do código se encontra em <a href="https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc">OLC Definition</a>.</p>
 <p><img alt="" src="../assets/CLP-coord-plusCode-ilustra01.png" /></p>
+<p>Os quatro primeiros dígitos (prefixo <code>588M</code>) podem ser cortados quando sabemos que o contexto é a cidade de São Paulo, disso resulta o código mais compacto <code>C9X8+RC</code>.</p>
+<p>Grade principal <strong>sem hierarquia</strong>: com células de 1/8000° esferoradianos (áreas de ~100 m²), nesta grade o endereço vizinho do Marco-zero (Editora UNESP a menos de 100 m do Marco-zero) apresenta código <a href="https://plus.codes/588MF928+27">F928+27</a>, totalmete distinto.</p>
+<p><img alt="" src="../assets/CLP-coord-plusCode-ilustra02-grade.png" /></p>
+<p>Para variações na precisão do endereço, existe a hierarquia da grade secundária, subdividindo em mais 20×20 células, com a adição de mais dois dígitos depois do sinal "+". Desse modo <a href="https://plus.codes/588MC9X8+RC4"><code>C9X8+RC4</code></a> é uma célula com ~2,5 metros de lado, e <a href="https://plus.codes/588MC9X8+R"><code>C9X8+R</code></a> ~200 metros.  Devido ao "salto", sem possibilidade de precisão intermediária, o PlusCode deixa de contemplar a escala do portão rural, da ordem de 15×15m nos requisitos do CLP.</p>
+<p><strong>Resumo das características do PlusCode:</strong>
+<table border="1" width="95%">
+<tr>
+  <td width="180"><i>Representação numérica</i>:<br/> <b>base20</b></td>
+  <td width="155"><i>Célula títipica</i>:<br/> <b>10 dígitos ~10×10 m</b></td>
+  <td><i>Hierarquia</i>:<br/> <b>não</b>, subgrade de 3 níveis insuficiente</td>
+</tr>
+<tr>
+  <td colspan="2"><i>Algoritmo de referência</i>:
+    <br/> <a href="https://github.com/google/open-location-code/blob/master/python/openlocationcode.py">código Python</a> e outros, todos <b>licença <a href="https://github.com/google/open-location-code/blob/master/LICENSE">Apache2</a></b>
+  </td>
+  <td><i>Potencial de adaptação</i>:<br/>
+    <b>baixo</b>, pode-se mudar a base para 32,  e acomodar o uso de prefixo de município.
+  </td>
+</tr>
+</table>  </p>
 <h2 id="s2">S2</h2>
-<p><a href="https://s2.sidewalklabs.com/regioncoverer/?cells=94ce59aaf89f&amp;center=-23.550385%2C-46.633956&amp;zoom=20"><strong>S2</strong></a></p>
+<p>Localização do Marco-zero representada por tecnologia S2: <a href="https://s2.sidewalklabs.com/regioncoverer/?cells=94ce59aaf89f&amp;center=-23.550385%2C-46.633956&amp;zoom=21"><code>94ce59aaf89f</code></a>, com célula de ~2×2m.  A representação pode ser adequada para base32, <code>3MHP.9IW0.9</code> (9 dígitos).</p>
+<p>O sistema de referência conhecido como "S2 Geometry" é na verdade uma biblioteca para indexação espacial em grandes bancos de dados, descrita em <a href="http://s2geometry.io">S2geometry.io</a>. As células da <a href="https://en.wikipedia.org/wiki/Discrete_Global_Grid#Hierarchical_grids">grade hierárquia</a>, com identificadores de 64 bits (S2geometry/Cell_ID) são em geral expressos fora da base de dados como números hexadecimais, mas essa escolha é indiferente.</p>
+<p>O site com recursos para demonstração, utilizado na ilustração abaixo, não faz parte da "distribuição oficial".  </p>
 <p><img alt="" src="../assets/CLP-coord-s2-ilustra01c.png" /></p>
+<p>O S2 pode ser considerado uma evolução do <a href="#geohash">Geohash</a>, pois resolve dois problemas sérios para um país de escala continental como o Brasil:</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Z-order_curve">Substituí a problemática <em>curva de ordem Z</em></a>, pela estável <a href="https://en.wikipedia.org/wiki/Hilbert_curve"><em>curva de Hilbert</em></a>, garantindo que códigos vizinhos tenham de fato, em 100% dos casos, o mesmo prefixo, sem descontinuidades.</p>
+</li>
+<li>
+<p>Devido ao uso da projeção corretiva (similar a uma projeção UTM), resolve dois problemas:</p>
+<ul>
+<li>
+<p>o problema área das células, garantindo que seja uniforme (quase constante) ao longo de todo o território nacional.</p>
+</li>
+<li>
+<p>o problema da forma das células, que se matém uniforme em todas as escalas e ao longo de todo o território nacional.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Resumo das características do S2geometry/Cell_ID:</strong>
+<table border="1" width="95%">
+<tr>
+  <td width="180"><i>Representação numérica</i>:<br/> <b>base16</b></td>
+  <td width="180">
+    <i>Célula títipica</i>: <a href="http://s2geometry.io/resources/s2cell_statistics.html">level-21</a><br/> <b>12 dígitos ~2×2 m</b>
+  </td>
+  <td><i>Hierarquia</i>:<br/> <b>sim</b>, podendo ser melhor adaptada</td>
+</tr>
+<tr>
+  <td colspan="2"><i>Algoritmo de referência</i>:
+    <br/> <a href="https://github.com/google/s2geometry">código C++</a> (licença <a href="https://github.com/google/s2geometry/blob/master/LICENSE">Apache2</a>).
+  </td>
+  <td><i>Potencial de adaptação</i>:<br/>
+    <b>bom</b>, pode-se adotar base32 e acomodar o uso de prefixo de município.
+    Forma e área das células estável em todo o território nacional.
+  </td>
+</tr>
+</table>  </p>
 <h1 id="comparando-com-nao-candidatos">Comparando com não-candidatos</h1>
-<p>Alguns algoritmos/tecnologias são muito ruins e por isso devem ser descartados do estudo comparativo. Um desses algoritmos foi apelidado de <em>algoritmo ingênuo</em> e, apesar de não ser candidato, é uma referência importante, estabelecendo o critério de "miínima performance". Ou seja, nenhum "algoritmo candidato a CLP-coordenada" pode ser pior do que o ingênuo.</p>
+<p>Alguns algoritmos/tecnologias são muito ruins e por isso devem ser descartados do estudo comparativo. Um desses algoritmos foi apelidado de <em>algoritmo ingênuo</em> e, apesar de não ser candidato, é uma referência importante, estabelecendo o critério de "mínima performance". Ou seja, nenhum "algoritmo candidato a CLP-coordenada" pode ser pior do que o ingênuo.</p>
 <p>Outras tecnologias são até muito boas, mas já foram de ante-mão barradas por não serem livres: são restritas por patentes ou direitos autorais. O Whats3words por exemplo é um destes casos.</p>
 <h2 id="mapcode">MapCode</h2>
-<p><a href="http://www.mapcode.com/getcoords.html?iso3=331&amp;mapcode=RR.56&amp;xx=-46.633956&amp;yy=-23.550385"><strong>MapCode</strong></a></p>
+<p>Localização do Marco-zero representada por tecnologia MapCode: <a href="http://www.mapcode.com/getcoords.html?iso3=331&amp;mapcode=RR.56&amp;xx=-46.633956&amp;yy=-23.550385"><code>BR-SP RR.56</code></a>
+com célula de ~5×5m (a confirmar). É um código não-hierarquico (a confirmar) de 4 caracteres aparentemente base36.</p>
+<p>O MapCode está contextualizado pela cidade mais populosa nas proximidades do sinal de quem faz a solicitação, que neste caso é a capital de <code>BR-SP</code>, representada no link pelo  código <em>ISO 331</em>.</p>
 <p><img alt="" src="../assets/CLP-coord-mapCode-ilustra01b.png" /></p>
 <h2 id="whats3words">Whats3words</h2>
-<p><a href="https://map.what3words.com/funil.leites.chaves"><strong>Whats3words</strong></a></p>
-<p>Por ser patenteado está sendo utilizado apenas como exemplo ilustrativo.</p>
+<p>Localização do Marco-zero representada por tecnologia Whats3words: <a href="https://map.what3words.com/funil.leites.chaves"><code>funil.leites.chaves</code></a>
+com célula de ~4×4m (a confirmar). É um código não-hierarquico de 3 palavras, cada palavra representa um dígito da base600 ou maior.</p>
+<p>É o principal representante da priorização do "legível e mnemônico", ou seja, pretende-se que seja mais fácil comunicar, soletrar ou lembrar de uma sequência de 3 palavras aleatórias, do que de uma sequência de 6 letras aleatórias.</p>
 <p><img alt="" src="../assets/CLP-coord-whats3words-ilustra01.png" /></p>
 <h2 id="syllagloble">Syllagloble</h2>
-<p><a href="http://syllagloble.appspot.com"><strong>Syllagloble</strong></a></p>
+<p>Localização do Marco-zero representada por tecnologia Syllagloble: <a href="http://syllagloble.appspot.com"><code>det erwi kam oyqo</code></a>
+com célula de ~3×5m (a confirmar).</p>
 <p>O <em>software Syllagloble</em> é apenas um experimento da empresa "Here". Similar ao What3words, faz uso de 4 sílabas ou palavras curtas, no lugar de 3 palavras longas.</p>
 <p><img alt="" src="../assets/CLP-coord-syllagloble-ilustra01.png" /></p>
-<h1 id="outras-comparacoes">Outras comparações</h1>
-<h2 id="com-algoritmo-ingenuo">com algoritmo ingênuo</h2>
-<p>As coordenadas geográficas podem ser <a href="spec04ap05-ingenuos.md#compactacao-ingenua">tratadas matematicamente e transformadas em um código mais compacto</a>, e existem várias maneiras de se fazer isso. Uma delas foi batizada de  Geohash, que é apenas uma das tecnologias candidatas, mas aqui tomaremos como exemplo para ilustrar a anatomia de um CLP-coordenada. Neste projeto serão analisados também o MapCode, o PlusCode e o S2geometry.</p>
-<h2 id="com-o-cep">com o CEP</h2>
-<p>Como uma das metas do CLP é se apresentar como potencial substituto do CEP no endereçamento postal, alguns requisitos, tais como a hierarquia desde macro região (siglas de estado e cidade), são decorrentes desta demanda. As principais diferenças entre o CEP e o CLP são:</p>
-<table>
-<thead>
-<tr>
-<th>Característica</th>
-<th>CEP</th>
-<th>CLP-coordenada</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>É <strong>um código só</strong> para o usuário lembrar?</td>
-<td>sim</td>
-<td>sim (um código só)</td>
-</tr>
-<tr>
-<td>É mais <strong>fácil de lembrar</strong> do que um número de telefone?</td>
-<td>Não. O CEP faz uso de "números opacos", ou seja, não são siglas e não são números com significado que possa ser lembrado.</td>
-<td>Talvez. O CLP oferece prefixo mnemônico, baseado nas siglas de estado e município.</td>
-</tr>
-<tr>
-<td>Demanda <strong>autoridade central</strong>?</td>
-<td>sim</td>
-<td>não</td>
-</tr>
-<tr>
-<td>Existe <strong>custo</strong> para o uso do sistema crescer?</td>
-<td>sim</td>
-<td>não</td>
-</tr>
-<tr>
-<td>Entidade espacial <strong>representada</strong>:</td>
-<td>Região ou logradouro.<br/>Na sua hierarquia o CEP representa macro-regiões, tais como um estado inteiro (2 dígitos), depois municípios (5 dígitos), até chegar na escala do logradouro (8 dígitos).<!-- <br/>Vantagem: uma casa demolida e reconstruída em outro local da rua terá um mesmo CEP.--></td>
-<td>Posição da porta em goordenadas do globo terrestre. <br/>Conforme o número de dígitos representa "células" de uma grade hierárquica, permitindo indicar portões maiores ou menores.</td>
-</tr>
-<tr>
-<td><strong>precisão</strong> no resultado da transformação do código em localização no mapa</td>
-<td>Varia conforme seja apenas um "CEP geral da cidde", um CEP de logradouro ou CEP de grande receptor. Em geral nas áreas rurais não existe CEP do logradouro.</td>
-<td>Sempre define uma célula de mesma área com opção de acrescentar mais um dígitos para ficar mais preciso. Algumas alternativas permitem mais precisão (menos um dígito) na região da mancha urbana prevista para uma ou mais décadas.</td>
-</tr>
-</tbody>
-</table>
-<p>Uma comparação similar foi realizada por K. Clemens em 2016 (<a href="https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119">ref</a>), ao levandar as características de geocódigos e de códigos postais em geral, de diversos países.
+<!--
+Digito verificador: artigo sugere que seja uma palavra ... nós sugerimos que no Brasil seja um Bicho do conjunto do 25 do jogo do bicho, mais outros 7 populares.
+
+## Ericode
+
+...
+
+# Outras comparações
+
+## com algoritmo ingênuo
+
+As coordenadas geográficas podem ser [tratadas matematicamente e transformadas em um código mais compacto](spec04ap05-ingenuos.md#compactacao-ingenua), e existem várias maneiras de se fazer isso. Uma delas foi batizada de  Geohash, que é apenas uma das tecnologias candidatas, mas aqui tomaremos como exemplo para ilustrar a anatomia de um CLP-coordenada. Neste projeto serão analisados também o MapCode, o PlusCode e o S2geometry.
+
+## com o CEP
+
+
+Como uma das metas do CLP é se apresentar como potencial substituto do CEP no endereçamento postal, alguns requisitos, tais como a hierarquia desde macro região (siglas de estado e cidade), são decorrentes desta demanda. As principais diferenças entre o CEP e o CLP são:
+
+Característica | CEP | CLP-coordenada
+---------------|-----|------------------
+É **um código só** para o usuário lembrar? | sim | sim (um código só)
+É mais **fácil de lembrar** do que um número de telefone? | Não. O CEP faz uso de "números opacos", ou seja, não são siglas e não são números com significado que possa ser lembrado. | Talvez. O CLP oferece prefixo mnemônico, baseado nas siglas de estado e município.
+Demanda **autoridade central**? | sim | não
+Existe **custo** para o uso do sistema crescer? |sim | não
+Entidade espacial **representada**: |Região ou logradouro.<br/>Na sua hierarquia o CEP representa macro-regiões, tais como um estado inteiro (2 dígitos), depois municípios (5 dígitos), até chegar na escala do logradouro (8 dígitos).!-- <br/>Vantagem: uma casa demolida e reconstruída em outro local da rua terá um mesmo CEP.-- |Posição da porta em goordenadas do globo terrestre. <br/>Conforme o número de dígitos representa "células" de uma grade hierárquica, permitindo indicar portões maiores ou menores.
+**precisão** no resultado da transformação do código em localização no mapa|Varia conforme seja apenas um "CEP geral da cidde", um CEP de logradouro ou CEP de grande receptor. Em geral nas áreas rurais não existe CEP do logradouro. | Sempre define uma célula de mesma área com opção de acrescentar mais um dígitos para ficar mais preciso. Algumas alternativas permitem mais precisão (menos um dígito) na região da mancha urbana prevista para uma ou mais décadas.
+
+Uma comparação similar foi realizada por K. Clemens em 2016 ([ref](https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119)), ao levandar as características de geocódigos e de códigos postais em geral, de diversos países.
+-->
+
 <!---
 table align="center" border="0" style="width:75%">
 <tr> <td colspan=4 align="center" style="background:#87cefa; color:#000000;"> <b>CÓDIGO POSTAL (tipo CEP)</b>
@@ -251,7 +314,8 @@ table align="center" border="0" style="width:75%">
  <tr style="background:#0000fe; color:#000000;" align="center">
      <td> 65xxx MA<td>65000...65180<br/>São Luiz <td>-000 a -899 vias <td>-9xx condomínios
 </table>
---></p>
+-->
+
 <hr />
 <h1 id="lietaratura">Lietaratura</h1>
 <p>As comparações entre tecnologias que solucionam o problema também tem sido realizadas, por exemplo <a href=""></a></p>
