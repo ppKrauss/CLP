@@ -1,5 +1,5 @@
 <!-- pode ficar mais curto? -->
-**<center><big>CLP</big><br/><small style="font-size:8pt">v0.0.6</small></center>**
+**<center><big>CLP</big><br/><small style="font-size:8pt">v0.0.6b</small></center>**
 
 Proposta de **C**ódigo **L**ocalizador de **P**ortão, CLP:  estudos de viabilidade e consulta pública.
 
@@ -19,7 +19,7 @@ Em 2018 a Secretaria da Agricultura de Estado de São Paulo reconheceu essa dív
 
 Outras aplicações para o CLP não faltam (!). *Localizar* e *descrever onde está localizado* vale para casa, carro, bicicletário, bicicleta, café, chocolate, cachorro, barraca da feira... Uma lista infinita, que parece limitada apenas pela imaginação.
 
-O sistema universal de localização, preciso e reconhecido por qualquer país do mundo, no mapa de papel ou no mapa da internet, é a coordenada geográfica (latitude/longitude).  Mais especificamente coordenadas medidas no [sistema WGS84](https://es.wikipedia.org/wiki/WGS84#Par%C3%A1metros_B%C3%A1sicos_de_Definici%C3%B3n), presente inclusive em mapas eletrônicos e dispositivos de localização (ex. GPS do celular). Todavia essa localização é representada por números que somam de 12 a 14 dígitos, **não é curto** como uma placa de carro ou número de telefone. O Geohash, PlusCode e similares, para a mesma precisão, gastam 6 a 9 caracteres: são soluções viáveis, até mesmo para substituir o CEP.
+O sistema universal de localização, preciso e reconhecido por qualquer país do mundo, no mapa de papel ou no mapa da internet, é a coordenada geográfica (latitude/longitude).  Mais especificamente coordenadas medidas no [sistema WGS84](https://es.wikipedia.org/wiki/WGS84#Par%C3%A1metros_B%C3%A1sicos_de_Definici%C3%B3n), presente inclusive em mapas eletrônicos e dispositivos de localização (ex. GPS do celular). Todavia essa localização é representada por números que somam de 12 a 14 dígitos, **não é curto**, é difícil de lembrar, mais difícil que uma placa de carro. Os códigos Geohash, PlusCode e similares, para a mesma precisão, gastam 6 a 9 caracteres: são soluções viáveis, até mesmo para substituir o CEP.
 
 O CEP `20031-050` do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP `20031-040` da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo [PlusCode `3RRF`](https://plus.codes/589R3RRF+) ou Geohash `CM9MX`. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  **[PlusCode `3RRF+6F`](https://plus.codes/589R3RRF+6F)**, diz exatamente onde está o  portão!<!-- O **CEP `69010-060`** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **[PlusCode `VXCG+3R4`](https://plus.codes/678XVXCG+3R4)** diz exatamente onde está o seu portão!--> <br/><small>&nbsp; &nbsp; [siga o link do `3RRF+6F` para entender se ainda não conhece]</small><br/>
 
@@ -76,15 +76,17 @@ Opção de CLP proposta<br>(contexto BR) | portão do MASP na tecnologia de refe
 **`SPA-YCFQ.F0M`** | [*Geohash*](http://geohash.org/6gycfqf0m) de um  ponto (`6gycfqf0m`)&nbsp; ~4x4&nbsp;m
 **`SPA-C8QV+CJ`** | [*PlusCode*](https://plus.codes/588MC8QV+CJ) do **portão** (`588MC8QV+CJ`)&nbsp; ~15x15 m
 **`SPA-C8QV+CJ4`** | [*PlusCode*](https://plus.codes/588MC8QV+CJ4) de um ponto (`588MC8QV+CJ4`)&nbsp; ~3x3 m
-**`SPA-2PP5.5C`**&nbsp;\* | [*S2*](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ac) do **portão** (`94ce59c94ac`)&nbsp;<!--94ce--> ~15x15&nbsp;m
+**`SPA-1CSI.IM`**&nbsp;\* | [*S2*](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ac) do **portão** (`94ce59c94ac`)&nbsp;<!--94ce--> ~15x15&nbsp;m
 **`SPA-1CSI.IN1`**&nbsp;\* | [*S2*](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ae1) de um ponto (`94ce59c94ae1`)&nbsp; ~2x2&nbsp;m
 &nbsp;\* <small>convertido p. base32.</small>|
 
-Qual opção de tecnologia adaptada ao CLP seriam melhor?
+Qual opção de tecnologia adaptada ao CLP seria a melhor? Qual gera códigos mais curtos e precisos?  Mais fáceis de lembrar? Com infraestrutura mais barata?
 
-No debate devemos chamar atenção para o fato de que o PlusCode não satisfaz o requisito da hierarquia nas macroregiões: é fundamental saber, antes de decidir qual tecnologia usar, **quais critérios consensuais adotaremos como [requisitos do CLP](spec04ap03-reqs.md)**. Nem todos os critérios técnicos são evidentes, e nem todos os critérios são técnicos. Daí o projeto estar enfatizando a formação de um coletivo para a discussão e votação das melhores opções, iniciando por representantes das comunidades brasileiras que entendem do assunto, como a [OpenStretMap Brasil](https://wiki.openstreetmap.org/wiki/Pt:Contact), a TETO Brasil e a Wikidata-Brasil.
+No debate devemos chamar atenção, por exemplo, para o fato de que o PlusCode não satisfaz o requisito da hierarquia nas macroregiões, nas escalas de bairro e quadra: precisamos dessa parte da hierarquia?
 
-Entre os padrões que satisfazem todos os requisitos, como o Geohash e o S2, outras  otimizações podem ainda ser realizadas, levando a códigos mais curtos ou mais mnemônicos.  Ao padronizarmos subregiões do município, por exemplo, podemos reduzir em um dígito ambos os casos S2 e Geohash. Se além disso, fazermos uso de estimativas da "mancha urbana futura" como fizeram o CEP e o MapCode, o resultado fica ainda melhor, mas a custo de códigos mais longos nas vilas do meio rural... Tudo isso seria detalhado pelo presente projeto, para que tenhamos **subsídios para uma decisão racional**.
+É fundamental saber, antes de decidir qual tecnologia usar, **quais critérios consensuais adotaremos como [requisitos do CLP](spec04ap03-reqs.md)**. Nem todos os critérios técnicos são evidentes, e nem todos os critérios são técnicos. Daí o projeto estar enfatizando a formação de um coletivo para a discussão e votação das melhores opções, iniciando por representantes das comunidades brasileiras que entendem do assunto, como a [OpenStretMap Brasil](https://wiki.openstreetmap.org/wiki/Pt:Contact), a TETO Brasil e a Wikidata-Brasil.
+
+Mesmo entre as tecnologias aparentemente acabadas como PlusCode ou Geohash, outras  otimizações podem ser realizadas, levando a códigos mais curtos ou mais mnemônicos. Se o padrão CLP fizer uso de estimativas da densidade de ocupação e da "mancha urbana futura", como fizeram o CEP e o MapCode, os códigos ficam ainda melhores, mais curtos, mas a custo de códigos mais longos nas vilas do meio rural... Tudo isso seria detalhado pelo presente projeto, para que tenhamos **subsídios para uma decisão ótima e racional**.
 
 O <!-- [levantamento sistemático](locationCodes.md)-->levantamento sistemático, com seleção de otimizações viáveis e a [comparação](index_CLPcoord.md#comparando-candidatos) dos resultados otimizados é também tema central da presente proposta, um resultado importante de ser apresentado.
 <!--
@@ -115,9 +117,9 @@ Tecnicamente um tipo pode ser convertido no outro através de [procedimentos de 
 
 A rigor ambos os códigos, CLP-via e CLP-coordenada, são expressões simbólicas cabíveis dentro das regras de construção de nomes fixadas pelo [padrão RFC-8141](https://www.rfc-editor.org/info/rfc8141), referente à expressão de URNs (do inglês *Uniform Resource Names*). Diversas URNs já são usadas no Brasil, tais como [código de livro ISBN](http://www.isbn.bn.br), e a [URN LEX](http://projeto.lexml.gov.br/documentacao/Parte-2-LexML-URN.pdf), o código oficial identificador de leis e decretos.
 
-A expressão formal do CLP-coordenada do MASP seria algo como `urn:geocode:br-sp-spa:2pp55c`, e do seu CLP-via algo como `urn:geocode:br-sp-spa:via:av_paulista-1578`, mas isso apareceria apenas em links e bancos de dados.
+A expressão formal do CLP-coordenada do MASP seria algo como `urn:geocode:br-sp-spa:ycfqf0`, e do seu CLP-via algo como `urn:geocode:br-sp-spa:via:av_paulista-1578`, mas isso apareceria apenas em links e bancos de dados.
 
-<a name="sintaxe">Na prática</a> os códigos impressos, para leitura humana, sinalização, correspondência, etc. aparecem em contextos onde a syntaxe completa de  `urn` é dispensável, ficando apenas a estrutura essencial:
+<a name="sintaxe">Na prática</a> os códigos impressos, para leitura humana, sinalização, correspondência, etc. aparecem em contextos onde a sintaxe completa de  `urn` é dispensável, ficando apenas a estrutura essencial:
 
 ![](assets/CLPcoordenada-syntax2.png)
 ![](assets/CLPvia-syntax2.png)
@@ -186,7 +188,7 @@ A busca por soluções tecnológicas é mundial, floresceu nos anos recentes. As
 
 Quanto à tecnologia, na Europa, Japão e outros países já se estuda um "*upgrade*" dos respectivos CEPs. Na Irlanda por exemplo [diversas alternativas tecnológicas foram estudadas entre 2010 e 2011](https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland#Alternative_location_codes), resultando mais tarde na implantação de um sistema mais moderno, o Eircode, baseado em coordenadas geográficas.
 
-Quanto à população mais sensível ao problema de "não ter um endereço para chamar de seu", no Brasil, quem mais sofre é a população do **meio rural**, e os bairros e regiões em situação de **habitação precária** &mdash; segundo dados da [TETO Brasil](https://www.techo.org/brasil/) são ~15 milhões habitantes desatendidos pelo CEP ou nome de rua.  Todos beneficiariam enormemente de um código de localização oficial, um CLP para o local onde habitam.
+Quanto à população mais sensível ao problema de "não ter um endereço para chamar de seu", no Brasil, quem mais sofre é a população do **meio rural**, e os bairros e regiões em situação de **habitação precária** &mdash; segundo dados da [TETO Brasil](https://www.techo.org/brasil/) são ~15 milhões habitantes desatendidos pelo CEP ou nome de rua.  Todos beneficiariam enormemente de um código de localização oficial.
 
 ------
 
