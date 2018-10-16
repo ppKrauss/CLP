@@ -75,6 +75,15 @@
 </li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apêncides <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="spec04ap01-siglas/">Siglas</a>
+</li>
+                        </ul>
+                    </li>
                     <li >
                         <a href="assets/README/">Créditos</a>
                     </li>
@@ -105,7 +114,6 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#motivacoes-e-estrategias">Motivações e estratégias</a></li>
-            <li><a href="#aprendizados-com-o-cep">Aprendizados com o CEP</a></li>
         <li class="main "><a href="#comparacoes-e-como-seria">Comparações e como seria</a></li>
             <li><a href="#dois-padroes-via-e-coordenada">Dois padrões, via e coordenada</a></li>
         <li class="main "><a href="#planejamento">Planejamento</a></li>
@@ -117,7 +125,7 @@
 
 <!-- pode ficar mais curto? -->
 
-<p><strong><center><big>CLP</big><br/><small style="font-size:8pt">v0.0.6b</small></center></strong></p>
+<p><strong><center><big>CLP</big><br/><small style="font-size:8pt">v0.0.7</small></center></strong></p>
 <p>Proposta de <strong>C</strong>ódigo <strong>L</strong>ocalizador de <strong>P</strong>ortão, CLP:  estudos de viabilidade e consulta pública.</p>
 <p>A ideia central do CLP é <strong>oferecer de maneira simples e padronizada, através de um código, a localização geográfica de um portão</strong>. O código será também recomendado como expressão digital do  <strong>endereço da casa</strong> ou local ao qual o portão dá acesso.</p>
 <!-- Portaria, portão, porta ou portal: -->
@@ -126,22 +134,15 @@
 <p><img alt="" src="./assets/ilustra-escalas01.jpg" /></p>
 <p>As tecnologias para se implantar e padronizar um CLP  são bem consolidadas, existem opções como o <a href="http://geohash.org/6gyf4bf1n">Geohash</a>, <a href="https://s2geometry.io/">S2</a> ou <a href="https://plus.codes/588MC9X8+RC">PlusCode</a>, que são padrões livres, e MapCode <!--(http://www.mapcode.com/getcoords.html?iso3=331&mapcode=RR.56&xx=-46.633956&yy=-23.550385)--> ou Whats3words, patenteados mas úteis como exemplo. Estas opções tecnológicas globais podem ser melhor <strong>adaptadas às condições e padrões locais do Brasil</strong>, e nisto consistirá uma parte relevante dos estudos e recomendações realizados pelo presente projeto.</p>
 <h1 id="motivacoes-e-estrategias">Motivações e estratégias</h1>
-<p>O conceito de <em>portão</em> do CLP está relacionado com o local onde se habita ou se trabalha, ou onde são prestados serviços públicos: saber do local e informar oficialmente o local <strong>são necessidades básicas asseguradas pela   <a href="https://www.senado.leg.br/atividade/const/constituicao-federal.asp">Constituição</a></strong>, são facetas do <em>habitar</em> (arts. 6º e 23), do <em>ir-e-vir</em> (art. 5º inc. XV), do <em>ser informado</em> (Art. 5º inc. XXXIII) e do <em>trabalhar</em> (arts. 6º, 170 e 193). <br/>Se um desses casos carece de <strong>endereço oficial</strong>, é uma dívida em aberto, do governo com o cidadão. A  chave da informação oficial, nos dias de hoje, é localizar a posição em mapa público e aberto (livre de patentes ou direitos autorais), tal como <a href="http://OSM.org">OpenStreetMap</a>. É uma questão de <strong>soberania nacional</strong> (art. 4º, incisos I a X), não depender de patentes, direitos autorais ou infraestrutura privada/estrangeira.<!-- ,incisos  onde se encontram os princípios da independência nacional, da autodeterminação dos povos, da não-intervenção, da igualdade entre os Estados.)... Soberania = autoridade superior que não pode ser limitada por nenhum outro poder.   .. e soberania do direito público sobre o direito privado.. --></p>
+<p>O conceito de <em>portão</em> do CLP está relacionado com o local onde se habita ou se trabalha, ou onde são prestados serviços públicos: saber do local e informar oficialmente o local <strong>são necessidades básicas asseguradas pela   <a href="https://www.senado.leg.br/atividade/const/constituicao-federal.asp">Constituição</a></strong>, são facetas do <em>habitar</em> (arts. 6º e 23), do <em>ir-e-vir</em> (art. 5º inc. XV), do <em>ser informado</em> (Art. 5º inc. XXXIII) e do <em>trabalhar</em> (arts. 6º, 170 e 193). <br/>Se um desses casos carece de <strong>endereço oficial</strong>, é uma dívida em aberto, do governo com o cidadão. A  chave da informação oficial, nos dias de hoje, é localizar a posição em mapa público e aberto, tal como <a href="http://OSM.org">OpenStreetMap</a>. É uma questão de <strong>soberania nacional</strong> (art. 4º, incisos I a X), não depender de patentes, direitos autorais ou infraestrutura privada/estrangeira.<!-- ,incisos  onde se encontram os princípios da independência nacional, da autodeterminação dos povos, da não-intervenção, da igualdade entre os Estados.)... Soberania = autoridade superior que não pode ser limitada por nenhum outro poder.   .. e soberania do direito público sobre o direito privado.. --></p>
 <p>Em 2018 a Secretaria da Agricultura de Estado de São Paulo reconheceu essa dívida para com os habitantes e serviços do meio rural,  e procurou a Comunidade OpenStreetMap em busca de soluções soberanas abertas. Convidados em seguida prefeituras usuárias do OpenStreetMap e o Terceiro Setor, através de entidades tais como a <a href="https://www.techo.org/brasil/">TETO BRASIL</a>; elas também vêm dialogando com a comunidade técnica em busca de soluções abertas.</p>
 <p>Outras aplicações para o CLP não faltam (!). <em>Localizar</em> e <em>descrever onde está localizado</em> vale para casa, carro, bicicletário, bicicleta, café, chocolate, cachorro, barraca da feira... Uma lista infinita, que parece limitada apenas pela imaginação.</p>
-<p>O sistema universal de localização, preciso e reconhecido por qualquer país do mundo, no mapa de papel ou no mapa da internet, é a <strong>coordenada geográfica (latitude/longitude)</strong>.  Mais especificamente coordenadas medidas no <a href="https://es.wikipedia.org/wiki/WGS84#Par%C3%A1metros_B%C3%A1sicos_de_Definici%C3%B3n">sistema de coordenadas WGS84</a>, presente inclusive em mapas digitais e dispositivos de localização (ex. <em>smartphone</em> com receptor GPS). Todavia essa localização é representada por números que somam de 12 a 14 dígitos, <strong>não é curto</strong>, é difícil de lembrar, mais difícil que uma placa de carro. Os códigos Geohash, PlusCode e similares, para a mesma precisão, gastam 6 a 9 caracteres: são soluções viáveis, até mesmo para substituir o CEP.</p>
-<p>O CEP <code>20031-050</code> do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP <code>20031-040</code> da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo <a href="https://plus.codes/589R3RRF+">PlusCode klzzwxh:0040</a> ou Geohash <code>CM9MX</code>. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  <strong><a href="https://plus.codes/589R3RRF+6F">PlusCode <code>3RRF+6F</code></a></strong>, diz exatamente onde está o  portão!<!-- O **CEP <code>69010-060</code>** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **<a href="https://plus.codes/678XVXCG+3R4">PlusCode klzzwxh:0044</a>** diz exatamente onde está o seu portão!--> <br/><small>&nbsp; &nbsp; [siga o link do <code>3RRF+6F</code> para entender se ainda não conhece]</small><br/></p>
+<p>O sistema universal de localização, aceito em qualquer país, é a <strong>coordenada geográfica (latitude/longitude)</strong>.  Mais especificamente o  <a href="https://es.wikipedia.org/wiki/WGS84#Par%C3%A1metros_B%C3%A1sicos_de_Definici%C3%B3n">sistema de coordenadas WGS84</a>, presente inclusive em mapas digitais e dispositivos de localização (ex. <em>smartphone</em> com receptor GPS). Todavia cada coordenada tem de 6 a 8 dígitos, somando de 12 a 16 dígitos, <strong>não é um código curto</strong>.<!--, é difícil de lembrar, mais difícil que uma placa de carro.--> Os códigos Geohash, PlusCode e similares, para a mesma precisão, gastam 6 a 9 caracteres: são soluções viáveis, até mesmo para substituir o CEP.</p>
+<p>O CEP <code>20031-050</code> do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP <code>20031-040</code> da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo <a href="https://plus.codes/589R3RRF+">PlusCode klzzwxh:0041</a> ou Geohash <code>CM9MX</code>. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  <strong><a href="https://plus.codes/589R3RRF+6F">PlusCode <code>3RRF+6F</code></a></strong>, diz exatamente onde está o  portão!<!-- O **CEP <code>69010-060</code>** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **<a href="https://plus.codes/678XVXCG+3R4">PlusCode klzzwxh:0045</a>** diz exatamente onde está o seu portão!--> <br/><small>&nbsp; &nbsp; [siga o link do <code>3RRF+6F</code> para entender se ainda não conhece]</small><br/></p>
 <p>O CLP, quando representando um endereço, pode ser recomendado como substituto do CEP nos lugares onde o CEP não chegou, tipicamente nas fazendas, vilas e zonas rurais.  O CLP pode  ser também expressão do próprio endereço, onde não existe nome oficial de logradouro, como em novos loteamentos, em conjuntos habitacionais precários e em favelas.</p>
 <p>... O que seria ideal fazer, melhorar o CEP ou implantar o PlusCode? Ou tecnologia Geohash?  Ou tecnologia S2? Será que podemos melhorar essas tecnologias para as nossas condições, garantindo a padronização de códigos mais curtos para o Brasil?</p>
 <p>Em estudos preliminares já comprovamos que é possível usar tais tecnologias e moldá-las ao Brasil e a cada município para deixar o código ainda mais curto.
 A seguir um breve resumo de como tentaremos responder a estas e outras questões, junto com a comunidade, através da construção da proposta do CLP.</p>
-<h2 id="aprendizados-com-o-cep">Aprendizados com o CEP</h2>
-<p>Depois de décadas usando o CEP aprendendos que <a href="https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md">ele tem problemas</a> intríncecos do código, e problemas de operação, do "Sistema CEP" como um todo, por reter patentes e direitos autorais, ser centralizado, etc. Sabemos que precisamos do oposto,  <strong>queremos códigos livres</strong> e descentralizados.</p>
-<p>Um dos problemas intrínsecos é a dificuldade de se memorizar, o CEP é tão pouco <strong>mnemônico</strong> (pouco amigável para memorização) quanto um número de telefone. O uso de siglas já padronizadas, que já estão em nossa memória, seria um grande avanço. Podemos melhorar o CEP <a href="http://www.openstreetmap.com.br/CRP/">substituindo prefixos por siglas</a>. O&nbsp;código de um CEP do Amazonas&nbsp;(AM) pode ser <code>AM150‑088</code> ao invés de <code>69150‑088</code>, de um CEP de Tocantins&nbsp;(TO), <code>TO500‑360</code> ao invés de <code>77500‑360</code>.</p>
-<p>Também aprendemos com o uso do CEP que um código com hierarquia é útil. Se formos substituir o CEP por um novo padrão, o CLP, queremos que ele preserve essa característica de ser um código hierárquico.</p>
-<p><img alt="" src="./assets/cep-digitos123d.png" /></p>
-<p>A hierarquia garante que dois CEPs, digamos <code>13165</code> e <code>13170</code>, se possuem prefixos iguais, então são vizinhos, estão dentro de uma mesma região, representada pelo prefixo comum, <code>131</code> no exemplo.</p>
-<p>O CEP com mais dígitos vai representando com mais detalhe uma região do espaço... Mas são 8 dígitos no CEP completo, e ainda assim não representa o endereço exato do portão. <strong>Com o CLP podemos fazer melhor</strong>, e  justamente por isso, entre outras aplicações, o CLP num futuro distante substituiria  o CEP, para num só código, de 7 ou 8 caracteres, chegarmos no portão.</p>
 <h1 id="comparacoes-e-como-seria">Comparações e como seria</h1>
 <p>Vejamos como seria  o CLP, por exemplo, para localizar o "portão" do <a href="https://pt.wikipedia.org/wiki/Museu_de_Arte_de_S%C3%A3o_Paulo">MASP</a>.</p>
 <p><img alt="" src="./assets/masp-comparing2b.jpg" /></p>
@@ -151,7 +152,7 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 <p>o uso de abreviações consagradas como os <strong>códigos de estado</strong>: <code>BR-SP</code> ou simplesmente <code>SP</code> designa o Estado de São Paulo, <code>AM</code> Amazonas, etc.</p>
 </li>
 <li>
-<p>a <a href="spec04ap01-siglas.md">abreviação de <strong>3 letras do município</strong></a>:  Sampa é <code>SPA</code>, a vizinha Guarulhos <code>GRH</code> e Piracicaba <code>PIR</code>... Jaraguá do Sul em SC é <code>JGS</code>.<!-- ver rodovia municipal JGS-489 --></p>
+<p>a <a href="spec04ap01-siglas/">abreviação de <strong>3 letras do município</strong></a>:  Sampa é <code>SPA</code>, a vizinha Guarulhos <code>GRH</code> e Piracicaba <code>PIR</code>... Jaraguá do Sul em SC é <code>JGS</code>.<!-- ver rodovia municipal JGS-489 --></p>
 </li>
 <li>
 <p>das regras de  <strong>hierarquia</strong>: primeiro sigla estadual depois municipal. A sigla  PIR só tem significado dentro da sua hierarquia, <code>SP-PIR</code> significa Piracicaba, que é diferente de <code>GO-PIR</code>, de Pires do Rio;</p>
@@ -180,7 +181,7 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 </tr>
 <tr>
 <td><strong><code>SP-SPA</code></strong></td>
-<td><a href="spec04ap01-siglas.md#padrao-estadual"><strong>Código Oficial</strong> do município</a> (<code>BR-SP-SPA</code>)</td>
+<td><a href="spec04ap01-siglas/#padrao-estadual"><strong>Código Oficial</strong> do município</a> (<code>BR-SP-SPA</code>)</td>
 </tr>
 <tr>
 <td><strong><code>SP:YCF</code></strong></td>
@@ -225,7 +226,7 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 </tbody>
 </table>
 <p>Qual opção de tecnologia adaptada ao CLP seria a melhor? Qual gera códigos mais curtos e precisos?  Mais fáceis de lembrar? Com infraestrutura mais barata?</p>
-<p>No debate devemos chamar atenção, por exemplo, para o fato de que o PlusCode não satisfaz o requisito da hierarquia nas macroregiões, nas escalas de bairro e quadra: precisamos dessa parte da hierarquia?</p>
+<p>No debate devemos chamar atenção, por exemplo, para o fato de que o PlusCode não satisfaz o requisito da <a href="./index_CLPcoord/#aprendizados-com-o-cep">hierarquia nas macroregiões</a>, nas escalas de bairro e quadra: precisamos dessa parte da hierarquia?</p>
 <p>É fundamental saber, antes de decidir qual tecnologia usar, <strong>quais critérios consensuais adotaremos como <a href="spec04ap03-reqs.md">requisitos do CLP</a></strong>. Nem todos os critérios técnicos são evidentes, e nem todos os critérios são técnicos. Daí o projeto estar enfatizando a formação de um coletivo para a discussão e votação das melhores opções, iniciando por representantes das comunidades brasileiras que entendem do assunto, como a <a href="https://wiki.openstreetmap.org/wiki/Pt:Contact">OpenStreetMap Brasil</a>, a TETO Brasil e a Wikidata-Brasil.</p>
 <p>Mesmo entre as tecnologias aparentemente acabadas como PlusCode ou Geohash, outras  otimizações podem ser realizadas, levando a códigos mais curtos ou mais mnemônicos. Se o padrão CLP fizer uso de estimativas da densidade de ocupação e da "mancha urbana futura", como fizeram o CEP e o MapCode, os códigos ficam ainda melhores, mais curtos, mas a custo de códigos mais longos nas vilas do meio rural... Tudo isso seria detalhado pelo presente projeto, para que tenhamos <strong>subsídios para uma decisão ótima e racional</strong>.</p>
 <p>O <!-- <a href="locationCodes.md">levantamento sistemático</a>-->levantamento sistemático, com seleção de otimizações viáveis e a <a href="index_CLPcoord/#comparando-candidatos">comparação</a> dos resultados otimizados é também tema central da presente proposta, um resultado importante de ser apresentado.
@@ -315,7 +316,7 @@ Todo o relacionamento com a comunidade seria realizado através da metodogia das
 -->
 
 <h2 id="nao-estamos-sozinhos">Não estamos sozinhos</h2>
-<p>A busca por soluções tecnológicas é mundial, floresceu nos anos recentes. As principais motivações são a ineficiência dos códigos tradicionais e a sua falta de abertura. A lista de <a href="https://index.okfn.org/dataset/postcodes/">OpenDataIndex referente a <em>Postcodes</em></a>, os análogos do CEP, com uma centena de outros países, destaca que apenas ~5% são considerados razoavelmente abertos: 90% dos países ainda apresentam problemas sérios de licença privada e exploração comercial sobre dado público, como no Brasil.</p>
+<p>A busca por soluções tecnológicas é mundial, floresceu nos anos recentes, devido à ineficiência dos códigos postais tradicionais no mundo digital, e a sua falta de abertura. A lista de <a href="https://index.okfn.org/dataset/postcodes/">OpenDataIndex referente a <em>Postcodes</em></a><!--, os análogos do CEP,--> com uma centena de outros países, destaca que apenas ~5% são considerados razoavelmente abertos: 90% dos países ainda apresentam problemas sérios de licença privada e exploração comercial sobre dado público, como no Brasil.</p>
 <p><img alt="" src="./assets/cep-rank_ODI-800px.png" /></p>
 <p>Quanto à tecnologia, na Europa, Japão e outros países já se estuda um "<em>upgrade</em>" dos respectivos CEPs. Na Irlanda por exemplo <a href="https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland#Alternative_location_codes">diversas alternativas tecnológicas foram estudadas entre 2010 e 2011</a>, resultando mais tarde na implantação de um sistema mais moderno, o Eircode, baseado em coordenadas geográficas.</p>
 <p>Quanto à população mais sensível ao problema de "não ter um endereço para chamar de seu", no Brasil, quem mais sofre é a população do <strong>meio rural</strong>, e os bairros e regiões em situação de <strong>habitação precária</strong> &mdash; segundo dados da <a href="https://www.techo.org/brasil/">TETO Brasil</a> são ~15 milhões habitantes desatendidos pelo CEP ou nome de rua.  Todos beneficiariam enormemente de um código de localização oficial.</p>
@@ -361,5 +362,5 @@ Todo o relacionamento com a comunidade seria realizado através da metodogia das
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-10-16 18:23:17
+Build Date UTC : 2018-10-16 23:41:48
 -->

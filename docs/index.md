@@ -1,5 +1,5 @@
 <!-- pode ficar mais curto? -->
-**<center><big>CLP</big><br/><small style="font-size:8pt">v0.0.6b</small></center>**
+**<center><big>CLP</big><br/><small style="font-size:8pt">v0.0.7</small></center>**
 
 Proposta de **C**ódigo **L**ocalizador de **P**ortão, CLP:  estudos de viabilidade e consulta pública.
 
@@ -13,13 +13,13 @@ As tecnologias para se implantar e padronizar um CLP  são bem consolidadas, exi
 
 # Motivações e estratégias
 
-O conceito de *portão* do CLP está relacionado com o local onde se habita ou se trabalha, ou onde são prestados serviços públicos: saber do local e informar oficialmente o local **são necessidades básicas asseguradas pela   [Constituição](https://www.senado.leg.br/atividade/const/constituicao-federal.asp)**, são facetas do *habitar* (arts. 6º e 23), do *ir-e-vir* (art. 5º inc. XV), do *ser informado* (Art. 5º inc. XXXIII) e do *trabalhar* (arts. 6º, 170 e 193). <br/>Se um desses casos carece de **endereço oficial**, é uma dívida em aberto, do governo com o cidadão. A  chave da informação oficial, nos dias de hoje, é localizar a posição em mapa público e aberto (livre de patentes ou direitos autorais), tal como [OpenStreetMap](http://OSM.org). É uma questão de **soberania nacional** (art. 4º, incisos I a X), não depender de patentes, direitos autorais ou infraestrutura privada/estrangeira.<!-- ,incisos  onde se encontram os princípios da independência nacional, da autodeterminação dos povos, da não-intervenção, da igualdade entre os Estados.)... Soberania = autoridade superior que não pode ser limitada por nenhum outro poder.   .. e soberania do direito público sobre o direito privado.. -->
+O conceito de *portão* do CLP está relacionado com o local onde se habita ou se trabalha, ou onde são prestados serviços públicos: saber do local e informar oficialmente o local **são necessidades básicas asseguradas pela   [Constituição](https://www.senado.leg.br/atividade/const/constituicao-federal.asp)**, são facetas do *habitar* (arts. 6º e 23), do *ir-e-vir* (art. 5º inc. XV), do *ser informado* (Art. 5º inc. XXXIII) e do *trabalhar* (arts. 6º, 170 e 193). <br/>Se um desses casos carece de **endereço oficial**, é uma dívida em aberto, do governo com o cidadão. A  chave da informação oficial, nos dias de hoje, é localizar a posição em mapa público e aberto, tal como [OpenStreetMap](http://OSM.org). É uma questão de **soberania nacional** (art. 4º, incisos I a X), não depender de patentes, direitos autorais ou infraestrutura privada/estrangeira.<!-- ,incisos  onde se encontram os princípios da independência nacional, da autodeterminação dos povos, da não-intervenção, da igualdade entre os Estados.)... Soberania = autoridade superior que não pode ser limitada por nenhum outro poder.   .. e soberania do direito público sobre o direito privado.. -->
 
 Em 2018 a Secretaria da Agricultura de Estado de São Paulo reconheceu essa dívida para com os habitantes e serviços do meio rural,  e procurou a Comunidade OpenStreetMap em busca de soluções soberanas abertas. Convidados em seguida prefeituras usuárias do OpenStreetMap e o Terceiro Setor, através de entidades tais como a [TETO BRASIL](https://www.techo.org/brasil/); elas também vêm dialogando com a comunidade técnica em busca de soluções abertas.
 
 Outras aplicações para o CLP não faltam (!). *Localizar* e *descrever onde está localizado* vale para casa, carro, bicicletário, bicicleta, café, chocolate, cachorro, barraca da feira... Uma lista infinita, que parece limitada apenas pela imaginação.
 
-O sistema universal de localização, preciso e reconhecido por qualquer país do mundo, no mapa de papel ou no mapa da internet, é a **coordenada geográfica (latitude/longitude)**.  Mais especificamente coordenadas medidas no [sistema de coordenadas WGS84](https://es.wikipedia.org/wiki/WGS84#Par%C3%A1metros_B%C3%A1sicos_de_Definici%C3%B3n), presente inclusive em mapas digitais e dispositivos de localização (ex. *smartphone* com receptor GPS). Todavia essa localização é representada por números que somam de 12 a 14 dígitos, **não é curto**, é difícil de lembrar, mais difícil que uma placa de carro. Os códigos Geohash, PlusCode e similares, para a mesma precisão, gastam 6 a 9 caracteres: são soluções viáveis, até mesmo para substituir o CEP.
+O sistema universal de localização, aceito em qualquer país, é a **coordenada geográfica (latitude/longitude)**.  Mais especificamente o  [sistema de coordenadas WGS84](https://es.wikipedia.org/wiki/WGS84#Par%C3%A1metros_B%C3%A1sicos_de_Definici%C3%B3n), presente inclusive em mapas digitais e dispositivos de localização (ex. *smartphone* com receptor GPS). Todavia cada coordenada tem de 6 a 8 dígitos, somando de 12 a 16 dígitos, **não é um código curto**.<!--, é difícil de lembrar, mais difícil que uma placa de carro.--> Os códigos Geohash, PlusCode e similares, para a mesma precisão, gastam 6 a 9 caracteres: são soluções viáveis, até mesmo para substituir o CEP.
 
 O CEP `20031-050` do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP `20031-040` da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo [PlusCode `3RRF`](https://plus.codes/589R3RRF+) ou Geohash `CM9MX`. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  **[PlusCode `3RRF+6F`](https://plus.codes/589R3RRF+6F)**, diz exatamente onde está o  portão!<!-- O **CEP `69010-060`** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **[PlusCode `VXCG+3R4`](https://plus.codes/678XVXCG+3R4)** diz exatamente onde está o seu portão!--> <br/><small>&nbsp; &nbsp; [siga o link do `3RRF+6F` para entender se ainda não conhece]</small><br/>
 
@@ -29,20 +29,6 @@ O CLP, quando representando um endereço, pode ser recomendado como substituto d
 
 Em estudos preliminares já comprovamos que é possível usar tais tecnologias e moldá-las ao Brasil e a cada município para deixar o código ainda mais curto.
 A seguir um breve resumo de como tentaremos responder a estas e outras questões, junto com a comunidade, através da construção da proposta do CLP.
-
-## Aprendizados com o CEP
-
-Depois de décadas usando o CEP aprendendos que [ele tem problemas](https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md) intríncecos do código, e problemas de operação, do "Sistema CEP" como um todo, por reter patentes e direitos autorais, ser centralizado, etc. Sabemos que precisamos do oposto,  **queremos códigos livres** e descentralizados.
-
-Um dos problemas intrínsecos é a dificuldade de se memorizar, o CEP é tão pouco **mnemônico** (pouco amigável para memorização) quanto um número de telefone. O uso de siglas já padronizadas, que já estão em nossa memória, seria um grande avanço. Podemos melhorar o CEP [substituindo prefixos por siglas](http://www.openstreetmap.com.br/CRP/). O&nbsp;código de um CEP do Amazonas&nbsp;(AM) pode ser `AM150‑088` ao invés de `69150‑088`, de um CEP de Tocantins&nbsp;(TO), `TO500‑360` ao invés de `77500‑360`.
-
-Também aprendemos com o uso do CEP que um código com hierarquia é útil. Se formos substituir o CEP por um novo padrão, o CLP, queremos que ele preserve essa característica de ser um código hierárquico.
-
-![](assets/cep-digitos123d.png)
-
-A hierarquia garante que dois CEPs, digamos `13165` e `13170`, se possuem prefixos iguais, então são vizinhos, estão dentro de uma mesma região, representada pelo prefixo comum, `131` no exemplo.
-
-O CEP com mais dígitos vai representando com mais detalhe uma região do espaço... Mas são 8 dígitos no CEP completo, e ainda assim não representa o endereço exato do portão. **Com o CLP podemos fazer melhor**, e  justamente por isso, entre outras aplicações, o CLP num futuro distante substituiria  o CEP, para num só código, de 7 ou 8 caracteres, chegarmos no portão.
 
 # Comparações e como seria
 
@@ -82,7 +68,7 @@ Opção de CLP proposta<br>(contexto BR) | portão do MASP na tecnologia de refe
 
 Qual opção de tecnologia adaptada ao CLP seria a melhor? Qual gera códigos mais curtos e precisos?  Mais fáceis de lembrar? Com infraestrutura mais barata?
 
-No debate devemos chamar atenção, por exemplo, para o fato de que o PlusCode não satisfaz o requisito da hierarquia nas macroregiões, nas escalas de bairro e quadra: precisamos dessa parte da hierarquia?
+No debate devemos chamar atenção, por exemplo, para o fato de que o PlusCode não satisfaz o requisito da [hierarquia nas macroregiões](index_CLPcoord/#aprendizados-com-o-cep), nas escalas de bairro e quadra: precisamos dessa parte da hierarquia?
 
 É fundamental saber, antes de decidir qual tecnologia usar, **quais critérios consensuais adotaremos como [requisitos do CLP](spec04ap03-reqs.md)**. Nem todos os critérios técnicos são evidentes, e nem todos os critérios são técnicos. Daí o projeto estar enfatizando a formação de um coletivo para a discussão e votação das melhores opções, iniciando por representantes das comunidades brasileiras que entendem do assunto, como a [OpenStreetMap Brasil](https://wiki.openstreetmap.org/wiki/Pt:Contact), a TETO Brasil e a Wikidata-Brasil.
 
@@ -182,7 +168,7 @@ Todo o relacionamento com a comunidade seria realizado através da metodogia das
 -->
 ## Não estamos sozinhos
 
-A busca por soluções tecnológicas é mundial, floresceu nos anos recentes. As principais motivações são a ineficiência dos códigos tradicionais e a sua falta de abertura. A lista de [OpenDataIndex referente a *Postcodes*](https://index.okfn.org/dataset/postcodes/), os análogos do CEP, com uma centena de outros países, destaca que apenas ~5% são considerados razoavelmente abertos: 90% dos países ainda apresentam problemas sérios de licença privada e exploração comercial sobre dado público, como no Brasil.
+A busca por soluções tecnológicas é mundial, floresceu nos anos recentes, devido à ineficiência dos códigos postais tradicionais no mundo digital, e a sua falta de abertura. A lista de [OpenDataIndex referente a *Postcodes*](https://index.okfn.org/dataset/postcodes/)<!--, os análogos do CEP,--> com uma centena de outros países, destaca que apenas ~5% são considerados razoavelmente abertos: 90% dos países ainda apresentam problemas sérios de licença privada e exploração comercial sobre dado público, como no Brasil.
 
 ![](assets/cep-rank_ODI-800px.png)
 

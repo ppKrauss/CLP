@@ -10,6 +10,8 @@ pages:
     - Especificações:
       - Geral: spec01-hub.md
       - Referências: spec05-referencias.md
+    - Apêncides:
+      - Siglas: spec04ap01-siglas.md  
 
     - Créditos: assets/README.md
 
