@@ -1,5 +1,5 @@
 <!-- pode ficar mais curto? -->
-**<center><big>CLP</big><br/><small style="font-size:8pt">v0.0.7b</small></center>**
+**<center><big>CLP</big><br/><small style="font-size:8pt">v0.0.7c</small></center>**
 
 Proposta de **C**ódigo **L**ocalizador de **P**ortão, CLP:  estudos de viabilidade e consulta pública.
 
@@ -9,7 +9,7 @@ A ideia central do CLP é **oferecer de maneira simples e padronizada, através 
 
 ![](assets/ilustra-escalas01.jpg)
 
-As tecnologias para se implantar e padronizar um CLP  são bem consolidadas, existem opções como o [Geohash](http://geohash.org/6gyf4bf1n), [S2](https://s2geometry.io/) ou [PlusCode](https://plus.codes/588MC9X8+RC), que são padrões livres, e MapCode <!--(http://www.mapcode.com/getcoords.html?iso3=331&mapcode=RR.56&xx=-46.633956&yy=-23.550385)--> ou Whats3words, patenteados mas úteis como exemplo. Estas opções tecnológicas globais podem ser melhor **adaptadas às condições e padrões locais do Brasil**, e nisto consistirá uma parte relevante dos estudos e recomendações realizados pelo presente projeto.
+As tecnologias para se implantar e padronizar um CLP  são bem consolidadas, existem opções como o [Geohash](index_CLPcoord.md#geohash)<!-- (http://geohash.org/6gyf4bf1n)-->, [S2](index_CLPcoord.md#s2)<!-- (https://s2geometry.io/)--> ou [PlusCode](https://plus.codes/588MC9X8+RC), que são padrões livres, e MapCode <!--(http://www.mapcode.com/getcoords.html?iso3=331&mapcode=RR.56&xx=-46.633956&yy=-23.550385)--> ou Whats3words, patenteados mas úteis como exemplo. Estas opções tecnológicas globais podem ser melhor **adaptadas às condições e padrões locais do Brasil**, e nisto consistirá uma parte relevante dos estudos e recomendações realizados pelo presente projeto.
 
 # Motivações e estratégias
 

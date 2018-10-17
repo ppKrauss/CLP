@@ -144,11 +144,36 @@
 <p><img alt="" src="../assets/CLPjurisdicao-syntax.png" /></p>
 <p>A designação de município faz uso das <strong>siglas de 3 letras</strong> do padrão já em uso nos identificadores de estradas. Como o CLP é <strong>sensível a contexto</strong> de país e UF, o uso do prefixo <code>BR</code> é dispensável no "contexto Brasil" e o uso da UF também dispensável quando as partes usuárias do CLP forem capazes de deduzir com certeza a UF.</p>
 <h2 id="comparando-com-outros-padroes">Comparando com outros padrões</h2>
-<p>O CEP <code>20031-050</code> do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP <code>20031-040</code> da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo <a href="https://plus.codes/589R3RRF+">PlusCode klzzwxh:0033</a> ou Geohash <code>CM9MX</code>. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  <strong><a href="https://plus.codes/589R3RRF+6F">PlusCode <code>3RRF+6F</code></a></strong>, diz exatamente onde está o  portão!<!-- O **CEP <code>69010-060</code>** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **<a href="https://plus.codes/678XVXCG+3R4">PlusCode klzzwxh:0037</a>** diz exatamente onde está o seu portão!--> <br/><small>&nbsp; &nbsp; [siga o link do <code>3RRF+6F</code> para entender se ainda não conhece]</small><br/></p>
-<p>O CLP, quando representando um endereço, pode ser recomendado como substituto do CEP nos lugares onde o CEP não chegou, tipicamente nas fazendas, vilas e zonas rurais.  O CLP pode  ser também expressão do próprio endereço, onde não existe nome oficial de logradouro, como em novos loteamentos, em conjuntos habitacionais precários e em favelas.</p>
-<p>... O que seria ideal fazer, melhorar o CEP ou implantar o PlusCode? Ou tecnologia Geohash?  Ou tecnologia S2? Será que podemos melhorar essas tecnologias para as nossas condições, garantindo a padronização de códigos mais curtos para o Brasil?</p>
-<p>Em estudos preliminares já comprovamos que é possível usar tais tecnologias e moldá-las ao Brasil e a cada município para deixar o código ainda mais curto.
-A seguir um breve resumo de como tentaremos responder a estas e outras questões, junto com a comunidade, através da construção da proposta do CLP.</p>
+<p>Existe uma imensa diversidade de representações alternativas à Latitude/Longitude, e que podem ser consideradas também "geocódigos". Pode-se classificá-las da seguinte forma:</p>
+<ul>
+<li>
+<p>representação baseada em <a href="https://en.wikipedia.org/wiki/Discrete_Global_Grid">grade global discreta</a> (do inglês DGG - <em>Discrete Global Grid</em>), que reduz as infinitas possíveis coordenadas a um número finito de células definidas por uma grade global. As DGGs podem ainda ser classificadas por seu nível de resolução &mdash; supor como "alta resolução" a DGG que oferece células de 3x3 metros ou menores &mdash;,  e pelo uso ou não da hierarquia:</p>
+<ul>
+<li>
+<p>DGG hierárquica: que oferece a possibilidade de subdividir células da grade através de uma nova grade no seu interior. A <a href="http://www.bigfastblog.com/geohash-intro">grade do Geohash</a> é um exemplo.</p>
+</li>
+<li>
+<p>DGG não-hierárquica: uma só grade, sem subgrades. Pode ser uma grade grosseira, como os 60 <a href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#UTM_zone"><em>fusos de UTM</em></a>, ou detalhada, como o <a href="https://en.wikipedia.org/wiki/Military_Grid_Reference_System">MGRS</a> de uso militar.    </p>
+</li>
+</ul>
+</li>
+<li>
+<p>representação sem DGG.  Os <a href="https://en.wikipedia.org/wiki/Country_code">códigos de país</a> por exemplo (entre eles a ISO&nbsp;3166&#8209;1&nbsp;alpha&#8209;2 que adotamos como prefixo no CLP), pois a sua cobertura sobre o globo é incompleta (os oceanos não são países). Neste grupo também se encontram os <a href="https://en.wikipedia.org/wiki/Postal_code">códigos postais</a>.  </p>
+</li>
+</ul>
+<p>Um levantamento parcial foi realizado por <a href="https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119">K. Clemens em 2016</a>, ao analisar as características de geocódigos e de códigos postais em geral. A principal vantagem de um geocódigo baseado em DGG de alta resolução, sobre um código postal comum, é que a capacidade de localizar o ponto desejado.</p>
+<p>O CEP <code>20031-050</code> do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP <code>20031-040</code> da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo <a href="https://plus.codes/589R3RRF+">PlusCode klzzwxh:0034</a> ou Geohash <code>CM9MX</code>. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  <a href="https://plus.codes/589R3RRF+6F">PlusCode <strong><code>3RRF+6F</code></strong></a>, diz exatamente onde está o  portão!<!-- O **CEP <code>69010-060</code>** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **<a href="https://plus.codes/678XVXCG+3R4">PlusCode klzzwxh:0038</a>** diz exatamente onde está o seu portão!--></p>
+<!--
+LIXO pois já está no index.md
+
+O CLP, quando representando um endereço, pode ser recomendado como substituto do CEP nos lugares onde o CEP não chegou, tipicamente nas fazendas, vilas e zonas rurais.  O CLP pode  ser também expressão do próprio endereço, onde não existe nome oficial de logradouro, como em novos loteamentos, em conjuntos habitacionais precários e em favelas.
+
+... O que seria ideal fazer, melhorar o CEP ou implantar o PlusCode? Ou tecnologia Geohash?  Ou tecnologia S2? Será que podemos melhorar essas tecnologias para as nossas condições, garantindo a padronização de códigos mais curtos para o Brasil?
+
+Em estudos preliminares já comprovamos que é possível usar tais tecnologias e moldá-las ao Brasil e a cada município para deixar o código ainda mais curto.
+A seguir um breve resumo de como tentaremos responder a estas e outras questões, junto com a comunidade, através da construção da proposta do CLP.
+-->
+
 <h2 id="aprendizados-com-o-cep">Aprendizados com o CEP</h2>
 <p>Depois de décadas usando o CEP aprendendos que <a href="https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md">ele tem problemas</a> intríncecos do código, e problemas de operação, do "Sistema CEP" como um todo, por reter patentes e direitos autorais, ser centralizado, etc. Sabemos que precisamos do oposto,  <strong>queremos códigos livres</strong> e descentralizados.</p>
 <p>Um dos problemas intrínsecos é a dificuldade de se memorizar, o CEP é tão pouco <strong>mnemônico</strong> (pouco amigável para memorização) quanto um número de telefone. O uso de siglas já padronizadas, que já estão em nossa memória, seria um grande avanço. Podemos melhorar o CEP <a href="http://www.openstreetmap.com.br/CRP/">substituindo prefixos por siglas</a>. O&nbsp;código de um CEP do Amazonas&nbsp;(AM) pode ser <code>AM150‑088</code> ao invés de <code>69150‑088</code>, de um CEP de Tocantins&nbsp;(TO), <code>TO500‑360</code> ao invés de <code>77500‑360</code>.</p>
@@ -293,8 +318,6 @@ com célula de ~3×5m (a confirmar).</p>
 <p>O <em>software Syllagloble</em> é apenas um experimento da empresa "Here". Similar ao What3words, faz uso de 4 sílabas ou palavras curtas, no lugar de 3 palavras longas.</p>
 <p><img alt="" src="../assets/CLP-coord-syllagloble-ilustra01.png" /></p>
 <!--
-Digito verificador: artigo sugere que seja uma palavra ... nós sugerimos que no Brasil seja um Bicho do conjunto do 25 do jogo do bicho, mais outros 7 populares.
-
 ## Ericode
 
 ...
@@ -306,7 +329,6 @@ Digito verificador: artigo sugere que seja uma palavra ... nós sugerimos que no
 As coordenadas geográficas podem ser [tratadas matematicamente e transformadas em um código mais compacto](spec04ap05-ingenuos.md#compactacao-ingenua), e existem várias maneiras de se fazer isso. Uma delas foi batizada de  Geohash, que é apenas uma das tecnologias candidatas, mas aqui tomaremos como exemplo para ilustrar a anatomia de um CLP-coordenada. Neste projeto serão analisados também o MapCode, o PlusCode e o S2geometry.
 
 ## com o CEP
-
 
 Como uma das metas do CLP é se apresentar como potencial substituto do CEP no endereçamento postal, alguns requisitos, tais como a hierarquia desde macro região (siglas de estado e cidade), são decorrentes desta demanda. As principais diferenças entre o CEP e o CLP são:
 

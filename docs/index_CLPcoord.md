@@ -28,7 +28,22 @@ A designação de município faz uso das **siglas de 3 letras** do padrão já e
 
 ## Comparando com outros padrões
 
-O CEP `20031-050` do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP `20031-040` da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo [PlusCode `3RRF`](https://plus.codes/589R3RRF+) ou Geohash `CM9MX`. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  **[PlusCode `3RRF+6F`](https://plus.codes/589R3RRF+6F)**, diz exatamente onde está o  portão!<!-- O **CEP `69010-060`** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **[PlusCode `VXCG+3R4`](https://plus.codes/678XVXCG+3R4)** diz exatamente onde está o seu portão!--> <br/><small>&nbsp; &nbsp; [siga o link do `3RRF+6F` para entender se ainda não conhece]</small><br/>
+Existe uma imensa diversidade de representações alternativas à Latitude/Longitude, e que podem ser consideradas também "geocódigos". Pode-se classificá-las da seguinte forma:
+
+* representação baseada em [grade global discreta](https://en.wikipedia.org/wiki/Discrete_Global_Grid) (do inglês DGG - *Discrete Global Grid*), que reduz as infinitas possíveis coordenadas a um número finito de células definidas por uma grade global. As DGGs podem ainda ser classificadas por seu nível de resolução &mdash; supor como "alta resolução" a DGG que oferece células de 3x3 metros ou menores &mdash;,  e pelo uso ou não da hierarquia:
+
+     * DGG hierárquica: que oferece a possibilidade de subdividir células da grade através de uma nova grade no seu interior. A [grade do Geohash](http://www.bigfastblog.com/geohash-intro) é um exemplo.
+
+     * DGG não-hierárquica: uma só grade, sem subgrades. Pode ser uma grade grosseira, como os 60 [*fusos de UTM*](https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#UTM_zone), ou detalhada, como o [MGRS](https://en.wikipedia.org/wiki/Military_Grid_Reference_System) de uso militar.    
+
+* representação sem DGG.  Os [códigos de país](https://en.wikipedia.org/wiki/Country_code) por exemplo (entre eles a ISO&nbsp;3166&#8209;1&nbsp;alpha&#8209;2 que adotamos como prefixo no CLP), pois a sua cobertura sobre o globo é incompleta (os oceanos não são países). Neste grupo também se encontram os [códigos postais](https://en.wikipedia.org/wiki/Postal_code).  
+
+Um levantamento parcial foi realizado por [K. Clemens em 2016](https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119), ao analisar as características de geocódigos e de códigos postais em geral. A principal vantagem de um geocódigo baseado em DGG de alta resolução, sobre um código postal comum, é que a capacidade de localizar o ponto desejado.
+
+O CEP `20031-050` do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP `20031-040` da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo [PlusCode `3RRF`](https://plus.codes/589R3RRF+) ou Geohash `CM9MX`. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  [PlusCode **`3RRF+6F`**](https://plus.codes/589R3RRF+6F), diz exatamente onde está o  portão!<!-- O **CEP `69010-060`** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **[PlusCode `VXCG+3R4`](https://plus.codes/678XVXCG+3R4)** diz exatamente onde está o seu portão!-->
+
+<!--
+LIXO pois já está no index.md
 
 O CLP, quando representando um endereço, pode ser recomendado como substituto do CEP nos lugares onde o CEP não chegou, tipicamente nas fazendas, vilas e zonas rurais.  O CLP pode  ser também expressão do próprio endereço, onde não existe nome oficial de logradouro, como em novos loteamentos, em conjuntos habitacionais precários e em favelas.
 
@@ -36,7 +51,7 @@ O CLP, quando representando um endereço, pode ser recomendado como substituto d
 
 Em estudos preliminares já comprovamos que é possível usar tais tecnologias e moldá-las ao Brasil e a cada município para deixar o código ainda mais curto.
 A seguir um breve resumo de como tentaremos responder a estas e outras questões, junto com a comunidade, através da construção da proposta do CLP.
-
+-->
 ## Aprendizados com o CEP
 
 Depois de décadas usando o CEP aprendendos que [ele tem problemas](https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md) intríncecos do código, e problemas de operação, do "Sistema CEP" como um todo, por reter patentes e direitos autorais, ser centralizado, etc. Sabemos que precisamos do oposto,  **queremos códigos livres** e descentralizados.
@@ -224,8 +239,6 @@ O *software Syllagloble* é apenas um experimento da empresa "Here". Similar ao 
 ![](assets/CLP-coord-syllagloble-ilustra01.png)
 
 <!--
-Digito verificador: artigo sugere que seja uma palavra ... nós sugerimos que no Brasil seja um Bicho do conjunto do 25 do jogo do bicho, mais outros 7 populares.
-
 ## Ericode
 
 ...
@@ -237,7 +250,6 @@ Digito verificador: artigo sugere que seja uma palavra ... nós sugerimos que no
 As coordenadas geográficas podem ser [tratadas matematicamente e transformadas em um código mais compacto](spec04ap05-ingenuos.md#compactacao-ingenua), e existem várias maneiras de se fazer isso. Uma delas foi batizada de  Geohash, que é apenas uma das tecnologias candidatas, mas aqui tomaremos como exemplo para ilustrar a anatomia de um CLP-coordenada. Neste projeto serão analisados também o MapCode, o PlusCode e o S2geometry.
 
 ## com o CEP
-
 
 Como uma das metas do CLP é se apresentar como potencial substituto do CEP no endereçamento postal, alguns requisitos, tais como a hierarquia desde macro região (siglas de estado e cidade), são decorrentes desta demanda. As principais diferenças entre o CEP e o CLP são:
 
