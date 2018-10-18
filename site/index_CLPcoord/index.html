@@ -233,9 +233,14 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
     <b>médio</b>, pode-se mudar o alfabeto da base, e acomodar o uso de prefixo de município.
   </td>
 </tr>
+<tr>
+  <td colspan="3"><i>Infraestrutura de teste utilizada</i>:
+  <br/>Geohash nativo do PostGIS.
+  </td>
+</tr>
 </table>  </p>
 <h2 id="pluscode">PlusCode</h2>
-<p>Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>, com célula de ~10×10m. A definição do código se encontra em <a href="https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc">OLC Definition</a>.</p>
+<p>Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>, com célula de ~10×10m. A definição do código se encontra em <a href="https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc">OLC Definition</a>. Há uma sutil distinção entre o algoritmo OLC, opção em foco no presente estudo, e a <a href="https://github.com/google/open-location-code/wiki/Plus-codes-API">API Google denominada <em>PlusCodes</em></a>, já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  --></p>
 <p><img alt="" src="../assets/CLP-coord-plusCode-ilustra01.png" /></p>
 <p>Os quatro primeiros dígitos (prefixo <code>588M</code>) podem ser cortados quando sabemos que o contexto é a cidade de São Paulo, disso resulta o código mais compacto <code>C9X8+RC</code>.</p>
 <p>Grade principal <strong>sem hierarquia</strong>: com células de 1/8000° esferoradianos (áreas de ~100 m²), nesta grade o endereço vizinho do Marco-zero (Editora UNESP a menos de 100 m do Marco-zero) apresenta código <a href="https://plus.codes/588MF928+27">F928+27</a>, totalmete distinto.</p>
@@ -255,6 +260,11 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
   <td><i>Potencial de adaptação</i>:<br/>
     <b>baixo</b>, pode-se mudar a base para 32,  e acomodar o uso de prefixo de município.
   </td>
+</tr>
+<tr>
+  <td colspan="3"><i>Infraestrutura de teste utilizada</i>:
+  <br/>Código Python do algortimo de referência, adaptado para a base32 do CLP e para o PostGIS.
+  </td><br />
 </tr>
 </table>  </p>
 <h2 id="s2">S2</h2>
@@ -279,6 +289,7 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 </ul>
 </li>
 </ul>
+<p>A implementação de referência da biblioteca S2 é escrita em C++ (mesma linguagem que o PostGIS) e portada para Go, Java e Python. Conforme anunciado, a biblioteca existe desde ~2011 quando uma versão inicial do código foi posta a público, mas somente em  <a href="https://web.archive.org/web/20171205230426/https://opensource.googleblog.com/2017/12/announcing-s2-library-geometry-on-sphere.html">dezembro de 2017</a> o código passou a ser atualizado e distribuído de de forma mais ampla e confiável.</p>
 <p><strong>Resumo das características do S2geometry/Cell_ID:</strong>
 <table border="1" width="95%">
 <tr>
@@ -296,6 +307,12 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
     <b>bom</b>, pode-se adotar base32 e acomodar o uso de prefixo de município.
     Forma e área das células estável em todo o território nacional.
   </td>
+</tr>
+<tr>
+  <td colspan="3"><i>Infraestrutura de teste utilizada</i>:
+  <br/>Wraper da versão S2geometry Python adaptado para PostGIS,
+  https://github.com/AfieldTrails/s2-postgis
+  </td><br />
 </tr>
 </table>  </p>
 <h1 id="comparando-com-nao-candidatos">Comparando com não-candidatos</h1>

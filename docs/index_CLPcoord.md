@@ -130,11 +130,16 @@ Por fim, apesar de ser um sistema inteligente na sua hierarquia, matematicamente
     <b>médio</b>, pode-se mudar o alfabeto da base, e acomodar o uso de prefixo de município.
   </td>
 </tr>
+<tr>
+  <td colspan="3"><i>Infraestrutura de teste utilizada</i>:
+  <br/>Geohash nativo do PostGIS.
+  </td>
+</tr>
 </table>  
 
 ## PlusCode
 
-Localização do Marco-zero representada por PlusCode: [`588MC9X8+RC`](https://plus.codes/588MC9X8+RC), com célula de ~10×10m. A definição do código se encontra em [OLC Definition](https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc).
+Localização do Marco-zero representada por PlusCode: [`588MC9X8+RC`](https://plus.codes/588MC9X8+RC), com célula de ~10×10m. A definição do código se encontra em [OLC Definition](https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc). Há uma sutil distinção entre o algoritmo OLC, opção em foco no presente estudo, e a [API Google denominada *PlusCodes*](https://github.com/google/open-location-code/wiki/Plus-codes-API), já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  -->
 
 ![](assets/CLP-coord-plusCode-ilustra01.png)
 
@@ -161,6 +166,11 @@ Para variações na precisão do endereço, existe a hierarquia da grade secund�
     <b>baixo</b>, pode-se mudar a base para 32,  e acomodar o uso de prefixo de município.
   </td>
 </tr>
+<tr>
+  <td colspan="3"><i>Infraestrutura de teste utilizada</i>:
+  <br/>Código Python do algortimo de referência, adaptado para a base32 do CLP e para o PostGIS.
+  </td>  
+</tr>
 </table>  
 
 ## S2
@@ -183,6 +193,8 @@ O S2 pode ser considerado uma evolução do [Geohash](#geohash), pois resolve do
 
     * o problema da forma das células, que se matém uniforme em todas as escalas e ao longo de todo o território nacional.
 
+A implementação de referência da biblioteca S2 é escrita em C++ (mesma linguagem que o PostGIS) e portada para Go, Java e Python. Conforme anunciado, a biblioteca existe desde ~2011 quando uma versão inicial do código foi posta a público, mas somente em  [dezembro de 2017](https://web.archive.org/web/20171205230426/https://opensource.googleblog.com/2017/12/announcing-s2-library-geometry-on-sphere.html) o código passou a ser atualizado e distribuído de de forma mais ampla e confiável.
+
 **Resumo das características do S2geometry/Cell_ID:**
 <table border="1" width="95%">
 <tr>
@@ -200,6 +212,12 @@ O S2 pode ser considerado uma evolução do [Geohash](#geohash), pois resolve do
     <b>bom</b>, pode-se adotar base32 e acomodar o uso de prefixo de município.
     Forma e área das células estável em todo o território nacional.
   </td>
+</tr>
+<tr>
+  <td colspan="3"><i>Infraestrutura de teste utilizada</i>:
+  <br/>Wraper da versão S2geometry Python adaptado para PostGIS,
+  https://github.com/AfieldTrails/s2-postgis
+  </td>  
 </tr>
 </table>  
 
