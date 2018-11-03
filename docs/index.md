@@ -1,5 +1,5 @@
 <!-- pode ficar mais curto? -->
-**<center><big>CLP</big><br/><small style="font-size:8pt">v0.0.7c</small></center>**
+**<center><big>CLP</big><br/><small style="font-size:8pt">v0.0.7e</small></center>**
 
 Proposta de **C**ódigo **L**ocalizador de **P**ortão, CLP:  estudos de viabilidade e consulta pública.
 
@@ -9,7 +9,7 @@ A ideia central do CLP é **oferecer de maneira simples e padronizada, através 
 
 ![](assets/ilustra-escalas01.jpg)
 
-As tecnologias para se implantar e padronizar um CLP  são bem consolidadas, existem opções como o [Geohash](index_CLPcoord.md#geohash)<!-- (http://geohash.org/6gyf4bf1n)-->, [S2](index_CLPcoord.md#s2)<!-- (https://s2geometry.io/)--> ou [PlusCode](https://plus.codes/588MC9X8+RC), que são padrões livres, e MapCode <!--(http://www.mapcode.com/getcoords.html?iso3=331&mapcode=RR.56&xx=-46.633956&yy=-23.550385)--> ou Whats3words, patenteados mas úteis como exemplo. Estas opções tecnológicas globais podem ser melhor **adaptadas às condições e padrões locais do Brasil**, e nisto consistirá uma parte relevante dos estudos e recomendações realizados pelo presente projeto.
+As tecnologias para se implantar e padronizar um CLP  são bem consolidadas, existem opções como o [Geohash](index_CLPcoord.md#geohash)<!-- (http://geohash.org/6gyf4bf1n)-->, [S2](index_CLPcoord.md#s2)<!-- (https://s2geometry.io/)--> ou [PlusCode](index_CLPcoord.md#pluscode),<!-- https://plus.codes/588MC9X8+RC--> que são padrões livres, e MapCode <!--(http://www.mapcode.com/getcoords.html?iso3=331&mapcode=RR.56&xx=-46.633956&yy=-23.550385)--> ou Whats3words, patenteados mas úteis como exemplo. Estas opções tecnológicas globais podem ser melhor **adaptadas às condições e padrões locais do Brasil**, e nisto consistirá uma parte relevante dos estudos e recomendações realizados pelo presente projeto.
 
 # Motivações e estratégias
 
@@ -36,7 +36,7 @@ Vejamos como seria  o CLP, por exemplo, para localizar o "portão" do [MASP](htt
 
 ![](assets/masp-comparing2b.jpg)
 
-Os códigos de localização existentes, como o Geohash ou o PlusCode, assim como estão, já seriam melhores do que o CEP. Mas eles também podem ser melhorados, **adaptados para o Brasil**, fazendo uso do que os brasileiros já têm no seu dia-a-dia. Deveria ser natural, por exemplo:
+Os códigos de localização existentes, como o Geohash ou o PlusCode, assim como estão, já seriam melhores do que o CEP por localizarem o portão com o mesmo número de dígitos. Mas eles também podem ser melhorados, **adaptados para o Brasil**, fazendo uso do que os brasileiros já têm no seu dia-a-dia. Deveria ser natural, por exemplo:
 
 * o uso de abreviações consagradas como os **códigos de estado**: `BR-SP` ou simplesmente `SP` designa o Estado de São Paulo, `AM` Amazonas, etc.
 
@@ -48,23 +48,27 @@ Os códigos de localização existentes, como o Geohash ou o PlusCode, assim com
 
 Estas regras simples, uma vez formalizadas como padrão, garantiriam um código CLP mais adequado para o brasileiro usar. As siglas, não se vê todos os dias, mas já vinhamos usando: em diversos códigos oficiais, em mapas e nas placas de vias públicas. As siglas estão no *código das estradas* federais (ex. [BR-116](https://pt.wikipedia.org/wiki/BR-116)), estaduais (ex. [SP-147](https://pt.wikipedia.org/wiki/SP-147)) e municipais (ex. PIR-033). <!-- ... mas já vinhamos usando: em diversos códigos oficiais, tais como [identificadores LEX de normas jurídicas](https://pt.wikipedia.org/wiki/Lex_(URN)), e nas placas de vias públicas ou mapas oficiais.-->
 
-Vejamos as siglas e os códigos inteiros no caso da localização no museu do MASP, como é hoje e como seriam pequenas adaptações:
+<span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao conjunto de cobertura &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, `6gycfqf0`, faz parte do *contexto São Paulo (SPA)*, ilustrado abaixo, e teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), reduzindo o  código do MASP a apenas cinco caracteres.
 
-Opção de CLP proposta<br>(contexto BR) | portão do MASP na tecnologia de referência
+![](assets/hierarqMasp-03-sampa3d.png)<!-- 6gy*, 6gz4, 6gz1, 6gwz. -->
+
+Vejamos as siglas e os códigos no caso da localização no museu do MASP, como seriam pequenas adaptações, resultando em um código CLP mais adequado do que cada opção tecnológica "pura":
+
+&nbsp;CLP&nbsp;resultante&nbsp;&nbsp;&nbsp;<br>&nbsp;(contexto BR) | Detalhes da opção tecnologica
 ----------------------|---------------------
-**`SP`**     | [**Código ISO** 3166](https://en.wikipedia.org/wiki/ISO_3166-2:BR) do estado (BR-SP)
-**`SP:Y`**   | opção [*Geohash*](http://geohash.org/6gy) da região (`6gy`)&nbsp; ~140x140 km
+**`SP`**     | [**Código ISO** 3166](https://en.wikipedia.org/wiki/ISO_3166-2:BR) do estado (`BR-SP`)
+**`SP:Y`**   | *Geohash* da região ([`6gy`](http://geohash.org/6gy))&nbsp; ~140×140 km
 **`SP-SPA`** | [**Código Oficial** do município](spec04ap01-siglas.md#padrao-estadual) (`BR-SP-SPA`)
-**`SP:YCF`** | opção [*Geohash*](http://geohash.org/6gycf) da sub-região (`6gycf`)&nbsp; ~4x5 km
-**`SP:E59`** | opção [*S2*](https://s2.sidewalklabs.com/regioncoverer/?center=-23.543286%2C-46.649618&zoom=12&cells=94ce59) da sub-região (`94ce59`)&nbsp; ~8x8 km <!-- estado SP = 94c, 94ce59 é macro do MASP -->
+**`SP:2F`** | *Geohash* da sub-região ([`6gycf`](http://geohash.org/6gycf))&nbsp; ~4×5 km
+**`SP:E59`** | *S2* da sub-região ([`94ce59`](https://s2.sidewalklabs.com/regioncoverer/?center=-23.543286%2C-46.649618&zoom=12&cells=94ce59))&nbsp; ~8×8 km <!-- estado SP = 94c, 94ce59 é macro do MASP -->
 (contexto BR-SP) |
-**`SPA-YCFQ.F0`** | [*Geohash*](http://geohash.org/6gycfqf0) do **portão** (`6gycfqf0`)&nbsp; ~25x20&nbsp;m
-**`SPA-YCFQ.F0M`** | [*Geohash*](http://geohash.org/6gycfqf0m) de um  ponto (`6gycfqf0m`)&nbsp; ~4x4&nbsp;m
-**`SPA-C8QV+CJ`** | [*PlusCode*](https://plus.codes/588MC8QV+CJ) do **portão** (`588MC8QV+CJ`)&nbsp; ~15x15 m
-**`SPA-C8QV+CJ4`** | [*PlusCode*](https://plus.codes/588MC8QV+CJ4) de um ponto (`588MC8QV+CJ4`)&nbsp; ~3x3 m
-**`SPA-1CSI.IM`**&nbsp;\* | [*S2*](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ac) do **portão** (`94ce59c94ac`)&nbsp;<!--94ce--> ~15x15&nbsp;m
-**`SPA-1CSI.IN1`**&nbsp;\* | [*S2*](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ae1) de um ponto (`94ce59c94ae1`)&nbsp; ~2x2&nbsp;m
-&nbsp;\* <small>convertido p. base32.</small>|
+**`SPA-2FQ.F0`** | *Geohash* do **portão** ([`6gycfqf0`](http://geohash.org/6gycfqf0))&nbsp; ~25×20&nbsp;m
+**`SPA-2FQ.F0M`** | *Geohash* de um  ponto ([`6gycfqf0m`](http://geohash.org/6gycfqf0m))&nbsp; ~4×4&nbsp;m
+**`SPA-C8QV+CJ`** | *PlusCode* do **portão** ([`588MC8QV+CJ`](https://plus.codes/588MC8QV+CJ))&nbsp; ~15×15 m
+**`SPA-C8QV+CJ4`** | *PlusCode* de um ponto ([`588MC8QV+CJ4`](https://plus.codes/588MC8QV+CJ4))&nbsp; ~3×3 m
+**`SPA-1CSI.IM`**&nbsp;\* | *S2* do **portão** ([`94ce59c94ac`](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ac))&nbsp;<!--94ce--> ~15×15&nbsp;m
+**`SPA-1CSI.IN1`**&nbsp;\* | *S2* de um ponto ([`94ce59c94ae1`](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ae1))&nbsp; ~2×2&nbsp;m
+&nbsp;|<div style="text-align:right">&nbsp;\*<small>&nbsp;código hexadecimal convertido para base32.</small></div>
 
 Qual opção de tecnologia adaptada ao CLP seria a melhor? Qual gera códigos mais curtos e precisos?  Mais fáceis de lembrar? Com infraestrutura mais barata?
 
@@ -81,7 +85,7 @@ As recomendações não se limitam à sintaxe dos códigos e sua tradução em l
 
 ## Dois padrões, via e coordenada
 
-Afinal CLP, *Código Localizador de Portão*, faz também papel de "endereço da casa dona do portão".  Falta então definir um outro padrão, que seria uma **expressão compacta do  endereço postal tradicional**. <br/>Por exemplo o endereço do MASP,  *"Avenida Paulista 1578, São Paulo"*. Suponhamos que o código oficial da avenida fosse `U131`, então o CLP  resultaria em algo como &nbsp; **`SPA‑U131‑1578`**. <br/>Alternativamente, em um contexto onde não se disponha do código do logradouro, o padrão também deve prever a expressão por extenso, que no exemplo resultaria em **`SPA‑av_paulista‑1578`**.  <!-- "u" de urbano, é o  menor CEP da via, no caso a paulista usa 01310-000, teria o ponto por exempl Quintana do CEP 04965-010 seria 4965.01  -->
+Afinal CLP, *Código Localizador de Portão*, faz também papel de "endereço da casa dona do portão".  Falta então definir um outro padrão, que seria uma **expressão compacta do  endereço postal tradicional**. <br/>Por exemplo o endereço do MASP,  *"Avenida Paulista 1578, São Paulo"*. Suponhamos que o código oficial da avenida fosse `U131`, então o CLP  resultaria em algo como &nbsp; **`SPA‑U131‑1578`**. <br/>Alternativamente, em um contexto onde não se disponha do código do logradouro, o padrão também deve prever a expressão por extenso, que no exemplo resultaria em **`SPA‑av_paulista‑1578`**.
 
 Esse tipo de código é importante para a representação interna dos endereços de correspondência em bancos de dados, links da internet, e na comunicação entre bancos de dados (interoperabilidade).  
 
@@ -91,11 +95,11 @@ Existem portanto dois grupos principais de CLPs:
 <th width="50%">Definição do tipo</th> <th>Aplicações e exemplos</th>
 </tr><tr>
 <td><b><a href="index_CLPvia">CLP-via</a></b>:<br/>Soluções baseadas na <b>proximidade do portão com uma via de acesso</b> a ele, contendo o código da via e a numeração praticada na via. <br/>O CLP-via seria uma escrita simplificada e padronizada do <a href="https://schema.org/PostalAddress" rel="external">endereço postal</a> tradicional, baseado em logradouro e numeração predial.
-</td><td>Garantiria links corretos e maior interoperabilidade entre bases de endereços.
+</td><td><br/>Expressão digital segura e padronizada de um endereço usual. Garantiria de links corretos e maior interoperabilidade entre bases de endereços.
 </tr><tr>
 <td><b><a href="index_CLPcoord">CLP-coordenada</a></b>:<br/> Soluções baseadas na <b>coordenada geográfica do portão</b>.<br/> Um algoritmo seguro, do tipo Geohash ou outro, toma como entrada as coordenadas padrão <a href="https://en.wikipedia.org/wiki/Geo_URI_scheme" rel="external">Geo URI</a>,<!-- RFC 5870 --> e devolve um código compacto, que é adotado como CLP.
 </td>
-<td>Seria um código dado por tecnologias como as exemplificadas, Geohash, S2, PlusCode, etc. Além  do CLP-coordenada ser proposto como substituto do CEP, seria também proposto como uma opção de expressão de geocódigo ou de coordenadas em protocolos similares ao Geo URI.<!-- seria utilizado também localizador em aplicativos, links e outros dispositivos, -->
+<td><br/>Todas as aplicações e vantagens das tecnologias exemplificadas <!-- #comparacoes-e-como-seria --> (Geohash, PlusCode, etc.). <br/>Além  disso o  CLP-coordenada pode ser proposto como substituto do CEP, e como uma opção em protocolos similares ao Geo URI.<!-- seria utilizado também localizador em aplicativos, links e outros dispositivos, -->
 </td>
 </tr></table>
 

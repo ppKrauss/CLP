@@ -121,6 +121,7 @@
             <li><a href="#pluscode">PlusCode</a></li>
             <li><a href="#s2">S2</a></li>
         <li class="main "><a href="#comparando-com-nao-candidatos">Comparando com não-candidatos</a></li>
+            <li><a href="#nactag-e-codigo-microsoft">Nactag e código Microsoft</a></li>
             <li><a href="#mapcode">MapCode</a></li>
             <li><a href="#whats3words">Whats3words</a></li>
             <li><a href="#syllagloble">Syllagloble</a></li>
@@ -137,12 +138,12 @@
 <p>O primeiro passo é transformar esses 12 elementos em 8, ao traduzirmos as coordenadas para Geohash, <a href="http://geohash.org/6gvvvw3d"><code>6GVVVW3D</code></a>.</p>
 <p>O segundo passo, para compactar mais um pouco, é fazer uso do contexto: se já sabemos que estamos localizados em <code>SP</code> e a sigla <code>PIR</code> já diz que é Piracicaba, então o Geohash não precisa dizer que estamos no hemisfério sul, etc. dispensamos o prefixo <code>6G</code> do Geohash, comum a todos os pontos de Piracicaba. <strong>Sobram 6</strong> caracteres: o código <code>PIR-VVV.W3D</code> é mais "palatável" para memorizar ou digitar.</p>
 <h2 id="sintaxe">Sintaxe</h2>
-<p>O código CLP é uma sequência de letras (A-Z) e números (0-9), com grupos separados por hífen ("-"). Essa sequência tem um prefixo e um sufixo, conforme a seguinte regra sintática, onde o prefixo é um código de jurisdição e o sufixo um códido de coordenada gegráfica válido para o interior do territorio da jurisdição:</p>
+<p>O código CLP é uma sequência de letras (A-Z) e números (0-9), com grupos separados por hífen ("-"). Essa sequência tem um prefixo e um sufixo, conforme a seguinte regra sintática, onde o prefixo é um código de jurisdição e o sufixo do CLP-coordenada um códido de coordenada gegráfica válido para o interior do territorio da jurisdição:</p>
 <p><img alt="" src="../assets/CLPcoordenada-syntax.png" /></p>
 <p>Por ser um padrão restrito ao território brasileiro inicia pela sigla <code>BR</code>.  As jurisdições <code>"BR-" &lt;uf&gt;</code>, referentes às unidades da federação, são determinadas pelo padrão <a href="https://pt.wikipedia.org/wiki/ISO_3166-2:BR">ISO&nbsp;3166-2:BR</a>, ou seja, são as tradicionais siglas de estado padronizadas pelo IBGE. Em seguida a última parte do código de jurisdição é o Município.</p>
 <p>Como há a opção de usar o CLP para designar porções maiores e menores da hierarquia territorial, a UF e o Município são opcionais:</p>
 <p><img alt="" src="../assets/CLPjurisdicao-syntax.png" /></p>
-<p>A designação de município faz uso das <strong>siglas de 3 letras</strong> do padrão já em uso nos identificadores de estradas. Como o CLP é <strong>sensível a contexto</strong> de país e UF, o uso do prefixo <code>BR</code> é dispensável no "contexto Brasil" e o uso da UF também dispensável quando as partes usuárias do CLP forem capazes de deduzir com certeza a UF.</p>
+<p>A designação de município faz uso das <a href="../spec04ap01-siglas/"><strong>siglas de 3 letras</strong></a> do padrão já em uso nos identificadores de estradas. Como o CLP é <strong>sensível a contexto</strong> de país e UF, o uso do prefixo <code>BR</code> é dispensável no "contexto Brasil" e o uso da UF também dispensável quando as partes usuárias do CLP forem capazes de deduzir com certeza a UF.</p>
 <h2 id="comparando-com-outros-padroes">Comparando com outros padrões</h2>
 <p>Existe uma imensa diversidade de representações alternativas à Latitude/Longitude, e que podem ser consideradas também "geocódigos". Pode-se classificá-las da seguinte forma:</p>
 <ul>
@@ -162,35 +163,23 @@
 </li>
 </ul>
 <p>Um levantamento parcial foi realizado por <a href="https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119">K. Clemens em 2016</a>, ao analisar as características de geocódigos e de códigos postais em geral. A principal vantagem de um geocódigo baseado em DGG de alta resolução, sobre um código postal comum, é que a capacidade de localizar o ponto desejado.</p>
-<p>O CEP <code>20031-050</code> do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP <code>20031-040</code> da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo <a href="https://plus.codes/589R3RRF+">PlusCode klzzwxh:0034</a> ou Geohash <code>CM9MX</code>. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  <a href="https://plus.codes/589R3RRF+6F">PlusCode <strong><code>3RRF+6F</code></strong></a>, diz exatamente onde está o  portão!<!-- O **CEP <code>69010-060</code>** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **<a href="https://plus.codes/678XVXCG+3R4">PlusCode klzzwxh:0038</a>** diz exatamente onde está o seu portão!--></p>
-<!--
-LIXO pois já está no index.md
-
-O CLP, quando representando um endereço, pode ser recomendado como substituto do CEP nos lugares onde o CEP não chegou, tipicamente nas fazendas, vilas e zonas rurais.  O CLP pode  ser também expressão do próprio endereço, onde não existe nome oficial de logradouro, como em novos loteamentos, em conjuntos habitacionais precários e em favelas.
-
-... O que seria ideal fazer, melhorar o CEP ou implantar o PlusCode? Ou tecnologia Geohash?  Ou tecnologia S2? Será que podemos melhorar essas tecnologias para as nossas condições, garantindo a padronização de códigos mais curtos para o Brasil?
-
-Em estudos preliminares já comprovamos que é possível usar tais tecnologias e moldá-las ao Brasil e a cada município para deixar o código ainda mais curto.
-A seguir um breve resumo de como tentaremos responder a estas e outras questões, junto com a comunidade, através da construção da proposta do CLP.
--->
-
+<p>O CEP <code>20031-050</code> do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP <code>20031-040</code> da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo <a href="https://plus.codes/589R3RRF+">PlusCode klzzwxh:0035</a> ou Geohash <code>CM9MX</code>. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  <a href="https://plus.codes/589R3RRF+6F">PlusCode <strong><code>3RRF+6F</code></strong></a>, diz exatamente onde está o  portão!<!-- O **CEP <code>69010-060</code>** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **<a href="https://plus.codes/678XVXCG+3R4">PlusCode klzzwxh:0039</a>** diz exatamente onde está o seu portão!--></p>
 <h2 id="aprendizados-com-o-cep">Aprendizados com o CEP</h2>
 <p>Depois de décadas usando o CEP aprendendos que <a href="https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md">ele tem problemas</a> intríncecos do código, e problemas de operação, do "Sistema CEP" como um todo, por reter patentes e direitos autorais, ser centralizado, etc. Sabemos que precisamos do oposto,  <strong>queremos códigos livres</strong> e descentralizados.</p>
-<p>Um dos problemas intrínsecos é a dificuldade de se memorizar, o CEP é tão pouco <strong>mnemônico</strong> (pouco amigável para memorização) quanto um número de telefone. O uso de siglas já padronizadas, que já estão em nossa memória, seria um grande avanço. Podemos melhorar o CEP <a href="http://www.openstreetmap.com.br/CRP/">substituindo prefixos por siglas</a>. O&nbsp;código de um CEP do Amazonas&nbsp;(AM) pode ser <code>AM150‑088</code> ao invés de <code>69150‑088</code>, de um CEP de Tocantins&nbsp;(TO), <code>TO500‑360</code> ao invés de <code>77500‑360</code>.</p>
+<p>Quanto aos problemas intrínsecos, o principal é a dificuldade de se memorizar. O CEP é tão pouco <strong>mnemônico</strong> (pouco amigável para memorização) quanto um número de telefone. O uso de siglas já padronizadas, que já estão em nossa memória, seria um grande avanço. Podemos melhorar o CEP <a href="http://www.openstreetmap.com.br/CRP/">substituindo prefixos por siglas</a>. O&nbsp;código de um CEP do Amazonas&nbsp;(AM) pode ser <code>AM150‑088</code> ao invés de <code>69150‑088</code>, de um CEP de Tocantins&nbsp;(TO), <code>TO500‑360</code> ao invés de <code>77500‑360</code>.</p>
 <p>Também aprendemos com o uso do CEP que um código com hierarquia é útil. Se formos substituir o CEP por um novo padrão, o CLP, queremos que ele preserve essa característica de ser um código hierárquico.</p>
 <p><img alt="" src="../assets/cep-digitos123d.png" /></p>
 <p>A hierarquia garante que dois CEPs, digamos <code>13165</code> e <code>13170</code>, se possuem prefixos iguais, então são vizinhos, estão dentro de uma mesma região, representada pelo prefixo comum, <code>131</code> no exemplo.</p>
-<p>O CEP com mais dígitos vai representando com mais detalhe uma região do espaço... Mas são 8 dígitos no CEP completo, e ainda assim não representa o endereço exato do portão. <strong>Com o CLP podemos fazer melhor</strong>, e  justamente por isso, entre outras aplicações, o CLP num futuro distante substituiria  o CEP, para num só código, de 7 ou 8 caracteres, chegarmos no portão.</p>
-<hr />
+<p>O CEP com mais dígitos vai representando com mais detalhe uma região do espaço... Mas são 8 dígitos no CEP completo, e ainda assim não representa o endereço exato do portão. <strong>Com o CLP podemos fazer melhor</strong>,</p>
+<p>e  justamente por isso, entre outras aplicações, o CLP num futuro distante substituiria  o CEP, para num só código, de 7 ou 8 caracteres, chegarmos no portão.</p>
 <h1 id="comparando-candidatos">Comparando candidatos</h1>
 <p>Comparação entre padrões abertos mais difundidos e tecnicamente satisfatórios: Geohash, PlusCode e S2. Outras tecnologias podem vir a ser acrescentadas como opção para se eleger o melhor fundamento para o código CLP.</p>
 <p>A seguir comparação se deu em torno de um ponto de controle bem conhecido, na capital do Estado de São Paulo, o <a href="https://pt.wikipedia.org/wiki/Marco_zero_da_cidade_de_S%C3%A3o_Paulo">Marco Zero</a> (<em>latitude -23.550385, longitude -46.633956</em>). O pedestal do Marco tem aproximadamente 3 metros de diâmetro, as dimensões usuais de um portão urbano.</p>
-<p>Códigos em sua extensão completa, sem cortar prefixo de município, e sem qualquer outra adaptação, tal como a base numérica dos seus dígitos:</p>
-<ul>
-<li>Geohash (base32): <code>6gyf4bf1n</code></li>
-<li>PlusCode normal (base20): <code>588MC9X8+RC</code></li>
-<li>S2 (hexadecimal): <code>94ce59aaf89</code></li>
-</ul>
+<p>Códigos em sua extensão completa, sem cortar prefixo de município, e sem qualquer outra adaptação, tal como a base numérica dos seus dígitos:
+<em> Nactag (base32): ??
+</em> Geohash (base32): <code>6gyf4bf1n</code>
+<em> PlusCode normal (base20): <code>588MC9X8+RC</code>
+</em> S2 (hexadecimal): <code>94ce59aaf89</code></p>
 <p>O uso de códigos híbridos, que misturam a designação do município com a coordenada do ponto, é realizado apenas em duas das tecnologias populares analisadas:</p>
 <ul>
 <li>PlusCode hibrido (cidade+base20): <code>C9X8+RC São Paulo, Brasil</code></li>
@@ -206,17 +195,19 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 <p>A seguir cada um dos exemplos será ilustrado pelo mapa fornecido na respectiva infraestrutura.</p>
 <h2 id="geohash">Geohash</h2>
 <p>Localização do Marco-zero representada por Geohash:  <a href="http://geohash.org/6gyf4bf1n"><code>6gyf4bf1n</code></a>.</p>
-<p>O link acima envia aponta para <code>geohash.org</code> que não dá zoom compativel com a resolução do Geohash. Para a ilustração abaixo foi utilizada a interface manual de <a href="https://movable-type.co.uk/scripts/geohash.html">movable-type.co.uk/scripts/geohash</a>.</p>
+<p>O link acima aponta para <code>geohash.org</code> que não dá zoom compativel com a resolução do Geohash. Para a ilustração abaixo foi utilizada a interface manual de <a href="http://movable-type.co.uk/scripts/geohash.html">movable-type.co.uk/scripts/geohash</a>.</p>
 <p><img alt="" src="../assets/CLP-coord-geohash-ilustra01.png" /></p>
-<p>Os dois primeiros dígitos (prefixo <code>6g</code>) podem ser cortados quando sabemos que o contexto é a cidade de São Paulo, disso resulta o código mais compacto <code>YF4B.F1N</code>.</p>
+<p>Os dois primeiros dígitos (prefixo <code>6g</code>) podem ser cortados quando sabemos que o contexto é a cidade de São Paulo, disso resulta o código mais compacto <code>YF4B.F1N</code>. Como demonstrado <a href="..#comparacoes-e-como-seria">na apresentação</a>, fazendo uso do conjunto de cobertura (reindexação de <code>6gyf</code> para <code>3</code>) fica ainda mais compacto (!), <code>34B.F1N</code>.</p>
 <p>Para completar a ilustração, vejamos a localização de um portão vizinho do Marco, como a <em>entrada da Catedral da Sé</em>, com sua escadaria de ~10m</p>
 <ul>
-<li>Geohash (base32), 9 dígitos: <code>6gyf4bdn9</code> (SPA-YF4B.DN9) precisão ~5x5m</li>
-<li>Geohash (base32), 8 dígitos: <code>6gyf4bdn</code> (SPA-YF4B.DN) precisão ~35x20m</li>
+<li>Geohash (base32), 9 dígitos: <code>6gyf4bdn9</code> (SPA-34B.DN9)  precisão ~5x5m</li>
+<li>Geohash (base32), 8 dígitos: <code>6gyf4bdn</code> (SPA-34B.DN)  precisão ~35x20m</li>
 </ul>
 <p><img alt="" src="../assets/CLP-coord-geohash-ilustra03.png" /></p>
-<p>A assimetria das células que ocorre em certos níveis hierárquicos, como o de 8 dígitos ilustrado acima, tem origem  num problema intrínseco do sistema Latitude-longitude, quando não se recorre a uma projeção ou correção geométrica. Originado pela mesma causa, há também o problema das células Geohash perderem precisão com a latitude &mdash; crescendo a área da célula conforme nos aproximamos do Equador, ao norte do país. A área das células de 8 dígitos varia de 25,1±0,2 m² no RS; até 26,9±0,1 m² no AM. Nas células de 9 dígitos a variação é de 4,4 m² a 4,8 m².</p>
+<p>A assimetria das células que ocorre em certos níveis hierárquicos, como o de 8 dígitos ilustrado acima, tem origem  num problema intrínseco do sistema Latitude-longitude, que só seria corrigido mediante projeção (por exemplo projeção cônica resultaria em coordenadas UTM). Com origem na mesma causa, há também o problema das células Geohash perderem precisão com a latitude &mdash; crescendo a área da célula conforme nos aproximamos do Equador, ao norte do país. A área das células de 8 dígitos varia de 25,1±0,2 m² no RS; até 26,9±0,1 m² no AM. Nas células de 9 dígitos a variação é de 4,4 m² a 4,8 m².</p>
 <p>Por fim, apesar de ser um sistema inteligente na sua hierarquia, matematicamente ele se baseia num fractal que "dá saltos", a <a href="https://en.wikipedia.org/wiki/Z-order_curve"><em>curva de ordem Z</em></a>, perdendo-se a propriedade de "células vizinhas com prefixos iguais", que o tornou atrativo. No <a href="https://github.com/tammoippen/geohash-hilbert">Geohash-Hilbert</a> o problema foi corrigido, assim como no <a href="#s2">S2</a> descrito a seguir.</p>
+<p>Quanto aos níveis indermediários da hierarquia, é possível expandir o código Geohash para base4, conforme <a href="http://mapzen.github.io/leaflet-spatial-prefix-tree/">ilustração abaixo do prefix-tree</a>.<!-- ou https://github.com/missinglink/leaflet-spatial-prefix-tree --> Através desses níveis intermediários, códigos ligeiramente mais curtos podem ser conseguidos, fazendo uso de um mosaico mais detalhado na <a href="..#cobertura">cobertura dos municípios</a>.</p>
+<p><img alt="" src="../assets/leaflet-spatial-prefix-tree-ex02.png" /></p>
 <p><strong>Resumo das características do Geohash:</strong>
 <table border="1" width="95%">
 <tr>
@@ -235,7 +226,7 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 </tr>
 <tr>
   <td colspan="3"><i>Infraestrutura de teste utilizada</i>:
-  <br/>Geohash nativo do PostGIS.
+  <br/>Geohash nativo do PostGIS. Visualização com LeafletJS e sua biblioteca <a href="https://leafletjs.com/examples/geojson/">GeoJSON</a>, e <a href="https://codepen.io/jthomassie/pen/lvoGe">boxes Geohash-JS</a>.
   </td>
 </tr>
 </table>  </p>
@@ -275,7 +266,7 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 <p>O S2 pode ser considerado uma evolução do <a href="#geohash">Geohash</a>, pois resolve dois problemas sérios para um país de escala continental como o Brasil:</p>
 <ul>
 <li>
-<p><a href="https://en.wikipedia.org/wiki/Z-order_curve">Substituí a problemática <em>curva de ordem Z</em></a>, pela estável <a href="https://en.wikipedia.org/wiki/Hilbert_curve"><em>curva de Hilbert</em></a>, garantindo que códigos vizinhos tenham de fato, em 100% dos casos, o mesmo prefixo, sem descontinuidades.</p>
+<p><a href="https://en.wikipedia.org/wiki/Z-order_curve">Substituí a descontínua <em>curva de ordem Z</em></a>, pela bem comportada <a href="https://en.wikipedia.org/wiki/Hilbert_curve"><em>curva de Hilbert</em></a>, garantindo que códigos vizinhos tenham de fato, em 100% dos casos, o mesmo prefixo, sem descontinuidades.</p>
 </li>
 <li>
 <p>Devido ao uso da projeção corretiva (similar a uma projeção UTM), resolve dois problemas:</p>
@@ -318,9 +309,24 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 <h1 id="comparando-com-nao-candidatos">Comparando com não-candidatos</h1>
 <p>Alguns algoritmos/tecnologias são muito ruins e por isso devem ser descartados do estudo comparativo. Um desses algoritmos foi apelidado de <em>algoritmo ingênuo</em> e, apesar de não ser candidato, é uma referência importante, estabelecendo o critério de "mínima performance". Ou seja, nenhum "algoritmo candidato a CLP-coordenada" pode ser pior do que o ingênuo.</p>
 <p>Outras tecnologias são até muito boas, mas já foram de ante-mão barradas por não serem livres: são restritas por patentes ou direitos autorais. O Whats3words por exemplo é um destes casos.</p>
+<h2 id="nactag-e-codigo-microsoft">Nactag e código Microsoft</h2>
+<p>A <em>NACtag</em> não apresenta vantagens técnicas mas é interessante por ser um dos primeiros geocódigos, e por estabelecer direitos autorais sobre algo que até então não se cogitava como passível de tais direitos. A disputa com a Microsoft também ajuda a realçar os <strong>riscos</strong> envolvidos na adoção de geocódigos não-livres.</p>
+<p>Na ilustração a localização do <a href="https://www.wikidata.org/wiki/Q178114">Monumento a Washington nos EUA</a>, nas coordenadas <code>geo:38.88944,-77.03528</code>, com célula <em>NACtag</em> de ~40×30m. É um código opcionalmente hierarquico de 8 dígitos base36 (4 cada coordenada).</p>
+<p><img alt="" src="../assets/CLP-coord-nactag-ilustra01b.png" /></p>
+<p>Na Wikipedia a <em>NACtag</em> foi registrada como <a href="https://en.wikipedia.org/wiki/Natural_Area_Code">Natural Area Code (NAC)</a>, site oficial <a href="http://www.nacgeo.com/nacsite/">nacgeo.com</a>.</p>
+<p>O algoritmo aliado à utilização pública foi proposto em 1994 por Xinhang Shen, visando a representação mais compacta das coordenadas de latitude e longitude, e entendendo que isso demandaria fixar algumas convenções de interpretação, portanto o estabelecimento de um padrão. Shen optou pela via do licenceamento: ainda hoje (com ultima atualização de 2014) a <a href="http://www.nacgeo.com/nacsite/licensing/NAC_Free_Licensing_Agreement.pdf">licença Nactag</a> não é totalmente livre, apreser de se auto-denominar "free licensing".</p>
+<p>A NACtag (ou <em>NAC locator</em>) foi também um dos primeiros sistemas de geocódigo a se declarar como <a href="http://globalpostalcodesystem.info/">substituto de <em>postcodes</em> tradicionais como o CEP</a>,
+já oferecendo a <a href="https://web.archive.org/web/20070222110607/http://globalpostalcodesystem.info:80/">solução online pelo menos desde 2007</a>.</p>
+<p><span id="nac-disputa">NOTA SOBRE DISPUTA POR DIREITOS AUTORIAIS</a></p>
+<p>Em 2005 entraram em disputa os detentores de direitos  sobre  a patente  internacional No. WO9607170 (de 1995), entitulada <em>"Compact text encoding of latitude/longitude coordinates"</em>, de propriedade da Microsoft, e os priprietários da NAC. A patente da Microsoft é de fato  bastante similar e posterior ao registrio de copyright da NACtag, de 1994. Por serem sistemas jurídicos distintos (direitos autorais <em>vs</em> direitos sobre patente), o problema permanece.</p>
+<p>A patente da Microsoft emprega o algoritmo equivalente para converter as coordenadas de longitude e latitude em inteiros não negativos e, em seguida, usa um conjunto de caracteres com exatamente o mesmo número de caracteres e as mesmas ordens de caracteres, exceto a remoção da letra "L" e a adição da letra "Y". Por exemplo, <code>longitude -127.8202; latitude 3,436086111</code> terá as seguintes representações:</p>
+<ul>
+<li>Código NacTag: <code>4BFGJ HK5DC</code></li>
+<li>Código da Microsoft: <code>hk5dc4bfgj</code> onde se percebe o grupo <code>4bfgj</code> e o grupo <code>hk5dc</code>, identicos à representação NACtag.</li>
+</ul>
+<p>O caso destaca que, mesmo com a <a href="https://web.archive.org/web/20101228091709/http://www.gps-practice-and-fun.com/nacgeo.html#Microsoft">flagrante ilegalidade da patente Microsoft já demonstrada em 2012</a>, o embrólio jurídico surge como barreira e risco aos protocolos e variantes de geocódigos <em>sub júdice</em>. Neste sentido recomenda-se optar por  geocódigos livres e que mais se distanciam de patentes consolidadas.</p>
 <h2 id="mapcode">MapCode</h2>
-<p>Localização do Marco-zero representada por tecnologia MapCode: <a href="http://www.mapcode.com/getcoords.html?iso3=331&amp;mapcode=RR.56&amp;xx=-46.633956&amp;yy=-23.550385"><code>BR-SP RR.56</code></a>
-com célula de ~5×5m (a confirmar). É um código não-hierarquico (a confirmar) de 4 caracteres aparentemente base36.</p>
+<p>Localização do Marco-zero representada por tecnologia MapCode: <a href="http://www.mapcode.com/getcoords.html?iso3=331&amp;mapcode=RR.56&amp;xx=-46.633956&amp;yy=-23.550385"><code>BR-SP RR.56</code></a> com célula de ~5×5m (a confirmar). É um código não-hierarquico (a confirmar) de 4 caracteres aparentemente base36.</p>
 <p>O MapCode está contextualizado pela cidade mais populosa nas proximidades do sinal de quem faz a solicitação, que neste caso é a capital de <code>BR-SP</code>, representada no link pelo  código <em>ISO 331</em>.</p>
 <p><img alt="" src="../assets/CLP-coord-mapCode-ilustra01b.png" /></p>
 <p>Mais detalhes sobre o MapCode no seu <a href="../www.mapcode.com/mapcode_documentation.doc">documento de apresentação</a> e na sua patente.  Foi aparentemente um dos primeiros padrões populares a <a href="http://www.mapcode.com/aboutmc.html">sugerirem a substituição do CEP pelo geocode</a>.</p>
