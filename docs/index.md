@@ -50,11 +50,7 @@ Estas regras simples, uma vez formalizadas como padrão, garantiriam um código 
 
 <span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao [conjunto de cobertura](http://s2geometry.io/devguide/examples/coverings.html) &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, `6gycfqf0`, faz parte do *contexto São Paulo (SPA)*, ilustrado abaixo, e teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), reduzindo o  código do MASP a apenas cinco caracteres.
 
-<span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao [conjunto de cobertura](http://s2geometry.io/devguide/examples/coverings.html) &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, `6gycfqf0`, faz parte do *contexto São Paulo (SPA)*, e poderia ser definido como "prefixo `6g`". Ou seja, se o contexto é conhecido ou dado por `SPA`, podemos remover o `6g` ficando só `ycfqf0` (6 caracters).
-
-Em geral podemos fazer melhor, fazendo melhor uso da padronização da cobertura do município. Conforme ilustrado abaixo, a localização do MASP teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), um código de apenas cinco caracteres.
-
-![](assets/hierarqMasp-03-sampa3d.png)<!-- 6gy*, 6gz4, 6gz1, 6gwz. -->
+![](assets/hierarqMasp-03-sampa3e.png)<!-- 6gy*, 6gz4, 6gz1, 6gwz. -->
 
 Vejamos as siglas e os códigos no caso da localização no museu do MASP, como seriam pequenas adaptações, resultando em um código CLP mais adequado do que cada opção tecnológica "pura":
 
@@ -68,8 +64,8 @@ Vejamos as siglas e os códigos no caso da localização no museu do MASP, como 
 (contexto BR-SP) |
 **`SPA-2FQ.F0`** | *Geohash* do **portão** ([`6gycfqf0`](http://geohash.org/6gycfqf0))&nbsp; ~25×20&nbsp;m
 **`SPA-2FQ.F0M`** | *Geohash* de um  ponto ([`6gycfqf0m`](http://geohash.org/6gycfqf0m))&nbsp; ~4×4&nbsp;m
-**`SPA-C8QV+CJ`** | *PlusCode* do **portão** ([`588MC8QV+CJ`](https://plus.codes/588MC8QV+CJ))&nbsp; ~15×15 m
-**`SPA-C8QV+CJ4`** | *PlusCode* de um ponto ([`588MC8QV+CJ4`](https://plus.codes/588MC8QV+CJ4))&nbsp; ~3×3 m
+**`SPA-C8QV.VCJ`** | *PlusCode* do **portão** ([`588MC8QV+CJ`](https://plus.codes/588MC8QV+CJ))&nbsp; ~15×15 m
+**`SPA-C8QV.CJ4`** | *PlusCode* de um ponto ([`588MC8QV+CJ4`](https://plus.codes/588MC8QV+CJ4))&nbsp; ~3×3 m
 **`SPA-1CSI.IM`**&nbsp;\* | *S2* do **portão** ([`94ce59c94ac`](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ac))&nbsp;<!--94ce--> ~15×15&nbsp;m
 **`SPA-1CSI.IN1`**&nbsp;\* | *S2* de um ponto ([`94ce59c94ae1`](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ae1))&nbsp; ~2×2&nbsp;m
 &nbsp;|<div style="text-align:right">&nbsp;\*<small>&nbsp;código hexadecimal convertido para base32.</small></div>

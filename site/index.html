@@ -163,9 +163,7 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 </ul>
 <p>Estas regras simples, uma vez formalizadas como padrão, garantiriam um código CLP mais adequado para o brasileiro usar. As siglas, não se vê todos os dias, mas já vinhamos usando: em diversos códigos oficiais, em mapas e nas placas de vias públicas. As siglas estão no <em>código das estradas</em> federais (ex. <a href="https://pt.wikipedia.org/wiki/BR-116">BR-116</a>), estaduais (ex. <a href="https://pt.wikipedia.org/wiki/SP-147">SP-147</a>) e municipais (ex. PIR-033). <!-- ... mas já vinhamos usando: em diversos códigos oficiais, tais como <a href="https://pt.wikipedia.org/wiki/Lex_(URN)">identificadores LEX de normas jurídicas</a>, e nas placas de vias públicas ou mapas oficiais.--></p>
 <p><span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao <a href="http://s2geometry.io/devguide/examples/coverings.html">conjunto de cobertura</a> &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, <code>6gycfqf0</code>, faz parte do <em>contexto São Paulo (SPA)</em>, ilustrado abaixo, e teria o seu prefixo <code>6gyc</code> associado ao índice 2, resultando em <strong><code>2fqf0</code></strong> (!), reduzindo o  código do MASP a apenas cinco caracteres.</p>
-<p><span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao <a href="http://s2geometry.io/devguide/examples/coverings.html">conjunto de cobertura</a> &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, <code>6gycfqf0</code>, faz parte do <em>contexto São Paulo (SPA)</em>, e poderia ser definido como "prefixo <code>6g</code>". Ou seja, se o contexto é conhecido ou dado por <code>SPA</code>, podemos remover o <code>6g</code> ficando só <code>ycfqf0</code> (6 caracters).</p>
-<p>Em geral podemos fazer melhor, fazendo melhor uso da padronização da cobertura do município. Conforme ilustrado abaixo, a localização do MASP teria o seu prefixo <code>6gyc</code> associado ao índice 2, resultando em <strong><code>2fqf0</code></strong> (!), um código de apenas cinco caracteres.</p>
-<p><img alt="" src="./assets/hierarqMasp-03-sampa3d.png" /><!-- 6gy*, 6gz4, 6gz1, 6gwz. --></p>
+<p><img alt="" src="./assets/hierarqMasp-03-sampa3e.png" /><!-- 6gy*, 6gz4, 6gz1, 6gwz. --></p>
 <p>Vejamos as siglas e os códigos no caso da localização no museu do MASP, como seriam pequenas adaptações, resultando em um código CLP mais adequado do que cada opção tecnológica "pura":</p>
 <table>
 <thead>
@@ -208,11 +206,11 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 <td><em>Geohash</em> de um  ponto (<a href="http://geohash.org/6gycfqf0m"><code>6gycfqf0m</code></a>)&nbsp; ~4×4&nbsp;m</td>
 </tr>
 <tr>
-<td><strong><code>SPA-C8QV+CJ</code></strong></td>
+<td><strong><code>SPA-C8QV.VCJ</code></strong></td>
 <td><em>PlusCode</em> do <strong>portão</strong> (<a href="https://plus.codes/588MC8QV+CJ"><code>588MC8QV+CJ</code></a>)&nbsp; ~15×15 m</td>
 </tr>
 <tr>
-<td><strong><code>SPA-C8QV+CJ4</code></strong></td>
+<td><strong><code>SPA-C8QV.CJ4</code></strong></td>
 <td><em>PlusCode</em> de um ponto (<a href="https://plus.codes/588MC8QV+CJ4"><code>588MC8QV+CJ4</code></a>)&nbsp; ~3×3 m</td>
 </tr>
 <tr>
@@ -366,5 +364,5 @@ Todo o relacionamento com a comunidade seria realizado através da metodogia das
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-11-19 08:04:08
+Build Date UTC : 2018-11-19 08:48:07
 -->
