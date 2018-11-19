@@ -181,7 +181,7 @@ O S2 pode ser considerado uma evolução do [Geohash](#geohash), pois resolve do
 
 * [Substituí a descontínua *curva de ordem Z*](https://en.wikipedia.org/wiki/Z-order_curve), pela bem comportada [*curva de Hilbert*](https://en.wikipedia.org/wiki/Hilbert_curve), garantindo que códigos vizinhos tenham de fato, em 100% dos casos, o mesmo prefixo, sem descontinuidades.
 
-* Devido ao uso da projeção corretiva (similar a uma projeção UTM), resolve dois problemas:
+* Devido ao uso da [projeção corretiva](http://s2geometry.io/devguide/s2cell_hierarchy.html#coordinate-systems) (similar a uma projeção UTM), resolve dois problemas:
 
     * o problema área das células, garantindo que seja uniforme (quase constante) ao longo de todo o território nacional.
 

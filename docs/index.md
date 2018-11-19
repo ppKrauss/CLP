@@ -48,7 +48,11 @@ Os códigos de localização existentes, como o Geohash ou o PlusCode, assim com
 
 Estas regras simples, uma vez formalizadas como padrão, garantiriam um código CLP mais adequado para o brasileiro usar. As siglas, não se vê todos os dias, mas já vinhamos usando: em diversos códigos oficiais, em mapas e nas placas de vias públicas. As siglas estão no *código das estradas* federais (ex. [BR-116](https://pt.wikipedia.org/wiki/BR-116)), estaduais (ex. [SP-147](https://pt.wikipedia.org/wiki/SP-147)) e municipais (ex. PIR-033). <!-- ... mas já vinhamos usando: em diversos códigos oficiais, tais como [identificadores LEX de normas jurídicas](https://pt.wikipedia.org/wiki/Lex_(URN)), e nas placas de vias públicas ou mapas oficiais.-->
 
-<span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao conjunto de cobertura &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, `6gycfqf0`, faz parte do *contexto São Paulo (SPA)*, ilustrado abaixo, e teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), reduzindo o  código do MASP a apenas cinco caracteres.
+<span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao [conjunto de cobertura](http://s2geometry.io/devguide/examples/coverings.html) &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, `6gycfqf0`, faz parte do *contexto São Paulo (SPA)*, ilustrado abaixo, e teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), reduzindo o  código do MASP a apenas cinco caracteres.
+
+<span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao [conjunto de cobertura](http://s2geometry.io/devguide/examples/coverings.html) &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, `6gycfqf0`, faz parte do *contexto São Paulo (SPA)*, e poderia ser definido como "prefixo `6g`". Ou seja, se o contexto é conhecido ou dado por `SPA`, podemos remover o `6g` ficando só `ycfqf0` (6 caracters).
+
+Em geral podemos fazer melhor, fazendo melhor uso da padronização da cobertura do município. Conforme ilustrado abaixo, a localização do MASP teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), um código de apenas cinco caracteres.
 
 ![](assets/hierarqMasp-03-sampa3d.png)<!-- 6gy*, 6gz4, 6gz1, 6gwz. -->
 
@@ -85,7 +89,7 @@ As recomendações não se limitam à sintaxe dos códigos e sua tradução em l
 
 ## Dois padrões, via e coordenada
 
-Afinal CLP, *Código Localizador de Portão*, faz também papel de "endereço da casa dona do portão".  Falta então definir um outro padrão, que seria uma **expressão compacta do  endereço postal tradicional**. <br/>Por exemplo o endereço do MASP,  *"Avenida Paulista 1578, São Paulo"*. Suponhamos que o código oficial da avenida fosse `U131`, então o CLP  resultaria em algo como &nbsp; **`SPA‑U131‑1578`**. <br/>Alternativamente, em um contexto onde não se disponha do código do logradouro, o padrão também deve prever a expressão por extenso, que no exemplo resultaria em **`SPA‑av_paulista‑1578`**.
+Afinal CLP, *Código Localizador de Portão*, faz também papel de "endereço da casa dona do portão".  Falta então definir um outro padrão, que seria uma **expressão compacta do  endereço postal tradicional**. <br/>Por exemplo o endereço do MASP,  *"Avenida Paulista 1578, São Paulo"*, fica mais compacto trocando-se o nome exteso *São Paulo* pela sigla `SPA` e abreviando avenida de forma patronizada para "av", resultando no código **`SPA‑av_paulista‑1578`**.<br/>Alternativamente, em um contexto onde os nomes de logradouro são batizados com códigos oficiais, o padrão também deve prever a expressão codificada.  Suponhamos que o código oficial da avenida fosse `U131`, então o CLP  resultaria em algo como &nbsp; **`SPA:U131-1578`**.
 
 Esse tipo de código é importante para a representação interna dos endereços de correspondência em bancos de dados, links da internet, e na comunicação entre bancos de dados (interoperabilidade).  
 
