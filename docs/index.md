@@ -1,5 +1,5 @@
 <!-- pode ficar mais curto? -->
-**<center><big>CLP</big><br/><small style="font-size:8pt">v0.0.7f</small></center>**
+**<center><big>CLP</big><br/><small style="font-size:8pt">v0.0.7g</small></center>**
 
 Proposta de **C**ódigo **L**ocalizador de **P**ortão, CLP:  estudos de viabilidade e consulta pública.
 
@@ -27,12 +27,22 @@ Quanto à fundamentação, é sólida e amplamente adotada. O sistema universal 
 
 Tais tecnologias são viáveis até mesmo para substituir o CEP dos Correios. O CEP `20031-050` do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP `20031-040` da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo [PlusCode `3RRF`](https://plus.codes/589R3RRF+) ou Geohash `CM9MX`. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  **[PlusCode `3RRF+6F`](https://plus.codes/589R3RRF+6F)**, diz exatamente onde está o  portão!<!-- O **CEP `69010-060`** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **[PlusCode `VXCG+3R4`](https://plus.codes/678XVXCG+3R4)** diz exatamente onde está o seu portão!--> <br/><small>&nbsp; &nbsp; [siga o link do `3RRF+6F` para entender se ainda não conhece]</small><br/>
 
-O CLP, quando representando um endereço, pode ser recomendado como substituto do CEP nos lugares onde o CEP não chegou, tipicamente nas fazendas, vilas e zonas rurais.  O CLP pode  ser também expressão do próprio endereço, onde não existe nome oficial de logradouro, como em novos loteamentos, em conjuntos habitacionais precários e em favelas.
+## O CLP de um endereço
+
+O CLP, quando representando um endereço de correspondência, pode ser recomendado como substituto do CEP nos lugares onde o CEP não chegou, tipicamente nas fazendas, vilas e zonas rurais.  O CLP pode  ser também expressão do próprio endereço, onde não existe nome oficial de logradouro, como em novos loteamentos, em conjuntos habitacionais precários e em favelas.
 
 ... O que seria ideal fazer, melhorar o CEP ou implantar o PlusCode? Ou tecnologia Geohash?  Ou tecnologia S2? Será que podemos melhorar essas tecnologias para as nossas condições, garantindo a padronização de códigos mais curtos para o Brasil?
 
 Em estudos preliminares já comprovamos que é possível usar tais tecnologias e moldá-las ao Brasil e a cada município para deixar o código ainda mais curto.
 A seguir um breve resumo de como tentaremos responder a estas e outras questões, junto com a comunidade, através da construção da proposta do CLP.
+
+## Contexto com siglas
+
+Se quero explicar para outra pessoa no telefone  onde  moro, digo algo como "eu moro aqui na rua tal, São Paulo, SP, Brasil"... Mas se já sabemos que estamos falando da mesma cidade, não precisa repetir tudo. Se o **contexto** é conhecido, **é redundante repetir**.  Ademais, o contexto espacial precisa ser algo simples e padronizado, como as siglas de estado (ex. SP), para que fique o mais curto e seguro possível quando for preciso comunicá-lo.
+
+O **contexto em um geocódigo** precisa ser legível não só para computadores mas também a seres humanos, aí ser mais amigável o uso de uma **hierarquia de siglas**, padronizadas e fáceis de lembrar.
+
+![](assets/siglas-hierarquia2.jpg)
 
 # Comparações e como seria
 
@@ -54,9 +64,13 @@ Estas regras simples, uma vez formalizadas como padrão, garantiriam um código 
 
 <span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao [conjunto de cobertura](http://s2geometry.io/devguide/examples/coverings.html) &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, `6gycfqf0`, faz parte do *contexto São Paulo (SPA)*, ilustrado abaixo, e teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), reduzindo o  código do MASP a apenas cinco caracteres.
 
-![](assets/hierarqMasp-03-sampa3e.png)<!-- 6gy*, 6gz4, 6gz1, 6gwz. -->
+![](assets/hierarqMasp-03-sampa3e.png)<!-- 6gy*, 6gz4, 6gz1, 6gwz.`6gyc1k9sg` = Portão 8 do Autódromo de Interlagos -->
 
-Vejamos as siglas e os códigos no caso da localização no museu do MASP, como seriam pequenas adaptações, resultando em um código CLP mais adequado do que cada opção tecnológica "pura":
+Mais alguns exemplos de Geohash de portão traduzidos para CLP:<br/>&nbsp; `6gycf5q2` ⟾ **`2f5q2`**: Portão 9 do Ibirapuera (troca `6gyc` por `2`) <br/>&nbsp; `6gybcsdv5` ⟾ **`1csdv5`**: entrada do Circo-escola Grajaú (troca `6gyb` por `1`)
+
+Reparamos então que o "contexto", que pode ser a sigla `SPA` ou o nome completo *"São Paulo, SP, Brasil"*, tem seu significado traduzido para o *conjunto cobertura*, e com isso ganhamos códigos mais curtos.
+
+Vejamos as siglas e os códigos no caso da localização no museu do MASP, como seriam **pequenas adaptações**, resultando em opções de código CLP mais adequadas do que cada opção tecnológica "pura". Quando fazemos essas adaptações **podemos então comparar as  tecnologias**:
 
 &nbsp;CLP&nbsp;resultante&nbsp;&nbsp;&nbsp;<br>&nbsp;(contexto BR) | Detalhes da opção tecnologica
 ----------------------|---------------------
@@ -107,7 +121,7 @@ Existem portanto dois grupos principais de CLPs:
 </td>
 </tr></table>
 
-Tecnicamente um tipo pode ser convertido no outro através de [procedimentos de geocodificação](https://en.wikipedia.org/wiki/Geocoding#Geocoding_process). Como existe um crescente *mercado de geocofificação*, a padronização dos dois tipos de CLP  também ajudaria a regulamentar o setor, garantindo a separação entre pré-processamento do CLP-via e a geocodificação, que resulta num *Geo URI* com certo grau de confiabilidade. Quando ambos são fornecidos, ambos podem ser convertidos em coordenadas geográficas e comparados, aferindo-se também um grau de confiabilidade resultante da comparação dos dois.  Critérios mínimos para a avaliação de custo e confiabilidade na geocodificação de endereços brasileiros, portanto, passariam a ser viáveis.
+Tecnicamente um tipo pode ser convertido no outro através de [procedimentos de geocodificação](https://en.wikipedia.org/wiki/Geocoding#Geocoding_process). Como existe um crescente *mercado de geocofificação*, a padronização dos dois tipos de CLP  também ajudaria a **regulamentar o setor**, garantindo a separação entre pré-processamento do CLP-via e a geocodificação, que resulta num *Geo URI* com certo grau de confiabilidade. Quando ambos são fornecidos, ambos podem ser convertidos em coordenadas geográficas e comparados, aferindo-se também um grau de confiabilidade resultante da comparação dos dois.  Critérios mínimos para a avaliação de custo e confiabilidade na geocodificação de endereços brasileiros, portanto, passariam a ser viáveis.
 
 A rigor ambos os códigos, CLP-via e CLP-coordenada, são expressões simbólicas cabíveis dentro das regras de construção de nomes fixadas pelo [padrão RFC-8141](https://www.rfc-editor.org/info/rfc8141), referente à expressão de URNs (do inglês *Uniform Resource Names*). Diversas URNs já são usadas no Brasil, tais como [código de livro ISBN](http://www.isbn.bn.br), e a [URN LEX](http://projeto.lexml.gov.br/documentacao/Parte-2-LexML-URN.pdf), o código oficial identificador de leis e decretos.
 
