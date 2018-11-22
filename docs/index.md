@@ -66,7 +66,7 @@ Estas regras simples, uma vez formalizadas como padrão, garantiriam um código 
 
 ![](assets/hierarqMasp-03-sampa3e.png)<!-- 6gy*, 6gz4, 6gz1, 6gwz.`6gyc1k9sg` = Portão 8 do Autódromo de Interlagos -->
 
-Mais alguns exemplos de Geohash de portão traduzidos para CLP:<br/>&nbsp; `6gycf5q2` ⟾ **`2f5q2`**: Portão 9 do Ibirapuera (troca `6gyc` por `2`) <br/>&nbsp; `6gybcsdv5` ⟾ **`1csdv5`**: entrada do Circo-escola Grajaú (troca `6gyb` por `1`)
+Mais alguns exemplos de Geohash de portão traduzidos para CLP:<br/>&nbsp; [`6gycf5q2`](http://www.openstreetmap.com.br/CLP/site2/#6gycf5q2) ⟾ **`2f5q2`**: Portão 9 do Ibirapuera (troca `6gyc` por `2`) <br/>&nbsp; [`6gybcsdv5`](http://www.openstreetmap.com.br/CLP/site2/#6gybcsdv5) ⟾ **`1csdv5`**: entrada do Circo-escola Grajaú (troca `6gyb` por `1`)
 
 Reparamos então que o "contexto", que pode ser a sigla `SPA` ou o nome completo *"São Paulo, SP, Brasil"*, tem seu significado traduzido para o *conjunto cobertura*, e com isso ganhamos códigos mais curtos.
 <!-- nota técnica: na especificação ténica e metodológica será definido como aproveitar melhor esse conjunto cobertura, garantindo 32 células e códigos mais curtos ainda.  
@@ -88,8 +88,8 @@ Vejamos as siglas e os códigos no caso da localização no museu do MASP, como 
 -->
 &nbsp;CLP&nbsp;resultante&nbsp;&nbsp;&nbsp;<br>&nbsp;(contexto BR-SP) | Detalhes da opção tecnologica
 ----------------------|---------------------
-**`SPA-2FQ.F0`** | *Geohash* do **portão** ([`6gycfqf0`](http://geohash.org/6gycfqf0))&nbsp; ~25×20&nbsp;m
-**`SPA-2FQ.F0M`** | *Geohash* de um  ponto ([`6gycfqf0m`](http://geohash.org/6gycfqf0m))&nbsp; ~4×4&nbsp;m
+**`SPA-2FQ.F0`** | *Geohash* do **portão** ([`6gycfqf0`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0))&nbsp; ~25×20&nbsp;m
+**`SPA-2FQ.F0M`** | *Geohash* de um  ponto ([`6gycfqf0m`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0m))&nbsp; ~4×4&nbsp;m
 **`SPA-C8QV.VCJ`** | *PlusCode* do **portão** ([`588MC8QV+CJ`](https://plus.codes/588MC8QV+CJ))&nbsp; ~15×15 m
 **`SPA-C8QV.CJ4`** | *PlusCode* de um ponto ([`588MC8QV+CJ4`](https://plus.codes/588MC8QV+CJ4))&nbsp; ~3×3 m
 **`SPA-1CSI.IM`**&nbsp;\* | *S2* do **portão** ([`94ce59c94ac`](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ac))&nbsp;<!--94ce--> ~15×15&nbsp;m
