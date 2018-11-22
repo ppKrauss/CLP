@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        <!-- Load Leaflet from CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+
+        <!-- Load geocoding plugin after Leaflet -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.4.1/leaflet-geocoder-mapzen.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.4.1/leaflet-geocoder-mapzen.js"></script>
+
+        <link rel="stylesheet" href="leaflet.label.css" />
+        <link rel="stylesheet" href="style.css" />
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    </head>
+    <body>
+
+        <div id="map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+
+        <div id="buttons" class="btn-group" role="group">
+          <button id="quadtree" type="button" class="btn btn-default active">Quadtree</button>
+          <button id="geohash" type="button" class="btn btn-default">Geohash</button>
+          <!-- button id="slippy" type="button" class="btn btn-default">Slippy Tile</button  -->
+        </div>
+
+        <script src="leaflet.label.js"></script>
+        <script src="geohash.js"></script>
+        <script src="map.js"></script>
+        <script src="plugin.js"></script>
+<script>
+if (selectedByUrl) { changeHashFunction(selectedByUrl); }
+
+</script>
+
+    </body>
+</html>

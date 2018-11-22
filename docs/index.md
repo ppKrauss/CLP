@@ -62,24 +62,32 @@ Os códigos de localização existentes, como o Geohash ou o PlusCode, assim com
 
 Estas regras simples, uma vez formalizadas como padrão, garantiriam um código CLP mais adequado para o brasileiro usar. As siglas, não se vê todos os dias, mas já vinhamos usando: em diversos códigos oficiais, em mapas e nas placas de vias públicas. As siglas estão no *código das estradas* federais (ex. [BR-116](https://pt.wikipedia.org/wiki/BR-116)), estaduais (ex. [SP-147](https://pt.wikipedia.org/wiki/SP-147)) e municipais (ex. PIR-033). <!-- ... mas já vinhamos usando: em diversos códigos oficiais, tais como [identificadores LEX de normas jurídicas](https://pt.wikipedia.org/wiki/Lex_(URN)), e nas placas de vias públicas ou mapas oficiais.-->
 
-<span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao [conjunto de cobertura](http://s2geometry.io/devguide/examples/coverings.html) &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, `6gycfqf0`, faz parte do *contexto São Paulo (SPA)*, ilustrado abaixo, e teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), reduzindo o  código do MASP a apenas cinco caracteres.
+<span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao [conjunto de cobertura](http://s2geometry.io/devguide/examples/coverings.html) &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, [`6gycfqf0`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0), faz parte do *contexto São Paulo (SPA)*, ilustrado abaixo, e teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), reduzindo o  código do MASP a apenas cinco caracteres.
 
 ![](assets/hierarqMasp-03-sampa3e.png)<!-- 6gy*, 6gz4, 6gz1, 6gwz.`6gyc1k9sg` = Portão 8 do Autódromo de Interlagos -->
 
 Mais alguns exemplos de Geohash de portão traduzidos para CLP:<br/>&nbsp; `6gycf5q2` ⟾ **`2f5q2`**: Portão 9 do Ibirapuera (troca `6gyc` por `2`) <br/>&nbsp; `6gybcsdv5` ⟾ **`1csdv5`**: entrada do Circo-escola Grajaú (troca `6gyb` por `1`)
 
 Reparamos então que o "contexto", que pode ser a sigla `SPA` ou o nome completo *"São Paulo, SP, Brasil"*, tem seu significado traduzido para o *conjunto cobertura*, e com isso ganhamos códigos mais curtos.
+<!-- nota técnica: na especificação ténica e metodológica será definido como aproveitar melhor esse conjunto cobertura, garantindo 32 células e códigos mais curtos ainda.  
+-->
+
+<blockquote><small>
+Nota de curiosidade: depois que a tecnologia for definida e implementada, e tudo no padrão CLP estiver funcionando, a comunidade paulistana (a mesma que <a href="http://www.cidades.registro.nic.br/#list-sugestoes">votou Sampa.br</a>!) poderia acrescentar uma "camada acima" de padronização, por exemplo de acréscimo da opção de trocar um ou dois dígitos iniciais do código por alguma palavra que denomine aproximadamente a região da célula. Imagine o código <tt>2f5q2</tt> do portão do Ibirapuera, se apelidarmos a célula de cobertura <tt>2</tt> de "Centro", então o código fica <b><tt>centro-f5q2</tt></b>. Mais longo porém muito mais fácil de lembrar.<br/> Analogamente  <tt>0</tt> seria "Marsilac", <tt>1</tt> "Sul", <tt>3</tt> "Norte", <tt>4</tt> "Nordeste" e <tt>5</tt> "Sudeste".
+</small></blockquote>
 
 Vejamos as siglas e os códigos no caso da localização no museu do MASP, como seriam **pequenas adaptações**, resultando em opções de código CLP mais adequadas do que cada opção tecnológica "pura". Quando fazemos essas adaptações **podemos então comparar as  tecnologias**:
 
-&nbsp;CLP&nbsp;resultante&nbsp;&nbsp;&nbsp;<br>&nbsp;(contexto BR) | Detalhes da opção tecnologica
-----------------------|---------------------
+<!--
 **`SP`**     | [**Código ISO** 3166](https://en.wikipedia.org/wiki/ISO_3166-2:BR) do estado (`BR-SP`)
 **`SP:Y`**   | *Geohash* da região ([`6gy`](http://geohash.org/6gy))&nbsp; ~140×140 km
 **`SP-SPA`** | [**Código Oficial** do município](spec04ap01-siglas.md#padrao-estadual) (`BR-SP-SPA`)
 **`SP:2F`** | *Geohash* da sub-região ([`6gycf`](http://geohash.org/6gycf))&nbsp; ~4×5 km
-**`SP:E59`** | *S2* da sub-região ([`94ce59`](https://s2.sidewalklabs.com/regioncoverer/?center=-23.543286%2C-46.649618&zoom=12&cells=94ce59))&nbsp; ~8×8 km <!-- estado SP = 94c, 94ce59 é macro do MASP -->
+**`SP:E59`** | *S2* da sub-região ([`94ce59`](https://s2.sidewalklabs.com/regioncoverer/?center=-23.543286%2C-46.649618&zoom=12&cells=94ce59))$
 (contexto BR-SP) |
+-->
+&nbsp;CLP&nbsp;resultante&nbsp;&nbsp;&nbsp;<br>&nbsp;(contexto BR-SP) | Detalhes da opção tecnologica
+----------------------|---------------------
 **`SPA-2FQ.F0`** | *Geohash* do **portão** ([`6gycfqf0`](http://geohash.org/6gycfqf0))&nbsp; ~25×20&nbsp;m
 **`SPA-2FQ.F0M`** | *Geohash* de um  ponto ([`6gycfqf0m`](http://geohash.org/6gycfqf0m))&nbsp; ~4×4&nbsp;m
 **`SPA-C8QV.VCJ`** | *PlusCode* do **portão** ([`588MC8QV+CJ`](https://plus.codes/588MC8QV+CJ))&nbsp; ~15×15 m

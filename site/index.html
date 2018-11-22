@@ -174,40 +174,30 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 <p><span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao <a href="http://s2geometry.io/devguide/examples/coverings.html">conjunto de cobertura</a> &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, <code>6gycfqf0</code>, faz parte do <em>contexto São Paulo (SPA)</em>, ilustrado abaixo, e teria o seu prefixo <code>6gyc</code> associado ao índice 2, resultando em <strong><code>2fqf0</code></strong> (!), reduzindo o  código do MASP a apenas cinco caracteres.</p>
 <p><img alt="" src="./assets/hierarqMasp-03-sampa3e.png" /><!-- 6gy*, 6gz4, 6gz1, 6gwz.<code>6gyc1k9sg</code> = Portão 8 do Autódromo de Interlagos --></p>
 <p>Mais alguns exemplos de Geohash de portão traduzidos para CLP:<br/>&nbsp; <code>6gycf5q2</code> ⟾ <strong><code>2f5q2</code></strong>: Portão 9 do Ibirapuera (troca <code>6gyc</code> por <code>2</code>) <br/>&nbsp; <code>6gybcsdv5</code> ⟾ <strong><code>1csdv5</code></strong>: entrada do Circo-escola Grajaú (troca <code>6gyb</code> por <code>1</code>)</p>
-<p>Reparamos então que o "contexto", que pode ser a sigla <code>SPA</code> ou o nome completo <em>"São Paulo, SP, Brasil"</em>, tem seu significado traduzido para o <em>conjunto cobertura</em>, e com isso ganhamos códigos mais curtos.</p>
+<p>Reparamos então que o "contexto", que pode ser a sigla <code>SPA</code> ou o nome completo <em>"São Paulo, SP, Brasil"</em>, tem seu significado traduzido para o <em>conjunto cobertura</em>, e com isso ganhamos códigos mais curtos.
+<!-- nota técnica: na especificação ténica e metodológica será definido como aproveitar melhor esse conjunto cobertura, garantindo 32 células e códigos mais curtos ainda.<br />--></p>
+<blockquote><small>
+Nota de curiosidade: depois que a tecnologia for definida e implementada, e tudo no padrão CLP estiver funcionando, a comunidade paulistana (a mesma que <a href="http://www.cidades.registro.nic.br/#list-sugestoes">votou Sampa.br</a>!) poderia acrescentar uma "camada acima" de padronização, por exemplo de acréscimo da opção de trocar um ou dois dígitos iniciais do código por alguma palavra que denomine aproximadamente a região da célula. Imagine o código <tt>2f5q2</tt> do portão do Ibirapuera, se apelidarmos a célula de cobertura <tt>2</tt> de "Centro", então o código fica <b><tt>centro-f5q2</tt></b>. Mais longo porém muito mais fácil de lembrar.<br/> Analogamente  <tt>0</tt> seria "Marsilac", <tt>1</tt> "Sul", <tt>3</tt> "Norte", <tt>4</tt> "Nordeste" e <tt>5</tt> "Sudeste".
+</small></blockquote>
+
 <p>Vejamos as siglas e os códigos no caso da localização no museu do MASP, como seriam <strong>pequenas adaptações</strong>, resultando em opções de código CLP mais adequadas do que cada opção tecnológica "pura". Quando fazemos essas adaptações <strong>podemos então comparar as  tecnologias</strong>:</p>
+<!--
+**`SP`**     | [**Código ISO** 3166](https://en.wikipedia.org/wiki/ISO_3166-2:BR) do estado (`BR-SP`)
+**`SP:Y`**   | *Geohash* da região ([`6gy`](http://geohash.org/6gy))&nbsp; ~140×140 km
+**`SP-SPA`** | [**Código Oficial** do município](spec04ap01-siglas.md#padrao-estadual) (`BR-SP-SPA`)
+**`SP:2F`** | *Geohash* da sub-região ([`6gycf`](http://geohash.org/6gycf))&nbsp; ~4×5 km
+**`SP:E59`** | *S2* da sub-região ([`94ce59`](https://s2.sidewalklabs.com/regioncoverer/?center=-23.543286%2C-46.649618&zoom=12&cells=94ce59))$
+(contexto BR-SP) |
+-->
+
 <table>
 <thead>
 <tr>
-<th>&nbsp;CLP&nbsp;resultante&nbsp;&nbsp;&nbsp;<br>&nbsp;(contexto BR)</th>
+<th>&nbsp;CLP&nbsp;resultante&nbsp;&nbsp;&nbsp;<br>&nbsp;(contexto BR-SP)</th>
 <th>Detalhes da opção tecnologica</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><strong><code>SP</code></strong></td>
-<td><a href="https://en.wikipedia.org/wiki/ISO_3166-2:BR"><strong>Código ISO</strong> 3166</a> do estado (<code>BR-SP</code>)</td>
-</tr>
-<tr>
-<td><strong><code>SP:Y</code></strong></td>
-<td><em>Geohash</em> da região (<a href="http://geohash.org/6gy"><code>6gy</code></a>)&nbsp; ~140×140 km</td>
-</tr>
-<tr>
-<td><strong><code>SP-SPA</code></strong></td>
-<td><a href="spec04ap01-siglas/#padrao-estadual"><strong>Código Oficial</strong> do município</a> (<code>BR-SP-SPA</code>)</td>
-</tr>
-<tr>
-<td><strong><code>SP:2F</code></strong></td>
-<td><em>Geohash</em> da sub-região (<a href="http://geohash.org/6gycf"><code>6gycf</code></a>)&nbsp; ~4×5 km</td>
-</tr>
-<tr>
-<td><strong><code>SP:E59</code></strong></td>
-<td><em>S2</em> da sub-região (<a href="https://s2.sidewalklabs.com/regioncoverer/?center=-23.543286%2C-46.649618&amp;zoom=12&amp;cells=94ce59"><code>94ce59</code></a>)&nbsp; ~8×8 km <!-- estado SP = 94c, 94ce59 é macro do MASP --></td>
-</tr>
-<tr>
-<td>(contexto BR-SP)</td>
-<td></td>
-</tr>
 <tr>
 <td><strong><code>SPA-2FQ.F0</code></strong></td>
 <td><em>Geohash</em> do <strong>portão</strong> (<a href="http://geohash.org/6gycfqf0"><code>6gycfqf0</code></a>)&nbsp; ~25×20&nbsp;m</td>
@@ -375,5 +365,5 @@ Todo o relacionamento com a comunidade seria realizado através da metodogia das
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-11-21 14:59:12
+Build Date UTC : 2018-11-21 22:54:08
 -->
