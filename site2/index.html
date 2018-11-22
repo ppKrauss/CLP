@@ -10,11 +10,16 @@
 
         <!-- Load Leaflet from CDN -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+        <script src="https://calvinmetcalf.github.io/leaflet-ajax/dist/leaflet.ajax.js"></script>
 
         <!-- Load geocoding plugin after Leaflet -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.4.1/leaflet-geocoder-mapzen.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.4.1/leaflet-geocoder-mapzen.js"></script>
+
+	<!-- Load geocoding plugin after Leaflet -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.9.4/leaflet-geocoder-mapzen.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.9.4/leaflet-geocoder-mapzen.js"></script>
+
 
         <link rel="stylesheet" href="leaflet.label.css" />
         <link rel="stylesheet" href="style.css" />
@@ -38,12 +43,13 @@
 
         <script src="leaflet.label.js"></script>
         <script src="geohash.js"></script>
-        <script src="map.js"></script>
+        <script src="map.js"></script><!-- selectedByUrl defined here -->
         <script src="plugin.js"></script>
-<script>
-if (selectedByUrl) { changeHashFunction(selectedByUrl); }
-
-</script>
-
+	<script>
+		if (selectedByUrl) {
+		    changeHashFunction( selectedByUrl );
+		}
+		selectedByUrl='';
+	</script>
     </body>
 </html>

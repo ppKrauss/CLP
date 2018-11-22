@@ -117,6 +117,7 @@
             <li><a href="#o-clp-de-um-endereco">O CLP de um endereço</a></li>
             <li><a href="#contexto-com-siglas">Contexto com siglas</a></li>
         <li class="main "><a href="#comparacoes-e-como-seria">Comparações e como seria</a></li>
+            <li><a href="#tabela-comparativa">Tabela comparativa</a></li>
             <li><a href="#dois-padroes-via-e-coordenada">Dois padrões, via e coordenada</a></li>
         <li class="main "><a href="#planejamento">Planejamento</a></li>
             <li><a href="#objetivo-e-metas-do-trabalho">Objetivo e metas do trabalho</a></li>
@@ -127,7 +128,7 @@
 
 <!-- pode ficar mais curto? -->
 
-<p><strong><center><big>CLP</big><br/><small style="font-size:8pt">v0.0.7g</small></center></strong></p>
+<p><strong><center><big>CLP</big><br/><small style="font-size:8pt">v0.1.0</small></center></strong></p>
 <p>Proposta de <strong>C</strong>ódigo <strong>L</strong>ocalizador de <strong>P</strong>ortão, CLP:  estudos de viabilidade e consulta pública.</p>
 <p>A ideia central do CLP é <strong>oferecer de maneira simples e padronizada, através de um código, a localização geográfica de um portão</strong>. O código será também recomendado como expressão digital do  <strong>endereço da casa</strong> ou local ao qual o portão dá acesso.</p>
 <!-- Portaria, portão, porta ou portal: -->
@@ -171,15 +172,18 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 </li>
 </ul>
 <p>Estas regras simples, uma vez formalizadas como padrão, garantiriam um código CLP mais adequado para o brasileiro usar. As siglas, não se vê todos os dias, mas já vinhamos usando: em diversos códigos oficiais, em mapas e nas placas de vias públicas. As siglas estão no <em>código das estradas</em> federais (ex. <a href="https://pt.wikipedia.org/wiki/BR-116">BR-116</a>), estaduais (ex. <a href="https://pt.wikipedia.org/wiki/SP-147">SP-147</a>) e municipais (ex. PIR-033). <!-- ... mas já vinhamos usando: em diversos códigos oficiais, tais como <a href="https://pt.wikipedia.org/wiki/Lex_(URN)">identificadores LEX de normas jurídicas</a>, e nas placas de vias públicas ou mapas oficiais.--></p>
-<p><span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao <a href="http://s2geometry.io/devguide/examples/coverings.html">conjunto de cobertura</a> &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, <a href="http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0"><code>6gycfqf0</code></a>, faz parte do <em>contexto São Paulo (SPA)</em>, ilustrado abaixo, e teria o seu prefixo <code>6gyc</code> associado ao índice 2, resultando em <strong><code>2fqf0</code></strong> (!), reduzindo o  código do MASP a apenas cinco caracteres.</p>
+<p><span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao <a href="http://s2geometry.io/devguide/examples/coverings.html">conjunto de cobertura</a> &mdash; células da grade de menor escala (macrocélulas) que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, <a href="http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0/SP/SaoPaulo"><code>6gycfqf0</code></a>, faz parte do <em>contexto São Paulo (SPA)</em>, ilustrado abaixo, e teria o seu prefixo <code>6gyc</code> associado ao índice 2, resultando em <strong><code>2fqf0</code></strong> (!), reduzindo o  código do MASP a apenas cinco caracteres.</p>
 <p><img alt="" src="./assets/hierarqMasp-03-sampa3e.png" /><!-- 6gy*, 6gz4, 6gz1, 6gwz.<code>6gyc1k9sg</code> = Portão 8 do Autódromo de Interlagos --></p>
 <p>Mais alguns exemplos de Geohash de portão traduzidos para CLP:<br/>&nbsp; <a href="http://www.openstreetmap.com.br/CLP/site2/#6gycf5q2"><code>6gycf5q2</code></a> ⟾ <strong><code>2f5q2</code></strong>: Portão 9 do Ibirapuera (troca <code>6gyc</code> por <code>2</code>) <br/>&nbsp; <a href="http://www.openstreetmap.com.br/CLP/site2/#6gybcsdv5"><code>6gybcsdv5</code></a> ⟾ <strong><code>1csdv5</code></strong>: entrada do Circo-escola Grajaú (troca <code>6gyb</code> por <code>1</code>)</p>
-<p>Reparamos então que o "contexto", que pode ser a sigla <code>SPA</code> ou o nome completo <em>"São Paulo, SP, Brasil"</em>, tem seu significado traduzido para o <em>conjunto cobertura</em>, e com isso ganhamos códigos mais curtos.
-<!-- nota técnica: na especificação ténica e metodológica será definido como aproveitar melhor esse conjunto cobertura, garantindo 32 células e códigos mais curtos ainda.<br />--></p>
+<p>Reparamos então que o "contexto", que pode ser a sigla <code>SPA</code> ou o nome completo <em>"São Paulo, SP, Brasil"</em>, tem seu significado traduzido para o <em>conjunto cobertura</em>, e com isso ganhamos códigos mais curtos.</p>
 <blockquote><small>
-Nota de curiosidade: depois que a tecnologia for definida e implementada, e tudo no padrão CLP estiver funcionando, a comunidade paulistana (a mesma que <a href="http://www.cidades.registro.nic.br/#list-sugestoes">votou Sampa.br</a>!) poderia acrescentar uma "camada acima" de padronização, por exemplo de acréscimo da opção de trocar um ou dois dígitos iniciais do código por alguma palavra que denomine aproximadamente a região da célula. Imagine o código <tt>2f5q2</tt> do portão do Ibirapuera, se apelidarmos a célula de cobertura <tt>2</tt> de "Centro", então o código fica <b><tt>centro-f5q2</tt></b>. Mais longo porém muito mais fácil de lembrar.<br/> Analogamente  <tt>0</tt> seria "Marsilac", <tt>1</tt> "Sul", <tt>3</tt> "Norte", <tt>4</tt> "Nordeste" e <tt>5</tt> "Sudeste".
+Notas técnicas e de curiosidade:
+<br/>• A partir desta transformação, usando o índice das macrocélulas, o padrão de geocódigo deixaria de se chamar Geohash, com o qual perde a compatibilidade, e passaria a ser de fato o <b>"padrão CLP"</b>.
+<br/>• A figura acima de São Paulo é grosseira, o ajuste exato requer mais macrocélulas... Na <a href="./spec01-hub">especificação ténica e metodológica</a>, de qualquer forma, será definido como aproveitar melhor esse conjunto cobertura, garantindo o uso de 32 macrocélulas,  e códigos mais curtos nas áreas de maior densidade populacional.
+<br/>• Depois que a tecnologia for definida e implementada, e tudo no "padrão CLP" estiver funcionando, a comunidade paulistana (a mesma que <a href="http://www.cidades.registro.nic.br/#list-sugestoes">votou Sampa.br</a>!) poderia acrescentar uma "camada acima" de padronização, por exemplo de acréscimo da opção de trocar um ou dois dígitos iniciais do código por alguma palavra que denomine aproximadamente a região da célula. Imagine o código <tt>2f5q2</tt> do portão do Ibirapuera, se apelidarmos a macrocélula de cobertura <tt>2</tt> de "Centro", então o código fica <b><tt>centro-f5q2</tt></b>. Mais longo porém muito mais fácil de lembrar.<br/> Analogamente  <tt>0</tt> seria "Marsilac", <tt>1</tt> "Sul", <tt>3</tt> "Norte", <tt>4</tt> "Nordeste" e <tt>5</tt> "Sudeste".
 </small></blockquote>
 
+<h2 id="tabela-comparativa">Tabela comparativa</h2>
 <p>Vejamos as siglas e os códigos no caso da localização no museu do MASP, como seriam <strong>pequenas adaptações</strong>, resultando em opções de código CLP mais adequadas do que cada opção tecnológica "pura". Quando fazemos essas adaptações <strong>podemos então comparar as  tecnologias</strong>:</p>
 <!--
 **`SP`**     | [**Código ISO** 3166](https://en.wikipedia.org/wiki/ISO_3166-2:BR) do estado (`BR-SP`)
@@ -200,7 +204,7 @@ Nota de curiosidade: depois que a tecnologia for definida e implementada, e tudo
 <tbody>
 <tr>
 <td><strong><code>SPA-2FQ.F0</code></strong></td>
-<td><em>Geohash</em> do <strong>portão</strong> (<a href="http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0"><code>6gycfqf0</code></a>)&nbsp; ~25×20&nbsp;m</td>
+<td><em>Geohash</em> do <strong>portão</strong> (<a href="http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0/SP/SaoPaulo"><code>6gycfqf0</code></a>)&nbsp; ~25×20&nbsp;m</td>
 </tr>
 <tr>
 <td><strong><code>SPA-2FQ.F0M</code></strong></td>
@@ -365,5 +369,5 @@ Todo o relacionamento com a comunidade seria realizado através da metodogia das
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-11-22 00:33:24
+Build Date UTC : 2018-11-22 07:48:12
 -->

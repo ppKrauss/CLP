@@ -1,5 +1,5 @@
 <!-- pode ficar mais curto? -->
-**<center><big>CLP</big><br/><small style="font-size:8pt">v0.0.7g</small></center>**
+**<center><big>CLP</big><br/><small style="font-size:8pt">v0.1.0</small></center>**
 
 Proposta de **C**ódigo **L**ocalizador de **P**ortão, CLP:  estudos de viabilidade e consulta pública.
 
@@ -62,19 +62,22 @@ Os códigos de localização existentes, como o Geohash ou o PlusCode, assim com
 
 Estas regras simples, uma vez formalizadas como padrão, garantiriam um código CLP mais adequado para o brasileiro usar. As siglas, não se vê todos os dias, mas já vinhamos usando: em diversos códigos oficiais, em mapas e nas placas de vias públicas. As siglas estão no *código das estradas* federais (ex. [BR-116](https://pt.wikipedia.org/wiki/BR-116)), estaduais (ex. [SP-147](https://pt.wikipedia.org/wiki/SP-147)) e municipais (ex. PIR-033). <!-- ... mas já vinhamos usando: em diversos códigos oficiais, tais como [identificadores LEX de normas jurídicas](https://pt.wikipedia.org/wiki/Lex_(URN)), e nas placas de vias públicas ou mapas oficiais.-->
 
-<span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao [conjunto de cobertura](http://s2geometry.io/devguide/examples/coverings.html) &mdash; células da grade de menor escala que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, [`6gycfqf0`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0), faz parte do *contexto São Paulo (SPA)*, ilustrado abaixo, e teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), reduzindo o  código do MASP a apenas cinco caracteres.
+<span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao [conjunto de cobertura](http://s2geometry.io/devguide/examples/coverings.html) &mdash; células da grade de menor escala (macrocélulas) que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, [`6gycfqf0`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0/SP/SaoPaulo), faz parte do *contexto São Paulo (SPA)*, ilustrado abaixo, e teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), reduzindo o  código do MASP a apenas cinco caracteres.
 
 ![](assets/hierarqMasp-03-sampa3e.png)<!-- 6gy*, 6gz4, 6gz1, 6gwz.`6gyc1k9sg` = Portão 8 do Autódromo de Interlagos -->
 
 Mais alguns exemplos de Geohash de portão traduzidos para CLP:<br/>&nbsp; [`6gycf5q2`](http://www.openstreetmap.com.br/CLP/site2/#6gycf5q2) ⟾ **`2f5q2`**: Portão 9 do Ibirapuera (troca `6gyc` por `2`) <br/>&nbsp; [`6gybcsdv5`](http://www.openstreetmap.com.br/CLP/site2/#6gybcsdv5) ⟾ **`1csdv5`**: entrada do Circo-escola Grajaú (troca `6gyb` por `1`)
 
 Reparamos então que o "contexto", que pode ser a sigla `SPA` ou o nome completo *"São Paulo, SP, Brasil"*, tem seu significado traduzido para o *conjunto cobertura*, e com isso ganhamos códigos mais curtos.
-<!-- nota técnica: na especificação ténica e metodológica será definido como aproveitar melhor esse conjunto cobertura, garantindo 32 células e códigos mais curtos ainda.  
--->
 
 <blockquote><small>
-Nota de curiosidade: depois que a tecnologia for definida e implementada, e tudo no padrão CLP estiver funcionando, a comunidade paulistana (a mesma que <a href="http://www.cidades.registro.nic.br/#list-sugestoes">votou Sampa.br</a>!) poderia acrescentar uma "camada acima" de padronização, por exemplo de acréscimo da opção de trocar um ou dois dígitos iniciais do código por alguma palavra que denomine aproximadamente a região da célula. Imagine o código <tt>2f5q2</tt> do portão do Ibirapuera, se apelidarmos a célula de cobertura <tt>2</tt> de "Centro", então o código fica <b><tt>centro-f5q2</tt></b>. Mais longo porém muito mais fácil de lembrar.<br/> Analogamente  <tt>0</tt> seria "Marsilac", <tt>1</tt> "Sul", <tt>3</tt> "Norte", <tt>4</tt> "Nordeste" e <tt>5</tt> "Sudeste".
+Notas técnicas e de curiosidade:
+<br/>• A partir desta transformação, usando o índice das macrocélulas, o padrão de geocódigo deixaria de se chamar Geohash, com o qual perde a compatibilidade, e passaria a ser de fato o <b>"padrão CLP"</b>.
+<br/>• A figura acima de São Paulo é grosseira, o ajuste exato requer mais macrocélulas... Na <a href="./spec01-hub">especificação ténica e metodológica</a>, de qualquer forma, será definido como aproveitar melhor esse conjunto cobertura, garantindo o uso de 32 macrocélulas,  e códigos mais curtos nas áreas de maior densidade populacional.
+<br/>• Depois que a tecnologia for definida e implementada, e tudo no "padrão CLP" estiver funcionando, a comunidade paulistana (a mesma que <a href="http://www.cidades.registro.nic.br/#list-sugestoes">votou Sampa.br</a>!) poderia acrescentar uma "camada acima" de padronização, por exemplo de acréscimo da opção de trocar um ou dois dígitos iniciais do código por alguma palavra que denomine aproximadamente a região da célula. Imagine o código <tt>2f5q2</tt> do portão do Ibirapuera, se apelidarmos a macrocélula de cobertura <tt>2</tt> de "Centro", então o código fica <b><tt>centro-f5q2</tt></b>. Mais longo porém muito mais fácil de lembrar.<br/> Analogamente  <tt>0</tt> seria "Marsilac", <tt>1</tt> "Sul", <tt>3</tt> "Norte", <tt>4</tt> "Nordeste" e <tt>5</tt> "Sudeste".
 </small></blockquote>
+
+## Tabela comparativa
 
 Vejamos as siglas e os códigos no caso da localização no museu do MASP, como seriam **pequenas adaptações**, resultando em opções de código CLP mais adequadas do que cada opção tecnológica "pura". Quando fazemos essas adaptações **podemos então comparar as  tecnologias**:
 
@@ -88,7 +91,7 @@ Vejamos as siglas e os códigos no caso da localização no museu do MASP, como 
 -->
 &nbsp;CLP&nbsp;resultante&nbsp;&nbsp;&nbsp;<br>&nbsp;(contexto BR-SP) | Detalhes da opção tecnologica
 ----------------------|---------------------
-**`SPA-2FQ.F0`** | *Geohash* do **portão** ([`6gycfqf0`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0))&nbsp; ~25×20&nbsp;m
+**`SPA-2FQ.F0`** | *Geohash* do **portão** ([`6gycfqf0`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0/SP/SaoPaulo))&nbsp; ~25×20&nbsp;m
 **`SPA-2FQ.F0M`** | *Geohash* de um  ponto ([`6gycfqf0m`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0m))&nbsp; ~4×4&nbsp;m
 **`SPA-C8QV.VCJ`** | *PlusCode* do **portão** ([`588MC8QV+CJ`](https://plus.codes/588MC8QV+CJ))&nbsp; ~15×15 m
 **`SPA-C8QV.CJ4`** | *PlusCode* de um ponto ([`588MC8QV+CJ4`](https://plus.codes/588MC8QV+CJ4))&nbsp; ~3×3 m

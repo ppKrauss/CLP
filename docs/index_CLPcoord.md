@@ -86,8 +86,9 @@ A seguir cada um dos exemplos será ilustrado pelo mapa fornecido na respectiva 
 
 ## Geohash
 Localização do Marco-zero representada por Geohash:  [`6gyf4bf1n`](http://geohash.org/6gyf4bf1n).
-
+<!--
 O link acima aponta para `geohash.org` que não dá zoom compativel com a resolução do Geohash. Para a ilustração abaixo foi utilizada a interface manual de [movable-type.co.uk/scripts/geohash](http://movable-type.co.uk/scripts/geohash.html).
+-->
 
 ![](assets/CLP-coord-geohash-ilustra01.png)
 
@@ -101,6 +102,14 @@ Para completar a ilustração, vejamos a localização de um portão vizinho do 
 ![](assets/CLP-coord-geohash-ilustra03.png)
 
 A assimetria das células que ocorre em certos níveis hierárquicos, como o de 8 dígitos ilustrado acima, tem origem  num problema intrínseco do sistema Latitude-longitude, que só seria corrigido mediante projeção (por exemplo projeção cônica resultaria em coordenadas UTM). Com origem na mesma causa, há também o problema das células Geohash perderem precisão com a latitude &mdash; crescendo a área da célula conforme nos aproximamos do Equador, ao norte do país. A área das células de 8 dígitos varia de 25,1±0,2 m² no RS; até 26,9±0,1 m² no AM. Nas células de 9 dígitos a variação é de 4,4 m² a 4,8 m².
+
+Para explorar o Geohash com sua grade e um município ao fundo, experirmentar:
+
+* SP/SaoPaulo:
+    * Marco-zero: [`6gyf4bf1n`](http://www.openstreetmap.com.br/CLP/site2/#6gyf4bf1/SP/SaoPaulo)
+    * MASP: [`6gycfqf0`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0/SP/SaoPaulo)
+* SP/MonteiroLobato: proximo de [`6gzm`](http://www.openstreetmap.com.br/CLP/site2/#6gzm/SP/MonteiroLobato)
+* PR/Curitiba: proximo de [`6gkz`](http://www.openstreetmap.com.br/CLP/site2/#6gkz/PR/Curitiba)
 
 Por fim, apesar de ser um sistema inteligente na sua hierarquia, matematicamente ele se baseia num fractal que "dá saltos", a [*curva de ordem Z*](https://en.wikipedia.org/wiki/Z-order_curve), perdendo-se a propriedade de "células vizinhas com prefixos iguais", que o tornou atrativo. No [Geohash-Hilbert](https://github.com/tammoippen/geohash-hilbert) o problema foi corrigido, assim como no [S2](#s2) descrito a seguir.
 
@@ -132,7 +141,32 @@ Quanto aos níveis indermediários da hierarquia, é possível expandir o códig
 </table>  
 
 ## PlusCode
+<!--
+destaque de problemas
 
+No centro da cidade, em Altamira, PA, Brazil.
+Prédio da prefeitura por exemplo tem PLuscode contextualizado QQVJ+6F
+
+   https://plus.codes/6889QQVJ+6F
+
+É relativamente curto, consome 6 digitos...
+Mas como o munípio é grande, requer mais contextos, como o "Altamira, distrito de Forlaleza",
+Ou seja, a estratégia do código curto sai do padrão e o Google cria arbitrariamente
+o componente de código "Fortaleza".
+   https://plus.codes/6889GWC7+JF
+
+Por fim, a maior parte das localizações em meio rural de Altamira ficam
+sem contextualização,  
+
+https://plus.codes/6889CW6G+6X
+https://plus.codes/68588VMH+W2
+https://plus.codes/687CC9HV+9F
+
+PS: por curiosidade o poligono de Altamira no OSM é
+  https://www.openstreetmap.org/relation/185554
+
+
+-->
 Localização do Marco-zero representada por PlusCode: [`588MC9X8+RC`](https://plus.codes/588MC9X8+RC), com célula de ~10×10m. A definição do código se encontra em [OLC Definition](https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc). Há uma sutil distinção entre o algoritmo OLC, opção em foco no presente estudo, e a [API Google denominada *PlusCodes*](https://github.com/google/open-location-code/wiki/Plus-codes-API), já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  -->
 
 ![](assets/CLP-coord-plusCode-ilustra01.png)

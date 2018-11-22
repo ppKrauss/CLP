@@ -194,8 +194,10 @@
 </ul>
 <p>A seguir cada um dos exemplos será ilustrado pelo mapa fornecido na respectiva infraestrutura.</p>
 <h2 id="geohash">Geohash</h2>
-<p>Localização do Marco-zero representada por Geohash:  <a href="http://geohash.org/6gyf4bf1n"><code>6gyf4bf1n</code></a>.</p>
-<p>O link acima aponta para <code>geohash.org</code> que não dá zoom compativel com a resolução do Geohash. Para a ilustração abaixo foi utilizada a interface manual de <a href="http://movable-type.co.uk/scripts/geohash.html">movable-type.co.uk/scripts/geohash</a>.</p>
+<p>Localização do Marco-zero representada por Geohash:  <a href="http://geohash.org/6gyf4bf1n"><code>6gyf4bf1n</code></a>.
+<!--
+O link acima aponta para <code>geohash.org</code> que não dá zoom compativel com a resolução do Geohash. Para a ilustração abaixo foi utilizada a interface manual de <a href="http://movable-type.co.uk/scripts/geohash.html">movable-type.co.uk/scripts/geohash</a>.
+--></p>
 <p><img alt="" src="../assets/CLP-coord-geohash-ilustra01.png" /></p>
 <p>Os dois primeiros dígitos (prefixo <code>6g</code>) podem ser cortados quando sabemos que o contexto é a cidade de São Paulo, disso resulta o código mais compacto <code>YF4B.F1N</code>. Como demonstrado <a href="..#comparacoes-e-como-seria">na apresentação</a>, fazendo uso do conjunto de cobertura (reindexação de <code>6gyf</code> para <code>3</code>) fica ainda mais compacto (!), <code>34B.F1N</code>.</p>
 <p>Para completar a ilustração, vejamos a localização de um portão vizinho do Marco, como a <em>entrada da Catedral da Sé</em>, com sua escadaria de ~10m</p>
@@ -205,6 +207,16 @@
 </ul>
 <p><img alt="" src="../assets/CLP-coord-geohash-ilustra03.png" /></p>
 <p>A assimetria das células que ocorre em certos níveis hierárquicos, como o de 8 dígitos ilustrado acima, tem origem  num problema intrínseco do sistema Latitude-longitude, que só seria corrigido mediante projeção (por exemplo projeção cônica resultaria em coordenadas UTM). Com origem na mesma causa, há também o problema das células Geohash perderem precisão com a latitude &mdash; crescendo a área da célula conforme nos aproximamos do Equador, ao norte do país. A área das células de 8 dígitos varia de 25,1±0,2 m² no RS; até 26,9±0,1 m² no AM. Nas células de 9 dígitos a variação é de 4,4 m² a 4,8 m².</p>
+<p>Para explorar o Geohash com sua grade e um município ao fundo, experirmentar:</p>
+<ul>
+<li>SP/SaoPaulo:<ul>
+<li>Marco-zero: <a href="http://www.openstreetmap.com.br/CLP/site2/#6gyf4bf1/SP/SaoPaulo"><code>6gyf4bf1n</code></a></li>
+<li>MASP: <a href="http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0/SP/SaoPaulo"><code>6gycfqf0</code></a></li>
+</ul>
+</li>
+<li>SP/MonteiroLobato: proximo de <a href="http://www.openstreetmap.com.br/CLP/site2/#6gzm/SP/MonteiroLobato"><code>6gzm</code></a></li>
+<li>PR/Curitiba: proximo de <a href="http://www.openstreetmap.com.br/CLP/site2/#6gkz/PR/Curitiba"><code>6gkz</code></a></li>
+</ul>
 <p>Por fim, apesar de ser um sistema inteligente na sua hierarquia, matematicamente ele se baseia num fractal que "dá saltos", a <a href="https://en.wikipedia.org/wiki/Z-order_curve"><em>curva de ordem Z</em></a>, perdendo-se a propriedade de "células vizinhas com prefixos iguais", que o tornou atrativo. No <a href="https://github.com/tammoippen/geohash-hilbert">Geohash-Hilbert</a> o problema foi corrigido, assim como no <a href="#s2">S2</a> descrito a seguir.</p>
 <p>Quanto aos níveis indermediários da hierarquia, é possível expandir o código Geohash para base4, conforme <a href="http://mapzen.github.io/leaflet-spatial-prefix-tree/">ilustração abaixo do prefix-tree</a>.<!-- ou https://github.com/missinglink/leaflet-spatial-prefix-tree --> Através desses níveis intermediários, códigos ligeiramente mais curtos podem ser conseguidos, fazendo uso de um mosaico mais detalhado na <a href="..#cobertura">cobertura dos municípios</a>.</p>
 <p><img alt="" src="../assets/leaflet-spatial-prefix-tree-ex02.png" /></p>
@@ -231,7 +243,25 @@
 </tr>
 </table>  </p>
 <h2 id="pluscode">PlusCode</h2>
-<p>Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>, com célula de ~10×10m. A definição do código se encontra em <a href="https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc">OLC Definition</a>. Há uma sutil distinção entre o algoritmo OLC, opção em foco no presente estudo, e a <a href="https://github.com/google/open-location-code/wiki/Plus-codes-API">API Google denominada <em>PlusCodes</em></a>, já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  --></p>
+<p>&lt;!--
+destaque de problemas</p>
+<p>No centro da cidade, em Altamira, PA, Brazil.
+Prédio da prefeitura por exemplo tem PLuscode contextualizado QQVJ+6F</p>
+<p>https://plus.codes/6889QQVJ+6F</p>
+<p>É relativamente curto, consome 6 digitos...
+Mas como o munípio é grande, requer mais contextos, como o "Altamira, distrito de Forlaleza",
+Ou seja, a estratégia do código curto sai do padrão e o Google cria arbitrariamente
+o componente de código "Fortaleza".
+   https://plus.codes/6889GWC7+JF</p>
+<p>Por fim, a maior parte das localizações em meio rural de Altamira ficam
+sem contextualização,  </p>
+<p>https://plus.codes/6889CW6G+6X
+https://plus.codes/68588VMH+W2
+https://plus.codes/687CC9HV+9F</p>
+<p>PS: por curiosidade o poligono de Altamira no OSM é
+  https://www.openstreetmap.org/relation/185554</p>
+<p>--&gt;
+Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>, com célula de ~10×10m. A definição do código se encontra em <a href="https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc">OLC Definition</a>. Há uma sutil distinção entre o algoritmo OLC, opção em foco no presente estudo, e a <a href="https://github.com/google/open-location-code/wiki/Plus-codes-API">API Google denominada <em>PlusCodes</em></a>, já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  --></p>
 <p><img alt="" src="../assets/CLP-coord-plusCode-ilustra01.png" /></p>
 <p>Os quatro primeiros dígitos (prefixo <code>588M</code>) podem ser cortados quando sabemos que o contexto é a cidade de São Paulo, disso resulta o código mais compacto <code>C9X8+RC</code>.</p>
 <p>Grade principal <strong>sem hierarquia</strong>: com células de 1/8000° esferoradianos (áreas de ~100 m²), nesta grade o endereço vizinho do Marco-zero (Editora UNESP a menos de 100 m do Marco-zero) apresenta código <a href="https://plus.codes/588MF928+27">F928+27</a>, totalmete distinto.</p>
