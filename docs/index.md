@@ -1,5 +1,5 @@
 <!-- pode ficar mais curto? -->
-**<center><big>CLP</big><br/><small style="font-size:8pt">v0.1.0</small></center>**
+**<center><big>CLP</big><br/><small style="font-size:8pt">v0.1.1</small></center>**
 
 Proposta de **C**ódigo **L**ocalizador de **P**ortão, CLP:  estudos de viabilidade e consulta pública.
 
@@ -19,11 +19,11 @@ Se um desses casos carece de **endereço oficial**, é uma dívida em aberto, do
 
 Em 2018 a Secretaria da Agricultura de Estado de São Paulo reconheceu a sua dívida para com os habitantes e prestadores de serviços do meio rural,  tendo procurado a Comunidade OpenStreetMap Brasil em busca de soluções soberanas abertas. Um dos frutos desse diálogo está no [Decreto Estadual 63.764 de SP](https://wiki.openstreetmap.org/wiki/WikiProject_Brazil/Utiliza%C3%A7%C3%B5es_Governamentais/Decreto_SP_63.764), que referencia "mapas abertos e rotas viárias de acesso às propriedades rurais".
 
-O CLP evoluiu de simples ideia a projeto. Convidados em seguida prefeituras usuárias do OpenStreetMap e o Terceiro Setor, através de entidades tais como a [TETO BRASIL](https://www.techo.org/brasil/), todos vêm dialogando com a comunidade técnica em busca de soluções abertas, eficientes e duradouras.
+O CLP evoluiu de simples ideia a projeto. Convidados em seguida prefeituras usuárias do OpenStreetMap e o Terceiro Setor, através de entidades tais como a [TETO BRASIL](https://www.techo.org/brasil/). Todos vêm dialogando com a comunidade técnica em busca de soluções abertas, eficientes e duradouras.
 
-Quanto a outras aplicações para o CLP, não faltam! *Localizar* e *descrever onde está localizado* vale para casa, shopping, bicicletário, borracharia, café, restaurante, árore, estátua,  barraca da feira... Uma lista infinita, que parece limitada apenas pela imaginação.
+Quanto a outras aplicações para o CLP, não faltam! *Localizar* e *descrever onde está localizado* vale para casa, shopping, bicicletário, árvore, estátua, restaurante, barraca da feira... Uma lista infinita, que parece limitada apenas pela imaginação.
 
-Quanto à fundamentação, é sólida e amplamente adotada. O sistema universal de localização, aceito em qualquer país, é a **coordenada geográfica (latitude/longitude)**.  Mais especificamente o  [sistema de coordenadas WGS84](https://es.wikipedia.org/wiki/WGS84#Par%C3%A1metros_B%C3%A1sicos_de_Definici%C3%B3n), presente inclusive em mapas digitais e dispositivos de localização (ex. *smartphone* com receptor GPS). Todavia cada coordenada tem de 6 a 8 dígitos, somando de 12 a 16 dígitos, **não é um código curto**.<!--, é difícil de lembrar, mais difícil que uma placa de carro.--> Os códigos Geohash, PlusCode e similares, para a mesma precisão, gastam 6 a 9 caracteres: **são soluções viáveis**, com códigos bem mais curtos.
+Quanto à fundamentação, é sólida e amplamente adotada. O sistema universal de localização, aceito em qualquer país, é a **coordenada geográfica (latitude/longitude)**.  Mais especificamente o  [sistema de coordenadas WGS84](https://es.wikipedia.org/wiki/WGS84#Par%C3%A1metros_B%C3%A1sicos_de_Definici%C3%B3n), presente inclusive em mapas digitais e dispositivos de localização (ex. *smartphone* com receptor GPS). Todavia cada coordenada tem de 6 a 8 dígitos, somando de 12 a 16 dígitos, **não é um código curto**.<!--, é difícil de lembrar, mais difícil que uma placa de carro.--> Os códigos Geohash, PlusCode e similares, para a mesma precisão, gastam 6 a 10 caracteres: **são soluções viáveis**, com códigos bem mais curtos.
 
 Tais tecnologias são viáveis até mesmo para substituir o CEP dos Correios. O CEP `20031-050` do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP `20031-040` da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo [PlusCode `3RRF`](https://plus.codes/589R3RRF+) ou Geohash `CM9MX`. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  **[PlusCode `3RRF+6F`](https://plus.codes/589R3RRF+6F)**, diz exatamente onde está o  portão!<!-- O **CEP `69010-060`** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **[PlusCode `VXCG+3R4`](https://plus.codes/678XVXCG+3R4)** diz exatamente onde está o seu portão!--> <br/><small>&nbsp; &nbsp; [siga o link do `3RRF+6F` para entender se ainda não conhece]</small><br/>
 
@@ -38,7 +38,7 @@ A seguir um breve resumo de como tentaremos responder a estas e outras questões
 
 ## Contexto com siglas
 
-Se quero explicar para outra pessoa no telefone  onde  moro, digo algo como "eu moro aqui na rua tal, São Paulo, SP, Brasil"... Mas se já sabemos que estamos falando da mesma cidade, não precisa repetir tudo. Se o **contexto** é conhecido, **é redundante repetir**.  Ademais, o contexto espacial precisa ser algo simples e padronizado, como as siglas de estado (ex. SP), para que fique o mais curto e seguro possível quando for preciso comunicá-lo.
+Se quero explicar para outra pessoa no telefone  onde  moro, digo algo como "eu moro aqui na rua tal, São Paulo, SP, Brasil"... Mas se já sabemos que estamos falando da mesma cidade, não precisa repetir tudo. Se o **contexto** é conhecido, **é redundante repetir**.  Ademais, o contexto espacial precisa ser algo simples e padronizado, como as siglas de estado (ex. SP), para que fique o mais curto e seguro possível ao comunicá-lo.
 
 O **contexto em um geocódigo** precisa ser legível não só para computadores mas também a seres humanos, aí ser mais amigável o uso de uma **hierarquia de siglas**, padronizadas e fáceis de lembrar.
 
@@ -147,7 +147,7 @@ Em ambos os casos o significado de "resolver o código" é transformar o código
 
 # Planejamento
 
-O trabalho foi apenas esboçado,  um banco de dados está sendo preparado, alguns testes foram feitos, parte da comunidade já está dialogando... Todavia há muito  que ser realizado, completando tarefas, coordenando voluntários, ampliando o debate e sistematizando decisões. Não é muito diferente do ciclo de construção de normas técnicas. <!-- A seguir o planejamento detalhado, incluindo metas e prazos.-->
+O trabalho foi apenas esboçado,  um banco de dados está sendo preparado, alguns testes foram feitos, parte da comunidade já está dialogando... Todavia há muito  que ser realizado, completando tarefas, coordenando voluntários, ampliando o debate e sistematizando decisões. Não é muito diferente do [ciclo de construção de normas técnicas](https://en.wikipedia.org/wiki/Internet_Standard#Standardization_process).
 
 ## Objetivo e metas do trabalho
 
@@ -156,15 +156,15 @@ Resumo:
 
 As discussões e  decisões coletivas seguirão a  ["metodologia das rodadas de discussão estruturada"](https://wiki.openstreetmap.org/wiki/WikiProject_Brazil/Associa%C3%A7%C3%A3o/Rodadas), ou similar. Inicialmente em um grupo mais especializado depois crescendo para um coletivo mais amplo na análise das soluções:
 
-1. Comunidades OpenStreetMap e Wikidata. Esse núcleo inicial tem ajudado a delimitar o escopo nos requisitos e a listar todas as potenciais soluções.
+1. Comunidades **OpenStreetMap e Wikidata**. Esse núcleo inicial tem ajudado a delimitar o escopo nos requisitos e a listar todas as potenciais soluções. <br/>NOTA: a infraestrutura de dados oficial (IBGE) e essas duas principais fontes de dados abertos já se econtram "amarradas" pelo [datasets.OK.org.BR/city-codes](http://datasets.OK.org.BR/city-codes), com apoio da [Open Knowledge Brasil](http://OK.org.BR) desde 2017.
 
-2. Representantes das demais comunidades do terceiro setor e universidades. Por exemplo ONGs de inclusão social e construção de habitações já vem apoiando a formalação dos requisitos. ONGs orientadas a software e dados abertos ajudam a testar soluções. Todas, através dos testes e do diálogo tomam parte nas rodadas de busca de consenso para as melhores práticas e soluções.
+2. Representantes das **demais comunidades do terceiro setor e universidades**. <br/>Por exemplo ONGs de inclusão social e construção de habitações já vem apoiando a [formulação dos requisitos](#spec01-hub). ONGs orientadas a software e dados abertos ajudam a testar soluções. Todas, através dos testes e do diálogo tomam parte nas rodadas de busca de consenso para as melhores práticas e soluções.
 
-3. Empresas. Ajudam a avaliar a viabilidade do "ecossistema de soluções" que poderiam surgir em torno do padrão, e em todas as instâncias do debate técnico.
+3. **Empresas**. Ajudam a avaliar a viabilidade do "ecossistema de soluções" que poderiam surgir em torno do padrão, e em todas as instâncias do debate técnico.
 
-4. Prefeituras menores. É prevista a realização de testes concretos em municípios menores, com o apoio de prefeituras que já vinham aderindo a soluções abertas e uso do OpenStreetMap.
+4. **Prefeituras menores**. É prevista a realização de testes concretos em municípios menores, com o apoio de prefeituras que já vinham aderindo a soluções abertas e uso do OpenStreetMap.
 
-5. Autoridades governamentais.   Já vem ocorrendo o diálogo por exemplo com o SINTER (Sistema nacional de gestão de informações territoriais), ligado à Receita Federal, e Secretarias do Estado em SP. Apesar de ser importante o diálogo ao longo de todo processo, a formalização se dará apenas no final, com a proposta v1.0 consolidada. Outros importantes atores no setor são o IBGE, a ABNT e as diversas Secretarias de Estado, na Agricultura, na Habitação, no Turismo, e no Meio Ambeinte.
+5. **Autoridades governamentais**.   Já vem ocorrendo o diálogo por exemplo com o SINTER (Sistema nacional de gestão de informações territoriais), ligado à Receita Federal, e Secretarias do Estado em SP. Apesar de ser importante o diálogo ao longo de todo processo, a formalização se dará apenas no final, com a proposta v1.0 consolidada. Outros importantes atores no setor são o IBGE, a ABNT e as diversas Secretarias de Estado, na Agricultura, na Habitação, no Turismo, e no Meio Ambeinte.
 
 <!--
 1. Estabelecer formalmente os **requisitos do CLP**, traduzindo em parâmetros objetivos as decisões discutidas. [[esboço](spec01-hub.md)]

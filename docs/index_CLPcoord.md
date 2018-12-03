@@ -141,32 +141,7 @@ Quanto aos níveis indermediários da hierarquia, é possível expandir o códig
 </table>  
 
 ## PlusCode
-<!--
-destaque de problemas
 
-No centro da cidade, em Altamira, PA, Brazil.
-Prédio da prefeitura por exemplo tem PLuscode contextualizado QQVJ+6F
-
-   https://plus.codes/6889QQVJ+6F
-
-É relativamente curto, consome 6 digitos...
-Mas como o munípio é grande, requer mais contextos, como o "Altamira, distrito de Forlaleza",
-Ou seja, a estratégia do código curto sai do padrão e o Google cria arbitrariamente
-o componente de código "Fortaleza".
-   https://plus.codes/6889GWC7+JF
-
-Por fim, a maior parte das localizações em meio rural de Altamira ficam
-sem contextualização,  
-
-https://plus.codes/6889CW6G+6X
-https://plus.codes/68588VMH+W2
-https://plus.codes/687CC9HV+9F
-
-PS: por curiosidade o poligono de Altamira no OSM é
-  https://www.openstreetmap.org/relation/185554
-
-
--->
 Localização do Marco-zero representada por PlusCode: [`588MC9X8+RC`](https://plus.codes/588MC9X8+RC), com célula de ~10×10m. A definição do código se encontra em [OLC Definition](https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc). Há uma sutil distinção entre o algoritmo OLC, opção em foco no presente estudo, e a [API Google denominada *PlusCodes*](https://github.com/google/open-location-code/wiki/Plus-codes-API), já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  -->
 
 ![](assets/CLP-coord-plusCode-ilustra01.png)
@@ -200,6 +175,20 @@ Para variações na precisão do endereço, existe a hierarquia da grade secund�
   </td>  
 </tr>
 </table>  
+
+### Problemas do PlusCode
+O PlusCode não é apenas um algoritmo (OLC licença Apache é livre), mas um serviço de resolução de códigos contextualizados por nome de cidade ou similar: este serviço é uma [caixa preta](https://en.wikipedia.org/wiki/Black_box), e não tem licença livre. Quanto  contexto não é derivado de um padrão aberto e soberano (controlado pela jurisdição), dizemos que o contexto é composto de "palavras mágicas".
+
+Exemplos de problemas típicos de contextualização. O prédio da prefeitura do município de  [Altamira (PA)](https://www.openstreetmap.org/relation/185554) está localizado no  PlusCode *[contextualizado QQVJ+6F](https://plus.codes/6889QQVJ+6F)*, que é um código PlusCode usual de 6 caracteres mais nome da cidade.
+
+Como o munípio de Altamira é muito grande, requer mais contextos, como o *"Altamira, distrito de Forlaleza"*... Ou seja, a estratégia do código curto sai do padrão e o Google cria arbitrariamente
+o componente de código "Fortaleza". Ver por exemplo [este ponto](https://plus.codes/6889GWC7+JF) é contextualizado por duas palavras, o nome de município (Altamira), e a palavra mágica Fortaleza.
+
+Por fim, a maior parte das localizações em meio rural de Altamira ficam até mesmo sem contextualização, nem a palavra Altamira comparece. Exemplos:
+
+* https://plus.codes/6889CW6G+6X
+* https://plus.codes/68588VMH+W2
+* https://plus.codes/687CC9HV+9F
 
 ## S2
 

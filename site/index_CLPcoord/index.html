@@ -243,25 +243,7 @@ O link acima aponta para <code>geohash.org</code> que não dá zoom compativel c
 </tr>
 </table>  </p>
 <h2 id="pluscode">PlusCode</h2>
-<p>&lt;!--
-destaque de problemas</p>
-<p>No centro da cidade, em Altamira, PA, Brazil.
-Prédio da prefeitura por exemplo tem PLuscode contextualizado QQVJ+6F</p>
-<p>https://plus.codes/6889QQVJ+6F</p>
-<p>É relativamente curto, consome 6 digitos...
-Mas como o munípio é grande, requer mais contextos, como o "Altamira, distrito de Forlaleza",
-Ou seja, a estratégia do código curto sai do padrão e o Google cria arbitrariamente
-o componente de código "Fortaleza".
-   https://plus.codes/6889GWC7+JF</p>
-<p>Por fim, a maior parte das localizações em meio rural de Altamira ficam
-sem contextualização,  </p>
-<p>https://plus.codes/6889CW6G+6X
-https://plus.codes/68588VMH+W2
-https://plus.codes/687CC9HV+9F</p>
-<p>PS: por curiosidade o poligono de Altamira no OSM é
-  https://www.openstreetmap.org/relation/185554</p>
-<p>--&gt;
-Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>, com célula de ~10×10m. A definição do código se encontra em <a href="https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc">OLC Definition</a>. Há uma sutil distinção entre o algoritmo OLC, opção em foco no presente estudo, e a <a href="https://github.com/google/open-location-code/wiki/Plus-codes-API">API Google denominada <em>PlusCodes</em></a>, já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  --></p>
+<p>Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>, com célula de ~10×10m. A definição do código se encontra em <a href="https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc">OLC Definition</a>. Há uma sutil distinção entre o algoritmo OLC, opção em foco no presente estudo, e a <a href="https://github.com/google/open-location-code/wiki/Plus-codes-API">API Google denominada <em>PlusCodes</em></a>, já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  --></p>
 <p><img alt="" src="../assets/CLP-coord-plusCode-ilustra01.png" /></p>
 <p>Os quatro primeiros dígitos (prefixo <code>588M</code>) podem ser cortados quando sabemos que o contexto é a cidade de São Paulo, disso resulta o código mais compacto <code>C9X8+RC</code>.</p>
 <p>Grade principal <strong>sem hierarquia</strong>: com células de 1/8000° esferoradianos (áreas de ~100 m²), nesta grade o endereço vizinho do Marco-zero (Editora UNESP a menos de 100 m do Marco-zero) apresenta código <a href="https://plus.codes/588MF928+27">F928+27</a>, totalmete distinto.</p>
@@ -288,6 +270,17 @@ Localização do Marco-zero representada por PlusCode: <a href="https://plus.cod
   </td><br />
 </tr>
 </table>  </p>
+<h3 id="problemas-do-pluscode">Problemas do PlusCode</h3>
+<p>O PlusCode não é apenas um algoritmo (OLC licença Apache é livre), mas um serviço de resolução de códigos contextualizados por nome de cidade ou similar: este serviço é uma <a href="https://en.wikipedia.org/wiki/Black_box">caixa preta</a>, e não tem licença livre. Quanto  contexto não é derivado de um padrão aberto e soberano (controlado pela jurisdição), dizemos que o contexto é composto de "palavras mágicas".</p>
+<p>Exemplos de problemas típicos de contextualização. O prédio da prefeitura do município de  <a href="https://www.openstreetmap.org/relation/185554">Altamira (PA)</a> está localizado no  PlusCode <em><a href="https://plus.codes/6889QQVJ+6F">contextualizado QQVJ+6F</a></em>, que é um código PlusCode usual de 6 caracteres mais nome da cidade.</p>
+<p>Como o munípio de Altamira é muito grande, requer mais contextos, como o <em>"Altamira, distrito de Forlaleza"</em>... Ou seja, a estratégia do código curto sai do padrão e o Google cria arbitrariamente
+o componente de código "Fortaleza". Ver por exemplo <a href="https://plus.codes/6889GWC7+JF">este ponto</a> é contextualizado por duas palavras, o nome de município (Altamira), e a palavra mágica Fortaleza.</p>
+<p>Por fim, a maior parte das localizações em meio rural de Altamira ficam até mesmo sem contextualização, nem a palavra Altamira comparece. Exemplos:</p>
+<ul>
+<li>https://plus.codes/6889CW6G+6X</li>
+<li>https://plus.codes/68588VMH+W2</li>
+<li>https://plus.codes/687CC9HV+9F</li>
+</ul>
 <h2 id="s2">S2</h2>
 <p>Localização do Marco-zero representada por tecnologia S2: <a href="https://s2.sidewalklabs.com/regioncoverer/?cells=94ce59aaf89f&amp;center=-23.550385%2C-46.633956&amp;zoom=21"><code>94ce59aaf89f</code></a>, com célula de ~2×2m.  A representação pode ser adequada para base32, <code>3MHP.9IW0.9</code> (9 dígitos).</p>
 <p>O sistema de referência conhecido como "S2 Geometry" é na verdade uma biblioteca para indexação espacial em grandes bancos de dados, descrita em <a href="http://s2geometry.io">S2geometry.io</a>. As células da <a href="https://en.wikipedia.org/wiki/Discrete_Global_Grid#Hierarchical_grids">grade hierárquia</a>, com identificadores de 64 bits (S2geometry/Cell_ID) são em geral expressos fora da base de dados como números hexadecimais, mas essa escolha é indiferente.</p>
