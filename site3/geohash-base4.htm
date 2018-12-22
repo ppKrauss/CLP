@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>CLP Viewer</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="http://cdn.rawgit.com/chrisveness/geodesy/v1.1.3/dms.js"></script>
+	<script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
+	<script src="./latlon-geohash.js"></script><!-- new ./latlon-geohash.js old http://cdn.rawgit.com/chrisveness/latlon-geohash/v1.1.0/latlon-geohash.js -->
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" crossorigin=""
+	  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" 
+	/>
+	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" crossorigin=""
+	    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+	></script>
+        <script src="http://lab.digital-democracy.org/leaflet-bing-layer/leaflet-bing-layer.js"></script>
+
+
+    <script>
+
+	var ghs_cell=null; // old box
+        function drawCell(geohash) {
+            //if (typeof box != 'undefined') box.setMap(null);
+            var bg = Geohash.bounds(geohash);
+	    var bounds = L.latLngBounds( L.latLng(bg.ne.lat, bg.ne.lon), L.latLng(bg.sw.lat, bg.sw.lon) );
+	    //console.log(bg,"Lbounds=",bounds);
+	    if (ghs_cell) ghs_cell.remove();
+	    ghs_cell = L.rectangle(bounds, {color: 'blue', weight: 2}).addTo(mapCanvas);
+	    var bounds = L.latLngBounds( L.latLng(bg.ne.lat, bg.ne.lon), L.latLng(bg.sw.lat, bg.sw.lon) );
+	    if( $('#fitZoom').is(':checked') )
+	        mapCanvas.fitBounds(bounds);
+        }
+
+        function drawLabel_latlng(latlng, msg) {
+       	      if (!msg || msg=='' || msg==undefined)
+	          msg = Geohash.encode(latlng.lat, latlng.lng, $('#precision').val());
+	      var center = Geohash.decode(msg);
+	      popup
+		.setLatLng( L.latLng(center.lat, center.lon) )
+		.setContent( msg ) // e.latlng.toString().replace('LatLng',''))
+		.openOn(mapCanvas);
+	      return msg;
+        }
+
+	function setRefPoint(lat,lon) {  // depends on L and DOM.
+	    lat = Dms.parseDMS(lat);
+	    lon = Dms.parseDMS(lon);
+	    var geohash = Geohash.encode( lat, lon, $('#precision').val() );
+	    var latlon = Geohash.decode(geohash); // center
+	    $('#lat').val(latlon.lat);
+	    $('#lon').val(latlon.lon);
+	    $('#geohash').val(geohash);
+	    drawCell(geohash);
+	    drawLabel_latlng(L.latLng(lat,lon),geohash);
+	    return geohash;
+	}
+
+        /**
+         * Returns specified argument from query string.
+         *
+         * @params  {string} key - Argument to be returned.
+         * @returns {string} Value of key ('' for ?arg=, null for ?arg, undefined if not present).
+         */
+        function getQueryArg(key) {
+            // look for key prefixed by ?/&/;, (optionally) suffixed
+            // by =val (using lazy match), followed by &/;/# or EOS
+            var re = new RegExp('[?&;]'+key+'(=(.*?))?([&;#]|$)');
+            var results = re.exec(location.search);
+            if (results == null) return undefined;    // not found
+            if (results[2] == undefined) return null; // ?key without '='
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        function getQueryArgSplitFor(key) {
+            var srch = location.search.substring(1);  // lose the initial '?'
+            var args = srch.split(/[&;]/);            // list of field=value pairs
+            for (var i=0; i<args.length; i++) {       // for each arg
+                var arg = args[i].split('=');         // split at '='
+                if (arg[0] == key) {                  // arg we're looking for?
+                    if (arg.length == 1) return null; // ?key without '='
+                    return decodeURIComponent(arg[1].replace(/\+/g, ' '));
+                }
+            }
+            return undefined;                         // not found
+        }
+
+/////
+
+
+        $(document).ready(function() {  //  ONLOAD
+
+		Geohash.base32 = '0123'; // base4
+                Geohash.base32_case = '-';
+		Geohash.BitMAX = 2;
+
+		$('#ptclick_text').css('font-weight', 'bold');
+		$( "#ptclick" ).click(function() {
+		     if( $(this).is(':checked') ) {
+		       $('#zoomIn_text').css('font-weight', 'bold');
+		       $('#ptclick_text').css('font-weight', 'normal');
+		     } else {
+		       $('#zoomIn_text').css('font-weight', 'normal');
+		       $('#ptclick_text').css('font-weight', 'bold');
+		     }
+		});
+
+
+		$('#geohash').change( function() {
+		// decode geohash
+		try {
+		    var geohash = $('#geohash').val();
+		    if ( Geohash.isValidCode(geohash) ) {
+			    var latlon = Geohash.decode(geohash);
+			    $('#lat').val(latlon.lat);
+			    $('#lon').val(latlon.lon);
+			    $('#precision').val($('#geohash').val().length);
+			    drawCell(geohash);
+			    drawLabel_latlng(L.latLng(latlon.lat,latlon.lon),geohash);
+			    //showNeighbours(geohash);
+                    }
+		} catch (err) { console.log(err); }
+		});
+
+		$('#lat,#lon').change( function() {
+		try {
+		    var lat = Dms.parseDMS($('#lat').val());
+		    var lon = Dms.parseDMS($('#lon').val());
+		    mapCanvas.setView( [lat,lon], 16, { animate: true, duration: 1.8 } );
+		    var geohash = Geohash.encode(lat, lon, $('#precision').val());
+		    drawCell(geohash);
+		    drawLabel_latlng(L.latLng(lat,lon),geohash);
+		} catch (err) { console.log(err); }
+		});
+
+		$('#precision').change( function() {
+		// encode geohash & reset lat/lon to reflect new precision
+		try {
+		    var geohash = setRefPoint( $('#lat').val(), $('#lon').val() ); // refresh by #precision
+		    /* var lat = Dms.parseDMS($('#lat').val());
+		    var lon = Dms.parseDMS($('#lon').val());
+		    var geohash = Geohash.encode(lat, lon, $('#precision').val());
+		    var latlon = Geohash.decode(geohash); // center
+			...
+                    */
+		    //showNeighbours(geohash);
+		} catch (err) { console.log(err); }
+		});
+
+		
+		/*  // initialise maps
+		if (qLatlon = getQueryArg('latlon')) {
+			var ll = qLatlon.split(',');
+			$('#lat').val(ll[0]);
+			$('#lon').val(ll[1]);
+			$('#lat').trigger('change');
+		}
+		*/
+        }); //ONLOAD
+
+
+    </script>
+
+
+</head>
+<body>
+
+Localize-se e obtenha seus geocódigos! 
+&nbsp;
+ <select name="usetec" id="usetec" onchange="if (this.value) window.open(this.value+'.htm','_self',false);">
+    <option value="" selected>-- Selecione o padrão desejado --</option>
+    <option value="geohash-base32ghs">Geohash padrão (base32ghs)</option>
+    <option value="geohash-base32pt">Geohash com base32pt</option>
+    <!-- option value="CLP-geohash">Geohash recodificado com CLP</option>
+    <option value="geohash-base32rfc">Geohash com base32rfc</option>
+    <option value="CLP-s2">S2geom recodificado com CLP</option>
+    <option value="s2-base32pt">S2geom com base32pt</option>
+    <option value="s2-base4">S2geom com base4</option>
+    <option value="s2-base32rfc">S2geom com base32rfc</option>
+    <option value="s2-base16">S2geom padrão (base16)</option -->
+</select>
+&nbsp;&nbsp; Tenologias selecionada: <b>Geohash base4</b> (hierarquia).
+
+<div id="mapid" style="width: 100%; height: 400px;"></div>
+
+
+<script src="map.js"></script>
+
+<script>
+///
+
+
+
+// // //
+/*
+if (selectedByUrl) {
+    changeHashFunction( selectedByUrl );  //  falta funcao
+}
+selectedByUrl='';
+
+*/
+</script>
+
+Zoom <span id="zoom_val">16</span>:
+&nbsp; &nbsp; 
+<label title="Ativa click de pega-ponto no mapa, ou zoom-in onClick">
+  <input type="checkbox" name="ptclick" id="ptclick">
+  <i id="zoomIn_text">double-click zoom-in</i>
+</label>
+&nbsp; &nbsp;
+(or <span id="ptclick_text">click-point</span> <label title="Zoom-fit to the cell">
+    <input type="checkbox" name="fitZoom" id="fitZoom" checked="1">
+    <i>fit zoom to cell</i></label>).
+
+<form>
+    <fieldset><legend>Geocódigo</legend>
+        <label><b>Geohash base4</b>: <input type="text" name="geohash" id="geohash"></label>
+	&nbsp;&nbsp;&nbsp;<label>Latitude / Longitude: 
+        <input type="text" name="lat" id="lat" size="11" maxlength="12" class="latlon" placeholder="Latitude (°N/S)" title="Latitude (°N/S)"> ,
+        <input type="text" name="lon" id="lon" size="11" maxlength="12" class="latlon" placeholder="Longitude (°L/O)" title="Longitude (°L/O)">
+        </label>
+        &nbsp;&nbsp;&nbsp;<label>Precisão:
+                <select name="precision" id="precision" class="latlon">
+                    <option value="4">4 dígitos</option>
+                    <option value="5">5 dígitos</option>
+                    <option value="6">6 dígitos</option>
+                    <option value="7">7 dígitos</option>
+                    <option value="8">8 dígitos</option>
+                    <option value="9">9 dígitos</option>
+                    <option value="10">10 dígitos</option>
+                    <option value="11">11 dígitos</option>
+                    <option value="12">12 dígitos</option>
+                    <option value="13">13 dígitos</option>
+                    <option value="14">14 dígitos</option>
+                    <option value="15">15 dígitos</option>
+                    <option value="16">16 dígitos</option>
+                    <option value="17">17 dígitos</option>
+                    <option value="18">18 dígitos</option>
+                    <option value="19">19 dígitos</option>
+                    <option value="20" selected="1">20 dígitos</option>
+                    <option value="21">21 dígitos</option>
+                    <option value="22">22 dígitos</option>
+                </select>
+
+	</label>
+
+    </fieldset>
+</form>
+
+<p>Pontos de controle: 
+   <a href="javascript:void(0);" onclick="setRefPoint(-23.561618,-46.655996);">MASP</a>,
+   <a href="javascript:void(0);" onclick="setRefPoint(-23.550375,-46.633937);">Marco-zero-SP</a>, ...
+</p>
+
+</body>
+</html>
+
