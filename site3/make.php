@@ -1,3 +1,42 @@
+<?php
+/**
+ * MAKE files HTML da navgegação de testes do Projeto CLP.
+ * USO:
+ *   php make.php # roda tudo
+ *   php make.php nome | more  # debug
+ */
+
+$JSLIB = 'lib_geohash';
+$MENU1 = [
+	"geohash-base32ghs"=>["nome"=>'Geohash padrão (base32ghs)', "digitos"=>12, "digito_sel"=>9, "js_onload"=>''],
+	"geohash-base32pt"=>["nome"=>'Geohash com base32pt', "digitos"=>12, "digito_sel"=>9, "js_onload"=>"
+		Geohash.base32 = '0123456789BCDFGHJKLMNPQRSTUVWXYZ'; // base32pt, non-silabic (for Portuguese)
+                Geohash.base32_case = 'upper';
+"],
+	"geohash-base4"=>[
+           "nome"=>'Geohash com base4', "digitos"=>24, "digito_sel"=>18, "js_onload"=>"
+		Geohash.base32 = '0123'; // base4
+                Geohash.base32_case = '-';
+		Geohash.BitMAX = 2;
+"],
+];
+$RUN_ITEM = ($argc>1)? $argv[1]: '';
+if ($RUN_ITEM && !isset($MENU1[$RUN_ITEM])) die("\nERRO, item '$argv[1]' desconhecido. \n");
+$RUN_ITENS = $RUN_ITEM? [$RUN_ITEM]: array_keys($MENU1);
+
+// // //  MAIN
+
+foreach($RUN_ITENS as $MENU1_CURRENT):
+
+$OPTS1='';
+foreach($MENU1 as $val=>$r) if ($val!=$MENU1_CURRENT)
+      $OPTS1.= "\n\t<option value='$val'>{$r['nome']}</option>";
+
+$OPTS2='';
+for($i=2; $i<=$MENU1[$MENU1_CURRENT]['digitos']; $i++)
+      $OPTS2.= "\n\t<option value='$i'".(($i==$MENU1[$MENU1_CURRENT]['digito_sel'])? " selected": "").">$i dígitos</option>";
+
+$TPL = <<<HTML
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +53,7 @@
 
   <script src="http://cdn.rawgit.com/chrisveness/geodesy/v1.1.3/dms.js"></script>
 	<script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
-	<script src="./lib_geohash.js"></script>
+	<script src="./{$JSLIB}.js"></script>
 
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" crossorigin=""
 	  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -103,11 +142,7 @@ function onMapClick(e) {  // used by map.js, mapCanvas.on('click')
 
 $(document).ready(function() {  //  ONLOAD
 
-    
-		Geohash.base32 = '0123'; // base4
-                Geohash.base32_case = '-';
-		Geohash.BitMAX = 2;
-
+    {$MENU1[$MENU1_CURRENT]['js_onload']}
 
 		$('#ptclick_text').css('font-weight', 'bold');
 		$( "#ptclick" ).click(function() {
@@ -177,13 +212,11 @@ $(document).ready(function() {  //  ONLOAD
 	&nbsp;
 	<select name="usetec" id="usetec" onchange="if (this.value) window.open(this.value+'.htm','_self',false);">
 	<option value="" selected>-- Selecione o padrão desejado --</option>
-	
-	<option value='geohash-base32ghs'>Geohash padrão (base32ghs)</option>
-	<option value='geohash-base32pt'>Geohash com base32pt</option>
+	{$OPTS1}
 	</select>
 	&nbsp;&nbsp;
 	<a target="_blank" href="http://www.openstreetmap.com.br/CLP/site/index_CLPcoord/#comparando-candidatos">Tenologia selecionada</a>:
-	<b>Geohash com base4</b>. Clique no mapa.
+	<b>{$MENU1[$MENU1_CURRENT]['nome']}</b>. Clique no mapa.
 </p>
 
 <div id="mapid" style="width: 100%; height: 400px;"></div>
@@ -205,36 +238,13 @@ $(document).ready(function() {  //  ONLOAD
 
 <form><!-- remover tag form -->
 	<fieldset><legend>Geocódigo</legend>
-		<label style="white-space:nowrap"><b>Geohash com base4</b>: <input type="text" size="23" name="geocode" id="geocode"></label>
+		<label style="white-space:nowrap"><b>{$MENU1[$MENU1_CURRENT]['nome']}</b>: <input type="text" size="23" name="geocode" id="geocode"></label>
 		&nbsp;&nbsp;&nbsp; <label>Latitude&nbsp;/&nbsp;Longitude:
 		<input type="text" name="lat" id="lat" size="11" maxlength="12" class="latlon" placeholder="Latitude (°N/S)" title="Latitude (°N/S)">&nbsp;,&nbsp;<input type="text" name="lon" id="lon" size="11" maxlength="12" class="latlon" placeholder="Longitude (°L/O)" title="Longitude (°L/O)">
 		</label>
 		&nbsp;&nbsp;&nbsp;
 		<label style="white-space:nowrap">Precisão:&nbsp;<select name="precision" id="precision" class="latlon">
-			
-	<option value='2'>2 dígitos</option>
-	<option value='3'>3 dígitos</option>
-	<option value='4'>4 dígitos</option>
-	<option value='5'>5 dígitos</option>
-	<option value='6'>6 dígitos</option>
-	<option value='7'>7 dígitos</option>
-	<option value='8'>8 dígitos</option>
-	<option value='9'>9 dígitos</option>
-	<option value='10'>10 dígitos</option>
-	<option value='11'>11 dígitos</option>
-	<option value='12'>12 dígitos</option>
-	<option value='13'>13 dígitos</option>
-	<option value='14'>14 dígitos</option>
-	<option value='15'>15 dígitos</option>
-	<option value='16'>16 dígitos</option>
-	<option value='17'>17 dígitos</option>
-	<option value='18' selected>18 dígitos</option>
-	<option value='19'>19 dígitos</option>
-	<option value='20'>20 dígitos</option>
-	<option value='21'>21 dígitos</option>
-	<option value='22'>22 dígitos</option>
-	<option value='23'>23 dígitos</option>
-	<option value='24'>24 dígitos</option>
+			{$OPTS2}
 			</select></label>
 	</fieldset>
 
@@ -259,3 +269,8 @@ $(document).ready(function() {  //  ONLOAD
 
 </body>
 </html>
+HTML;
+
+file_put_contents("$MENU1_CURRENT.htm",$TPL);
+
+endforeach; // $RUN_ITENS

@@ -16,7 +16,7 @@ var bing_options = {
     maxZoom: 21 // see  https://stackoverflow.com/a/53883145/287948  and https://github.com/digidem/leaflet-bing-layer/issues/39
 };
 
-var 
+var
   lay_mapbox = L.tileLayer(MAPBOX_URL+MAPBOX_KEY, {
 	maxZoom: 21,
 	attribution: attribMapBase+' MapBOX',
@@ -35,21 +35,73 @@ L.control.layers({
 }).addTo(mapCanvas);
 lay_mapbox.addTo(mapCanvas); //  set as default
 
-
 mapCanvas.on('zoomend', function() {
     var x = mapCanvas.getZoom();
     $('#zoom_val').text(x);
 });
 
+var cityCanvas = {
+  urlCities: "https://raw.githubusercontent.com/datasets-br/city-codes/master/data/dump_osm/",
+  opts: {'sp-spa':"SP/SaoPaulo", 'pr-cur': "PR/Curitiba"},
+  geom: null,
+  geom_opts: {style:{fill:false,color:'red'}},
+  show: function (opt,dom_id_ref,dom_class_selected) {
+    if (cityCanvas.opts[opt]===undefined) alert("Cidade '"+opt+"' desconhecida");
+    else {
+      var fname = cityCanvas.opts[opt];
+      if (cityCanvas.geom) cityCanvas.geom.clearLayers();
+      var jcity = $.ajax({   //  see https://medium.com/d/c72ae3b41c01
+          url: cityCanvas.urlCities+fname+".geojson",
+          dataType: "json",
+          success: console.log(fname+" city successfully loaded."),
+          error: function(xhr) { alert(xhr.statusText); }
+      });
+      $.when(jcity).done(function() { // Add requested external GeoJSON to map
+          cityCanvas.geom = L.geoJSON( jcity.responseJSON, cityCanvas.geom_opts ).addTo(mapCanvas);
+          mapCanvas.fitBounds( cityCanvas.geom.getBounds(), {padding:[70,70], animate:true, duration:1.8} );
+      });
+      if (dom_id_ref!==undefined) {
+        // DOM changes, mark city name as selected
+        var ref_all = dom_id_ref+'-ALL';
+        var ref_this = dom_id_ref+'-'+opt;
+        var ref_class = (dom_class_selected!==undefined)? dom_class_selected: 'selected_text';
+
+        $("#"+ref_all+" p.city-LST a").toggleClass(ref_class,false); // unselect all
+        $("#"+ref_this).toggleClass(ref_class,true); // select item
+
+        $("#"+ref_all+" p.city-PTS span").hide();
+        $("#city-PTS-"+opt).show();
+      } // \if DOM
+      return true;
+    } // \if opt
+    return false;
+  } // \func
+};
+// if (city_atURL) ...
+
+var mapCanvas_popup_aux = L.popup();
+
+function mapCanvas_popup(lat,lon,msg) {
+  mapCanvas_popup_aux
+    .setLatLng( L.latLng(lat,lon) )
+    .setContent( msg )
+    .openOn(mapCanvas);
+}
+
+mapCanvas.on('click', onMapClick);
+L.control.scale({imperial:false,updateWhenIdle:false,maxWidth:50}).addTo(mapCanvas);
+
+
+/////
+
 
 /*
-
 
 var selectedByUrl = '';
 var hash = window.location.hash
 hash = hash.replace('#','');  // examples #6gzm/SP/MonteiroLobato ,  #6gycf/SP/SaoPaulo or #6gkz/PR/Curitiba
 if (hash) {
-	// check prefixes "geohash:" (default) or "quadtree:", and city 
+	// check prefixes "geohash:" (default) or "quadtree:", and city
 	var selectedByUrl = 'geohash';
 	var regex = /^((geohash|quadtree):)?(.+?)(\/(.+))?$/;
 	var fd = hash.match(regex);
@@ -89,23 +141,3 @@ L.control.layers({
 	}).addTo(mapCanvas);
 
 */
-
-
-var popup = L.popup();
-
-function onMapClick(e) {
-   if( !$('#ptclick').is(':checked') ) {
-       var geohash = drawLabel_latlng(e.latlng);
-       drawCell(geohash);
-       $('#geohash').val(geohash);
-       var c = Geohash.decode(geohash);
-       $('#lat').val( Number((c.lat).toFixed(6)) );
-       $('#lon').val( Number((c.lon).toFixed(6)) );
-    }
-}
-mapCanvas.on('click', onMapClick);
-L.control.scale({imperial:false,updateWhenIdle:false,maxWidth:50}).addTo(mapCanvas);
-
-
-
-

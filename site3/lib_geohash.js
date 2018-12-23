@@ -1,6 +1,8 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-/* Geohash encoding/decoding and associated functions   (c) Chris Veness 2014-2016 / MIT Licence  */
-/*  !!!new version 2018 for base4 */
+/* Geohash encoding/decoding and associated functions   (c) Chris Veness 2014-2016 / MIT Licence
+   http://cdn.rawgit.com/chrisveness/latlon-geohash/v1.1.0/latlon-geohash.js
+  */
+/*  !!!new version 2018 for base4 and string validation */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
 'use strict';
@@ -16,6 +18,7 @@ var Geohash = {};
 /* (Geohash-specific) Base32 map */
 Geohash.base32 = '0123456789bcdefghjkmnpqrstuvwxyz'; // base32ghs, standard Geohash alphabet
 Geohash.base32_case = 'lower';
+Geohash.hash = '';  // accumulator of the Geohash class
 
 // Geohash.base32 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'; // base32rfc, RFC3548 alphabet
 // Geohash.base32 = '0123456789BCDFGHJKLMNPQRSTUVWXYZ'; // base32pt, non-silabic (for Portuguese)
@@ -43,7 +46,7 @@ Geohash.encode = function(lat, lon, precision) {
             var posn = Geohash.decode(hash);
             if (posn.lat==lat && posn.lon==lon) return hash;
         }
-        precision = 12; // set to maximum
+        precision = 12; // else set to maximum
     }
 
     lat = Number(lat);
@@ -55,7 +58,7 @@ Geohash.encode = function(lat, lon, precision) {
     var idx = 0; // index into base32 map
     var bit = 0; // each char holds 5 bits
     var evenBit = true;
-    var geohash = '';
+    var geohash = ''; // or Geohash.hash?
 
     var latMin =  -90, latMax =  90;
     var lonMin = -180, lonMax = 180;
@@ -92,15 +95,44 @@ Geohash.encode = function(lat, lon, precision) {
         }
     }
 
-    return geohash;
+    return geohash;  // or?  return (Geohash.hash=geohash);
 };
 
-Geohash.isValidCode = function(str,showAlert) {
+/**
+ * Changes Geohash.hash to correct case or empty when invalid. Generates alert() on-true flag.
+ * Can use as isValidCode() with defaults, same as isValidCode(true)
+ * as isValidCode(geohash) or isValidCode(false) or isValidCode(geohash,false)
+ * MUST change name to hash_isValid().
+ */
+Geohash.isValidCode = function(a,b) {
+  var showAlert=true;
+  if (a!==undefined) {
+     if (typeof a === 'boolean') showAlert=a;
+     else { // int or string
+	   Geohash.hash = a;
+           if (b!==undefined && !b) showAlert=false;
+     }
+  } // else using Geohash.hash and showAlert.
   var rgx = new RegExp('^['+Geohash.base32+']+$');
-  var r = str.match(rgx);
-  if ((showAlert===undefined || showAlert) && !r) 
-    alert("The string \n"+str+"\n is not valid!\n All letters MUST be in \n'"+Geohash.base32+"'");
-  return r;
+  if (Geohash.hash.length === 0) {
+     if (showAlert) alert("Empty geocode");
+     return false;
+  } else {
+          // Normalize case:
+	  if (Geohash.base32_case=='lower')
+	    Geohash.hash = Geohash.hash.toLowerCase();
+	  else if (Geohash.base32_case=='upper')
+	    Geohash.hash = Geohash.hash.toUpperCase();
+          
+	  var r = Geohash.hash.match(rgx); // VALIDATION
+	  if (!r) {
+	    Geohash.hash = ''; // drop.
+	    if (showAlert)
+	      alert("The string \n"+Geohash.hash+"\n is not valid!\n All letters MUST be in \n'"+Geohash.base32+"'");
+	      //  or  throw new Error('Invalid geohash');
+	  }
+	  return r;
+  }
 }
 
 
@@ -116,8 +148,7 @@ Geohash.isValidCode = function(str,showAlert) {
  *     var latlon = Geohash.decode('u120fxw'); // latlon: { lat: 52.205, lon: 0.1188 }
  */
 Geohash.decode = function(geohash) {
-
-    var bounds = Geohash.bounds(geohash); // <-- the hard work
+    var bounds = Geohash.bounds(geohash); // <-- the hard work and validation
     // now just determine the centre of the cell...
 
     var latMin = bounds.sw.lat, lonMin = bounds.sw.lon;
@@ -143,11 +174,9 @@ Geohash.decode = function(geohash) {
  * @throws  Invalid geohash.
  */
 Geohash.bounds = function(geohash) {
-    if (geohash.length === 0) throw new Error('Invalid geohash');
-    if (Geohash.base32_case=='lower')
-       geohash = geohash.toLowerCase(); // WARNING, base32 alphabet can be sensitive.
-    else if (Geohash.base32_case=='upper')
-       geohash = geohash.toUpperCase(); // WARNING
+    if (geohash===undefined) geohash=Geohash.hash;
+    if (!Geohash.isValidCode(geohash)) throw new Error('Invalid geohash');
+    geohash = Geohash.hash; // valid and normalized
 
     var evenBit = true;
     var latMin =  -90, latMax =  90;

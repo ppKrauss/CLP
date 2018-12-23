@@ -1,98 +1,109 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
 	<title>CLP Viewer</title>
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css"/>
+	<style>
+		p, fieldset {margin-left: 10pt;}
+		.selected_text {font-weight: bold;}
+		.city-PTS span {margin:0;padding:0;}
+	</style>
 
-        <script src="http://cdn.rawgit.com/chrisveness/geodesy/v1.1.3/dms.js"></script>
+  <script src="http://cdn.rawgit.com/chrisveness/geodesy/v1.1.3/dms.js"></script>
 	<script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
-	<script src="./latlon-geohash.js"></script><!-- new ./latlon-geohash.js old http://cdn.rawgit.com/chrisveness/latlon-geohash/v1.1.0/latlon-geohash.js -->
+	<script src="./lib_geohash.js"></script>
 
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" crossorigin=""
-	  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" 
+	  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
 	/>
 	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" crossorigin=""
 	    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
 	></script>
         <script src="http://lab.digital-democracy.org/leaflet-bing-layer/leaflet-bing-layer.js"></script>
 
+<script>
+var cell_geom=null;
 
-    <script>
+// FALTA mudar de Geohash para GeocodeLib
 
-	var ghs_cell=null; // old box
-        function drawCell(geohash) {
-            //if (typeof box != 'undefined') box.setMap(null);
-            var bg = Geohash.bounds(geohash);
-	    var bounds = L.latLngBounds( L.latLng(bg.ne.lat, bg.ne.lon), L.latLng(bg.sw.lat, bg.sw.lon) );
-	    //console.log(bg,"Lbounds=",bounds);
-	    if (ghs_cell) ghs_cell.remove();
-	    ghs_cell = L.rectangle(bounds, {color: 'blue', weight: 2}).addTo(mapCanvas);
-	    var bounds = L.latLngBounds( L.latLng(bg.ne.lat, bg.ne.lon), L.latLng(bg.sw.lat, bg.sw.lon) );
-	    if( $('#fitZoom').is(':checked') )
-	        mapCanvas.fitBounds(bounds);
+function drawCell(geocode) {  //  refazer, jgando para map.js
+	var bg = Geohash.bounds(geocode);
+	var bounds = L.latLngBounds( L.latLng(bg.ne.lat, bg.ne.lon), L.latLng(bg.sw.lat, bg.sw.lon) );
+	if (cell_geom) cell_geom.remove();
+	cell_geom = L.rectangle(bounds, {color: 'blue', weight: 2}).addTo(mapCanvas);
+	var bounds = L.latLngBounds( L.latLng(bg.ne.lat, bg.ne.lon), L.latLng(bg.sw.lat, bg.sw.lon) );
+	if( $('#fitZoom').is(':checked') )
+		mapCanvas.fitBounds( bounds, {padding:[70,70],maxZoom:19} );
+}
+
+function drawLabel_latlng(lat, lon, msg) {
+	if ( !msg || msg=='' || msg==undefined )
+		msg = Geohash.encode( lat, lon, $('#precision').val() );
+	var center = Geohash.decode(msg);
+	mapCanvas_popup(center.lat, center.lon, msg);
+	return msg;
+}
+
+function setRefPoint(lat,lon) {  // depends on L and DOM.
+    lat = Dms.parseDMS(lat);
+    lon = Dms.parseDMS(lon);
+    var geocode = Geohash.encode( lat, lon, $('#precision').val() );
+    var latlon = Geohash.decode(geocode); // center
+    $('#lat').val(latlon.lat);
+    $('#lon').val(latlon.lon);
+    $('#geocode').val(geocode);
+    drawCell(geocode);
+    drawLabel_latlng(lat, lon, geocode);
+    return geocode;
+}
+
+/**
+ * Returns specified argument from query string.
+ *
+ * @params  {string} key - Argument to be returned.
+ * @returns {string} Value of key ('' for ?arg=, null for ?arg, undefined if not present).
+ */
+function getQueryArg(key) {
+    // look for key prefixed by ?/&/;, (optionally) suffixed
+    // by =val (using lazy match), followed by &/;/# or EOS
+    var re = new RegExp('[?&;]'+key+'(=(.*?))?([&;#]|$)');
+    var results = re.exec(location.search);
+    if (results == null) return undefined;    // not found
+    if (results[2] == undefined) return null; // ?key without '='
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function getQueryArgSplitFor(key) {
+    var srch = location.search.substring(1);  // lose the initial '?'
+    var args = srch.split(/[&;]/);            // list of field=value pairs
+    for (var i=0; i<args.length; i++) {       // for each arg
+        var arg = args[i].split('=');         // split at '='
+        if (arg[0] == key) {                  // arg we're looking for?
+            if (arg.length == 1) return null; // ?key without '='
+            return decodeURIComponent(arg[1].replace(/\+/g, ' '));
         }
+    }
+    return undefined;                         // not found
+}
 
-        function drawLabel_latlng(latlng, msg) {
-       	      if (!msg || msg=='' || msg==undefined)
-	          msg = Geohash.encode(latlng.lat, latlng.lng, $('#precision').val());
-	      var center = Geohash.decode(msg);
-	      popup
-		.setLatLng( L.latLng(center.lat, center.lon) )
-		.setContent( msg ) // e.latlng.toString().replace('LatLng',''))
-		.openOn(mapCanvas);
-	      return msg;
-        }
-
-	function setRefPoint(lat,lon) {  // depends on L and DOM.
-	    lat = Dms.parseDMS(lat);
-	    lon = Dms.parseDMS(lon);
-	    var geohash = Geohash.encode( lat, lon, $('#precision').val() );
-	    var latlon = Geohash.decode(geohash); // center
-	    $('#lat').val(latlon.lat);
-	    $('#lon').val(latlon.lon);
-	    $('#geohash').val(geohash);
-	    drawCell(geohash);
-	    drawLabel_latlng(L.latLng(lat,lon),geohash);
-	    return geohash;
-	}
-
-        /**
-         * Returns specified argument from query string.
-         *
-         * @params  {string} key - Argument to be returned.
-         * @returns {string} Value of key ('' for ?arg=, null for ?arg, undefined if not present).
-         */
-        function getQueryArg(key) {
-            // look for key prefixed by ?/&/;, (optionally) suffixed
-            // by =val (using lazy match), followed by &/;/# or EOS
-            var re = new RegExp('[?&;]'+key+'(=(.*?))?([&;#]|$)');
-            var results = re.exec(location.search);
-            if (results == null) return undefined;    // not found
-            if (results[2] == undefined) return null; // ?key without '='
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
-        function getQueryArgSplitFor(key) {
-            var srch = location.search.substring(1);  // lose the initial '?'
-            var args = srch.split(/[&;]/);            // list of field=value pairs
-            for (var i=0; i<args.length; i++) {       // for each arg
-                var arg = args[i].split('=');         // split at '='
-                if (arg[0] == key) {                  // arg we're looking for?
-                    if (arg.length == 1) return null; // ?key without '='
-                    return decodeURIComponent(arg[1].replace(/\+/g, ' '));
-                }
-            }
-            return undefined;                         // not found
-        }
-
+function onMapClick(e) {  // used by map.js, mapCanvas.on('click')
+   if( !$('#ptclick').is(':checked') ) {
+       var geocode = drawLabel_latlng(e.latlng.lat, e.latlng.lng);
+       drawCell(geocode);
+       $('#geocode').val(geocode);
+       var c = Geohash.decode(geocode);
+       $('#lat').val( Number((c.lat).toFixed(6)) );
+       $('#lon').val( Number((c.lon).toFixed(6)) );
+    }
+}
 /////
 
+$(document).ready(function() {  //  ONLOAD
 
-
-        $(document).ready(function() {  //  ONLOAD
+    
 
 		$('#ptclick_text').css('font-weight', 'bold');
 		$( "#ptclick" ).click(function() {
@@ -106,48 +117,41 @@
 		});
 
 
-		$('#geohash').change( function() {
-		// decode geohash
-		try {
-		    var geohash = $('#geohash').val();
-		    if ( Geohash.isValidCode(geohash) ) {
-			    var latlon = Geohash.decode(geohash);
-			    $('#lat').val(latlon.lat);
-			    $('#lon').val(latlon.lon);
-			    $('#precision').val($('#geohash').val().length);
-			    drawCell(geohash);
-			    drawLabel_latlng(L.latLng(latlon.lat,latlon.lon),geohash);
-			    //showNeighbours(geohash);
-                    }
-		} catch (err) { console.log(err); }
+		$('#geocode').change( function() {
+			// decode geocode
+			try {
+				if ( Geohash.isValidCode( $('#geocode').val() ) ) {
+					$('#geocode').val(Geohash.hash); // set to correct when changed.
+					var latlon = Geohash.decode();
+					$('#lat').val(latlon.lat);
+					$('#lon').val(latlon.lon);
+					$('#precision').val( Geohash.hash.length );
+					drawCell(Geohash.hash);
+					drawLabel_latlng(latlon.lat, latlon.lon, Geohash.hash );
+				} // if
+			} catch (err) { console.log(err); }
 		});
 
 		$('#lat,#lon').change( function() {
-		try {
-		    var lat = Dms.parseDMS($('#lat').val());
-		    var lon = Dms.parseDMS($('#lon').val());
-		    mapCanvas.setView( [lat,lon], 16, { animate: true, duration: 1.8 } );
-		    var geohash = Geohash.encode(lat, lon, $('#precision').val());
-		    drawCell(geohash);
-		    drawLabel_latlng(L.latLng(lat,lon),geohash);
-		} catch (err) { console.log(err); }
+			// editing lat or lon, refresh all.
+			try {
+			    var lat = Dms.parseDMS($('#lat').val());
+			    var lon = Dms.parseDMS($('#lon').val());
+			    mapCanvas.setView( [lat,lon], 16, { animate: true, duration: 1.8 } );
+			    var geocode = Geohash.encode(lat, lon, $('#precision').val());
+			    drawCell(geocode);
+			    drawLabel_latlng(lat, lon, geocode);
+			} catch (err) { console.log(err); }
 		});
 
 		$('#precision').change( function() {
-		// encode geohash & reset lat/lon to reflect new precision
-		try {
-		    var geohash = setRefPoint( $('#lat').val(), $('#lon').val() ); // refresh by #precision
-		    /* var lat = Dms.parseDMS($('#lat').val());
-		    var lon = Dms.parseDMS($('#lon').val());
-		    var geohash = Geohash.encode(lat, lon, $('#precision').val());
-		    var latlon = Geohash.decode(geohash); // center
-			...
-                    */
-		    //showNeighbours(geohash);
-		} catch (err) { console.log(err); }
+			// encode geocode & reset lat/lon to reflect new precision
+			try {
+			    var geocode = setRefPoint( $('#lat').val(), $('#lon').val() );
+			} catch (err) { console.log(err); }
 		});
 
-		
+
 		/*  // initialise maps
 		if (qLatlon = getQueryArg('latlon')) {
 			var ll = qLatlon.split(',');
@@ -156,86 +160,86 @@
 			$('#lat').trigger('change');
 		}
 		*/
-        }); //ONLOAD
+}); //ONLOAD
 
 
-    </script>
-
-
+</script>
 </head>
+
+
 <body>
 
-Localize-se e obtenha seus geocódigos! 
-&nbsp;
- <select name="usetec" id="usetec" onchange="if (this.value) window.open(this.value+'.htm','_self',false);">
-    <option value="" selected>-- Selecione o padrão desejado --</option>
-    <option value="geohash-base32pt">Geohash com base32pt</option>
-    <option value="geohash-base4">Geohash com base4</option>
-</select>
-&nbsp;&nbsp; Tenologias selecionada: <b>Geohash</b> padrão (base32ghs).
+<p>Localize-se e obtenha seus geocódigos!
+	&nbsp;
+	<select name="usetec" id="usetec" onchange="if (this.value) window.open(this.value+'.htm','_self',false);">
+	<option value="" selected>-- Selecione o padrão desejado --</option>
+	
+	<option value='geohash-base32pt'>Geohash com base32pt</option>
+	<option value='geohash-base4'>Geohash com base4</option>
+	</select>
+	&nbsp;&nbsp;
+	<a target="_blank" href="http://www.openstreetmap.com.br/CLP/site/index_CLPcoord/#comparando-candidatos">Tenologia selecionada</a>:
+	<b>Geohash padrão (base32ghs)</b>. Clique no mapa.
+</p>
 
 <div id="mapid" style="width: 100%; height: 400px;"></div>
-
-
 <script src="map.js"></script>
 
-<script>
-///
-
-
-
-// // //
-/*
-if (selectedByUrl) {
-    changeHashFunction( selectedByUrl );  //  falta funcao
-}
-selectedByUrl='';
-
-*/
-</script>
-
-Zoom <span id="zoom_val">16</span>:
-&nbsp; &nbsp; 
-<label title="Ativa click de pega-ponto no mapa, ou zoom-in onClick">
-  <input type="checkbox" name="ptclick" id="ptclick">
-  <i id="zoomIn_text">double-click zoom-in</i>
-</label>
-&nbsp; &nbsp;
-(or <span id="ptclick_text">click-point</span> <label title="Zoom-fit to the cell">
-    <input type="checkbox" name="fitZoom" id="fitZoom" checked="1">
-    <i>fit zoom to cell</i></label>).
-
-<form>
-    <fieldset><legend>Geocódigo</legend>
-        <label><b>Geohash base32ghs</b>: <input type="text" name="geohash" id="geohash"></label>
-	&nbsp;&nbsp;&nbsp;<label>Latitude / Longitude: 
-        <input type="text" name="lat" id="lat" size="11" maxlength="12" class="latlon" placeholder="Latitude (°N/S)" title="Latitude (°N/S)"> ,
-        <input type="text" name="lon" id="lon" size="11" maxlength="12" class="latlon" placeholder="Longitude (°L/O)" title="Longitude (°L/O)">
-        </label>
-        &nbsp;&nbsp;&nbsp;<label>Precisão:
-                <select name="precision" id="precision" class="latlon">
-                    <!-- option value="1">1 caracter</option-->
-                    <option value="2">2 caracteres</option>
-                    <option value="3">3 caracteres</option>
-                    <option value="4">4 caracteres</option>
-                    <option value="5">5 caracteres</option>
-                    <option value="6">6 caracteres</option>
-                    <option value="7">7 caracteres</option>
-                    <option value="8" selected="1">8 caracteres</option>
-                    <option value="9">9 caracteres</option>
-                    <option value="10">10 caracteres</option>
-                </select>
-
+<p>
+	Zoom <span id="zoom_val">16</span>:
+	&nbsp; &nbsp;
+	<label title="Ativa click de pega-ponto no mapa, ou zoom-in onClick">
+	  <input type="checkbox" name="ptclick" id="ptclick">
+	  <i id="zoomIn_text">double-click zoom-in</i>
 	</label>
-
-    </fieldset>
-</form>
-
-<p>Pontos de controle: 
-   <a href="javascript:void(0);" onclick="setRefPoint(-23.561618,-46.655996);">MASP</a>,
-   <a href="javascript:void(0);" onclick="setRefPoint(-23.550375,-46.633937);">Marco-zero-SP</a>, ...
+	&nbsp; &nbsp;
+	(or <span id="ptclick_text">click-point</span> <label title="Zoom-fit to the cell">
+	    <input type="checkbox" name="fitZoom" id="fitZoom" checked="1">
+	    <i>fit zoom to cell</i></label>).
+	&nbsp; &nbsp; Para fundo BING, clique nos layers.
 </p>
+
+<form><!-- remover tag form -->
+	<fieldset><legend>Geocódigo</legend>
+		<label style="white-space:nowrap"><b>Geohash padrão (base32ghs)</b>: <input type="text" size="23" name="geocode" id="geocode"></label>
+		&nbsp;&nbsp;&nbsp; <label>Latitude&nbsp;/&nbsp;Longitude:
+		<input type="text" name="lat" id="lat" size="11" maxlength="12" class="latlon" placeholder="Latitude (°N/S)" title="Latitude (°N/S)">&nbsp;,&nbsp;<input type="text" name="lon" id="lon" size="11" maxlength="12" class="latlon" placeholder="Longitude (°L/O)" title="Longitude (°L/O)">
+		</label>
+		&nbsp;&nbsp;&nbsp;
+		<label style="white-space:nowrap">Precisão:&nbsp;<select name="precision" id="precision" class="latlon">
+			
+	<option value='2'>2 dígitos</option>
+	<option value='3'>3 dígitos</option>
+	<option value='4'>4 dígitos</option>
+	<option value='5'>5 dígitos</option>
+	<option value='6'>6 dígitos</option>
+	<option value='7'>7 dígitos</option>
+	<option value='8'>8 dígitos</option>
+	<option value='9' selected>9 dígitos</option>
+	<option value='10'>10 dígitos</option>
+	<option value='11'>11 dígitos</option>
+	<option value='12'>12 dígitos</option>
+			</select></label>
+	</fieldset>
+
+	<div id="city-ALL">
+		<p class="city-LST">Cidade com bordas apresentadas em vermelho:
+		&nbsp;<a href="javascript:void(0);" onclick="cityCanvas.show('sp-spa','city')" id="city-sp-spa">São Paulo (SP)</a>,
+		&nbsp;<a href="javascript:void(0);" onclick="cityCanvas.show('pr-cur','city')" id="city-pr-cur">Curitiba (PR)</a>.
+		</p>
+		<p class="city-PTS">Pontos de controle na cidade selecionada: <span>(clique em cidade)</span>
+			<span id="city-PTS-sp-spa" style="display:none">
+		   <a href="javascript:void(0);" onclick="setRefPoint(-23.561618,-46.655996);">MASP</a>,
+		   <a href="javascript:void(0);" onclick="setRefPoint(-23.550375,-46.633937);">Marco-zero-SP</a>, ...
+		  </span>
+			<span id="city-PTS-pr-cur" style="display:none">
+		   <a href="javascript:void(0);" onclick="setRefPoint(-25.48656,-49.2744);">ponto-lixo1</a>,
+		   <a href="javascript:void(0);" onclick="setRefPoint(-25.63145,-49.3595);">ponto-lixo2</a>, ...
+		  </span>
+		</p>
+</div>
+
+</form>
 
 </body>
 </html>
-
