@@ -113,19 +113,20 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#sintaxe">Sintaxe</a></li>
-        <li class="main "><a href="#comparando-com-outros-padroes">Comparando com outros padrões</a></li>
-        <li class="main "><a href="#aprendizados-com-o-cep">Aprendizados com o CEP</a></li>
-        <li class="main "><a href="#comparando-candidatos">Comparando candidatos</a></li>
+        <li class="main active"><a href="#sintaxe">SINTAXE</a></li>
+        <li class="main "><a href="#diferentes-padroes">DIFERENTES PADRÕES</a></li>
+            <li><a href="#aprendizados-com-o-cep">Aprendizados com o CEP</a></li>
+        <li class="main "><a href="#comparando-os-padroes-candidatos">COMPARANDO OS PADRÕES CANDIDATOS</a></li>
             <li><a href="#geohash">Geohash</a></li>
+            <li><a href="#openlocationcode">OpenLocationCode</a></li>
             <li><a href="#pluscode">PlusCode</a></li>
-            <li><a href="#s2">S2</a></li>
-        <li class="main "><a href="#comparando-com-nao-candidatos">Comparando com não-candidatos</a></li>
+            <li><a href="#s2geometry">S2geometry</a></li>
+        <li class="main "><a href="#comparando-nao-candidatos">COMPARANDO NÃO-CANDIDATOS</a></li>
             <li><a href="#nactag-e-codigo-microsoft">Nactag e código Microsoft</a></li>
             <li><a href="#mapcode">MapCode</a></li>
             <li><a href="#whats3words">Whats3words</a></li>
             <li><a href="#syllagloble">Syllagloble</a></li>
-        <li class="main "><a href="#lietaratura">Lietaratura</a></li>
+        <li class="main "><a href="#lietaratura">LIETARATURA</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -137,15 +138,15 @@
 <p>As coordenadas geográficas são muito longas. <a href="https://www.openstreetmap.org/?mlat=-22.860799&amp;mlon=-47.920199&amp;zoom=18">No exemplo</a>, se ficarmos só nos dígitos <strong>seriam ao todo 12</strong>, os dígitos "228607" da latitude e "479201" da longitude. Difícil decorar e trabalhoso digitar.</p>
 <p>O primeiro passo é transformar esses 12 elementos em 8, ao traduzirmos as coordenadas para Geohash, <a href="http://geohash.org/6gvvvw3d"><code>6GVVVW3D</code></a>.</p>
 <p>O segundo passo, para compactar mais um pouco, é fazer uso do contexto: se já sabemos que estamos localizados em <code>SP</code> e a sigla <code>PIR</code> já diz que é Piracicaba, então o Geohash não precisa dizer que estamos no hemisfério sul, etc. dispensamos o prefixo <code>6G</code> do Geohash, comum a todos os pontos de Piracicaba. <strong>Sobram 6</strong> caracteres: o código <code>PIR-VVV.W3D</code> é mais "palatável" para memorizar ou digitar.</p>
-<h2 id="sintaxe">Sintaxe</h2>
-<p>O código CLP é uma sequência de letras (A-Z) e números (0-9), com grupos separados por hífen ("-"). Essa sequência tem um prefixo e um sufixo, conforme a seguinte regra sintática, onde o prefixo é um código de jurisdição e o sufixo do CLP-coordenada um códido de coordenada gegráfica válido para o interior do territorio da jurisdição:</p>
+<h1 id="sintaxe">SINTAXE</h1>
+<p>O código CLP-coordenada é uma sequência de letras (A-Z) e números (0-9), com grupos separados por hífen ("&#8209;"). Essa sequência tem um prefixo e um sufixo, conforme a seguinte regra sintática, onde o <strong>prefixo é um código de jurisdição</strong> e o <strong>sufixo  um códido de coordenada gegráfica</strong> válido para o interior do territorio da jurisdição:</p>
 <p><img alt="" src="../assets/CLPcoordenada-syntax.png" /></p>
-<p>Por ser um padrão restrito ao território brasileiro inicia pela sigla <code>BR</code>.  As jurisdições <code>"BR-" &lt;uf&gt;</code>, referentes às unidades da federação, são determinadas pelo padrão <a href="https://pt.wikipedia.org/wiki/ISO_3166-2:BR">ISO&nbsp;3166-2:BR</a>, ou seja, são as tradicionais siglas de estado padronizadas pelo IBGE. Em seguida a última parte do código de jurisdição é o Município.</p>
-<p>Como há a opção de usar o CLP para designar porções maiores e menores da hierarquia territorial, a UF e o Município são opcionais:</p>
+<p>Por ser um padrão restrito ao território brasileiro, inicia pela sigla <code>BR</code>.  As jurisdições <code>"BR-" &lt;uf&gt;</code>, referentes às unidades da federação, são determinadas pelo padrão <a href="https://pt.wikipedia.org/wiki/ISO_3166-2:BR">ISO&nbsp;3166-2:BR</a>, ou seja, são as tradicionais siglas de estado padronizadas pelo IBGE. Em seguida a última parte do código de jurisdição é o Município.</p>
+<p>Como há a opção de usar o CLP para designar porções maiores e menores da hierarquia territorial, a UF e o Município são opcionais. Disso resulta a seguinte regra sintática para a jurisdição:</p>
 <p><img alt="" src="../assets/CLPjurisdicao-syntax.png" /></p>
 <p>A designação de município faz uso das <a href="../spec04ap01-siglas/"><strong>siglas de 3 letras</strong></a> do padrão já em uso nos identificadores de estradas. Como o CLP é <strong>sensível a contexto</strong> de país e UF, o uso do prefixo <code>BR</code> é dispensável no "contexto Brasil" e o uso da UF também dispensável quando as partes usuárias do CLP forem capazes de deduzir com certeza a UF.</p>
-<h2 id="comparando-com-outros-padroes">Comparando com outros padrões</h2>
-<p>Existe uma imensa diversidade de representações alternativas à Latitude/Longitude, e que podem ser consideradas também "geocódigos". Pode-se classificá-las da seguinte forma:</p>
+<h1 id="diferentes-padroes">DIFERENTES PADRÕES</h1>
+<p>Comparando os diferentes padrões de geocódigo de grades que os fundamentam. Existe uma imensa diversidade de representações alternativas à Latitude/Longitude, e que podem ser consideradas também "geocódigos". Pode-se classificá-las da seguinte forma:</p>
 <ul>
 <li>
 <p>representação baseada em <a href="https://en.wikipedia.org/wiki/Discrete_Global_Grid">grade global discreta</a> (do inglês DGG - <em>Discrete Global Grid</em>), que reduz as infinitas possíveis coordenadas a um número finito de células definidas por uma grade global. As DGGs podem ainda ser classificadas por seu nível de resolução &mdash; supor como "alta resolução" a DGG que oferece células de 3x3 metros ou menores &mdash;,  e pelo uso ou não da hierarquia:</p>
@@ -163,7 +164,7 @@
 </li>
 </ul>
 <p>Um levantamento parcial foi realizado por <a href="https://www.thinkmind.org/download.php?articleid=geoprocessing_2016_7_10_30119">K. Clemens em 2016</a>, ao analisar as características de geocódigos e de códigos postais em geral. A principal vantagem de um geocódigo baseado em DGG de alta resolução, sobre um código postal comum, é que a capacidade de localizar o ponto desejado.</p>
-<p>O CEP <code>20031-050</code> do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP <code>20031-040</code> da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo <a href="https://plus.codes/589R3RRF+">PlusCode klzzwxh:0035</a> ou Geohash <code>CM9MX</code>. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  <a href="https://plus.codes/589R3RRF+6F">PlusCode <strong><code>3RRF+6F</code></strong></a>, diz exatamente onde está o  portão!<!-- O **CEP <code>69010-060</code>** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **<a href="https://plus.codes/678XVXCG+3R4">PlusCode klzzwxh:0039</a>** diz exatamente onde está o seu portão!--></p>
+<p>O CEP <code>20031-050</code> do endereço de entrada do Teatro Municipal do Rio,<!-- Rua Evaristo da Veiga, 1; ... O CEP <code>20031-040</code> da refere-se a uma praça inteira, a Floriano &dash;  que pode também ser referenciada pelo <a href="https://plus.codes/589R3RRF+">PlusCode klzzwxh:0038</a> ou Geohash <code>CM9MX</code>. --> não nos diz onde está, informa apenas que é a rua&nbsp;Evaristo da Veiga.<!-- ](https://www.openstreetmap.org/way/50485413)--> Um código localizador, como por exemplo  <a href="https://plus.codes/589R3RRF+6F">PlusCode <strong><code>3RRF+6F</code></strong></a>, diz exatamente onde está o  portão!<!-- O **CEP <code>69010-060</code>** de uma casa em Manaus não nos diz onde ela está,<br/>mas o **<a href="https://plus.codes/678XVXCG+3R4">PlusCode klzzwxh:0042</a>** diz exatamente onde está o seu portão!--></p>
 <h2 id="aprendizados-com-o-cep">Aprendizados com o CEP</h2>
 <p>Depois de décadas usando o CEP aprendendos que <a href="https://github.com/OSMBrasil/CRP/blob/master/substituir-CEP.md">ele tem problemas</a> intríncecos do código, e problemas de operação, do "Sistema CEP" como um todo, por reter patentes e direitos autorais, ser centralizado, etc. Sabemos que precisamos do oposto,  <strong>queremos códigos livres</strong> e descentralizados.</p>
 <p>Quanto aos problemas intrínsecos, o principal é a dificuldade de se memorizar. O CEP é tão pouco <strong>mnemônico</strong> (pouco amigável para memorização) quanto um número de telefone. O uso de siglas já padronizadas, que já estão em nossa memória, seria um grande avanço. Podemos melhorar o CEP <a href="http://www.openstreetmap.com.br/CRP/">substituindo prefixos por siglas</a>. O&nbsp;código de um CEP do Amazonas&nbsp;(AM) pode ser <code>AM150‑088</code> ao invés de <code>69150‑088</code>, de um CEP de Tocantins&nbsp;(TO), <code>TO500‑360</code> ao invés de <code>77500‑360</code>.</p>
@@ -172,7 +173,7 @@
 <p>A hierarquia garante que dois CEPs, digamos <code>13165</code> e <code>13170</code>, se possuem prefixos iguais, então são vizinhos, estão dentro de uma mesma região, representada pelo prefixo comum, <code>131</code> no exemplo.</p>
 <p>O CEP com mais dígitos vai representando com mais detalhe uma região do espaço... Mas são 8 dígitos no CEP completo, e ainda assim não representa o endereço exato do portão. <strong>Com o CLP podemos fazer melhor</strong>,</p>
 <p>e  justamente por isso, entre outras aplicações, o CLP num futuro distante substituiria  o CEP, para num só código, de 7 ou 8 caracteres, chegarmos no portão.</p>
-<h1 id="comparando-candidatos">Comparando candidatos</h1>
+<h1 id="comparando-os-padroes-candidatos">COMPARANDO OS PADRÕES CANDIDATOS</h1>
 <p>Comparação entre padrões abertos mais difundidos e tecnicamente satisfatórios: Geohash, PlusCode e S2. Outras tecnologias podem vir a ser acrescentadas como opção para se eleger o melhor fundamento para o código CLP.</p>
 <p>A seguir comparação se deu em torno de um ponto de controle bem conhecido, na capital do Estado de São Paulo, o <a href="https://pt.wikipedia.org/wiki/Marco_zero_da_cidade_de_S%C3%A3o_Paulo">Marco Zero</a> (<em>latitude -23.550385, longitude -46.633956</em>). O pedestal do Marco tem aproximadamente 3 metros de diâmetro, as dimensões usuais de um portão urbano.</p>
 <p>Códigos em sua extensão completa, sem cortar prefixo de município, e sem qualquer outra adaptação, tal como a base numérica dos seus dígitos:
@@ -242,8 +243,10 @@ O link acima aponta para <code>geohash.org</code> que não dá zoom compativel c
   </td>
 </tr>
 </table>  </p>
+<h2 id="openlocationcode">OpenLocationCode</h2>
+<p>Ver "OLC" do PlusCode.</p>
 <h2 id="pluscode">PlusCode</h2>
-<p>Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>, com célula de ~10×10m. A definição do código se encontra em <a href="https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc">OLC Definition</a>. Há uma sutil distinção entre o algoritmo OLC, opção em foco no presente estudo, e a <a href="https://github.com/google/open-location-code/wiki/Plus-codes-API">API Google denominada <em>PlusCodes</em></a>, já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  --></p>
+<p>Localização do Marco-zero representada por PlusCode: <a href="https://plus.codes/588MC9X8+RC"><code>588MC9X8+RC</code></a>, com célula de ~10×10m. A definição do código (padrão OpenLocationCode - OLC) se encontra em <a href="https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc"><em>OLC Definition</em></a>. Há uma sutil distinção entre o algoritmo OpenLocationCode, opção em foco no presente estudo, e a <a href="https://github.com/google/open-location-code/wiki/Plus-codes-API">API Google denominada <em>PlusCodes</em></a>, já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  --></p>
 <p><img alt="" src="../assets/CLP-coord-plusCode-ilustra01.png" /></p>
 <p>Os quatro primeiros dígitos (prefixo <code>588M</code>) podem ser cortados quando sabemos que o contexto é a cidade de São Paulo, disso resulta o código mais compacto <code>C9X8+RC</code>.</p>
 <p>Grade principal <strong>sem hierarquia</strong>: com células de 1/8000° esferoradianos (áreas de ~100 m²), nesta grade o endereço vizinho do Marco-zero (Editora UNESP a menos de 100 m do Marco-zero) apresenta código <a href="https://plus.codes/588MF928+27">F928+27</a>, totalmete distinto.</p>
@@ -271,7 +274,7 @@ O link acima aponta para <code>geohash.org</code> que não dá zoom compativel c
 </tr>
 </table>  </p>
 <h3 id="problemas-do-pluscode">Problemas do PlusCode</h3>
-<p>O PlusCode não é apenas um algoritmo (OLC licença Apache é livre), mas um serviço de resolução de códigos contextualizados por nome de cidade ou similar: este serviço é uma <a href="https://en.wikipedia.org/wiki/Black_box">caixa preta</a>, e não tem licença livre. Quanto  contexto não é derivado de um padrão aberto e soberano (controlado pela jurisdição), dizemos que o contexto é composto de "palavras mágicas".</p>
+<p>O PlusCode é baseado no OpenLocationCode, que é livre, mas não é apenas o OpenLocationCode... É um serviço de resolução de códigos contextualizados por nome de cidade: este serviço é uma <a href="https://en.wikipedia.org/wiki/Black_box">caixa preta</a>, e não tem licença livre. Quando o  contexto não é derivado de um padrão aberto e soberano (controlado pela jurisdição), dizemos que o contexto é composto de "palavras mágicas".</p>
 <p>Exemplos de problemas típicos de contextualização. O prédio da prefeitura do município de  <a href="https://www.openstreetmap.org/relation/185554">Altamira (PA)</a> está localizado no  PlusCode <em><a href="https://plus.codes/6889QQVJ+6F">contextualizado QQVJ+6F</a></em>, que é um código PlusCode usual de 6 caracteres mais nome da cidade.</p>
 <p>Como o munípio de Altamira é muito grande, requer mais contextos, como o <em>"Altamira, distrito de Forlaleza"</em>... Ou seja, a estratégia do código curto sai do padrão e o Google cria arbitrariamente
 o componente de código "Fortaleza". Ver por exemplo <a href="https://plus.codes/6889GWC7+JF">este ponto</a> é contextualizado por duas palavras, o nome de município (Altamira), e a palavra mágica Fortaleza.</p>
@@ -281,7 +284,7 @@ o componente de código "Fortaleza". Ver por exemplo <a href="https://plus.codes
 <li>https://plus.codes/68588VMH+W2</li>
 <li>https://plus.codes/687CC9HV+9F</li>
 </ul>
-<h2 id="s2">S2</h2>
+<h2 id="s2geometry">S2geometry</h2>
 <p>Localização do Marco-zero representada por tecnologia S2: <a href="https://s2.sidewalklabs.com/regioncoverer/?cells=94ce59aaf89f&amp;center=-23.550385%2C-46.633956&amp;zoom=21"><code>94ce59aaf89f</code></a>, com célula de ~2×2m.  A representação pode ser adequada para base32, <code>3MHP.9IW0.9</code> (9 dígitos).</p>
 <p>O sistema de referência conhecido como "S2 Geometry" é na verdade uma biblioteca para indexação espacial em grandes bancos de dados, descrita em <a href="http://s2geometry.io">S2geometry.io</a>. As células da <a href="https://en.wikipedia.org/wiki/Discrete_Global_Grid#Hierarchical_grids">grade hierárquia</a>, com identificadores de 64 bits (S2geometry/Cell_ID) são em geral expressos fora da base de dados como números hexadecimais, mas essa escolha é indiferente.</p>
 <p>O site com recursos para demonstração, utilizado na ilustração abaixo, não faz parte da "distribuição oficial".  </p>
@@ -329,7 +332,7 @@ o componente de código "Fortaleza". Ver por exemplo <a href="https://plus.codes
   </td><br />
 </tr>
 </table>  </p>
-<h1 id="comparando-com-nao-candidatos">Comparando com não-candidatos</h1>
+<h1 id="comparando-nao-candidatos">COMPARANDO NÃO-CANDIDATOS</h1>
 <p>Alguns algoritmos/tecnologias são muito ruins e por isso devem ser descartados do estudo comparativo. Um desses algoritmos foi apelidado de <em>algoritmo ingênuo</em> e, apesar de não ser candidato, é uma referência importante, estabelecendo o critério de "mínima performance". Ou seja, nenhum "algoritmo candidato a CLP-coordenada" pode ser pior do que o ingênuo.</p>
 <p>Outras tecnologias são até muito boas, mas já foram de ante-mão barradas por não serem livres: são restritas por patentes ou direitos autorais. O Whats3words por exemplo é um destes casos.</p>
 <h2 id="nactag-e-codigo-microsoft">Nactag e código Microsoft</h2>
@@ -410,7 +413,7 @@ table align="center" border="0" style="width:75%">
 -->
 
 <hr />
-<h1 id="lietaratura">Lietaratura</h1>
+<h1 id="lietaratura">LIETARATURA</h1>
 <p>As comparações entre tecnologias que solucionam o problema também tem sido realizadas, por exemplo <a href=""></a></p>
 <ul>
 <li>

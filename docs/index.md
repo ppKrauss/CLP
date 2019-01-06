@@ -1,3 +1,4 @@
+
 <!-- pode ficar mais curto? -->
 **<center><big>CLP</big><br/><small style="font-size:8pt">v0.1.1</small></center>**
 
@@ -11,7 +12,7 @@ A ideia central do CLP é **oferecer de maneira simples e padronizada, através 
 
 As tecnologias para se implantar e padronizar um CLP  são bem consolidadas, existem opções como o [Geohash](index_CLPcoord.md#geohash)<!-- (http://geohash.org/6gyf4bf1n)-->, [S2](index_CLPcoord.md#s2)<!-- (https://s2geometry.io/)--> ou [PlusCode](index_CLPcoord.md#pluscode),<!-- https://plus.codes/588MC9X8+RC--> que são padrões livres, e MapCode <!--(http://www.mapcode.com/getcoords.html?iso3=331&mapcode=RR.56&xx=-46.633956&yy=-23.550385)--> ou Whats3words, patenteados mas úteis como exemplo. Estas opções tecnológicas globais podem ser melhor **adaptadas às condições e padrões locais do Brasil**, e nisto consistirá uma parte relevante dos estudos e recomendações realizados pelo presente projeto.
 
-# Motivações e estratégias
+# MOTIVAÇÕES E ESTRATÉGIAS
 
 O conceito de *portão* do CLP está relacionado com o local onde se habita ou se trabalha, ou onde são prestados serviços públicos: ser informado do local ou informar oficialmente o local  **são necessidades básicas asseguradas pela   [Constituição](https://www.senado.leg.br/atividade/const/constituicao-federal.asp)**. Refere-se ao direito de acolher e ser acolhido nos pontos de acesso publicamente definidos, é um direito com  facetas do *habitar* (arts. 6º e 23), do *ir-e-vir* (art. 5º inc. XV), do *ser informado* (Art. 5º inc. XXXIII) e do *trabalhar* (arts. 6º, 170 e 193).
 
@@ -44,7 +45,7 @@ O **contexto em um geocódigo** precisa ser legível não só para computadores 
 
 ![](assets/siglas-hierarquia2.jpg)
 
-# Comparações e como seria
+# COMO SERIA
 
 Vejamos como seria  o CLP, por exemplo, para localizar o "portão" do [MASP](https://pt.wikipedia.org/wiki/Museu_de_Arte_de_S%C3%A3o_Paulo).
 
@@ -62,11 +63,17 @@ Os códigos de localização existentes, como o Geohash ou o PlusCode, assim com
 
 Estas regras simples, uma vez formalizadas como padrão, garantiriam um código CLP mais adequado para o brasileiro usar. As siglas, não se vê todos os dias, mas já vinhamos usando: em diversos códigos oficiais, em mapas e nas placas de vias públicas. As siglas estão no *código das estradas* federais (ex. [BR-116](https://pt.wikipedia.org/wiki/BR-116)), estaduais (ex. [SP-147](https://pt.wikipedia.org/wiki/SP-147)) e municipais (ex. PIR-033). <!-- ... mas já vinhamos usando: em diversos códigos oficiais, tais como [identificadores LEX de normas jurídicas](https://pt.wikipedia.org/wiki/Lex_(URN)), e nas placas de vias públicas ou mapas oficiais.-->
 
-<span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao [conjunto de cobertura](http://s2geometry.io/devguide/examples/coverings.html) &mdash; células da grade de menor escala (macrocélulas) que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, [`6gycfqf0`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0/SP/SaoPaulo), faz parte do *contexto São Paulo (SPA)*, ilustrado abaixo, e teria o seu prefixo `6gyc` associado ao índice 2, resultando em **`2fqf0`** (!), reduzindo o  código do MASP a apenas cinco caracteres.
+## Cobertura do município
+<span id="cobertura">Outro aspecto</span> sujeito à padronização-Brasil, é quanto ao [conjunto de cobertura](http://s2geometry.io/devguide/examples/coverings.html) &mdash; células da grade de menor escala (**macrocélulas**) que servirão de "contexto", definindo o município e proporcionando prefixos mais curtos. Na grade Geohash por exemplo, o ponto do MASP, [`6gycfqf0`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0/SP/SaoPaulo), faz parte do *contexto São Paulo (SPA)*, ilustrado abaixo, e teria o seu prefixo `6gyc` associado ao índice 5, resultando em **`5fqf0`** (!), reduzindo o  código do MASP a apenas cinco caracteres.
 
-![](assets/hierarqMasp-03-sampa3e.png)<!-- 6gy*, 6gz4, 6gz1, 6gwz.`6gyc1k9sg` = Portão 8 do Autódromo de Interlagos -->
+![](assets/hierarqMasp-03-sampa04b.png)<!--
+MUDOU
+0=6gwx, 1=6gwz,
+2=6gy8, 3=6gy9, 4=6gyb, 5=6gyc, 6=6gyd, 7=6gyf, 8=6gyg
+9=6gz1, b=6gz4
+...`6gyc1k9sg` = Portão 8 do Autódromo de Interlagos -->
 
-Mais alguns exemplos de Geohash de portão traduzidos para CLP:<br/>&nbsp; [`6gycf5q2`](http://www.openstreetmap.com.br/CLP/site2/#6gycf5q2) ⟾ **`2f5q2`**: Portão 9 do Ibirapuera (troca `6gyc` por `2`) <br/>&nbsp; [`6gybcsdv5`](http://www.openstreetmap.com.br/CLP/site2/#6gybcsdv5) ⟾ **`1csdv5`**: entrada do Circo-escola Grajaú (troca `6gyb` por `1`)
+Mais alguns exemplos de Geohash de portão traduzidos para CLP:<br/>&nbsp; [`6gycf5q2`](http://www.openstreetmap.com.br/CLP/site3/geohash-base32ghs.htm#6gycf5q2) ⟾ **`5f5q2`**: Portão 9 do Ibirapuera (troca `6gyc` por `5`) <br/>&nbsp; [`6gybcsdv5`](http://www.openstreetmap.com.br/CLP/site3/geohash-base32ghs.htm#6gybcsdv5) ⟾ **`4csdv5`**: entrada do Circo-escola Grajaú (troca `6gyb` por `4`)
 
 Reparamos então que o "contexto", que pode ser a sigla `SPA` ou o nome completo *"São Paulo, SP, Brasil"*, tem seu significado traduzido para o *conjunto cobertura*, e com isso ganhamos códigos mais curtos.
 
@@ -77,7 +84,7 @@ Notas técnicas e de curiosidade:
 <br/>• Depois que a tecnologia for definida e implementada, e tudo no "padrão CLP" estiver funcionando, a comunidade paulistana (a mesma que <a href="http://www.cidades.registro.nic.br/#list-sugestoes">votou Sampa.br</a>!) poderia acrescentar uma "camada acima" de padronização, por exemplo de acréscimo da opção de trocar um ou dois dígitos iniciais do código por alguma palavra que denomine aproximadamente a região da célula. Imagine o código <tt>2f5q2</tt> do portão do Ibirapuera, se apelidarmos a macrocélula de cobertura <tt>2</tt> de "Centro", então o código fica <b><tt>centro-f5q2</tt></b>. Mais longo porém muito mais fácil de lembrar.<br/> Analogamente  <tt>0</tt> seria "Marsilac", <tt>1</tt> "Sul", <tt>3</tt> "Norte", <tt>4</tt> "Nordeste" e <tt>5</tt> "Sudeste".
 </small></blockquote>
 
-## Tabela comparativa
+## Comparando opções
 
 Vejamos as siglas e os códigos no caso da localização no museu do MASP, como seriam **pequenas adaptações**, resultando em opções de código CLP mais adequadas do que cada opção tecnológica "pura". Quando fazemos essas adaptações **podemos então comparar as  tecnologias**:
 
@@ -91,8 +98,8 @@ Vejamos as siglas e os códigos no caso da localização no museu do MASP, como 
 -->
 &nbsp;CLP&nbsp;resultante&nbsp;&nbsp;&nbsp;<br>&nbsp;(contexto BR-SP) | Detalhes da opção tecnologica
 ----------------------|---------------------
-**`SPA-2FQ.F0`** | *Geohash* do **portão** ([`6gycfqf0`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0/SP/SaoPaulo))&nbsp; ~25×20&nbsp;m
-**`SPA-2FQ.F0M`** | *Geohash* de um  ponto ([`6gycfqf0m`](http://www.openstreetmap.com.br/CLP/site2/#6gycfqf0m))&nbsp; ~4×4&nbsp;m
+**`SPA-5FQ.F0`** | *Geohash* do **portão** ([`6gycfqf0`](http://www.openstreetmap.com.br/CLP/site3/geohash-base32ghs.htm#BR-SP-SPA-6gycfqf0))&nbsp; ~25×20&nbsp;m
+**`SPA-5FQ.F0M`** | *Geohash* de um  ponto ([`6gycfqf0m`](http://www.openstreetmap.com.br/CLP/site3/geohash-base32ghs.htm#BR-SP-SPA-6gycfqf0m))&nbsp; ~4×4&nbsp;m
 **`SPA-C8QV.VCJ`** | *PlusCode* do **portão** ([`588MC8QV+CJ`](https://plus.codes/588MC8QV+CJ))&nbsp; ~15×15 m
 **`SPA-C8QV.CJ4`** | *PlusCode* de um ponto ([`588MC8QV+CJ4`](https://plus.codes/588MC8QV+CJ4))&nbsp; ~3×3 m
 **`SPA-1CSI.IM`**&nbsp;\* | *S2* do **portão** ([`94ce59c94ac`](https://s2.sidewalklabs.com/regioncoverer/?center=-23.561540%2C-46.656141&zoom=20&cells=94ce59c94ac))&nbsp;<!--94ce--> ~15×15&nbsp;m
@@ -145,7 +152,7 @@ A expressão formal do CLP-coordenada do MASP seria algo como `urn:geocode:br-sp
 
 Em ambos os casos o significado de "resolver o código" é transformar o código em uma coordenada geográfica, um ponto<!-- ou *célula da grade*--> no mapa representando a localização do portão.  Os algorítmos (softwares) de transformação não podem ser patenteados, precisam ser abertos, livres de direitos autorais, assim como os dados &mdash; disponíveis por exemplo <!-- em [datasets.ok.org.br](http://datasets.ok.org.br/city-codes)  e--> no [OpenStreetMap.org](http://OpenStreetMap.org).
 
-# Planejamento
+# PLANEJAMENTO
 
 O trabalho foi apenas esboçado,  um banco de dados está sendo preparado, alguns testes foram feitos, parte da comunidade já está dialogando... Todavia há muito  que ser realizado, completando tarefas, coordenando voluntários, ampliando o debate e sistematizando decisões. Não é muito diferente do [ciclo de construção de normas técnicas](https://en.wikipedia.org/wiki/Internet_Standard#Standardization_process).
 

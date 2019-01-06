@@ -2,12 +2,12 @@
  * LeafletJs map initializations.
  */
 
-var BING_KEY = 'AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L';
-var MAPBOX_KEY = 'eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-var MAPBOX_URL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.';
+// // // //
+const BING_KEY = 'AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L'
+   ,MAPBOX_KEY = 'eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
+   ,MAPBOX_URL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.';
 var attribMapBase = ' <a href="http://www.openstreetmap.com.br/CLP">OSM and CLP</a> contribs | ';
-
-var bing_options = {
+var bing_options  = {
     bingMapsKey: BING_KEY,
     //imagerySet: 'RoadOnDemand',
     attribution: attribMapBase+' BING',
@@ -18,21 +18,21 @@ var bing_options = {
 
 var
   lay_mapbox = L.tileLayer(MAPBOX_URL+MAPBOX_KEY, {
-	maxZoom: 21,
-	attribution: attribMapBase+' MapBOX',
-	id: 'mapbox.streets'
-  }),
-  lay_bing = L.tileLayer.bing(bing_options)
-;
-
-var mapCanvas = L.map('mapid', {
-    center: [-23.56149,-46.655953],
+  	maxZoom: 21,
+  	attribution: attribMapBase+' MapBOX',
+  	id: 'mapbox.streets'
+  })
+  ,lay_bing = L.tileLayer.bing(bing_options)
+  ,mapCanvas = L.map('mapid', {
+    center: [-23.56149,-46.655953], //LeafletJs array is LatLon, not lngLat
     zoom: 16
-});
+  });
+
 L.control.layers({
     "Standard": lay_mapbox,
     "BING": lay_bing
 }).addTo(mapCanvas);
+
 lay_mapbox.addTo(mapCanvas); //  set as default
 
 mapCanvas.on('zoomend', function() {
@@ -82,21 +82,56 @@ var cityCanvas = {
 var mapCanvas_popup_aux = L.popup();
 
 function mapCanvas_popup(lat,lon,msg) {
+  if ( typeof lat=='array' || lat instanceof Array )
+    {msg=lon; [lon,lat]=lat;}
+  if (lat===undefined||lat===null||!msg) alert("BUG2344")
   mapCanvas_popup_aux
     .setLatLng( L.latLng(lat,lon) )
     .setContent( msg )
     .openOn(mapCanvas);
 }
 
-mapCanvas.on('click', onMapClick);
+mapCanvas.on('click', onMapClick); // see external onMapClick
+mapCanvas.on('mousemove', onMapMouseMove); // see external onMapMouseMove
 L.control.scale({imperial:false,updateWhenIdle:false,maxWidth:50}).addTo(mapCanvas);
 
+// // // // // // // // //
+// Extra-functions and controls.
 
-/////
+var cell_geom=null; // used by drawCell_*.
+
+/**
+ * Remove old cell and add a new GeoJSON cell.
+ * @param GeoJSON_polygon GeoJSON, the cell polygon.
+ * @param fit boolean, true to zoom map by fitBounds().
+ * @param rmLast boolean, true to zoom map by fitBounds().
+ * @param geom_opts object, leaflet .
+ */
+function drawCell_byPoly(GeoJSON_polygon, fit, rmLast=true, conf=null) {
+  if (cell_geom && (rmLast || rmLast===undefined)) cell_geom.remove();
+  if (!conf) conf={poly:null,fit:null};
+  if (!conf.poly) conf.poly={color: 'blue', weight: 2};
+  if (!conf.fit) conf.fit={padding:[70,70], animate:true, duration:1.2};
+  cell_geom = L.geoJSON( GeoJSON_polygon, conf.poly ).addTo(mapCanvas);
+  if(fit) mapCanvas.fitBounds( cell_geom.getBounds(), conf.fit );
+}
+
+/**
+ * LIXO. Remove old cell and add a new cell calculated by bounds rectangle.
+ * @param bx array, [0=latMin,1=lonMin,2=latMax,3=lonMax] = [sw, ne]
+ * @param fit boolean, true to zoom map by fitBounds().
+ */
+function drawCell_byBounds(bx, fit, rmLast) {
+  if (cell_geom && (rmLast==undefined || rmLast)) cell_geom.remove();
+	var bounds = L.latLngBounds( L.latLng(bx[2],bx[3]), L.latLng(bx[0],bx[1]) );
+	if (cell_geom) cell_geom.remove();
+	cell_geom = L.rectangle(bounds, {color: 'blue', weight: 2}).addTo(mapCanvas);
+	if( fit!==undefined && fit )
+		mapCanvas.fitBounds( bounds, {padding:[70,70],maxZoom:19} );
+}
 
 
-/*
-
+/* LIXO
 var selectedByUrl = '';
 var hash = window.location.hash
 hash = hash.replace('#','');  // examples #6gzm/SP/MonteiroLobato ,  #6gycf/SP/SaoPaulo or #6gkz/PR/Curitiba

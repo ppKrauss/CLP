@@ -6,6 +6,8 @@ L.tileLayer('https://{s}.tiles.mapbox.com/v3/randyme.i0568680/{z}/{x}/{y}.png', 
   maxZoom: 18
 }).addTo(map);
 
+L.control.scale({maxWidth:200,metric:true,imperial:false}).addTo(map);
+
 
 // lupa para a busca de códigos, mesmo com UPGRADE ainda dando pau  
 L.control.geocoder('search-6gycfqf0',{"url":"https://pelias.io/api"}).addTo(map); //6gycfqf0 or fljxAAA

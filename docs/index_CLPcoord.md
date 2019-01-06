@@ -12,23 +12,23 @@ O primeiro passo é transformar esses 12 elementos em 8, ao traduzirmos as coord
 
 O segundo passo, para compactar mais um pouco, é fazer uso do contexto: se já sabemos que estamos localizados em `SP` e a sigla `PIR` já diz que é Piracicaba, então o Geohash não precisa dizer que estamos no hemisfério sul, etc. dispensamos o prefixo `6G` do Geohash, comum a todos os pontos de Piracicaba. **Sobram 6** caracteres: o código `PIR-VVV.W3D` é mais "palatável" para memorizar ou digitar.
 
-## Sintaxe
+# SINTAXE
 
-O código CLP é uma sequência de letras (A-Z) e números (0-9), com grupos separados por hífen ("-"). Essa sequência tem um prefixo e um sufixo, conforme a seguinte regra sintática, onde o prefixo é um código de jurisdição e o sufixo do CLP-coordenada um códido de coordenada gegráfica válido para o interior do territorio da jurisdição:
+O código CLP-coordenada é uma sequência de letras (A-Z) e números (0-9), com grupos separados por hífen ("&#8209;"). Essa sequência tem um prefixo e um sufixo, conforme a seguinte regra sintática, onde o **prefixo é um código de jurisdição** e o **sufixo  um códido de coordenada gegráfica** válido para o interior do territorio da jurisdição:
 
 ![](assets/CLPcoordenada-syntax.png)
 
-Por ser um padrão restrito ao território brasileiro inicia pela sigla `BR`.  As jurisdições `"BR-" <uf>`, referentes às unidades da federação, são determinadas pelo padrão [ISO&nbsp;3166-2:BR](https://pt.wikipedia.org/wiki/ISO_3166-2:BR), ou seja, são as tradicionais siglas de estado padronizadas pelo IBGE. Em seguida a última parte do código de jurisdição é o Município.
+Por ser um padrão restrito ao território brasileiro, inicia pela sigla `BR`.  As jurisdições `"BR-" <uf>`, referentes às unidades da federação, são determinadas pelo padrão [ISO&nbsp;3166-2:BR](https://pt.wikipedia.org/wiki/ISO_3166-2:BR), ou seja, são as tradicionais siglas de estado padronizadas pelo IBGE. Em seguida a última parte do código de jurisdição é o Município.
 
-Como há a opção de usar o CLP para designar porções maiores e menores da hierarquia territorial, a UF e o Município são opcionais:
+Como há a opção de usar o CLP para designar porções maiores e menores da hierarquia territorial, a UF e o Município são opcionais. Disso resulta a seguinte regra sintática para a jurisdição:
 
 ![](assets/CLPjurisdicao-syntax.png)
 
 A designação de município faz uso das [**siglas de 3 letras**](spec04ap01-siglas.md) do padrão já em uso nos identificadores de estradas. Como o CLP é **sensível a contexto** de país e UF, o uso do prefixo `BR` é dispensável no "contexto Brasil" e o uso da UF também dispensável quando as partes usuárias do CLP forem capazes de deduzir com certeza a UF.
 
-## Comparando com outros padrões
+# DIFERENTES PADRÕES
 
-Existe uma imensa diversidade de representações alternativas à Latitude/Longitude, e que podem ser consideradas também "geocódigos". Pode-se classificá-las da seguinte forma:
+Comparando os diferentes padrões de geocódigo de grades que os fundamentam. Existe uma imensa diversidade de representações alternativas à Latitude/Longitude, e que podem ser consideradas também "geocódigos". Pode-se classificá-las da seguinte forma:
 
 * representação baseada em [grade global discreta](https://en.wikipedia.org/wiki/Discrete_Global_Grid) (do inglês DGG - *Discrete Global Grid*), que reduz as infinitas possíveis coordenadas a um número finito de células definidas por uma grade global. As DGGs podem ainda ser classificadas por seu nível de resolução &mdash; supor como "alta resolução" a DGG que oferece células de 3x3 metros ou menores &mdash;,  e pelo uso ou não da hierarquia:
 
@@ -58,7 +58,7 @@ O CEP com mais dígitos vai representando com mais detalhe uma região do espaç
 
 e  justamente por isso, entre outras aplicações, o CLP num futuro distante substituiria  o CEP, para num só código, de 7 ou 8 caracteres, chegarmos no portão.
 
-# Comparando candidatos
+# COMPARANDO OS PADRÕES CANDIDATOS
 
 Comparação entre padrões abertos mais difundidos e tecnicamente satisfatórios: Geohash, PlusCode e S2. Outras tecnologias podem vir a ser acrescentadas como opção para se eleger o melhor fundamento para o código CLP.
 
@@ -140,9 +140,12 @@ Quanto aos níveis indermediários da hierarquia, é possível expandir o códig
 </tr>
 </table>  
 
+## OpenLocationCode
+Ver "OLC" do PlusCode.
+
 ## PlusCode
 
-Localização do Marco-zero representada por PlusCode: [`588MC9X8+RC`](https://plus.codes/588MC9X8+RC), com célula de ~10×10m. A definição do código se encontra em [OLC Definition](https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc). Há uma sutil distinção entre o algoritmo OLC, opção em foco no presente estudo, e a [API Google denominada *PlusCodes*](https://github.com/google/open-location-code/wiki/Plus-codes-API), já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  -->
+Localização do Marco-zero representada por PlusCode: [`588MC9X8+RC`](https://plus.codes/588MC9X8+RC), com célula de ~10×10m. A definição do código (padrão OpenLocationCode - OLC) se encontra em [*OLC Definition*](https://github.com/google/open-location-code/blob/master/docs/olc_definition.adoc). Há uma sutil distinção entre o algoritmo OpenLocationCode, opção em foco no presente estudo, e a [API Google denominada *PlusCodes*](https://github.com/google/open-location-code/wiki/Plus-codes-API), já na sua versão 2.0 desde outubro de 2018.<!-- prova em  https://web.archive.org/web/20181017144813/https://github.com/google/open-location-code/wiki/Plus-codes-API  -->
 
 ![](assets/CLP-coord-plusCode-ilustra01.png)
 
@@ -177,7 +180,8 @@ Para variações na precisão do endereço, existe a hierarquia da grade secund�
 </table>  
 
 ### Problemas do PlusCode
-O PlusCode não é apenas um algoritmo (OLC licença Apache é livre), mas um serviço de resolução de códigos contextualizados por nome de cidade ou similar: este serviço é uma [caixa preta](https://en.wikipedia.org/wiki/Black_box), e não tem licença livre. Quanto  contexto não é derivado de um padrão aberto e soberano (controlado pela jurisdição), dizemos que o contexto é composto de "palavras mágicas".
+
+O PlusCode é baseado no OpenLocationCode, que é livre, mas não é apenas o OpenLocationCode... É um serviço de resolução de códigos contextualizados por nome de cidade: este serviço é uma [caixa preta](https://en.wikipedia.org/wiki/Black_box), e não tem licença livre. Quando o  contexto não é derivado de um padrão aberto e soberano (controlado pela jurisdição), dizemos que o contexto é composto de "palavras mágicas".
 
 Exemplos de problemas típicos de contextualização. O prédio da prefeitura do município de  [Altamira (PA)](https://www.openstreetmap.org/relation/185554) está localizado no  PlusCode *[contextualizado QQVJ+6F](https://plus.codes/6889QQVJ+6F)*, que é um código PlusCode usual de 6 caracteres mais nome da cidade.
 
@@ -190,7 +194,7 @@ Por fim, a maior parte das localizações em meio rural de Altamira ficam até m
 * https://plus.codes/68588VMH+W2
 * https://plus.codes/687CC9HV+9F
 
-## S2
+## S2geometry
 
 Localização do Marco-zero representada por tecnologia S2: [`94ce59aaf89f`](https://s2.sidewalklabs.com/regioncoverer/?cells=94ce59aaf89f&center=-23.550385%2C-46.633956&zoom=21), com célula de ~2×2m.  A representação pode ser adequada para base32, `3MHP.9IW0.9` (9 dígitos).
 
@@ -238,7 +242,7 @@ A implementação de referência da biblioteca S2 é escrita em C++ (mesma lingu
 </tr>
 </table>  
 
-# Comparando com não-candidatos
+# COMPARANDO NÃO-CANDIDATOS
 
 Alguns algoritmos/tecnologias são muito ruins e por isso devem ser descartados do estudo comparativo. Um desses algoritmos foi apelidado de *algoritmo ingênuo* e, apesar de não ser candidato, é uma referência importante, estabelecendo o critério de "mínima performance". Ou seja, nenhum "algoritmo candidato a CLP-coordenada" pode ser pior do que o ingênuo.
 
@@ -344,7 +348,7 @@ table align="center" border="0" style="width:75%">
 
 -----
 
-# Lietaratura
+# LIETARATURA
 
 As comparações entre tecnologias que solucionam o problema também tem sido realizadas, por exemplo []()
 
