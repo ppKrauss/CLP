@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SHOW BASIC</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel='shortcut icon' type='image/x-icon' href='./favicon.ico' />
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+	  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+	  crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+	  integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+	  crossorigin=""></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.40/BigInteger.min.js"></script>
+</head>
+
+<body>
+
+<p>SHOW BASIC</p>
+
+<!-- MAPA E SEUS CONTROLES: -->
+<div id="mapid" style="width: 100%; height: 400px;"></div>
+
+
+<script>
+// after LOAD:
+var map = L.map('mapid').setView([-23.56149,-46.655953], 13); //LeafletJs array is LatLon, not lngLat
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker([-23.56149,-46.655953]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();
+
+
+var selectedByUrl = '';
+var COVER={};
+
+
+//////////////////////////////////////////////////
+
+class Base4h {
+// export class Base4h {
+
+  constructor(main,main0=null,prefix=null) {
+      this.glob0 = main0;   // BigInt or ArrayBuffer for extra-prefix
+      this.glob  = main     // main register, BigInt
+      this.prefix = prefix;  // local prefix
+
+      // PROPRIETIES:
+      this.TR_b16= {
+        "0":"G","1":"H",
+        "00":"I","01":"J","10":"K","11":"L",
+        "000":"M","001":"N","010":"O","011":"P","100":"Q","101":"R","110":"S","111":"T"
+      };
+      this.exoticAlphabet= { // for exoticAlphabet labels, see also data/catalog-base.csv
+        'js':   '0123456789abcdefghijklmnopqrstuv' // RFC3548's base32hex = Javascript (ECMA-262)
+        ,'ghs': '0123456789bcdefghjkmnpqrstuvwxyz' // standard Geohash (js except "ailo")
+        ,'pt':  '0123456789BCDFGHJKLMNPQRSTUVWXYZ' // no frequent vowel of Portuguese (for non-silabic codes)
+        ,'rfc': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567' // RFC3548 base32
+        ,'url': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_' // RFC sec. 5
+      };
+      this.stdAlphabet = { // see data/catalog-base.csv
+        "base16":"js","base32":"js","base64":"url"
+      };
+
+      // CALCULATED PROPRIETIES:
+      this.TR_bin= {
+        "G":"0","H":"1",
+        "I":"00","J":"01","K":"10","L":"11",
+        "M":"000","N":"001","O":"010","P":"011","Q":"100","R":"101","S":"110","T":"111"
+      };
+      this.rgxBase = {
+        "base4h": /^([0123]*)([GH])?$/,
+        "base16ph": /^([0-9a-f]*)([G-T])?$/
+      };
+  }
+
+  get local()  {
+    if (this.prefix) return null; // under construction!
+    else return this.glob
+  }
+
+  // // // // // //
+  // MAIN METHODS
+
+  /**
+   * Set internal registers with inputs, and check basic pre-condictions.
+   * @param val mix bigInt, BigInt, or number positive value.
+   * @param bits int (optional but recommended) expectd length in number of bits (pad zeros).
+   * @param canZero boolean (true) flag to accept value zero
+   * @return this for method chaining.
+   */
+  fromInt(val,bits=0,canZero=true) {
+    let t = typeof val;
+    let isNum  = (t=='number')
+    if (isNum || t=='bigint') {
+      val = bigInt(val)
+      if (isNum && !Number.isInteger(val))
+        throw new Error("er01, invalid input number, must be integer");
+    } else if (t!='object') // suppose bigInt lib
+      throw new Error("er02, invalid input type, must be bigint or number");
+    if ( val.isNegative() || (!canZero && val.isZero()) )
+        throw new Error(`er03, value ${val.toString()} must be greater than zero\n ${canZero}`);
+    let valBits = val.bitLength()
+    if (bits) {
+      if (valBits>bits) throw new Error("er06, internal BUG, very strange!");
+    } else bits = valBits;
+    this.bits = bits
+    this.bin  = val
+    return this;
+  }
+
+  toStringBin() { // canonic output.
+    return this.bin.toString(2).padStart(this.bits,'0')
+  }
+
+  toStringPlusHalf(conf=null) {  // canonic compressed alternatives.
+    if (!this.bits) return '';
+    if (!conf) conf = this.lastParseLabel; // when conf===undefined || conf===null
+    else if (typeof conf != 'object') conf = this.parseLabel(conf,true);
+    if (!conf.useHalfDigit) throw new Error("er01, invalid conf");
+
+    let strBin = this.toStringBin()
+    let halfDigit = ''
+    let cut_rest = this.bits % conf.bitsPerDigit //conf.base;  // number of excluded bits
+    let cut = this.bits - cut_rest; // bits in the main number
+    if (conf.base==4) {
+      if (cut_rest) {
+        let b = this.bits-1;
+        let last = strBin.charAt(b)
+        strBin = b? strBin.substring(0,b): ''
+        halfDigit = this.TR_b16[last]
+      }
+    } else if (cut_rest) { // non-zero when base16 non-exact
+      let c = cut-1;
+      let lasts = strBin.substring(cut) // from cut
+      strBin = c? strBin.substring(0,cut): ''
+      halfDigit = this.TR_b16[lasts]
+    }
+    let b = strBin? bigInt(strBin,2).toString(conf.base).padStart(cut/conf.bitsPerDigit,'0'): '';
+    return b + halfDigit
+  }
+
+  /**
+   * Add, remove or replace a prefix into this.bin, returning result.
+   * @param strbin_prefix a string with a binary representation of the prefix.
+   * @param strbin_new (optional) a string with a binary replacement.
+   */
+  strPrefix_replace(strbin_prefix,strbin_new='') {
+    // use cases: remove prefix, add prefix, replace global-by-local, replace local-by-global
+    let full = this.toStringBin()
+    if (strbin_prefix) {  // replace when prefix exists
+      var rgx = new RegExp('^'+strbin_prefix+'(.+)$')
+      let found = full.match(rgx)
+      return found? (strbin_new+found[1]): ''
+    } else if (strbin_new) { // add a prefix
+      return strbin_new+full
+    } else
+      return full; // no changes
+  }
+
+  // // // // // //
+  // OTHER METHODS
+
+/**
+ * Set this (.bin and .bits) with the specified input.
+ * @param strval string valid number expressed in the baseOpt.
+ * @param baseOpt string of a valid base label.
+ * @param canZero boolean (false) flag to not generate error on strval=='0'.
+ * @return this for method chaining.
+ */
+fromString(strval,baseOpt=2,canZero=true) {
+  if (!strval)
+    throw new Error("er01, empty value");
+  let halfDigit = ''
+  let conf = this.parseLabel(baseOpt) //{label,base,useHalfDigit,exoticAlphabet}
+  let bits = strval.length
+  let val = null
+  if (conf.base==2) {
+    if ( !strval.match(/^[01]+$/) )
+      throw new Error("er02, invalid synxtax for string-binary");
+    val = bigInt(strval,2)
+  } else if ( [4,16,32,64].includes(conf.base) )  { // base4h or other!
+    if (conf.label=='base4h' || conf.label=='base16ph') {
+      let found = strval.match(this.rgxBase[conf.label])
+      if (!found)  throw new Error("er03, invalid synxtax for "+conf.label+" value");
+      let main = found[1]
+      halfDigit = found[2]
+      let halfBin = halfDigit? this.TR_bin[halfDigit]: ''
+      bits = main.length*conf.bitsPerDigit + halfBin.length
+      val = bigInt( bigInt(main,conf.base).toString(2) + halfBin, 2 )
+    } else {  // other base, no halfDigit representation
+      if (!Number.isInteger(conf.bitsPerDigit))
+        throw new Error("er04, invalid input base "+conf.base);
+      bits *= conf.bitsPerDigit
+      val = bigInt(strval,conf.base)
+    }
+  } else
+    throw new Error("er05, invalid base "+conf.base);
+  return this.fromInt( val , bits, canZero )
+}
+
+/**
+ * @return string representing the specified baseOpt.
+ * @param baseOpt string of a valid base label.
+ */
+toString(baseOpt='base16ph',errorOnInvalid=false) {
+  let conf = this.parseLabel(baseOpt)
+  if (conf.base==2)
+    return this.toStringBin()
+  else if (conf.useHalfDigit)
+    return this.toStringPlusHalf()
+  else {
+    if (this.bits % conf.bitsPerDigit != 0) {
+      if (errorOnInvalid)
+        throw new Error("invalid binary length, must be a multiple of "+conf.bitsPerDigit);
+      else return '';
+    }
+    let digits = this.bits / conf.bitsPerDigit
+    if (conf.exoticAlphabet)
+      return this.bin.toString(conf.base,conf.exoticAlphabet).padStart(digits,'0')
+    else
+      return this.bin.toString(conf.base).padStart(digits,'0')
+  }
+}
+
+
+
+
+// // // //
+// Extended user interface, must updated with datasets.
+
+/**
+ * Parses the base (radix) label descriptor.
+ * @param l mix string, null, undefied or number, free-label
+ * @returns {label,base,useHalfDigit,exoticAlphabet}
+ * lixo: this.onFalseError(this.parseLabel(baseOpt))
+ */
+parseLabel(l,forceIsHalf=false) {
+  if (!l) l='base2';
+  let t = typeof l
+  if (t == 'number') l='base'+String(l)+(forceIsHalf? 'h':'');
+  else if (t!='string')
+    throw new Error("invalid type, must be number or string");
+  l = l.toLowerCase()
+  if (l=='base32hex') l='base32js'; // exceptions
+  let pref3 = l.slice(0,3)
+  if (pref3=='bin') l='base2';
+  else if (pref3=='hex') l='base16'+l.slice(3);
+  let m = l.match(/^b(?:ase)?(\d+)(.+)?$/)
+  if (!m)
+    throw new Error("invalid label syntax, must be 'baseXy'");
+  let radix = Number(m[1])
+  let alphabet = m[2]? m[2]: ''
+  let useHalfDigit = false;
+  if (m[2]=='ph' || m[2]=='h') {
+    useHalfDigit = true
+    alphabet = ''  // standard
+  }
+  if (alphabet=='std') alphabet='';
+  var lab = 'base'+radix
+  if (useHalfDigit) {
+    if (radix==4) lab = lab+'h';
+    else if (radix==16) lab = lab+'ph'; // ? change to h
+    else
+      throw new Error("invalid radix, must be 4 or 16  when using halfDigit");
+  } else
+    lab = lab+alphabet
+  this.lastParseLabel = {
+    label: lab
+    ,base: radix
+    ,useHalfDigit: useHalfDigit
+    ,bitsPerDigit: Math.log(radix)/Math.log(2)
+    ,exoticAlphabet: alphabet
+  };
+  return this.lastParseLabel;
+}
+
+set coverset(cset) {
+  this._coverset = []
+  for (let i of cset.cover) {
+    const b4 = new Base4h(null)
+    let s = b4.fromString(cset.commom + i, 'base16ph');
+    this._coverset.push( s.toString(2) )
+  }
+  this._coverset.sort()
+}
+
+get coverset() {
+  let r = []
+  let tmp = new Base4h(null)
+  for(let i of this._coverset) 
+    r.push( tmp. fromString(i,2). toString('base16ph') )
+  return r
+}
+
+} // \class
+
+
+//////////////////////////////////////////////////
+
+const cover_SP_SPA = {
+  commom:"33f", // human-readable commom string prefix
+  cover:[
+    "9dbT", "9dT", "9fO", "9fP", "c8R", "c8T", "c9R", "c9T",
+    "caM",  "caN", "caO", "caP", "cbM", "cbN", "cbO", "cbP",
+    "cbS",  "cbT", "ccT", "ceM", "ceN", "ceO", "ceP", "ceQ",
+    "ceR",  "ceS", "cf8", "e1O", "e4M"  // 28 itens
+  ]
+};
+
+
+const b4h = new Base4h(null);
+
+b4h.coverset = cover_SP_SPA;
+console.log(b4h.coverset)
+
+
+console.log("3202311203G", b4h.fromString("3202311203G","base4h").toString("base16ph") )
+
+var xx=[
+"320231120303110121223322","320231120303110123020111","320231120303110122131232","320231120303110122112200",
+"320231120303110122101122","320231120303110120332122","320231120303110121223322"];
+
+let lix =[];
+for (let i of xx)
+  lix.push( b4h.fromString(i,"base4h").toString('base16ph') )
+console.log(lix)
+</script>
+
+<p>FIM MAPA. CIDADES:
+<!-- CIDADES -->
+
+
+</body>
+</html>
+

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CLP cover Viewer</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel='shortcut icon' type='image/x-icon' href='./favicon.ico' />
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css"/>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" crossorigin=""
+	  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+	/>
+	<style>
+		p, fieldset {margin-left: 10pt;}
+		fieldset {line-height: 22pt;}
+		.selected_text {font-weight: bold;}
+		.city-PTS span {margin:0;padding:0;}
+		#cell_etc {color:red;font-size:120%; font-weight:bold;}
+	</style>
+
+	<script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.40/BigInteger.min.js"></script>
+	<script src="https://npmcdn.com/@turf/turf@5.1.6/turf.min.js"></script>
+	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" crossorigin=""
+	    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+	></script>
+  <script src="http://lab.digital-democracy.org/leaflet-bing-layer/leaflet-bing-layer.js"></script>
+
+	<script src="./assets/lib_Geocode.js"></script>
+	<script src="./assets/libDggCell_Geohash.js"></script>
+	<script src="./assets/domPage.js"></script>
+
+<script>
+
+var selectedByUrl = '';
+var COVER={};
+
+$(document).ready(function() {  //  ONLOAD
+
+    
+
+		Geocode.dggCell = DGGcell; // inicializa.
+	  //  fazer o mesmo com Cover ou suas CoverCell
+	  Geocode.cleanStates();
+		if (Geocode.kx_hash_base==4)
+			$('#showBase4').hide();
+
+		$('#ptclick_text').css('font-weight', 'bold');
+		$( "#ptclick" ).click(function() {
+	     if( $(this).is(':checked') ) {
+	       $('#zoomIn_text').css('font-weight', 'bold');
+	       $('#ptclick_text').css('font-weight', 'normal');
+	     } else {
+	       $('#zoomIn_text').css('font-weight', 'normal');
+	       $('#ptclick_text').css('font-weight', 'bold');
+	     }
+		});
+
+		$('#dom_geocode').change( function() {
+			var c = Geocode.setByHash_whenIsValid( $('#dom_geocode').val() );
+			if (c) {
+				$('#dom_level').val(c.level)
+				setRefPoint(c.center);
+			} // gambi, calcula hash novamente
+			else console.log("interface ERROR: invalid geocode");
+		});
+
+		$('#dom_latlon').change( function() {
+			// editing lat or lon, refresh all.
+			var c = dom_getLatLon();
+			if (c) setRefPoint(c);
+		});
+
+		$('#dom_level').change( function() {
+			var c = dom_getLatLon();
+			if (c) setRefPoint(c);
+		});
+
+		$('#code_sep').change( function() {
+			Geocode.cf_hash_sep = $(this).is(':checked')?  '.':  ''; // for next
+			$('#dom_geocode').val(
+				Geocode.hashRender( $('#dom_geocode').val(), true )
+			);
+		});
+
+		$('#cover_view').change( function() {
+			if ( $(this).is(':checked') ) {alert("Em construção:\nlembrar de fazer ou pedir para fazer");}
+		});
+
+		runRequest() // checks URL and run parsed parameters.
+
+}); //ONLOAD
+</script>
+</head>
+
+<body>
+
+<p>lixo-Demo covers</p>
+
+<!-- MAPA E SEUS CONTROLES: -->
+<div id="mapid" style="width: 100%; height: 400px;"></div>
+<script src="assets/map.js"></script>
+<p>
+<!-- CIDADES -->
+
+	<div id="city-ALL">
+<!-- ["6gwx","6gwz","6gy8","6gy9","6gyb","6gyc","6gyd","6gyf","6gyg","6gz1","6gz4"] -->
+		<p class="city-LST">Cidade com bordas apresentadas em vermelho:
+
+		&nbsp;<a href="javascript:void(0);" onclick="cityCanvas.show('sp-spa','city')" id="city-sp-spa">São Paulo (SP)</a>,
+		<!-- mostrar amarelo claro ... Cover-set Geohash de "sp-spa"  = ['6gwx','6gwz', '6gy8','6gy9','6gyb','6gyc','6gyd','6gyf','6gyg',  '6gz1','6gz4'] -->
+		&nbsp;<a href="javascript:void(0);" onclick="cityCanvas.show('pr-cur','city')" id="city-pr-cur">Curitiba (PR)</a>,
+		&nbsp;<a href="javascript:void(0);" onclick="cityCanvas.show('pa-atm','city')" id="city-pa-atm">Altamira (PA)</a>.<!-- IBGE 1500602 -->
+		<br/>
+
+		</p>
+		<p>Dimensões do município selecionado: <span id="city-MEDIDAS"></span>
+		</p>
+		<p class="city-PTS">Pontos de controle: <span>(clique em cidade)</span>
+
+			<span id="city-PTS-sp-spa" class="city-PTS-content" style="display:none">
+		   <a href="javascript:void(0);" onclick="setRefPoint(-23.561618,-46.655996);">MASP</a>,
+		   <a href="javascript:void(0);" onclick="setRefPoint(-23.550375,-46.633937);">Marco-zero-SP</a>,
+			 <a href="javascript:void(0);" onclick="setRefPoint(-23.625486,-46.660856);">Aeroporto</a>, ...
+			 <br/>Cobertura (<span class="coverNumItems">0</span> items):
+			 <textarea rows="2" cols="64">:b4,030333303320,03033321331⬒, 03033330220⬒, 03033330221⬒, 03033330230⬒, 03033330231⬒, 03033330320⬒, 03033330321⬒,
+03033321331⬓, 03033330220⬓, 03033330221⬓, 03033330230⬓, 03033330231⬓, 03033330320⬓,
+03033330233⬒, 03033330322⬒,
+03033330322⬓, 03033330233⬓,
+03033332100⬒, 03033332011⬒,
+03033330303⬓, 03033330321⬒, 03033330321⬓, 03033330323⬒,
+0303332131233⬓,03033321313⬓, 03033330202⬓, 03033330203⬓, 03033330212⬓, 03033330213⬓
+			</textarea><label title="Visualizar a cobertura no mapa, em amarelo"><input class="cover_view" type="checkbox"/> visualizar</label>
+			<!-- old 	and simplest
+			  :b32,6gwx,6gwz,6gy8,6gy9,6gyb,6gyc,6gyd,6gyf,6gyg,6gz1,6gz4
+			 -->
+			</span>
+
+			<span id="city-PTS-pr-cur" class="city-PTS-content" style="display:none">
+		   <a href="javascript:void(0);" onclick="setRefPoint(-25.416667,-49.25);">Centro</a>,
+		   <a href="javascript:void(0);" onclick="setRefPoint(-25.404903,-49.230165);">Aeroporto</a>, ...
+			 <br/>Cobertura (<span class="coverNumItems">0</span> items):
+			 <textarea rows="2" cols="64">:b4,030332113331⬓, 030332113333⬒, 030332113333⬓, 030332131110⬒, 030332113332⬓, 030332113332⬒, 030332113330⬓, 030332113330⬒, 030332113321⬒, 030332113321⬓, 030332113323⬒, 030332113323⬓, 030332131101⬒, 030332131100⬒, 030332113322⬓, 030332113322⬒, 030332113320⬓, 030332113320⬒, 030332113231⬒, 030332113231⬓, 030332113233⬒, 030332113233⬓, 0303321310, 030332113232⬓, 030332113232⬒, 030332113230⬓, 030332113221⬒, 030332113221⬓, 030332113223⬒, 030332113223⬓, 030332113220⬒, 030332113220⬓
+			 </textarea><label title="Visualizar a cobertura no mapa, em amarelo"><input class="cover_view" type="checkbox"/> visualizar</label>
+			 <!-- old
+				 :b32,6gkzv, 6gkzy, 6gkzz, 6gmp8, 6gkzx, 6gkzw, 6gkzt, 6gkzs, 6gkzk, 6gkzm, 6gkzq, 6gkzr, 6gmp2, 6gmp0, 6gkzp, 6gkzn, 6gkzj, 6gkzh, 6gkyu, 6gkyv, 6gkyy, 6gkyz, 6gmn, 6gkyx, 6gkyw, 6gkyt, 6gkyk, 6gkym, 6gkyq, 6gkyr, 6gkyh, 6gkyj
+		 	-->
+		  </span>
+
+			<span id="city-PTS-pa-atm" class="city-PTS-content" style="display:none">
+		   <a href="javascript:void(0);" onclick="setRefPoint(-3.2069074,-52.2188004);">Prefeitura</a>,
+		   <a href="javascript:void(0);" onclick="setRefPoint(-3.2535258,-52.249368);">Aeroporto</a>, ...
+			 <br/>Cobertura (<span class="coverNumItems">0</span> items):
+			 <textarea rows="2" cols="64">:b4,031330312313220, 031330312303311, 03133031231212, 03133031231203, 03133031231231,
+03133031231230,03133031231232,03133031231322,03133031231233,03133031231323,
+031330301⬒, 031330301⬓, 031330303⬒, 031330303⬓, 031330312⬓, 031330330⬒, 031330312⬒, 031330313⬒, 031330313⬓,
+0313203⬒, 0313201⬓, 0313201⬒, 0313210⬒, 0313210⬓,
+0313212⬒, 0313213⬒, 0313211⬓, 0313211⬒, 0313300⬒,
+0313300⬓, 0313302⬒,03133023⬒
+			 </textarea><label title="Visualizar a cobertura no mapa, em amarelo"><input class="cover_view" type="checkbox"/> visualizar</label>
+		  </span>
+
+
+		</p>
+</div>
+<p>Bloco de notas:<br/>
+<textarea id="dom_notes" rows="3" cols="64">
+</textarea>
+<br/><label title="copiar os geocódigos que clicar no mapa">
+	<input type="checkbox" id="dom_notes_chk"/> copiar geocódigos clicados
+</label>
+</p>
+
+</body>
+</html>

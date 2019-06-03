@@ -151,13 +151,19 @@ Localização do Marco-zero representada por PlusCode: [`588MC9X8+RC`](https://p
 
 Os quatro primeiros dígitos (prefixo `588M`) podem ser cortados quando sabemos que o contexto é a cidade de São Paulo, disso resulta o código mais compacto `C9X8+RC`.
 
+
+Uma característica interessante, baseada na estratégia de entrelaçamento (usada por exemplo no Geohash)  nesse prefixo é que cada dois caracteres representam um par latitude-longitude, resultando num sistema vertical-horizontal de localização na sua grade.
+
+![](assets/OLC-grid-compare1.png)
+
+
 Grade principal **sem hierarquia**: com células de 1/8000° esferoradianos (áreas de ~100 m²), nesta grade o endereço vizinho do Marco-zero (Editora UNESP a menos de 100 m do Marco-zero) apresenta código [F928+27](https://plus.codes/588MF928+27), totalmete distinto.
 
 ![](assets/CLP-coord-plusCode-ilustra02-grade.png)
 
 Para variações na precisão do endereço, existe a hierarquia da grade secundária, subdividindo em mais 20×20 células, com a adição de mais dois dígitos depois do sinal "+". Desse modo [`C9X8+RC4`](https://plus.codes/588MC9X8+RC4) é uma célula com ~2,5 metros de lado, e [`C9X8+R`](https://plus.codes/588MC9X8+R) ~200 metros.  Devido ao "salto", sem possibilidade de precisão intermediária, o PlusCode deixa de contemplar a escala do portão rural, da ordem de 15×15m nos requisitos do CLP.
 
-**Resumo das características do PlusCode:**
+**Resumo das características do PlusCode:**<br/>
 <table border="1" width="95%">
 <tr>
   <td width="180"><i>Representação numérica</i>:<br/> <b>base20</b></td>
@@ -179,6 +185,12 @@ Para variações na precisão do endereço, existe a hierarquia da grade secund�
 </tr>
 </table>  
 
+### Problemas do OLC em relação ao Geohash
+
+* **Não pode ser truncado**. A porção inicial do geocódigo OLC que precede o "+" não pode ser quebrada caracter a caracter, só a cada dois caracteres.
+
+* **Não preserva vizinhos em listagens**. Por exemplo, uma chácara próxima à cidade de Monteiro Lobato está sob o geocódigo OLC "588PX3". Nas células vinhas eram esperados geocódigos parecidos, de modo a aparecerem como vizinhos numa listagem ordenada pelos geocódigos, mas as células acima e abaixo, "588P23" e "588PW3" ficam distantes na listagem. Efetivamente isso dificulta o ser humano e o computador em agrupar semelhantes, que é o principal benefício de qualquer geocódigo hierárquico.
+
 ### Problemas do PlusCode
 
 O PlusCode é baseado no OpenLocationCode, que é livre, mas não é apenas o OpenLocationCode... É um serviço de resolução de códigos contextualizados por nome de cidade: este serviço é uma [caixa preta](https://en.wikipedia.org/wiki/Black_box), e não tem licença livre. Quando o  contexto não é derivado de um padrão aberto e soberano (controlado pela jurisdição), dizemos que o contexto é composto de "palavras mágicas".
@@ -196,7 +208,7 @@ Por fim, a maior parte das localizações em meio rural de Altamira ficam até m
 
 ## S2geometry
 
-Localização do Marco-zero representada por tecnologia S2: [`94ce59aaf89f`](https://s2.sidewalklabs.com/regioncoverer/?cells=94ce59aaf89f&center=-23.550385%2C-46.633956&zoom=21), com célula de ~2×2m.  A representação pode ser adequada para base32, `3MHP.9IW0.9` (9 dígitos).
+Localização do Marco-zero representada por tecnologia S2: [`94ce59aaf89f`](https://s2.sidewalklabs.com/regioncoverer/?cells=94ce59aaf89f&center=-23.550385%2C-46.633956&zoom=21), com célula de ~2×2m.  A representação pode, teoricamente, ser adequada para base32, `3MHP.9IW0.9` (9 dígitos). Dá uma idéia do grau de compactação, mostrando que poderia ser até um pouco mais compacto que Geohash. O problema é que, para se obter um geocódigo hierarquico e consistente, pemitindo truncagens e preservando semelhança com vizinhos, não basta converter de hexadecimal para base32. O procedimento precisa ser ainda melhor testado e padronizado, encontra-se <a href="http://osm.codes/_foundations/art3.pdf">descrito neste <i>white paper</i> do OSM.codes</a>.
 
 O sistema de referência conhecido como "S2 Geometry" é na verdade uma biblioteca para indexação espacial em grandes bancos de dados, descrita em [S2geometry.io](http://s2geometry.io). As células da [grade hierárquia](https://en.wikipedia.org/wiki/Discrete_Global_Grid#Hierarchical_grids), com identificadores de 64 bits (S2geometry/Cell_ID) são em geral expressos fora da base de dados como números hexadecimais, mas essa escolha é indiferente.
 
@@ -212,7 +224,7 @@ O S2 pode ser considerado uma evolução do [Geohash](#geohash), pois resolve do
 
     * o problema área das células, garantindo que seja uniforme (quase constante) ao longo de todo o território nacional.
 
-    * o problema da forma das células, que se matém uniforme em todas as escalas e ao longo de todo o território nacional.
+    * o problema da forma das células, que se matém praticamente uniforme em todas as escalas e ao longo de todo o território nacional.
 
 A implementação de referência da biblioteca S2 é escrita em C++ (mesma linguagem que o PostGIS) e portada para Go, Java e Python. Conforme anunciado, a biblioteca existe desde ~2011 quando uma versão inicial do código foi posta a público, mas somente em  [dezembro de 2017](https://web.archive.org/web/20171205230426/https://opensource.googleblog.com/2017/12/announcing-s2-library-geometry-on-sphere.html) o código passou a ser atualizado e distribuído de de forma mais ampla e confiável.
 
@@ -240,7 +252,15 @@ A implementação de referência da biblioteca S2 é escrita em C++ (mesma lingu
   https://github.com/AfieldTrails/s2-postgis
   </td>  
 </tr>
-</table>  
+</table>
+
+## Uber-H3
+
+Os engenheiros da Uber chegaram a testar o <i>S2 Geometry</i>, descartando-o.  [Nesta página de apresentação](https://eng.uber.com/h3/) justificam a escolha de células hexagonais e o desenvolvimento de uma solução orientada à sua indexação. Os identificadores de célula não são exatamente hierárquicos, mas há como construir uma chave hierárquica base7 (todo hexagono H3 pode ser subdividido em 7 hexagonos menores).
+
+Do ponto de vista "multiuso", ou seja, da adoção da grade para outras finalidades ([ex.](http://doi.org/10.3138/cart.54.1.2018-0017)) além de código postal, a grade do Uber H3 é a mais atrativa por oferecer garantia de área constante da célula, e ser usada como  [Discrete Global Grid System ](http://docs.opengeospatial.org/as/15-104r5/15-104r5.html) (**DGGS**) dentro dos padrões de qualidade determinados pelo OGC.  Infelizmente não é, segundo [este artigo](http://ceur-ws.org/Vol-2323/SKI-Canada-2019-7-6-1.pdf), não pode ser considerado como DGGS, mas de todas as tecnologias livres e com eficiência demonstrada, é a que melhor se aproxima do padrão OGC.
+
+Ainda não foi completamente analisado, e seu algoritmo de conversão base49 ainda não foi padronizado.
 
 # COMPARANDO NÃO-CANDIDATOS
 
